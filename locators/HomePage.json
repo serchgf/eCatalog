@@ -1,0 +1,126 @@
+{
+  "url": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "locators": {
+    "search_bar": {
+      "by": "XPATH",
+      "value": "//input[@role='searchbox']"
+    },
+    "carousel" :
+    {
+      "by": "XPATH",
+      "value": "//ul[@ng-reflect-ng-class='p-carousel-indicators p-reset']"
+    },
+    "footer_logo": {
+      "by": "XPATH",
+      "value": "//div[@class='footer-logo']"
+    },
+    "add_vehicle_btn": {
+      "by": "XPATH",
+      "value": "//span[@class='vehicle-selected']"
+    },
+    "vehicle_country_checkbox_icons": {
+      "by": "XPATH",
+      "value": "//p-checkbox[@inputid='c.id']"
+    },
+    "part_interchange_linktext": {
+      "by": "XPATH",
+      "value": "//span[@id='interchange_option']"
+    },
+    "vehicle_type_tbx": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@field='vehicleTypeDescription']//input"
+    },
+    "vehicle_type_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@field='vehicleTypeDescription']//button"
+    },
+    "year_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='year']//button"
+    },
+    "make_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='make']//button"
+    },
+    "model_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='model']//button"
+    },
+    "submodel_tbx": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='subModel']//input"
+    },
+    "submodel_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='subModel']//button"
+    },
+    "engine_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='engine']//button"
+    },
+    "add_vehicle_button_submit": {
+      "by": "XPATH",
+      "value": "//button[@type='submit']"
+    },
+    "list_box": {
+      "by": "XPATH",
+      "value": "//ul[@role='listbox']/li"
+    },
+    "vehicle_selected": {
+      "by": "XPATH",
+      "value": "//span[@class='vehicle-selected']"
+    },
+    "categories_btn": {
+      "by": "XPATH",
+      "value": "//section//span[contains(text(),'CATEGORIES')]"
+    },
+    "popular_categories_list_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='category-popular-categories d-inline-block ng-star-inserted']//div[@role='button']"
+    },
+    "add_new_vehicle_btn": {
+      "by": "XPATH",
+      "value": "//p-button[@ng-reflect-label='Add new vehicle']"
+    },
+    "recent_vehicles": {
+      "by": "XPATH",
+      "value": "//div[@class='o-image-list']"
+    },
+    "edit_info_btn": {
+      "by": "XPATH",
+      "value": "//button[@ng-reflect-label='Edit info']"
+    },
+    "save_changes_btn": {
+      "by": "XPATH",
+      "value": "//p-button[@ng-reflect-label='Save changes']"
+    },
+    "labels_vehicle_selected": {
+      "by": "XPATH",
+      "value": "//div[@class='ng-star-inserted']//div[@class='px-4']/p"
+    },
+    "delete_all_btn": {
+      "by": "XPATH",
+      "value": "//button[@ng-reflect-label='DELETE ALL']"
+    },
+    "add_vehicle_info_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Add vehicle info')]"
+    },
+    "load_spinner": {
+      "by": "XPATH",
+      "value": "//div[@class='panel panel-breadcrumb']/div"
+    },
+    "general_category_list": {
+      "by": "XPATH",
+      "value": "//div[@class='m-0 category-list-colums']/div"
+    },
+    "subcategory_list": {
+      "by": "XPATH",
+      "value": "//div[@class='m-0 category-list-colums']/div"
+    },
+    "label_subcategory_selected": {
+      "by": "XPATH",
+      "value": "//div[@class='category-nav-limiter']/h2"
+    }
+  }
+}

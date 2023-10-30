@@ -1,0 +1,97 @@
+{
+  "url": "https://laboratorio.qaminds.com/index.php?route=product/search",
+  "locators": {
+    "search_input": {
+      "by": "XPATH",
+      "value": "//div[@id='search']/input"
+    },
+    "search_btn": {
+      "by": "XPATH",
+      "value": "//div[@id=\"search\"]//button"
+    },
+    "Iphone_link": {
+      "by": "XPATH",
+      "value": "//a[contains(text(),'iPhone')]"
+    },
+    "add_to_cart_btn": {
+      "by": "ID",
+      "value": "button-cart"
+    },
+    "checkout_btn": {
+      "by": "XPATH",
+      "value": "//a[@title='Checkout']"
+    },
+    "guest_radio_btn": {
+      "by": "XPATH",
+      "value": "//input[@value='guest']"
+    },
+    "continue_btn": {
+      "by": "XPATH",
+      "value": "//input[@id='button-account']"
+    },
+    "firstname": {
+      "by": "NAME",
+      "value": "firstname"
+    },
+    "lastname": {
+      "by": "NAME",
+      "value": "lastname"
+    },
+    "email": {
+      "by": "XPATH",
+      "value": "//input[@id='input-payment-email']"
+    },
+    "telephone": {
+      "by": "NAME",
+      "value": "telephone"
+    },
+    "address_1": {
+      "by": "NAME",
+      "value": "address_1"
+    },
+    "city": {
+      "by": "NAME",
+      "value": "city"
+    },
+    "postcode": {
+      "by": "NAME",
+      "value": "postcode"
+    },
+    "select_country_dropdown": {
+      "by": "XPATH",
+      "value": "//select[@name='country_id']//option"
+    },
+    "select_state_dropdown": {
+      "by": "XPATH",
+      "value": "//select[@name='zone_id']//option"
+    },
+    "continue_btn_guest":{
+    "by": "ID",
+    "value": "button-guest"
+    },
+    "textarea": {
+      "by": "XPATH",
+      "value": "//textarea[@name='comment']"
+    },
+    "continue_btn_step_4":{
+    "by": "XPATH",
+    "value": "//input[@id='button-shipping-method']"
+    },
+    "terms_and_conditions_chkbx":{
+    "by": "XPATH",
+    "value": "//input[@name='agree']"
+    },
+    "continue_btn_step_5":{
+    "by": "XPATH",
+    "value": "//input[@id='button-payment-method']"
+    },
+    "confirm_btn":{
+    "by": "ID",
+    "value": "button-confirm"
+    },
+    "success_h1_message": {
+      "by": "XPATH",
+      "value": "//div[@id='content']/h1"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "url": "https://laboratorio.qaminds.com/index.php?route=product/product&path=57&product_id=49",
+  "locators": {
+    "write_review_link": {
+      "by": "XPATH",
+      "value": "//a[contains(text(),'Write a review')]"
+    },
+    "name_tbx": {
+      "by": "ID",
+      "value": "input-name"
+    },
+    "review_tbx": {
+      "by": "ID",
+      "value": "input-review"
+    },
+    "rate_radio_btn_1": {
+      "by": "XPATH",
+      "value": "//input[@type='radio' and @value='1']"
+    },
+    "rate_radio_btn_2": {
+      "by": "XPATH",
+      "value": "//input[@type='radio' and @value='2']"
+    },
+    "rate_radio_btn_3": {
+      "by": "XPATH",
+      "value": "//input[@type='radio' and @value='3']"
+    },
+    "rate_radio_btn_4": {
+      "by": "XPATH",
+      "value": "//input[@type='radio' and @value='4']"
+    },
+    "rate_radio_btn_5": {
+      "by": "XPATH",
+      "value": "//input[@type='radio' and @value='5']"
+    },
+    "continue_btn": {
+      "by": "ID",
+      "value": "button-review"
+    },
+    "alert_success_msg": {
+      "by": "XPATH",
+      "value": "//div[@class='alert alert-success alert-dismissible']"
+    }
+  }
+}

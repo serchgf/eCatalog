@@ -1,0 +1,21 @@
+{
+  "url": "https://laboratorio.qaminds.com/index.php?route=product/search",
+  "locators": {
+    "search_input": {
+      "by": "XPATH",
+      "value": "//div[@id='search']/input"
+    },
+    "search_btn": {
+      "by": "XPATH",
+      "value": "//div[@id=\"search\"]//button"
+    },
+    "search_message_label": {
+      "by": "XPATH",
+      "value": "//div[@id=\"content\"]/h1"
+    },
+    "search_criteria_tbx": {
+      "by": "XPATH",
+      "value": "//div[@id='content']//div/input"
+    }
+  }
+}

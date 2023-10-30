@@ -1,0 +1,4 @@
+XPATH ADD VEHICLE PICKER
+//search-bar//button
+WAS REPLACED BY
+//span[@class='vehicle-selected']

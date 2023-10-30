@@ -1,0 +1,53 @@
+{
+  "url": "https://laboratorio.qaminds.com/index.php?route=account/register",
+  "locators": {
+    "first_name_input": {
+      "by": "ID",
+      "value": "input-firstname"
+    },
+    "last_name_input": {
+      "by": "ID",
+      "value": "input-lastname"
+    },
+    "email_input": {
+      "by": "ID",
+      "value": "input-email"
+    },
+    "telephone_input": {
+      "by": "ID",
+      "value": "input-telephone"
+    },
+    "password_input": {
+      "by": "ID",
+      "value": "input-password"
+    },
+    "password_confirm_input": {
+      "by": "ID",
+      "value": "input-confirm"
+    },
+    "radio_bt_yes": {
+      "by": "XPATH",
+      "value": "//label[@class='radio-inline']/input[@value='1']"
+    },
+    "radio_btn_no": {
+      "by": "XPATH",
+      "value": "//label[@class='radio-inline']/input[@value='0']"
+    },
+    "privacy_btn": {
+      "by": "XPATH",
+      "value": "//input[@name='agree']"
+    },
+    "continue_btn": {
+      "by": "XPATH",
+      "value": "//input[@value='Continue']"
+    },
+    "warning_email": {
+      "by": "XPATH",
+      "value": "//input[@value='Continue']"
+    },
+    "alert_msg": {
+      "by": "XPATH",
+      "value": "//div[@class='alert alert-danger alert-dismissible']"
+    }
+  }
+}
