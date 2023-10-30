@@ -8,7 +8,7 @@ import pytest
 
 from src.factory.webdriver_factory import get_drivers
 
-_SCREENSHOT_PATH = os.path.join(pathlib.Path(__file__).parent, "screenshots")
+_SCREENSHOT_PATH = os.path.join(pathlib.Path(__file__).parent, "Screenshots")
 _REPORTS_PATH = os.path.join(pathlib.Path(__file__).parent, "Reports")
 _LOGS_PATH = os.path.join(pathlib.Path(__file__).parent, "logs")
 
@@ -45,7 +45,7 @@ def move_to_report_dir(file_source, path_to_move):
     file_source = file_source+'/'
     file_destination = path_to_move
     get_files = os.listdir(file_source)
-    logging.info(f"numero de archivos en screenshots: {len(get_files)}")
+    logging.info(f"numero de archivos en Screenshots: {len(get_files)}")
     if len(get_files) == 0 or len(get_files) is None:
         logging.info("No image to move")
     else:

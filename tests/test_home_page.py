@@ -139,8 +139,6 @@ def test_Garage_Category_Navigation(web_drivers):
     text_subcategory_selected = home_page.get_text_label_subcategory_selected()
     assert text_subcategory_selected == subcategory_selected, f"Text displayed: {text_subcategory_selected}, should be: {subcategory_selected}"
 
-
-
     assert home_page.validate_vehicle_list_cleared(), "The vehicles are not cleared correctly, 'Add vehicle info' should be Visible"
 
 
