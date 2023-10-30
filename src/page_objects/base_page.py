@@ -11,7 +11,7 @@ from src.web_elements.common import WebElementWrapper
 
 
 _LOCATOR_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "locators")
-_SCREENSHOTS_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "Screenshots")
+_SCREENSHOTS_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "screenshots")
 
 
 class BasePage:
