@@ -2,12 +2,14 @@ import json
 import logging
 import os
 import pathlib
+import time
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from src.web_elements.common import WebElementWrapper
+
 
 
 _LOCATOR_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "locators")
@@ -38,6 +40,10 @@ class BasePage:
     def take_screenshot(self, img_name: str):
         file_path = os.path.join(_SCREENSHOTS_DIR_PATH, f"{img_name}.png")
         self.__driver.save_screenshot(file_path)
+
+    def scroll_down(self):
+        logging.info("SCROLL DOWN TO HEIGHT")
+        self.__driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
 
     def __load_locators_attributes(self):
         locator_config = self.__load_locators_config()

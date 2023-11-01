@@ -112,15 +112,40 @@
     },
     "general_category_list": {
       "by": "XPATH",
-      "value": "//div[@class='m-0 category-list-colums']/div"
+      "value": "//div[@class='m-0 category-list-colums']/div/span"
     },
     "subcategory_list": {
       "by": "XPATH",
-      "value": "//div[@class='m-0 category-list-colums']/div"
+      "value": "//div[@class='m-0 category-list-colums']/div/span"
     },
     "label_subcategory_selected": {
       "by": "XPATH",
-      "value": "//div[@class='category-nav-limiter']/h2"
+      "value": "//div[@class='category-space-title']//span"
+    },
+    "breadcrum_section_link_list": {
+      "by": "XPATH",
+      "value": "//section[@id='breadcrum-section']//li/a"
+    },
+    "element_buttons_grid_category": {
+      "by": "XPATH",
+      "value": "//div[@role='button']//img"
+    },
+    "link_products_list": {
+      "by": "XPATH",
+      "value": "//ol[@class='p-0 m-0']//a"
+    },
+    "homePage_button": {
+      "by": "XPATH",
+      "value": "//div[@id='search_section']/img"
+    },
+    "lasted_products_viewed_list": {
+      "by": "XPATH",
+      "value": "//p[@tooltipposition='top']"
+    },
+    "last_viewed_products_label":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Latest Viewed Products')]"
+
     }
   }
 }

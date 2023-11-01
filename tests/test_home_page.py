@@ -4,7 +4,7 @@ import time
 from src.page_objects.home_page import HomePage
 
 
-# # # #MXTEST-8263
+# MXTEST-8263
 # def test_Vehicle_Filtering_Functionality_Validation(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -23,9 +23,8 @@ from src.page_objects.home_page import HomePage
 #     home_page.click_on_categories_button_and_select()
 #     # Realizar consulta a la base de datos
 #     home_page.connect_and_consult()
-# #
-# #
-# # #MXTEST-8282
+
+# MXTEST-8282
 # def test_Garage_Garage_Vehicle_Limit(web_drivers):
 #     # se necesita actualizar el jira, el Maximo permitido en la lista es de 15 en vez de 10
 #     home_page = HomePage(*web_drivers)
@@ -55,7 +54,7 @@ from src.page_objects.home_page import HomePage
 #     assert n_vehicles <= 15, "The number of vehicles listed must be Maximum '15'"
 #     logging.info(f"{n_vehicles}: are listed")
 #
-# # #MXTEST-8284
+# MXTEST-8284
 # def test_Garage_Edit_Vehicle(web_drivers):
 #     # se necesita actualizar el tc en jira, los campos que se pueden editar son submodel y Engine
 #     home_page = HomePage(*web_drivers)
@@ -91,7 +90,7 @@ from src.page_objects.home_page import HomePage
 #     logging.info(f"\nOriginal Submodel:{submodel} -> {expected_submodel}\nOriginal Engine:{engine} -> {expected_engine}")
 
 
-# # #MXTEST-8285
+#XTEST-8285
 # def test_Garage_Remove_Vehicle(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -99,6 +98,7 @@ from src.page_objects.home_page import HomePage
 #     time.sleep(3)
 #     home_page.click_on_Picker_vehicle_btn()
 #     vehicles_list = []
+#     time.sleep(3)
 #     for index in range(4):
 #         logging.info(f"Iteration---------------------------------------------------------------- {index}")
 #         vehicle = home_page.click_on_vehicle_type_and_select(index)
@@ -124,22 +124,76 @@ from src.page_objects.home_page import HomePage
 #     assert home_page.validate_vehicle_list_cleared(), "The vehicles are not cleared correctly, 'Add vehicle info' should be Visible"
 
 
-# #MXTEST-8287
-def test_Garage_Category_Navigation(web_drivers):
+# # MXTEST-8287
+# def test_Garage_Category_Navigation(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     #time.sleep(3)
+#     home_page.click_on_categories_button()
+#     category_list = home_page.get_general_categories_list()
+#     # click en categoria random
+#     category_selected = home_page.select_random_element_of_list(category_list)
+#
+#     logging.info(f"category selected: {category_selected}")
+#     # obtener lista de subcategorias
+#     subcategory_list = home_page.get_subcategory_list()
+#     if len(subcategory_list)<1:
+#         subcategory_list = home_page.get_subcategory_list()
+#     # click en subcategoria random
+#     subcategory_selected = home_page.select_random_element_of_list(subcategory_list)
+#     logging.info(f"Subcategory selected: {subcategory_selected}")
+#     actual_parent_category = home_page.click_first_parent_category_on_breadcrumb()
+#     assert category_selected == actual_parent_category, f"The actual parent category: {actual_parent_category}, should be: {category_selected}"
+#     assert home_page.validate_parent_category_list_page()
 
+
+# MXTEST-8271
+
+def test_Last_Viewed_Products(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
-    # time.sleep(3)
+    time.sleep(3)
+
+
+
+    expected_product_selected_list = []
+    # CICLO DE 3 O 5 VECES
+
+    #time.sleep(3)
     home_page.click_on_categories_button()
+    # get popular category list
+    category_list = home_page.get_popular_category_list()
+    # click random popular category
+    category_selected = home_page.select_random_element_of_list(category_list)
+    # get product list
+    product_list = home_page.get_link_product_list()
+    expected_product_selected = home_page.select_random_element_of_list(product_list)
 
-    category_selected = home_page.select_random_element_of_list(home_page.get_general_categories_list())
-    logging.info(f"Category selected: {category_selected}")
-    subcategory_selected = home_page.select_random_element_of_list(home_page.get_subcategory_list())
-    logging.info(f"Subcategory selected: {subcategory_selected}")
-    text_subcategory_selected = home_page.get_text_label_subcategory_selected()
-    assert text_subcategory_selected == subcategory_selected, f"Text displayed: {text_subcategory_selected}, should be: {subcategory_selected}"
+    # add product selected to list
+    expected_product_selected_list.append(expected_product_selected)
+    # click home page button
+    home_page.click_homepage_button()
+    #
+    logging.info(f"Recent Products expected list:")
+    home_page.show_product_list(expected_product_selected_list)
+    # # GET actual lasted viewed products list
+    logging.info(f"GET actual lasted viewed products list")
+    lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
+    lasted_viewed_list = []
+    for lasted_viewed_product in lasted_product_viewed_list:
+        lasted_viewed_list.append(lasted_viewed_product)
+    #
+    # logging.info(f"SHOW actual lasted viewed products list++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    for product in lasted_product_viewed_list:
+        logging.info(f"{product}")
+    assert expected_product_selected_list in lasted_viewed_list
 
-    assert home_page.validate_vehicle_list_cleared(), "The vehicles are not cleared correctly, 'Add vehicle info' should be Visible"
+# VALIDAR EL QUE EN EL CARRUSERL SE VEAN LOS ULTIMAS  BUSQUEDAS
+
+
+# MXTEST-8290
+
 
 
 # def test_validate_menu_bar_elements(web_drivers):

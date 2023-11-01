@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.select import Select
 
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.common.action_chains import ActionChains as AC
 
 class WebElementWrapper:
     """
@@ -41,6 +41,11 @@ class WebElementWrapper:
         logging.info(f"Wait until disappears: {self.__locator}")
         self.__wait_driver.until(EC.invisibility_of_element_located(self.__locator))
 
+    def scroll_down_to_element(self):
+        logging.info(f"Scroll Down to Element: {self.__locator}")
+        actions = AC(self.__driver)
+        element = self.__wait_driver.until(EC.visibility_of_element_located(self.__locator))
+        actions.move_to_element(element).perform()
 
 
 
