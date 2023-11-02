@@ -1,0 +1,49 @@
+{
+
+  "url": "https://172.22.210.30/ecatalog-us/#/",
+  "locators": {
+
+    "carousel": {
+      "by": "XPATH",
+      "value": "//p-carousel[@styleclass='o-banners-carousel']//ul[@ng-reflect-ng-class='p-carousel-indicators p-reset']"
+    },
+    "categories_btn": {
+      "by": "XPATH",
+      "value": "//section//span[contains(text(),'CATEGORIES')]"
+    },
+    "popular_categories_list_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='category-popular-categories d-inline-block ng-star-inserted']//div[@role='button']"
+    },
+
+    "general_category_list": {
+      "by": "XPATH",
+      "value": "//div[@class='m-0 category-list-colums']/div/span"
+    },
+    "subcategory_list": {
+      "by": "XPATH",
+      "value": "//div[@class='m-0 category-list-colums']/div/span"
+    },
+    "label_subcategory_selected": {
+      "by": "XPATH",
+      "value": "//div[@class='category-space-title']//span"
+    },
+
+    "homePage_button": {
+      "by": "XPATH",
+      "value": "//div[@id='search_section']/img"
+    },
+    "lasted_products_viewed_list": {
+      "by": "XPATH",
+      "value": "//p[@tooltipposition='top']"
+    },
+    "last_category_on_list": {
+      "by": "XPATH",
+      "value": "//span[normalize-space()='Turbocharger & Supercharger']"
+    },
+    "element_buttons_grid_category": {
+      "by": "XPATH",
+      "value": "//div[@role='button']//img"
+    }
+  }
+}
