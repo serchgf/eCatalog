@@ -1,3 +1,4 @@
+import json
 import logging
 import random
 import time
@@ -11,6 +12,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 class HomePage(BasePage):
+
     def __init__(self, driver: WebDriver, wait_driver: WebDriverWait):
         super(HomePage, self).__init__(driver, wait_driver)
 
@@ -229,14 +231,29 @@ class HomePage(BasePage):
         return subcategory_label.text
 
     def select_random_element_of_list(self, lista: list):
+        time.sleep(1)
+        self.wait_until_page_load_complete()
         logging.info(f"Select a random element of the list")
         index = random.randint(0, len(lista))
         element_selected = lista[index]
         element_text = element_selected.text
         element_text = element_text.upper()
-        logging.info(f"Element selected: {element_text}")
-        element_selected.click()
+        #logging.info(f"Element selected: {element_text}")
+        try:
+            element_selected.click()
+        except:
+            element_selected.click()
+
         return element_text
+
+
+    def wait_search_results_label(self):
+        try:
+            self.element("search_results_label").wait_visible()
+        except TimeoutError:
+            self.element("search_results_label").wait_visible()
+        finally:
+            self.element("search_results_label").wait_visible()
 
     def click_first_parent_category_on_breadcrumb(self):
         logging.info(f"click on first parent category on breadcrumb")
@@ -325,10 +342,13 @@ class HomePage(BasePage):
 
     def get_link_product_list(self):
         logging.info(f"Get Products list")
+        self.wait_until_page_load_complete()
         lista = self.element("link_products_list").find_elements()
         return lista
 
     def get_popular_category_list(self):
+        self.wait_until_page_load_complete()
+        time.sleep(1)
         logging.info(f"Get popular category list")
         lista = self.element("popular_categories_list_btn").find_elements()
         return lista
@@ -341,7 +361,6 @@ class HomePage(BasePage):
         logging.info(f"Click home page button")
         self.element("homePage_button").wait_clickable().click()
 
-
     def get_lasted_viewed_products_list(self):
         logging.info(f"Get Lasted viewed products list")
         # self.scroll_down()
@@ -353,6 +372,43 @@ class HomePage(BasePage):
             element = element.upper()
             lista.append(element)
         return lista
+
+    def clean_product_selected(self, expected_product_selected: str):
+        product_selected = expected_product_selected.split('#')
+        product_selected = product_selected[0].split('\n')
+        return product_selected[1]
+    def get_footer_links_name_href_dict(self):
+        logging.info(f"Get Footer links list")
+        self.element("tools_span").wait_visible()
+        dic_name_href = {}
+        link_list = self.element("footer_links").find_elements()
+        for link in link_list:
+            dic_name_href[link.text] = link.get_attribute("href")
+        return dic_name_href
+
+    def get_footer_links_href(self):
+        logging.info(f"Get Footer links href(url)")
+        self.element("tools_span").wait_visible()
+        links_href_list = []
+        link_list = self.element("footer_links").find_elements()
+        for link in link_list:
+            links_href_list.append(link.get_attribute('href'))
+        return links_href_list
+
+    def validate_footer_links_href(self, href_list: list, data_json):
+        logging.info(f"Validate expected href links with actual href(url) on footer page")
+        name_list =[]
+        href_list = []
+        link_list = self.element("footer_links").find_elements()
+        for link in link_list:
+            links_href_list.append(link.get_attribute('href'))
+        return links_href_list
+
+
+    def cargar_json_data(self, JSON_PATH: str):
+        with open(JSON_PATH) as archivo:
+            datos = json.load(archivo)
+        return datos
     def mysql_connection(self):
         connection = mysql.connector.connect(
             host="172.22.210.13",

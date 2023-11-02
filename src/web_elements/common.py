@@ -33,7 +33,7 @@ class WebElementWrapper:
         logging.info(f"Wait visible: {self.__locator}")
         return self.__wait_driver.until(EC.visibility_of_element_located(self.__locator))
 
-    def wait_text_to_be_preset(self, text: str) -> WebElement:
+    def wait_text_to_be_present(self, text: str) -> WebElement:
         logging.info(f"Wait text be present, locator: {self.__locator}, text: {text}")
         return self.__wait_driver.until(EC.text_to_be_present_in_element(self.__locator, text))
 
@@ -46,6 +46,5 @@ class WebElementWrapper:
         actions = AC(self.__driver)
         element = self.__wait_driver.until(EC.visibility_of_element_located(self.__locator))
         actions.move_to_element(element).perform()
-
 
 

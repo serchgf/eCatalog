@@ -1,7 +1,14 @@
 import logging
+import os
+import pathlib
 import time
+import json
+
+import pytest
 
 from src.page_objects.home_page import HomePage
+_JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent,"locators","HomePage.json")
+
 
 
 # MXTEST-8263
@@ -153,46 +160,71 @@ from src.page_objects.home_page import HomePage
 def test_Last_Viewed_Products(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
-    time.sleep(3)
-
-
-
+    #time.sleep(3)
     expected_product_selected_list = []
+    lasted_viewed_list = []
     # CICLO DE 3 O 5 VECES
 
-    #time.sleep(3)
-    home_page.click_on_categories_button()
-    # get popular category list
-    category_list = home_page.get_popular_category_list()
-    # click random popular category
-    category_selected = home_page.select_random_element_of_list(category_list)
-    # get product list
-    product_list = home_page.get_link_product_list()
-    expected_product_selected = home_page.select_random_element_of_list(product_list)
+    for i in range(1):
+        logging.info(f"-------------------------------------------------------------------------Iteration: {i}")
+        home_page.wait_until_page_load_complete()
+        home_page.click_on_categories_button()
 
-    # add product selected to list
-    expected_product_selected_list.append(expected_product_selected)
-    # click home page button
-    home_page.click_homepage_button()
-    #
-    logging.info(f"Recent Products expected list:")
-    home_page.show_product_list(expected_product_selected_list)
-    # # GET actual lasted viewed products list
-    logging.info(f"GET actual lasted viewed products list")
-    lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
-    lasted_viewed_list = []
-    for lasted_viewed_product in lasted_product_viewed_list:
-        lasted_viewed_list.append(lasted_viewed_product)
-    #
-    # logging.info(f"SHOW actual lasted viewed products list++++++++++++++++++++++++++++++++++++++++++++++++++++")
-    for product in lasted_product_viewed_list:
-        logging.info(f"{product}")
-    assert expected_product_selected_list in lasted_viewed_list
+        # get popular category list
+        category_list = home_page.get_popular_category_list()
+        # click random popular category
+        category_selected = home_page.select_random_element_of_list(category_list)
+        logging.info(f"category selected: {category_selected}")
+
+        # # get product list
+        home_page.wait_until_page_load_complete()
+        # time.sleep(5)
+        home_page.wait_search_results_label()
+        product_list = home_page.get_link_product_list()
+        expected_product_selected = home_page.select_random_element_of_list(product_list)
+        product_selected = home_page.clean_product_selected(expected_product_selected)
+        logging.info(f"Product selected: {product_selected}")
+        #ime.sleep(5)
+        # add product selected to list
+        expected_product_selected_list.append(product_selected)
+
+        home_page.click_homepage_button()
+        home_page.wait_until_page_load_complete()
+        # home_page.scroll_down()
+        # home_page.scroll_down()
+        # home_page.scroll_down()
+        #
+        logging.info(f"Recent Products expected list:")
+        home_page.show_product_list(expected_product_selected_list)
+        logging.info(f"GET actual lasted viewed products list")
+        lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
+        # lasted_viewed_list = []
+        for lasted_viewed_product in lasted_product_viewed_list:
+            lasted_viewed_list.append(lasted_viewed_product)
+
+    assert lasted_viewed_list == expected_product_selected_list
 
 # VALIDAR EL QUE EN EL CARRUSERL SE VEAN LOS ULTIMAS  BUSQUEDAS
 
 
 # MXTEST-8290
+
+# def test_Footer_Validation_Tool_section_elements(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.scroll_down()
+#
+#     data = home_page.cargar_json_data(_JSON_PATH)
+#     expected_data = data['footer_href_links']
+#     logging.info(f"Expected data: {expected_data}")
+#
+#     actual_name_href_dic = home_page.get_footer_links_name_href_dict()
+#     logging.info(f"ACTUAL data: {actual_name_href_dic['Delivery routes Jalisco']}")
+#
+#     assert expected_data == actual_name_href_dic, f"Link names and url: {actual_name_href_dic},\n should be: {expected_data}"
+
+
 
 
 
