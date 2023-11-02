@@ -1,5 +1,12 @@
 {
-  "url": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "url": "https://172.22.210.30/ecatalog-us/#/",
+  "url_qa": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "footer_href_links":{
+      "Delivery routes Jalisco": "http://intranet.oreillyauto.mx/files/administrativo/logistica/documento.php?d=Y2lyY3VpdG9fc3VjdXJzYWxlc19qYWxpc2NvLnBkZg==&n=Q2lyY3VpdG9zIGVudHJlIHN1Y3Vyc2FsZXMgSmFsaXNjbw==",
+      "Delivery routes Leon": "http://intranet.oreillyauto.mx/files/administrativo/almacen/documento.php?d=Y2lyY3VpdG9fbGVvbi5wZGY=&n=Q2lyY3VpdG8gZW50cmUgU3VjdXJzYWxlcyBMZcOzbg==",
+      "Orma Stores": "https://www.orma.com.mx/sucursales",
+      "Product lines": "http://intranet.oreillyauto.mx/files/cat_prov_online.html"
+    },
   "locators": {
     "search_bar": {
       "by": "XPATH",
@@ -145,7 +152,26 @@
     "last_viewed_products_label":{
       "by": "XPATH",
       "value": "//span[contains(text(),'Latest Viewed Products')]"
-
+    },
+    "spinner": {
+      "by": "XPATH",
+      "value": "//div[@role='alert']"
+    },
+    "span_filter_by": {
+      "by": "XPATH",
+      "value": "//div[@class='title']//span[contains(text(),'filter by')]"
+    },
+    "tools_span": {
+      "by": "XPATH",
+      "value": "//o-footer//span[contains(text(),'Tools')]"
+    },
+    "footer_links": {
+      "by": "XPATH",
+      "value": "//o-footer//div[@class='glossary-tools']//a"
+    },
+    "search_results_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Search Results')]"
     }
   }
 }

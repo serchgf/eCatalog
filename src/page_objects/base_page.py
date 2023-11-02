@@ -42,8 +42,26 @@ class BasePage:
         self.__driver.save_screenshot(file_path)
 
     def scroll_down(self):
+        time.sleep(1)
         logging.info("SCROLL DOWN TO HEIGHT")
         self.__driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+
+    def zoom_out(self, percent: int):
+        logging.info(F"ZOOM OUT: {percent}")
+        self.__driver.execute_script(f"document.body.style.zoom='{percent}%'")
+    def wait_until_page_load_complete(self):
+        logging.info(f"wait until page loads complete")
+        try:
+            state = self.__driver.execute_script('return document.readyState')
+            assert state == 'complete', "Page does not loads correctly"
+        except AssertionError:
+            state = self.__driver.execute_script('return document.readyState')
+            assert state == 'complete', "Page does not loads correctly"
+        finally:
+            state = self.__driver.execute_script('return document.readyState')
+            assert state == 'complete', "Page does not loads correctly"
+
+
 
     def __load_locators_attributes(self):
         locator_config = self.__load_locators_config()
