@@ -2,6 +2,7 @@ import logging
 import random
 import time
 import mysql.connector
+from selenium.common import NoSuchElementException, ElementClickInterceptedException
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -27,6 +28,7 @@ class CLPage(BasePage):
 
     def get_general_categories_list(self):
         logging.info(f"Get General Category List")
+        self.element("list_container").wait_visible()
         general_category_list = self.element("general_category_list").find_elements()
         # logging.info(f"El tamaño de la lista general:{len(general_category_list)}")
         return general_category_list
@@ -34,6 +36,7 @@ class CLPage(BasePage):
     def get_subcategory_list(self):
         logging.info(f"Get subcategory List")
         self.element("label_subcategory_selected").wait_visible()
+        self.element("list_container").wait_visible()
         subcategory_list = self.element("subcategory_list").find_elements()
         return subcategory_list
 
@@ -42,15 +45,40 @@ class CLPage(BasePage):
         subcategory_label = self.element("label_subcategory_selected").wait_visible()
         return subcategory_label.text
 
+    # def select_random_element_of_list(self, lista: list):
+    #     logging.info(f"Select a random element of the list")
+    #     index = random.randint(0, len(lista))
+    #     try:
+    #         element_selected = lista[index]
+    #         element_text = element_selected.text
+    #         self.javascript_clic(element_text)
+    #         element_text = element_text.upper()
+    #         #logging.info(f"Element selected: {element_text}")
+    #         return element_text
+    #     except IndexError:
+    #         index = random.randint(0, len(lista))
+    #         element_selected = lista[index]
+    #         element_text = element_selected.text
+    #         self.javascript_clic(element_text)
+    #         element_text = element_text.upper()
+    #         # logging.info(f"Element selected: {element_text}")
+    #         return element_text
     def select_random_element_of_list(self, lista: list):
+        time.sleep(2)
+        self.wait_until_page_load_complete()
         logging.info(f"Select a random element of the list")
         index = random.randint(0, len(lista))
         element_selected = lista[index]
         element_text = element_selected.text
+
+        try:
+            element_selected.click()
+        except ElementClickInterceptedException:
+            self.javascript_clic(element_text)
+
         element_text = element_text.upper()
-        logging.info(f"Element selected: {element_text}")
-        element_selected.click()
         return element_text
+
 
     def click_first_parent_category_on_breadcrumb(self):
         logging.info(f"click on first parent category on breadcrumb")
@@ -119,9 +147,23 @@ class CLPage(BasePage):
             lista.append(element)
         return lista
 
-    def validate_parent_category_list_page(self):
-        logging.info(f"Validate parent category list page")
-        return self.element("element_buttons_grid_category").wait_clickable()
+    def validate_category_landing_page(self):
+        try:
+            self.element("category_landing_title").find_element()
+            logging.info(f"Validate category landing page")
+            return self.element("category_landing_title").find_element().text
+        except NoSuchElementException:
+            return False
+
+    def validate_product_list_page(self):
+        try:
+            self.element("plp_title").find_element()
+            logging.info("Validate product list page")
+            return self.element("plp_title").find_element().text
+        except NoSuchElementException:
+            return False
+
+
 
     def mysql_connection(self):
         connection = mysql.connector.connect(
@@ -146,3 +188,111 @@ class CLPage(BasePage):
         cursor.close()
         connection.close()
 
+    def click_on_Picker_vehicle_btn(self):
+        time.sleep(1)
+        logging.info(f"Click on Picker vehicle btn")
+        self.element("add_vehicle_btn").wait_clickable().click()
+
+    def click_on_vehicle_type_and_select(self, index=0):
+        """
+        Input is '0' by default and it will return the first element of the list
+        input any other character and it will return a random element in the list
+        :param index:
+        :return:
+        """
+        # logging.info(f"waiting for vehicle country checkbox icons")
+        # self.element("vehicle_country_checkbox_icons").wait_visible()
+        logging.info(f"Click on Vehicle dropdown")
+        dropdown = self.element("vehicle_type_dropdown").wait_clickable()
+        dropdown.click()
+        vehicle_type = self.select_index_list_element(index)
+        return vehicle_type
+        # if index is None:
+        #     self.select_first_list_element()
+        # else:
+        #     self.select_index_list_element(index)
+
+    def click_on_year_and_select(self, index=0):
+        """
+        Input is '0' by default and it will return the first element of the list
+        input any other character and it will return a random element in the list
+        :param index:
+        :return:
+        """
+        time.sleep(.2)
+
+        logging.info(f"Click on year dropdown")
+
+        dropdown = self.element("year_dropdown").wait_visible()
+        dropdown.click()
+        year = self.select_index_list_element(index)
+        return year
+
+    def click_on_make_and_select(self, index=0):
+        """
+        Input is '0' by default and it will return the first element of the list
+        input any other character and it will return a random element in the list
+        :param index:
+        :return:
+        """
+        time.sleep(.3)
+        logging.info(f"Click on make dropdown")
+        dropdown = self.element("make_dropdown").wait_visible()
+        dropdown.click()
+
+        make = self.select_index_list_element(index)
+        return make
+
+    def click_on_model_and_select(self, index=0):
+        """
+        Input is '0' by default and it will return the first element of the list
+        input any other character and it will return a random element in the list
+        :param index:
+        :return:
+        """
+        time.sleep(.2)
+        logging.info(f"Click on model dropdown")
+        dropdown = self.element("model_dropdown").wait_visible()
+        dropdown.click()
+        time.sleep(.2)
+        # dropdown.click()
+        # dropdown.click()
+        self.select_index_list_element(index)
+
+    def click_on_submodel_and_select(self, index=0):
+        """
+        Input is '0' by default and it will return the first element of the list
+        input any other character and it will return a random element in the list
+        :param index:
+        :return:
+        """
+        time.sleep(.2)
+        logging.info(f"Click on submodel dropdown")
+        dropdown = self.element("submodel_dropdown").wait_clickable()
+        dropdown.click()
+        submodel = self.select_index_list_element(index)
+        return submodel
+
+    def click_on_engine_and_select(self, index=0):
+        """
+        Input is '0' by default and it will return the first element of the list
+        input any other character and it will return a random element in the list
+        :param index:
+        :return:
+        """
+        time.sleep(.2)
+        logging.info(f"Click on engine dropdown")
+        dropdown = self.element("engine_dropdown").wait_clickable()
+        dropdown.click()
+        engine = self.select_index_list_element(index)
+        return engine
+
+    def click_on_add_vehicle_submit_btn(self):
+        logging.info(f"Click on Add vehicle submit button")
+        self.element("add_vehicle_button_submit").wait_clickable().click()
+
+    def get_vehicle_selected(self):
+        # era 1.5
+        time.sleep(1.5)
+        logging.info(f"Get vehicle selected text")
+        return self.element("vehicle_selected").wait_visible().text

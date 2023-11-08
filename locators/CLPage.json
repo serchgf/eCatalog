@@ -1,6 +1,6 @@
 {
 
-  "url": "https://172.22.210.30/ecatalog-us/#/",
+  "url": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
   "locators": {
 
     "carousel": {
@@ -15,14 +15,17 @@
       "by": "XPATH",
       "value": "//div[@class='category-popular-categories d-inline-block ng-star-inserted']//div[@role='button']"
     },
-
+    "list_container" : {
+      "by": "XPATH",
+      "value": "//div[@class='category-iterable-body']"
+    },
     "general_category_list": {
       "by": "XPATH",
       "value": "//div[@class='m-0 category-list-colums']/div/span"
     },
     "subcategory_list": {
       "by": "XPATH",
-      "value": "//div[@class='m-0 category-list-colums']/div/span"
+      "value": "//div[contains(@class,'m-0 category-list-colums')]/div/span"
     },
     "label_subcategory_selected": {
       "by": "XPATH",
@@ -41,9 +44,75 @@
       "by": "XPATH",
       "value": "//span[normalize-space()='Turbocharger & Supercharger']"
     },
-    "element_buttons_grid_category": {
+    "category_landing_elements_img": {
       "by": "XPATH",
       "value": "//div[@role='button']//img"
+    },
+    "category_landing_title": {
+      "by": "XPATH",
+      "value": "//div[@class='category-nav-limiter']/h2"
+    },
+    "filter_section": {
+      "by": "XPATH",
+      "value": "//div[@class='filters-column ng-star-inserted']"
+    },
+     "plp_title": {
+      "by": "XPATH",
+      "value": "//span[@class='roboto-800 fs-16px notranslate']"
+    },
+    "loading_img": {
+      "by": "XPATH",
+      "value1": "//div[@role='alert']//*[name()='svg']",
+      "value": "//p[contains(text(),'Loading')]"
+    },
+
+    "plp_error": {
+      "by": "XPATH",
+      "value": "//div[@class='description']/span[contains(text(),'We're sorry')]"
+    },
+    "add_vehicle_btn": {
+      "by": "XPATH",
+      "value": "//span[@class='vehicle-selected']"
+    },
+     "vehicle_type_tbx": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@field='vehicleTypeDescription']//input"
+    },
+    "vehicle_type_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@field='vehicleTypeDescription']//button"
+    },
+    "list_box": {
+      "by": "XPATH",
+      "value": "//ul[@role='listbox']/li"
+    },
+     "model_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='model']//button"
+    },
+    "submodel_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='subModel']//button"
+    },
+    "engine_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='engine']//button"
+    },
+    "year_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='year']//button"
+    },
+    "make_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='make']//button"
+    },
+     "add_vehicle_button_submit": {
+      "by": "XPATH",
+      "value": "//button[@type='submit']"
+    },
+    "vehicle_selected": {
+      "by": "XPATH",
+      "value": "//span[@class='vehicle-selected']"
     }
   }
 }
