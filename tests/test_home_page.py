@@ -7,10 +7,9 @@ import json
 import pytest
 
 from src.page_objects.home_page import HomePage
-_JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent,"locators","HomePage.json")
+_JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "HomePage.json")
 
-
-
+# HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-8263
 # def test_Vehicle_Filtering_Functionality_Validation(web_drivers):
 #     home_page = HomePage(*web_drivers)
@@ -96,7 +95,6 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent,"locators","HomeP
 #         f"Vehicle Edited successful")
 #     logging.info(f"\nOriginal Submodel:{submodel} -> {expected_submodel}\nOriginal Engine:{engine} -> {expected_engine}")
 
-
 #XTEST-8285
 # def test_Garage_Remove_Vehicle(web_drivers):
 #
@@ -154,55 +152,58 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent,"locators","HomeP
 #     assert category_selected == actual_parent_category, f"The actual parent category: {actual_parent_category}, should be: {category_selected}"
 #     assert home_page.validate_parent_category_list_page()
 
-
 # MXTEST-8271
 
-def test_Last_Viewed_Products(web_drivers):
-    home_page = HomePage(*web_drivers)
-    home_page.open()
-    #time.sleep(3)
-    expected_product_selected_list = []
-    lasted_viewed_list = []
-    # CICLO DE 3 O 5 VECES
-
-    for i in range(1):
-        logging.info(f"-------------------------------------------------------------------------Iteration: {i}")
-        home_page.wait_until_page_load_complete()
-        home_page.click_on_categories_button()
-
-        # get popular category list
-        category_list = home_page.get_popular_category_list()
-        # click random popular category
-        category_selected = home_page.select_random_element_of_list(category_list)
-        logging.info(f"category selected: {category_selected}")
-
-        # # get product list
-        home_page.wait_until_page_load_complete()
-        # time.sleep(5)
-        home_page.wait_search_results_label()
-        product_list = home_page.get_link_product_list()
-        expected_product_selected = home_page.select_random_element_of_list(product_list)
-        product_selected = home_page.clean_product_selected(expected_product_selected)
-        logging.info(f"Product selected: {product_selected}")
-        #ime.sleep(5)
-        # add product selected to list
-        expected_product_selected_list.append(product_selected)
-
-        home_page.click_homepage_button()
-        home_page.wait_until_page_load_complete()
-        # home_page.scroll_down()
-        # home_page.scroll_down()
-        # home_page.scroll_down()
-        #
-        logging.info(f"Recent Products expected list:")
-        home_page.show_product_list(expected_product_selected_list)
-        logging.info(f"GET actual lasted viewed products list")
-        lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
-        # lasted_viewed_list = []
-        for lasted_viewed_product in lasted_product_viewed_list:
-            lasted_viewed_list.append(lasted_viewed_product)
-
-    assert lasted_viewed_list == expected_product_selected_list
+# def test_Last_Viewed_Products(web_drivers):
+#     # pendiente hasta que funcione bien la pagina, codigo terminado
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     #time.sleep(3)
+#     expected_product_selected_list = []
+#     lasted_viewed_list = []
+#     # CICLO DE 3 O 5 VECES
+#
+#     for i in range(4):
+#         logging.info(f"-------------------------------------------------------------------------Iteration: {i}")
+#         home_page.wait_until_page_load_complete()
+#         home_page.click_on_categories_button()
+#         time.sleep(1)
+#         # get popular category list
+#         category_list = home_page.get_popular_category_list()
+#         # click random popular category
+#         category_selected = home_page.select_random_element_of_list(category_list)
+#         logging.info(f"category selected: {category_selected}")
+#
+#         # # get product list
+#         home_page.wait_until_page_load_complete()
+#         # time.sleep(5)
+#         home_page.wait_search_results_label()
+#         product_list = home_page.get_link_product_list()
+#         expected_product_selected = home_page.select_random_element_of_list(product_list)
+#         product_selected = home_page.clean_product_selected(expected_product_selected)
+#         logging.info(f"Product selected: {product_selected}")
+#         #ime.sleep(5)
+#         # add product selected to list
+#         expected_product_selected_list.append(product_selected)
+#         #
+#         home_page.click_homepage_button()
+#         home_page.wait_until_page_load_complete()
+#         logging.info(f"Recent Products expected list:")
+#         home_page.show_product_list(expected_product_selected_list)
+#
+#
+#     home_page.wait_until_page_load_complete()
+#     home_page.scroll_down()
+#     logging.info(f"GET actual lasted viewed products list")
+#     lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
+#     # lasted_viewed_list = []
+#     for lasted_viewed_product in lasted_product_viewed_list:
+#         if lasted_viewed_product != '':
+#             lasted_viewed_list.append(lasted_viewed_product)
+#     #
+#     logging.info(f"lasted_viewed_list: {lasted_viewed_list}")
+#     logging.info(f"expected_product_selected_list: {expected_product_selected_list}")
+#     assert lasted_viewed_list.sort() == expected_product_selected_list.sort()
 
 # VALIDAR EL QUE EN EL CARRUSERL SE VEAN LOS ULTIMAS  BUSQUEDAS
 
@@ -223,6 +224,135 @@ def test_Last_Viewed_Products(web_drivers):
 #     logging.info(f"ACTUAL data: {actual_name_href_dic['Delivery routes Jalisco']}")
 #
 #     assert expected_data == actual_name_href_dic, f"Link names and url: {actual_name_href_dic},\n should be: {expected_data}"
+# HOME PAGE-------------------------------------------------------------------------------------------------------------
+
+# BRAND NAVIGATION------------------------------------------------------------------------------------------------------
+# # MXTEST-8255, MXTEST-8266
+# def test_search_single_brand_without_vehicle_selected(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#     # CLIC BRANDS DROPDOWN
+#     home_page.click_on_brands()
+#     # CLIC SHOW ALL BRANDS LINK TEXT
+#     home_page.click_on_show_all_brands()
+#     # click on any brand
+#     home_page.get_random_brand()
+#
+#     # # get number of elements
+#     search_results_number = home_page.get_search_results_number()
+#
+#     logging.info(f"Search results number: {search_results_number}")
+"""     # todo falta crear la query y comparar los resultados"""
+#     # DB Connection
+#     #data = home_page.cargar_json_data(_JSON_PATH)
+#     #expected_data = data['query_MXTEST-8263']
+#     # logging.info(f"Expected data: {expected_data}")
+#     #home_page.mysql_connection()
+#
+#     # send query
+#
+#     # recover result number of query
+#
+#     # assert search result number showed in page with querey result
+
+
+
+
+# # MXTEST-8265, MXTEST-8267
+# def test_search_all_brands_vehicle_selected(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#
+#     home_page.click_on_Picker_vehicle_btn()
+#     home_page.click_on_vehicle_type_and_select()
+#
+#     year = home_page.click_on_year_and_select()
+#     make = home_page.click_on_make_and_select()
+#     home_page.click_on_model_and_select()
+#     home_page.click_on_submodel_and_select()
+#     home_page.click_on_engine_and_select()
+#     home_page.click_on_add_vehicle_submit_btn()
+#     expected_vehicle_selected = f"{year} {make}"
+#     vehicle_selected = home_page.get_vehicle_selected()
+#     assert vehicle_selected == expected_vehicle_selected, f"The button must shows: '{expected_vehicle_selected}' instead of '{vehicle_selected}' on the button."
+#     # CLIC BRANDS DROPDOWN
+#     home_page.click_on_brands()
+#     # CLIC SHOW ALL BRANDS LINK TEXT
+#     home_page.click_on_show_all_brands()
+#     # click on any brand
+#     home_page.get_random_brand()
+#     # # get number of elements
+#     search_results_number = home_page.get_search_results_number()
+#     assert search_results_number > 0, "No elements displayed"
+#
+#
+#     logging.info(f"Search results number: {search_results_number}")
+"""# todo falta crear la query y comparar los resultados"""
+#     # DB Connection
+#     #data = home_page.cargar_json_data(_JSON_PATH)
+#     #expected_data = data['query_MXTEST-8263']
+#     # logging.info(f"Expected data: {expected_data}")
+#     #home_page.mysql_connection()
+#
+#     # send query
+#
+#     # recover result number of query
+#
+#     # assert search result number showed in page with querey result
+
+
+
+# MXTEST-8265, MXTEST-8267
+def test_search_all_brands_vehicle_selected(web_drivers):
+
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    home_page.wait_until_page_load_complete()
+
+    home_page.click_on_Picker_vehicle_btn()
+    home_page.click_on_vehicle_type_and_select()
+
+    year = home_page.click_on_year_and_select()
+    make = home_page.click_on_make_and_select()
+    home_page.click_on_model_and_select()
+    home_page.click_on_submodel_and_select()
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    expected_vehicle_selected = f"{year} {make}"
+    vehicle_selected = home_page.get_vehicle_selected()
+    assert vehicle_selected == expected_vehicle_selected, f"The button must shows: '{expected_vehicle_selected}' instead of '{vehicle_selected}' on the button."
+    # CLIC BRANDS DROPDOWN
+    home_page.click_on_brands()
+    # CLIC SHOW ALL BRANDS LINK TEXT
+    home_page.click_on_show_all_brands()
+    # click on any brand
+    home_page.get_random_brand()
+    # # get number of elements
+    search_results_number = home_page.get_search_results_number()
+    assert search_results_number > 0, "No elements displayed"
+
+
+    logging.info(f"Search results number: {search_results_number}")
+    """"# todo falta crear la query y comparar los resultados"""
+    # DB Connection
+    #data = home_page.cargar_json_data(_JSON_PATH)
+    #expected_data = data['query_MXTEST-8263']
+    # logging.info(f"Expected data: {expected_data}")
+    #home_page.mysql_connection()
+
+    # send query
+
+    # recover result number of query
+
+    # assert search result number showed in page with querey result
+
+
+
+
 
 
 

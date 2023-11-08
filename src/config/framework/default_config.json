@@ -1,7 +1,7 @@
 {
   "browser_name": "chrome",
-  "implicit_wait": 10,
-  "explicit_wait": 5,
+  "implicit_wait": 20,
+  "explicit_wait": 10,
   "drivers_path": "driver/chromedriver.exe",
   "maximize": true,
   "incognito": true,

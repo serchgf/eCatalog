@@ -1,6 +1,9 @@
 {
-  "url": "https://172.22.210.30/ecatalog-us/#/",
+  "url": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "url_dev": "https://172.22.210.30/ecatalog-us/#/",
   "url_qa": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "query_MXTEST-8263": "SELECT * FROM epc.application_vehicle_indexes avi INNER JOIN epc.vehicles v on v.a_vehicle_id = avi.vehicle_id WHERE avi.application_id='161096296'  AND avi.part_type_id = '02512' GROUP BY avi.application_id, avi.vehicle_id;",
+  "query_MXTEST_8255": "hola mundo",
   "footer_href_links":{
       "Delivery routes Jalisco": "http://intranet.oreillyauto.mx/files/administrativo/logistica/documento.php?d=Y2lyY3VpdG9fc3VjdXJzYWxlc19qYWxpc2NvLnBkZg==&n=Q2lyY3VpdG9zIGVudHJlIHN1Y3Vyc2FsZXMgSmFsaXNjbw==",
       "Delivery routes Leon": "http://intranet.oreillyauto.mx/files/administrativo/almacen/documento.php?d=Y2lyY3VpdG9fbGVvbi5wZGY=&n=Q2lyY3VpdG8gZW50cmUgU3VjdXJzYWxlcyBMZcOzbg==",
@@ -33,21 +36,25 @@
       "by": "XPATH",
       "value": "//span[@id='interchange_option']"
     },
+    "vehicle_type_label": {
+      "by": "XPATH",
+      "value": "//p[contains(text(),'Vehicle type*')]"
+    },
     "vehicle_type_tbx": {
       "by": "XPATH",
       "value": "//p-autocomplete[@field='vehicleTypeDescription']//input"
     },
     "vehicle_type_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@field='vehicleTypeDescription']//button"
+      "value": "//p-autocomplete[@field='vehicleTypeDescription']//button/span"
     },
     "year_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@formcontrolname='year']//button"
+      "value": "//p-autocomplete[@formcontrolname='year']//button/span"
     },
     "make_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@formcontrolname='make']//button"
+      "value": "//p-autocomplete[@formcontrolname='make']//button/span"
     },
     "model_dropdown": {
       "by": "XPATH",
@@ -59,11 +66,11 @@
     },
     "submodel_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@formcontrolname='subModel']//button"
+      "value": "//p-autocomplete[@formcontrolname='subModel']//button/span"
     },
     "engine_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@formcontrolname='engine']//button"
+      "value": "//p-autocomplete[@formcontrolname='engine']//button/span"
     },
     "add_vehicle_button_submit": {
       "by": "XPATH",
@@ -172,6 +179,46 @@
     "search_results_label": {
       "by": "XPATH",
       "value": "//span[contains(text(),'Search Results')]"
+    },
+    "popular_categories_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'POPULAR CATEGORIES')]"
+    },
+    "brands_dropdown": {
+      "by": "XPATH",
+      "value": "//section[@class='submenu ps-5 ng-star-inserted']//span[contains(text(),'BRANDS')]"
+    },
+     "deals_button": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'DEALS')]"
+    },
+    "show_all_brands_link": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),' Show all brands ')]"
+    },
+    "brands_images": {
+      "by": "XPATH",
+      "value": "//o-brand-menu//img"
+    },
+    "explore_brands_label": {
+      "by": "XPATH",
+      "value": "//div[contains(text(),' Explore Brands ')]"
+    },
+    "sort_by_dropdown": {
+      "by": "XPATH",
+      "value": "//p-dropdown[@optionlabel='name']"
+    },
+    "all_brands_link_list":{
+      "by": "XPATH",
+      "value": "//span[@class='p-button-label ng-star-inserted']"
+    },
+    "explore_bands_label":{
+      "by": "XPATH",
+      "value": "//div[contains(text(),' Explore Brands ')]"
+      },
+    "no_results_message": {
+      "by": "XPATH",
+      "value": "//div[@class='description']/span[1]"
     }
   }
 }

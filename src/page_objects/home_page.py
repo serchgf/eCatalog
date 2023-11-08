@@ -3,12 +3,13 @@ import logging
 import random
 import time
 import mysql.connector
+from selenium.common import JavascriptException
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from src.page_objects.base_page import BasePage
 from selenium.webdriver.support.select import Select
-from selenium.webdriver.common.action_chains import ActionChains
+import locators
 
 
 class HomePage(BasePage):
@@ -39,12 +40,15 @@ class HomePage(BasePage):
         :return:
         """
         # logging.info(f"waiting for vehicle country checkbox icons")
-        # self.element("vehicle_country_checkbox_icons").wait_visible()
+        self.element("vehicle_type_label").wait_visible()
         logging.info(f"Click on Vehicle dropdown")
         dropdown = self.element("vehicle_type_dropdown").wait_clickable()
+        #self.clic_javacript(dropdown)
         dropdown.click()
+
         vehicle_type = self.select_index_list_element(index)
         return vehicle_type
+
         # if index is None:
         #     self.select_first_list_element()
         # else:
@@ -88,10 +92,10 @@ class HomePage(BasePage):
         :param index:
         :return:
         """
-        time.sleep(.2)
         logging.info(f"Click on model dropdown")
-        dropdown = self.element("model_dropdown").wait_visible()
-        dropdown.click()
+        dropdown = self.element("model_dropdown").wait_clickable()
+        self.clic_javacript(dropdown)
+        #dropdown.click()
         time.sleep(.2)
         # dropdown.click()
         # dropdown.click()
@@ -231,23 +235,21 @@ class HomePage(BasePage):
         return subcategory_label.text
 
     def select_random_element_of_list(self, lista: list):
-        time.sleep(1)
+        time.sleep(2)
         self.wait_until_page_load_complete()
         logging.info(f"Select a random element of the list")
         index = random.randint(0, len(lista))
         element_selected = lista[index]
         element_text = element_selected.text
         element_text = element_text.upper()
-        #logging.info(f"Element selected: {element_text}")
-        try:
-            element_selected.click()
-        except:
-            element_selected.click()
-
+        # self.scroll_to_element(element_selected)
+        # self.move_to_element_and_click(element_selected)
+        # self.clic_javacript(element_selected)
+        element_selected.click()
         return element_text
 
-
     def wait_search_results_label(self):
+        time.sleep(3)
         try:
             self.element("search_results_label").wait_visible()
         except TimeoutError:
@@ -266,20 +268,21 @@ class HomePage(BasePage):
     def select_index_list_element(self, index=0):
         logging.info(f"Get element list")
         lista = self.element("list_box").find_elements()
-
         if index != 0:
             n_elementos = len(lista)
             index = random.randint(0, n_elementos)
             time.sleep(.2)
             element_selected = lista[index].text
             logging.info(f"select element on the list with index: {index}: {element_selected}")
+            #self.clic_javacript(lista[index])
             lista[index].click()
         else:
             index = 0
             time.sleep(.2)
             element_selected = lista[index].text
             logging.info(f"select element on the list with index: {index}: {element_selected}")
-            lista[index].click()
+            self.clic_javacript(lista[index])
+            #lista[index].click()
 
         return element_selected
 
@@ -343,15 +346,25 @@ class HomePage(BasePage):
     def get_link_product_list(self):
         logging.info(f"Get Products list")
         self.wait_until_page_load_complete()
+        self.element("span_filter_by").wait_visible()
         lista = self.element("link_products_list").find_elements()
-        return lista
+        if len(lista)!= 0:
+            return lista
+        else:
+            lista = self.element("link_products_list").find_elements()
+            return lista
 
     def get_popular_category_list(self):
         self.wait_until_page_load_complete()
-        time.sleep(1)
         logging.info(f"Get popular category list")
+        self.element("popular_categories_label").wait_visible()
+
         lista = self.element("popular_categories_list_btn").find_elements()
-        return lista
+        if len(lista)!=0:
+            return lista
+        else:
+            lista = self.element("popular_categories_list_btn").find_elements()
+            return lista
 
     def show_product_list(self, product_list: list):
         for product in product_list:
@@ -363,6 +376,8 @@ class HomePage(BasePage):
 
     def get_lasted_viewed_products_list(self):
         logging.info(f"Get Lasted viewed products list")
+        self.element('last_viewed_products_label').wait_visible()
+        self.scroll_to_element(self.element('last_viewed_products_label'))
         # self.scroll_down()
         lista =[]
         # self.element("last_viewed_products_label").scroll_down_to_element()
@@ -377,6 +392,7 @@ class HomePage(BasePage):
         product_selected = expected_product_selected.split('#')
         product_selected = product_selected[0].split('\n')
         return product_selected[1]
+
     def get_footer_links_name_href_dict(self):
         logging.info(f"Get Footer links list")
         self.element("tools_span").wait_visible()
@@ -395,20 +411,62 @@ class HomePage(BasePage):
             links_href_list.append(link.get_attribute('href'))
         return links_href_list
 
-    def validate_footer_links_href(self, href_list: list, data_json):
-        logging.info(f"Validate expected href links with actual href(url) on footer page")
-        name_list =[]
-        href_list = []
-        link_list = self.element("footer_links").find_elements()
-        for link in link_list:
-            links_href_list.append(link.get_attribute('href'))
-        return links_href_list
 
+
+    # def validate_footer_links_href(self, href_list: list, data_json):
+    #     logging.info(f"Validate expected href links with actual href(url) on footer page")
+    #     name_list =[]
+    #     href_list = []
+    #     link_list = self.element("footer_links").find_elements()
+    #     for link in link_list:
+    #         links_href_list.append(link.get_attribute('href'))
+    #     return links_href_list
+    def click_on_brands(self):
+        logging.info(f"Click on brands dropdown list")
+        self.element("brands_dropdown").wait_visible().click()
+
+
+    def click_on_show_all_brands(self):
+        logging.info(f"Click on show all brands link text ")
+        self.element("show_all_brands_link").wait_clickable().click()
+
+    def get_random_brand(self):
+        logging.info(f"Click Random Brand")
+        self.element("explore_brands_label").wait_visible()
+        brands_list = self.element("all_brands_link_list").find_elements()
+        logging.info(f"El numero de marcas son: {len(brands_list)}")
+
+        index = random.randint(0, len(brands_list))
+        brand_selected = brands_list[index].text
+        logging.info(f"Brand Selected: {brand_selected}")
+        brands_list[index].click()
+        return brand_selected
+
+    def get_search_results_number(self):
+        logging.info(f"Get search results number")
+        try:
+            self.element("span_filter_by").wait_visible()
+        except TimeoutError:
+            self.element("span_filter_by").wait_visible()
+
+        self.element("sort_by_dropdown").wait_visible()
+        search_results = self.element("search_results_label").wait_visible().text
+        logging.info(f"search result label: {search_results}")
+        cadena_l = search_results.split('(')
+        numero = cadena_l[1].replace(')', '')
+        numero = int(numero)
+        return numero
+
+    def get_search_message(self):
+        logging.info("Get search results message")
+        text = self.element("no_results_message").find_element().text
+        return text
 
     def cargar_json_data(self, JSON_PATH: str):
         with open(JSON_PATH) as archivo:
             datos = json.load(archivo)
         return datos
+
     def mysql_connection(self):
         connection = mysql.connector.connect(
             host="172.22.210.13",

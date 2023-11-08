@@ -4,12 +4,14 @@ import os
 import pathlib
 import time
 
+from selenium.common import JavascriptException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from src.web_elements.common import WebElementWrapper
-
+from selenium.webdriver.common.action_chains import ActionChains as AC
+from selenium.webdriver.support import expected_conditions as EC
 
 
 _LOCATOR_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "locators")
@@ -44,12 +46,13 @@ class BasePage:
     def scroll_down(self):
         time.sleep(1)
         logging.info("SCROLL DOWN TO HEIGHT")
-        self.__driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+        self.__driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
 
     def zoom_out(self, percent: int):
         logging.info(F"ZOOM OUT: {percent}")
         self.__driver.execute_script(f"document.body.style.zoom='{percent}%'")
     def wait_until_page_load_complete(self):
+        time.sleep(4)
         logging.info(f"wait until page loads complete")
         try:
             state = self.__driver.execute_script('return document.readyState')
@@ -61,6 +64,45 @@ class BasePage:
             state = self.__driver.execute_script('return document.readyState')
             assert state == 'complete', "Page does not loads correctly"
 
+
+    def clic_javacript(self, element):
+        """
+        Recibe webelement
+        :param element:
+        :return:
+        """
+        e = element
+        try:
+            e.click()
+        except JavascriptException:
+            #    #https://stackoverflow.com/questions/56848671/cannot-read-property-defaultview-of-undefined
+            print("Error, element not found... check your Locator")
+            self.__driver.execute_script("arguments[0].click();", e)
+
+    def javascript_clic(self, element_text):
+        """
+        recibe el texto del webElement
+        :param element_text:
+        :return:
+        """
+        xpath = f"//span[normalize-space()='{element_text}']"
+        script = f'var elemento = document.evaluate("{xpath}", document, null, 9, null).singleNodeValue; elemento.click();'
+        self.__driver.execute_script(script)
+
+    def move_to_element_and_click(self, element):
+        """
+        Recibe un webElement
+        :param element:
+        :return:
+        """
+        logging.info(f"Move to Element and click")
+        actions = AC(self.__driver)
+        actions.move_to_element(element).click().perform()
+
+    def scroll_to_element(self, element):
+        logging.info(f"Scroll Down to Element")
+        actions = AC(self.__driver)
+        actions.move_to_element(element).perform()
 
 
     def __load_locators_attributes(self):
