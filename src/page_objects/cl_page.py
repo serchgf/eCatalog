@@ -45,40 +45,33 @@ class CLPage(BasePage):
         subcategory_label = self.element("label_subcategory_selected").wait_visible()
         return subcategory_label.text
 
-    # def select_random_element_of_list(self, lista: list):
-    #     logging.info(f"Select a random element of the list")
-    #     index = random.randint(0, len(lista))
-    #     try:
-    #         element_selected = lista[index]
-    #         element_text = element_selected.text
-    #         self.javascript_clic(element_text)
-    #         element_text = element_text.upper()
-    #         #logging.info(f"Element selected: {element_text}")
-    #         return element_text
-    #     except IndexError:
-    #         index = random.randint(0, len(lista))
-    #         element_selected = lista[index]
-    #         element_text = element_selected.text
-    #         self.javascript_clic(element_text)
-    #         element_text = element_text.upper()
-    #         # logging.info(f"Element selected: {element_text}")
-    #         return element_text
     def select_random_element_of_list(self, lista: list):
-        time.sleep(2)
         self.wait_until_page_load_complete()
         logging.info(f"Select a random element of the list")
         index = random.randint(0, len(lista))
-        element_selected = lista[index]
-        element_text = element_selected.text
-
         try:
-            element_selected.click()
-        except ElementClickInterceptedException:
-            self.javascript_clic(element_text)
+            element_selected = lista[index-1]
+            element_text = element_selected.text
 
-        element_text = element_text.upper()
-        return element_text
+            try:
+                element_selected.click()
+            except ElementClickInterceptedException:
+                self.javascript_clic(element_text)
 
+            element_text = element_text.upper()
+            return element_text
+        except IndexError:
+            index = random.randint(0, len(lista))
+            element_selected = lista[index-1]
+            element_text = element_selected.text
+
+            try:
+                element_selected.click()
+            except ElementClickInterceptedException:
+                self.javascript_clic(element_text)
+
+            element_text = element_text.upper()
+            return element_text
 
     def click_first_parent_category_on_breadcrumb(self):
         logging.info(f"click on first parent category on breadcrumb")
@@ -94,13 +87,13 @@ class CLPage(BasePage):
 
         if index != 0:
             n_elementos = len(lista)
-            index = random.randint(0, n_elementos)
+            index = random.randint(0, n_elementos-1)
             time.sleep(.2)
             element_selected = lista[index].text
             logging.info(f"select element on the list with index: {index}: {element_selected}")
             lista[index].click()
         else:
-            index = 0
+            index = 1
             time.sleep(.2)
             element_selected = lista[index].text
             logging.info(f"select element on the list with index: {index}: {element_selected}")
@@ -147,23 +140,63 @@ class CLPage(BasePage):
             lista.append(element)
         return lista
 
-    def validate_category_landing_page(self):
+    # def validate_category_landing_page(self):
+    #     try:
+    #         self.element("category_landing_title").find_element()
+    #         logging.info(f"Validate category landing page")
+    #         return self.element("category_landing_title").find_element().text
+    #     except NoSuchElementException:
+    #         return False
+    def validate_category_landing_page(self, subcategory_selected):
         try:
-            self.element("category_landing_title").find_element()
-            logging.info(f"Validate category landing page")
-            return self.element("category_landing_title").find_element().text
+            if self.element("category_landing_title").find_element().text == subcategory_selected:
+                logging.info(f"Validate categories in landing page")
+                total = self.clp_category_result()
+                logging.info(f"The total of categories in page = {total}")
+                return True
         except NoSuchElementException:
             return False
 
-    def validate_product_list_page(self):
+    def validate_product_list_page(self, subcategory_selected):
         try:
-            self.element("plp_title").find_element()
-            logging.info("Validate product list page")
-            return self.element("plp_title").find_element().text
+            if self.element("plp_title").find_element().text.upper() == subcategory_selected:
+                logging.info("Validate product list page")
+                total = self.get_search_results_number()
+                logging.info(f"The total of products = {total}")
+                return True
         except NoSuchElementException:
             return False
 
+    def validate_no_products_found(self):
+        try:
+            if self.element("plp_error").find_element():
+                return True
+        except NoSuchElementException:
+            return False
 
+    def clp_category_result(self):
+        logging.info("Get the total of categories on page")
+        img_cat = self.element("img_cat_names").find_elements()
+        additional = self.element("additional_cat_names").find_elements()
+        total = len(img_cat) + len(additional)
+        return total
+
+    def get_search_results_number(self):
+        logging.info(f"Get search results number")
+        try:
+            self.element("span_filter_by").wait_visible()
+            self.element("sort_by_dropdown").wait_visible()
+        except TimeoutError:
+            self.element("span_filter_by").wait_visible()
+            self.element("sort_by_dropdown").wait_visible()
+
+
+        search_results = self.element("search_results_label").find_element().text
+        logging.info(f"search result label: {search_results}")
+        cadena_l = search_results.split('(')
+        numero = cadena_l[1].replace(')', '')
+        numero = int(numero)
+        return numero
 
     def mysql_connection(self):
         connection = mysql.connector.connect(
@@ -236,10 +269,10 @@ class CLPage(BasePage):
         :return:
         """
         time.sleep(.3)
-        logging.info(f"Click on make dropdown")
-        dropdown = self.element("make_dropdown").wait_visible()
-        dropdown.click()
-
+        # logging.info(f"Click on make dropdown")
+        # dropdown = self.element("make_dropdown").wait_visible()
+        # dropdown.click()
+        logging.info(f"Select Make from list")
         make = self.select_index_list_element(index)
         return make
 
@@ -251,12 +284,13 @@ class CLPage(BasePage):
         :return:
         """
         time.sleep(.2)
-        logging.info(f"Click on model dropdown")
-        dropdown = self.element("model_dropdown").wait_visible()
-        dropdown.click()
-        time.sleep(.2)
+        # logging.info(f"Click on model dropdown")
+        # dropdown = self.element("model_dropdown").wait_visible()
         # dropdown.click()
-        # dropdown.click()
+        # time.sleep(.2)
+        # # dropdown.click()
+        # # dropdown.click()
+        logging.info(f"Select Model from list")
         self.select_index_list_element(index)
 
     def click_on_submodel_and_select(self, index=0):
@@ -267,9 +301,10 @@ class CLPage(BasePage):
         :return:
         """
         time.sleep(.2)
-        logging.info(f"Click on submodel dropdown")
-        dropdown = self.element("submodel_dropdown").wait_clickable()
-        dropdown.click()
+        # logging.info(f"Click on submodel dropdown")
+        # dropdown = self.element("submodel_dropdown").wait_clickable()
+        # dropdown.click()
+        logging.info(f"Select submodel from list")
         submodel = self.select_index_list_element(index)
         return submodel
 
@@ -281,9 +316,10 @@ class CLPage(BasePage):
         :return:
         """
         time.sleep(.2)
-        logging.info(f"Click on engine dropdown")
-        dropdown = self.element("engine_dropdown").wait_clickable()
-        dropdown.click()
+        # logging.info(f"Click on engine dropdown")
+        # dropdown = self.element("engine_dropdown").wait_clickable()
+        # dropdown.click()
+        logging.info(f"Select Engine from list")
         engine = self.select_index_list_element(index)
         return engine
 
