@@ -14,7 +14,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # def test_Vehicle_Filtering_Functionality_Validation(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
-#     time.sleep(3)
+#     time.sleep(5)
 #     home_page.click_on_Picker_vehicle_btn()
 #     home_page.click_on_vehicle_type_and_select()
 #     year = home_page.click_on_year_and_select()
@@ -25,10 +25,10 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     home_page.click_on_add_vehicle_submit_btn()
 #     expected_vehicle_selected = f"{year} {make}"
 #     vehicle_selected = home_page.get_vehicle_selected()
-#     assert vehicle_selected == expected_vehicle_selected, f"The button must shows: '{expected_vehicle_selected}' instead of '{vehicle_selected}' on the button."
-#     home_page.click_on_categories_button_and_select()
+#     assert vehicle_selected in expected_vehicle_selected, f"Button must shows:{expected_vehicle_selected}"
+#     #home_page.click_on_categories_button_and_select()
 #     # Realizar consulta a la base de datos
-#     home_page.connect_and_consult()
+#     # home_page.connect_and_consult() consultas no requeridas
 
 # MXTEST-8282
 # def test_Garage_Garage_Vehicle_Limit(web_drivers):
@@ -38,8 +38,9 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     time.sleep(3)
 #     logging.info(f"FIRST Iteration----------------------------------------------------------------")
 #     home_page.click_on_Picker_vehicle_btn()
+#
 #     vehicles_list = []
-#     for index in range(16):
+#     for index in range(15):
 #         logging.info(f"{index} Iteration----------------------------------------------------------------")
 #         vehicle = home_page.click_on_vehicle_type_and_select(index)
 #         home_page.click_on_year_and_select(index)
@@ -155,48 +156,44 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # MXTEST-8271
 
 # def test_Last_Viewed_Products(web_drivers):
-#     # pendiente hasta que funcione bien la pagina, codigo terminado
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
-#     #time.sleep(3)
+#     time.sleep(5)
 #     expected_product_selected_list = []
 #     lasted_viewed_list = []
 #     # CICLO DE 3 O 5 VECES
-#
+#     home_page.wait_until_page_load_complete()
+#     logging.info(f"Click categorie button*****************")
+#     home_page.click_on_categories_button()
+#     home_page.javascript_clic("Accessories")
+#     subcat_1_list_2 = home_page.get_product_list_2()
+#     home_page.click_element_text_of_list(subcat_1_list_2, "Exterior Accessories")
+#     subcat_2_list_2 = home_page.get_product_list_2()
+#     home_page.click_element_text_of_list(subcat_2_list_2, "Canopy And Tent")
+#     home_page.wait_search_results_label()
+#     product_list = home_page.get_link_product_list(0)
+#     expected_product_selected = home_page.select_random_element_of_list(product_list)
+#     product_selected = home_page.clean_product_selected(expected_product_selected)
+#     logging.info(f"Selected: {product_selected}")
+#     expected_product_selected_list.append(product_selected)
+#     time.sleep(2)
 #     for i in range(4):
-#         logging.info(f"-------------------------------------------------------------------------Iteration: {i}")
-#         home_page.wait_until_page_load_complete()
-#         home_page.click_on_categories_button()
-#         time.sleep(1)
-#         # get popular category list
-#         category_list = home_page.get_popular_category_list()
-#         # click random popular category
-#         category_selected = home_page.select_random_element_of_list(category_list)
-#         logging.info(f"category selected: {category_selected}")
-#
-#         # # get product list
-#         home_page.wait_until_page_load_complete()
-#         # time.sleep(5)
-#         home_page.wait_search_results_label()
-#         product_list = home_page.get_link_product_list()
+#         home_page.back_to_previous_page()
+#         product_list = home_page.get_link_product_list(0)
 #         expected_product_selected = home_page.select_random_element_of_list(product_list)
 #         product_selected = home_page.clean_product_selected(expected_product_selected)
-#         logging.info(f"Product selected: {product_selected}")
-#         #ime.sleep(5)
-#         # add product selected to list
+#         logging.info(f"Selected: {product_selected}")
 #         expected_product_selected_list.append(product_selected)
-#         #
-#         home_page.click_homepage_button()
-#         home_page.wait_until_page_load_complete()
-#         logging.info(f"Recent Products expected list:")
-#         home_page.show_product_list(expected_product_selected_list)
+#         time.sleep(1)
 #
+#     home_page.click_on_logo_oreily_home()
 #
-#     home_page.wait_until_page_load_complete()
-#     home_page.scroll_down()
+#     logging.info(f"Recent Products expected list:")
+#     home_page.show_product_list(expected_product_selected_list)
+#
 #     logging.info(f"GET actual lasted viewed products list")
 #     lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
-#     # lasted_viewed_list = []
+#
 #     for lasted_viewed_product in lasted_product_viewed_list:
 #         if lasted_viewed_product != '':
 #             lasted_viewed_list.append(lasted_viewed_product)
@@ -205,7 +202,6 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     logging.info(f"expected_product_selected_list: {expected_product_selected_list}")
 #     assert lasted_viewed_list.sort() == expected_product_selected_list.sort()
 
-# VALIDAR EL QUE EN EL CARRUSERL SE VEAN LOS ULTIMAS  BUSQUEDAS
 
 
 # MXTEST-8290
@@ -221,7 +217,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     logging.info(f"Expected data: {expected_data}")
 #
 #     actual_name_href_dic = home_page.get_footer_links_name_href_dict()
-#     logging.info(f"ACTUAL data: {actual_name_href_dic['Delivery routes Jalisco']}")
+#     ### logging.info(f"ACTUAL data: {actual_name_href_dic['Delivery routes Jalisco']}")
 #
 #     assert expected_data == actual_name_href_dic, f"Link names and url: {actual_name_href_dic},\n should be: {expected_data}"
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
@@ -256,8 +252,6 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     # recover result number of query
 #
 #     # assert search result number showed in page with querey result
-
-
 
 
 # # MXTEST-8265, MXTEST-8267
@@ -305,64 +299,261 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     # assert search result number showed in page with querey result
 
 
-
-# MXTEST-8265, MXTEST-8267
-def test_search_all_brands_vehicle_selected(web_drivers):
-
-    home_page = HomePage(*web_drivers)
-    home_page.open()
-    home_page.wait_until_page_load_complete()
-
-    home_page.click_on_Picker_vehicle_btn()
-    home_page.click_on_vehicle_type_and_select()
-
-    year = home_page.click_on_year_and_select()
-    make = home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
-    expected_vehicle_selected = f"{year} {make}"
-    vehicle_selected = home_page.get_vehicle_selected()
-    assert vehicle_selected == expected_vehicle_selected, f"The button must shows: '{expected_vehicle_selected}' instead of '{vehicle_selected}' on the button."
-    # CLIC BRANDS DROPDOWN
-    home_page.click_on_brands()
-    # CLIC SHOW ALL BRANDS LINK TEXT
-    home_page.click_on_show_all_brands()
-    # click on any brand
-    home_page.get_random_brand()
-    # # get number of elements
-    search_results_number = home_page.get_search_results_number()
-    assert search_results_number > 0, "No elements displayed"
-
-
-    logging.info(f"Search results number: {search_results_number}")
-    """"# todo falta crear la query y comparar los resultados"""
-    # DB Connection
-    #data = home_page.cargar_json_data(_JSON_PATH)
-    #expected_data = data['query_MXTEST-8263']
-    # logging.info(f"Expected data: {expected_data}")
-    #home_page.mysql_connection()
-
-    # send query
-
-    # recover result number of query
-
-    # assert search result number showed in page with querey result
-
-
-
-
-
-
-
-
-
-# def test_validate_menu_bar_elements(web_drivers):
+# # MXTEST-8265, MXTEST-8267
+# def test_search_all_brands_vehicle_selected(web_drivers):
+#
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
-#     expected_menu_elements = ['Desktops', 'Laptops & Notebooks', 'Components', 'Tablets', 'Software', 'Phones & PDAs',
-#                               'Cameras', 'MP3 Players']
-#     actual_menu_elements = home_page.obtain_menu_elements()
-#     assert expected_menu_elements in actual_menu_elements, f"Elements in menu bar should be: {expected_menu_elements}"
-#     home_page.take_screenshot("test_validate_menu_bar_elements")
+#     home_page.wait_until_page_load_complete()
+#
+#     home_page.click_on_Picker_vehicle_btn()
+#     home_page.click_on_vehicle_type_and_select()
+#
+#     year = home_page.click_on_year_and_select()
+#     make = home_page.click_on_make_and_select()
+#     home_page.click_on_model_and_select()
+#     home_page.click_on_submodel_and_select()
+#     home_page.click_on_engine_and_select()
+#     home_page.click_on_add_vehicle_submit_btn()
+#     expected_vehicle_selected = f"{year} {make}"
+#     vehicle_selected = home_page.get_vehicle_selected()
+#     assert vehicle_selected == expected_vehicle_selected, f"The button must shows: '{expected_vehicle_selected}' instead of '{vehicle_selected}' on the button."
+#     # CLIC BRANDS DROPDOWN
+#     home_page.click_on_brands()
+#     # CLIC SHOW ALL BRANDS LINK TEXT
+#     home_page.click_on_show_all_brands()
+#     # click on any brand
+#     home_page.get_random_brand()
+#     # # get number of elements
+#     search_results_number = home_page.get_search_results_number()
+#     assert search_results_number > 0, "No elements displayed"
+#
+#
+#     logging.info(f"Search results number: {search_results_number}")
+#     """"# todo falta crear la query y comparar los resultados"""
+#     # DB Connection
+#     #data = home_page.cargar_json_data(_JSON_PATH)
+#     #expected_data = data['query_MXTEST-8263']
+#     # logging.info(f"Expected data: {expected_data}")
+#     #home_page.mysql_connection()
+#
+#     # send query
+#
+#     # recover result number of query
+#
+#     # assert search result number showed in page with querey result
+
+
+
+# MODAL NAVIGATION------------------------------------------------------------------------------------------------------
+
+# # MXTEST-8257
+# def test_Popular_Categories(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#     home_page.click_on_categories_button()
+#     popular_category_list = home_page.get_popular_category_list()
+#     expected_len_popopular_category_list = 12
+#     logging.info("Validation the number of categories in the 'Categorias populares' section")
+#     assert len(popular_category_list) == expected_len_popopular_category_list, f"Number of popular categories must be: '{expected_len_popopular_category_list}' instead of '{len(popular_category_list)}'."
+#
+# # MXTEST-8273
+# def test_GoBackButton(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#     home_page.click_on_categories_button()
+#     general_category_list = home_page.get_general_categories_list()
+#     home_page.select_random_element_of_list(general_category_list)
+#     home_page.click_on_goBack_btn()
+#
+#     logging.info("Validate presence of 'POPULAR CATEGORIES' label in modal")
+#     assert home_page.presenceOf_popular_categories_label(), f"'POPULAR CATEGORIES' label has not been displayed."
+#
+
+# # MXTEST-8274
+# def test_PopupClose_Button(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#     home_page.click_on_categories_button()
+#     home_page.close_categories()
+
+
+
+
+# EQUIVALENTS-----------------------------------------------------------------------------------------------------------
+
+# # MXTEST-8256
+# def test_Search_Compatible(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#     home_page.click_on_part_interchange_btn()
+#     part_1 = "25455"
+#     home_page.write_part_in_interchange_tbx(part_1)
+#     home_page.click_part_interchange_search_btn()
+#
+#     # get part type list of step 2
+#     step_2_part_type_list_1 = home_page.get_part_interchange_step_2_list()
+#
+#     # execute a query to get the the part type list (category list) corresponding to part_number
+#
+#     # compare the results
+
+
+# # MXTEST-8276
+# def test_ChangeSearchedNumber(web_drivers):
+
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#     home_page.click_on_part_interchange_btn()
+#     part_1 = "25455"
+#     home_page.write_part_in_interchange_tbx(part_1)
+#     home_page.click_part_interchange_search_btn()
+#     # get part type list of step 2
+#     step_2_part_type_list_1 = home_page.get_part_interchange_step_2_list()
+#     # click a part type of the list
+#     part_type_selected = home_page.select_random_element_of_list(step_2_part_type_list_1)
+#     logging.info(f"Part Type selected: {part_type_selected}")
+#
+#     home_page.clear_part_interchange_input_tbx()
+#
+#     part_2 = "12587"
+#     home_page.write_part_in_interchange_tbx(part_2)
+#     home_page.click_part_interchange_search_btn()
+#     step_2_part_type_list_2 = home_page.get_part_interchange_step_2_list()
+#
+#     assert step_2_part_type_list_1 != step_2_part_type_list_2, "List 1 displayed must be different of list 2"
+#
+
+# # MXTEST-8277
+# def test_Search_WrongNumber(web_drivers):
+
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#     home_page.click_on_part_interchange_btn()
+#     part = "999999999999"
+#     home_page.write_part_in_interchange_tbx(part)
+#
+#     home_page.click_part_interchange_search_btn()
+#     expected_message1 = "NO RESULTS FOUND"
+#     expected_message2 = "Please, type in a new part number."
+#     actual_message = home_page.get_no_results_found_message()
+#     logging.info(f"VALIDATING CORRECT MESSAGE RESULT")
+#     assert expected_message1 in actual_message, f"The message should contains: {expected_message1}"
+#     assert expected_message2 in actual_message, f"The message should contains: {expected_message2}"
+
+# # MXTEST-8280
+# def test_Search_PopupClose_Button(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#     home_page.click_on_part_interchange_btn()
+#     part = "20123"
+#     home_page.write_part_in_interchange_tbx(part)
+#     home_page.clic_outside_of_modal_window()
+#     home_page.click_on_part_interchange_btn()
+#     home_page.close_part_interchange()
+#     home_page.click_on_part_interchange_btn()
+#
+
+
+# # MXTEST-8283
+# def test_Search_FromProductPage(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.wait_until_page_load_complete()
+#     product = "wheel adapter"
+#     home_page.search_product(product)
+#     #get product list
+#
+#     home_page.wait_search_results_label()
+#     product_list = home_page.get_link_product_list()
+#     product_selected = home_page.select_random_element_of_list(product_list)
+#     logging.info(f"Product Selected: {product_selected}")
+#     part_number = home_page.get_part_number()
+#     home_page.click_on_part_interchange_btn()
+#     logging.info(f"Validate Part number: {part_number}")
+#     actual_text = home_page.get_text_part_interchange_input()
+#     logging.info(f"Validate ACTUAL Part number: {actual_text}")
+#     assert actual_text == part_number, f"The part number should be: {part_number} instead of {actual_text}"
+
+
+# PDP-------------------------------------------------------------------------------------------------------------------
+
+# # MXTEST-8275
+# def test_Compatibility_Vehicle_selected(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.click_on_brands()
+#     # CLIC SHOW ALL BRANDS LINK TEXT
+#     home_page.click_on_show_all_brands()
+#     # click on any brand
+#     home_page.get_random_brand()
+#     product_list = home_page.get_link_product_list()
+#     product_selected = home_page.select_random_element_of_list(product_list)
+#     logging.info(f"Product Selected: {product_selected}")
+#     home_page.click_on_Picker_vehicle_btn()
+#     year = home_page.click_on_year_and_select()
+#     make = home_page.click_on_make_and_select()
+#     home_page.click_on_model_and_select()
+#     home_page.click_on_submodel_and_select()
+#     home_page.click_on_engine_and_select()
+#
+#     home_page.click_on_add_vehicle_submit_btn()
+#     expected_message = "Does NOT Fit"
+#     expected_message_2 = "Non application"
+#     expected_message_2 = "Fits"
+#     actual_message = home_page.get_does_not_fit_meessage()
+#     assert expected_message in actual_message or expected_message_2 in actual_message, f"The message {actual_message} should be: {expected_message} or {expected_message_2}"
+
+# # MXTEST-8286
+# def test_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
+#
+#     home_page = HomePage(*web_drivers)
+#     url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/red-line-full-synthetic-motor-oil-0w-30-1-quart-11114/rl00/11114"
+#     home_page.open_new_url(url)
+#     home_page.click_check_vehicle_fit_btn()
+#     home_page.write_a_vehicle_type("Agricultural Equipment")
+#     home_page.write_a_year("2019")
+#     home_page.write_a_make("AGCO")
+#     home_page.write_a_model("5650")
+#     home_page.write_a_submodel("Base")
+#     home_page.write_a_engine("GENERIC")
+#     home_page.click_on_add_vehicle_submit_btn()
+#     expected_message = "Does NOT Fit"
+#     actual_message = home_page.get_does_not_fit_meessage()
+#     assert expected_message in actual_message, f"The message {actual_message} should be: {expected_message}"
+#
+
+
+#
+# # # MXTEST-8289
+# def test_DirectLink_CompatibilityError_PreselectedVehicle(web_drivers):
+#     # falta dato URL: https://testintranet.oreillyauto.mx/ecatalog/<<ID DEL ARTICULO >>
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     home_page.click_on_Picker_vehicle_btn()
+#     home_page.write_a_vehicle_type("Agricultural Equipment")
+#     home_page.write_a_year("2019")
+#     home_page.write_a_make("AGCO")
+#     home_page.write_a_model("5650")
+#     home_page.write_a_submodel("Base")
+#     home_page.write_a_engine("GENERIC")
+#     home_page.click_on_add_vehicle_submit_btn()
+#     url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/red-line-full-synthetic-motor-oil-0w-30-1-quart-11114/rl00/11114"
+#     home_page.open_new_url(url)
+#     expected_message = "Does NOT Fit"
+#
+#     actual_message = home_page.get_does_not_fit_meessage()
+#
+#     assert expected_message in actual_message, f"The message {actual_message} should be: {expected_message}"

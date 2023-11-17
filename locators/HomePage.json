@@ -15,8 +15,7 @@
       "by": "XPATH",
       "value": "//input[@role='searchbox']"
     },
-    "carousel" :
-    {
+    "carousel" : {
       "by": "XPATH",
       "value": "//ul[@ng-reflect-ng-class='p-carousel-indicators p-reset']"
     },
@@ -34,7 +33,15 @@
     },
     "part_interchange_linktext": {
       "by": "XPATH",
-      "value": "//span[@id='interchange_option']"
+      "value": "//div[@id='id-menu-right']//span[@id='interchange_option']"
+    },
+    "part_interchange_input_tbx": {
+      "by": "XPATH",
+      "value": "//input[@ng-reflect-model]"
+    },
+    "part_interchange_txt_label": {
+      "by": "XPATH",
+      "value": "//input[@ng-reflect-model]"
     },
     "vehicle_type_label": {
       "by": "XPATH",
@@ -52,13 +59,25 @@
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='year']//button/span"
     },
+    "year_input_tbx": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='year']//input"
+    },
     "make_dropdown": {
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='make']//button/span"
     },
+    "make_input_tbx": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='make']//input"
+    },
     "model_dropdown": {
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='model']//button"
+    },
+    "model_input_tbx": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='model']//input"
     },
     "submodel_tbx": {
       "by": "XPATH",
@@ -71,6 +90,10 @@
     "engine_dropdown": {
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='engine']//button/span"
+    },
+    "engine_tbx": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='engine']//input"
     },
     "add_vehicle_button_submit": {
       "by": "XPATH",
@@ -148,6 +171,14 @@
       "by": "XPATH",
       "value": "//ol[@class='p-0 m-0']//a"
     },
+    "link_products_list_2": {
+      "by": "XPATH",
+      "value": "//div[@role='button']"
+    },
+    "additional_label": {
+      "by": "XPATH",
+      "value": "//h2[contains(text(),'Additional')]"
+    },
     "homePage_button": {
       "by": "XPATH",
       "value": "//div[@id='search_section']/img"
@@ -184,6 +215,14 @@
       "by": "XPATH",
       "value": "//span[contains(text(),'POPULAR CATEGORIES')]"
     },
+    "close_categories_x_button": {
+      "by": "XPATH",
+      "value": "//div[@class='p-card-header ng-star-inserted']//button"
+    },
+    "close_part_interchange_x_button": {
+      "by": "XPATH",
+      "value": "//div[@role='dialog']//button[@tabindex='-1']"
+    },
     "brands_dropdown": {
       "by": "XPATH",
       "value": "//section[@class='submenu ps-5 ng-star-inserted']//span[contains(text(),'BRANDS')]"
@@ -219,6 +258,62 @@
     "no_results_message": {
       "by": "XPATH",
       "value": "//div[@class='description']/span[1]"
+    },
+    "go_back_btn": {
+      "by": "XPATH",
+      "value": "//button[@ng-reflect-label='GO BACK']"
+    },
+    "general_categories_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'GENERAL CATEGORIES')]"
+    },
+    "part_number":{
+      "by": "XPATH",
+      "value": "//div[@class='actions']//div/div"
+    },
+    "highlight_search_result": {
+      "by": "XPATH",
+      "value": "//span[@class='highlight-autocomplete']"
+    },
+    "blank_space": {
+      "by": "XPATH",
+      "value": "//body"
+    },
+    "img_logo_oreilly_home": {
+      "by": "XPATH",
+      "value": "//img[@id='logo-no-feedback']"
+    },
+    "part_interchange_search_button": {
+      "by": "XPATH",
+      "value": "//interchange-modal//button[@icon='pi pi-search']"
+    },
+    "no_results_container": {
+      "by": "XPATH",
+      "value": "//div[@class='no-results-container']"
+    },
+    "part_interchange_step_2": {
+      "by": "XPATH",
+      "value": "//div[@class='fade-in-up ng-star-inserted']"
+    },
+    "part_interchange_step_2_list": {
+      "by": "XPATH",
+      "value": "//div[@class='fade-in-up ng-star-inserted']//li"
+    },
+    "category_nav_limiter": {
+      "by": "XPATH",
+      "value": "//div[@class='category-nav-limiter']"
+    },
+      "category_nav_limiter_h2": {
+      "by": "XPATH",
+      "value": "//div[@class='category-nav-limiter']/h2"
+    },
+    "check_vehicle_fit_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='check-compatibility-action']//button"
+    },
+    "does_not_fit_message_label": {
+      "by": "XPATH",
+      "value": "//p[@class='badge-text']/span[contains(text(),'Does NOT Fit')]"
     }
   }
 }
