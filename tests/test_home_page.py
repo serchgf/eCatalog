@@ -379,6 +379,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
+#     time.sleep(3)
 #     home_page.wait_until_page_load_complete()
 #     home_page.click_on_categories_button()
 #     home_page.close_categories()
@@ -557,3 +558,58 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     actual_message = home_page.get_does_not_fit_meessage()
 #
 #     assert expected_message in actual_message, f"The message {actual_message} should be: {expected_message}"
+
+
+# AUTO FILL OPTION------------------------------------------------------------------------------------------------------
+
+# # MXTEST-8292
+# def test_AutofillOption_FreeTextSearchBar(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     word = "eng"
+#     home_page.search_product(word)
+
+
+# NEW CLIENT------------------------------------------------------------------------------------------------------------
+
+# # MXTEST-8291
+# def test_NewClient_CallWindow(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     time.sleep(4)
+#     home_page.shortcut_new_client()
+#     home_page.click_new_client_continue_btn()
+#     home_page.click_on_categories_button()
+#
+#     home_page.click_on_category_by_text("Oil, Chemicals & Fluids")
+#     home_page.click_on_subcategory_by_text("Motor Oil")
+#
+#     home_page.shortcut_new_client()
+#     home_page.click_new_client_cancel_btn()
+#     product_list = home_page.get_link_product_list(1)
+#     product = "Motor Oil - Full Synthetic"
+#     for prod in product_list:
+#         if prod.text == product:
+#             prod.click()
+#             break
+#
+#     home_page.shortcut_new_client()
+#     #step 11
+#     home_page.click_new_client_cancel_btn()
+#     # 12 click first element on the list
+#     product_list = home_page.get_link_product_list()
+#     home_page.click_on_specific_index_on_list_element(product_list, 0)
+#     # step 13
+#     home_page.shortcut_new_client()
+#     # step 14
+#     home_page.click_new_client_cancel_btn()
+#     # step 15 click on brands
+#     home_page.click_on_brands()
+#     # step 16 click en show all brands
+#     home_page.click_on_show_all_brands()
+#     #step 17
+#     home_page.shortcut_new_client()
+#     # step 18
+#     home_page.click_new_client_cancel_btn()
+#
+#     home_page.wait_until_page_load_complete()

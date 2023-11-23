@@ -314,6 +314,18 @@
     "does_not_fit_message_label": {
       "by": "XPATH",
       "value": "//p[@class='badge-text']/span[contains(text(),'Does NOT Fit')]"
+    },
+    "new_client_label": {
+      "by": "XPATH",
+      "value": "//p[contains(text(),'New Client')]"
+    },
+    "new_client_continue_btn": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'Continue')]"
+    },
+    "new_client_cancel_btn": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'Cancel')]"
     }
   }
 }

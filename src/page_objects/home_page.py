@@ -4,6 +4,7 @@ import random
 import time
 import mysql.connector
 from selenium.common import JavascriptException
+from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -245,6 +246,34 @@ class HomePage(BasePage):
                     break
             return new_engine_text
 
+    def click_new_client_continue_btn(self):
+        logging.info(f"Click new client continue button")
+        self.element("new_client_label").wait_visible()
+        self.element("new_client_continue_btn").wait_clickable().click()
+    def click_new_client_cancel_btn(self):
+        logging.info(f"Click new client cancel button")
+        self.element("new_client_label").wait_visible()
+        self.element("new_client_cancel_btn").wait_clickable().click()
+
+    def shortcut_new_client(self):
+        action = self.actionChain()
+        action.send_keys(Keys.SHIFT + 'C')
+        action.perform()
+
+    def click_on_category_by_text(self, text:str):
+        logging.info(f"Click on category: {text}")
+        self.element("popular_categories_label").wait_visible()
+        self.javascript_clic(text)
+
+    def click_on_subcategory_by_text(self, text:str):
+        logging.info(f"Click on subcategory: {text}")
+        time.sleep(1)
+        self.element("subcategory_list").find_elements()
+        self.javascript_clic(text)
+
+
+
+
     def click_on_add_vehicle_submit_btn(self):
         logging.info(f"Click on Add vehicle submit button")
         self.element("add_vehicle_button_submit").wait_clickable().click()
@@ -343,11 +372,22 @@ class HomePage(BasePage):
 
         return element_selected
 
+
+    def click_on_specific_index_on_list_element(self, lista: list, index:int):
+        """ click on specific index on list element provided """
+        time.sleep(.2)
+        element_selected = lista[index].text
+        logging.info(f"select element on the list with index: {index}: {element_selected}")
+        self.clic_javacript(lista[index])
+        #lista[index].click()
+
+        return element_selected
+
+
     def press_page_down_key_from_carousel(self):
         logging.info(f"Press Page Down key from carousel")
         element = self.element("carousel").wait_clickable()
         self.page_down_key_from_element(element)
-
 
 
     def get_vehicle_selected(self):
@@ -455,18 +495,6 @@ class HomePage(BasePage):
         logging.info(f"Validate parent category list page")
         return self.element("element_buttons_grid_category").wait_clickable()
 
-    def get_product_list_2(self):
-
-        logging.info(f"Get Products list_2")
-        self.wait_until_page_load_complete()
-        self.element("link_products_list_2").wait_visible()
-        lista = self.element("link_products_list_2").find_elements()
-        if len(lista) != 0:
-            return lista
-        else:
-            self.wait_until_page_load_complete()
-            self.element("link_products_list_2").wait_visible()
-            lista = self.element("link_products_list_2").find_elements()
 
     def get_link_product_list(self, type_of_label=0):
         logging.info(f"Get Products list")
