@@ -30,6 +30,15 @@ class HomePage(BasePage):
         search_bar.send_keys(value)
         self.element("highlight_search_result").wait_clickable().click()
 
+    def search_wrong_product_name(self, value: str):
+        # time.sleep(3)
+        logging.info(f"Search: {value}")
+        search_bar = self.element("search_bar").wait_clickable()
+        search_bar.send_keys(value)
+        action = self.actionChain()
+        action.send_keys(Keys.ENTER)
+        action.perform()
+
     def obtain_menu_elements(self) -> list[str]:
         logging.info(f"Get menu bar names")
         self.element("menu_bar").wait_visible()
@@ -56,21 +65,25 @@ class HomePage(BasePage):
         time.sleep(.5)
         self.element("list_box").wait_visible()
         self.javascript_clic(make)
+
     def write_a_model(self, model: str):
         logging.info(f"Write model: {model}")
         time.sleep(.5)
         self.element("list_box").wait_visible()
         self.javascript_clic(model)
+
     def write_a_submodel(self, submodel: str):
         logging.info(f"Write submodel: {submodel}")
         time.sleep(.5)
         self.element("list_box").wait_visible()
         self.javascript_clic(submodel)
+
     def write_a_engine(self, engine: str):
         logging.info(f"Write engine: {engine}")
         time.sleep(.5)
         self.element("list_box").wait_visible()
         self.javascript_clic(engine)
+
     def click_on_vehicle_type_and_select(self, index=0):
         """
         Input is '0' by default and it will return the first element of the list
@@ -94,6 +107,21 @@ class HomePage(BasePage):
         # else:
         #     self.select_index_list_element(index)
 
+    def click_on_vehicle_type_dropdown(self):
+        """
+        Click on vehicle type dropdown
+        :param index:
+        :return: list
+        """
+        logging.info(f"click vehicle type dropdown")
+        self.element("vehicle_type_label").wait_visible()
+        logging.info(f"Click on Vehicle dropdown")
+        dropdown = self.element("vehicle_type_dropdown").wait_clickable()
+        dropdown.click()
+        time.sleep(1)
+        vehicle_type_list = self.element("list_box").find_elements()
+        return vehicle_type_list
+
     def click_on_year_and_select(self, index=0):
         """
         Input is '0' by default and it will return the first element of the list
@@ -101,7 +129,7 @@ class HomePage(BasePage):
         :param index:
         :return:
         """
-        time.sleep(.2)
+        time.sleep(.3)
 
         logging.info(f"Click on year dropdown")
 
@@ -250,6 +278,7 @@ class HomePage(BasePage):
         logging.info(f"Click new client continue button")
         self.element("new_client_label").wait_visible()
         self.element("new_client_continue_btn").wait_clickable().click()
+
     def click_new_client_cancel_btn(self):
         logging.info(f"Click new client cancel button")
         self.element("new_client_label").wait_visible()
@@ -270,9 +299,6 @@ class HomePage(BasePage):
         time.sleep(1)
         self.element("subcategory_list").find_elements()
         self.javascript_clic(text)
-
-
-
 
     def click_on_add_vehicle_submit_btn(self):
         logging.info(f"Click on Add vehicle submit button")
@@ -301,8 +327,15 @@ class HomePage(BasePage):
 
     def get_subcategory_list(self):
         logging.info(f"Get subcategory List")
-        self.element("label_subcategory_selected").wait_visible()
-        subcategory_list = self.element("subcategory_list").find_elements()
+        #self.element("label_subcategory_selected").wait_visible()
+        self.element("go_back_btn").wait_visible()
+        try:
+            subcategory_list = self.element("subcategory_list").find_elements()
+        except:
+            try:
+             subcategory_list = self.element("subcategory_list_2").find_elements()
+            except:
+                subcategory_list = self.element("subcategory_list_3").find_elements()
         return subcategory_list
 
     def get_text_label_subcategory_selected(self):
@@ -372,7 +405,6 @@ class HomePage(BasePage):
 
         return element_selected
 
-
     def click_on_specific_index_on_list_element(self, lista: list, index:int):
         """ click on specific index on list element provided """
         time.sleep(.2)
@@ -383,18 +415,21 @@ class HomePage(BasePage):
 
         return element_selected
 
-
     def press_page_down_key_from_carousel(self):
         logging.info(f"Press Page Down key from carousel")
         element = self.element("carousel").wait_clickable()
         self.page_down_key_from_element(element)
-
 
     def get_vehicle_selected(self):
         # era 1.5
         time.sleep(1.5)
         logging.info(f"Get vehicle selected text")
         return self.element("vehicle_selected").wait_visible().text
+
+
+        # text = self.element("vehicle_selected").wait_visible().text
+        # vehicle_selected = text.split('\n')
+        # return vehicle_selected[0]
 
     def get_part_number(self):
         logging.info(f"Get Part Number")
@@ -446,7 +481,7 @@ class HomePage(BasePage):
         logging.info(f"Click Canopy And Tent")
         self.javascript_clic("Canopy And Tent")
 
-    def click_element_text_of_list(self, lista:list, text: str):
+    def click_element_text_of_list(self, lista: list, text: str):
         logging.info(f"Click on: {text}")
         for element in lista:
             element_text = element.text
@@ -455,12 +490,12 @@ class HomePage(BasePage):
             if text in element_text:
                 logging.info(f"Click {text.upper()}S*****************")
                 self.clic_javacript(element)
-
                 break
 
     def close_categories(self):
         logging.info(f"Close Categories modal")
         self.element("close_categories_x_button").wait_clickable().click()
+
     def presenceOf_popular_categories_label(self):
         logging.info(f"Presence of Popular Categories Label")
         try:
@@ -495,8 +530,9 @@ class HomePage(BasePage):
         logging.info(f"Validate parent category list page")
         return self.element("element_buttons_grid_category").wait_clickable()
 
-
     def get_link_product_list(self, type_of_label=0):
+        """ '0' means the results pages contains 'Search Results' label on top
+            '1' means the results pages contains 'Additional' label at bottom """
         logging.info(f"Get Products list")
         self.wait_until_page_load_complete()
         if type_of_label == 1:
@@ -535,6 +571,8 @@ class HomePage(BasePage):
 
     def show_product_list(self, product_list: list):
         for product in product_list:
+            if product is not str:
+                logging.info(product.text)
             logging.info(product)
 
     def click_homepage_button(self):
@@ -591,6 +629,7 @@ class HomePage(BasePage):
         texto = self.element("part_interchange_input_tbx").wait_visible().get_attribute('ng-reflect-model')
         # logging.info(f"Text from Part Interchange input tbx: {texto}")
         return texto
+
     def write_part_in_interchange_tbx(self, part):
         logging.info(f"Write Part in Interchange tbx")
         self.element("part_interchange_input_tbx").wait_visible().send_keys(part)
@@ -611,7 +650,6 @@ class HomePage(BasePage):
     def click_on_brands(self):
         logging.info(f"Click on brands dropdown list")
         self.element("brands_dropdown").wait_visible().click()
-
 
     def click_on_show_all_brands(self):
         logging.info(f"Click on show all brands link text ")
@@ -638,10 +676,23 @@ class HomePage(BasePage):
 
         return step_2_list
 
-    def get_no_results_found_message(self):
+    def get_no_results_container_message(self):
+        """
+        function to get message with locator "no_results_container"
+        We're sorry, no results were found
+        :return:
+        """
         logging.info("Get no results found message")
         return self.element("no_results_container").wait_visible().text
 
+    def get_no_results_message(self):
+        """
+        function to get message with locator "no_results_message"
+        We're sorry, no results were found
+        :return:
+        """
+        logging.info("Get message:'We're sorry, no results were found'")
+        return self.element("no_results_message").wait_visible().text
     def get_does_not_fit_meessage(self):
         logging.info("Get does not fit message")
         return self.element("does_not_fit_message_label").wait_visible().text
@@ -663,7 +714,8 @@ class HomePage(BasePage):
         brand_selected = brands_list[index].text
         logging.info(f"Brand Selected: {brand_selected}")
         time.sleep(.5)
-        brands_list[index].click()
+        self.javascript_clic(brand_selected)
+        #brands_list[index].click() funciona original
         return brand_selected
 
     def get_search_results_number(self):
@@ -671,7 +723,10 @@ class HomePage(BasePage):
         try:
             self.element("span_filter_by").wait_visible()
         except TimeoutError:
-            self.element("span_filter_by").wait_visible()
+            try:
+                self.element("span_filter_by").wait_visible()
+            except TimeoutError:
+                return self.element("no_results_message").wait_visible().text
 
         self.element("sort_by_dropdown").wait_visible()
         search_results = self.element("search_results_label").wait_visible().text
@@ -680,6 +735,18 @@ class HomePage(BasePage):
         numero = cadena_l[1].replace(')', '')
         numero = int(numero)
         return numero
+
+    def click_order_by_dropdown_and_select_option(self, option:str):
+        """
+        Click Order by dropdown and select any of fallowing options:
+        :param option: 'Relevance', 'A - Z', 'Z - A'
+        :return:
+        """
+        logging.info(f"Click sort by dropdown and select option: {option}")
+        self.element("sort_by_label").wait_visible()
+        self.element("sort_by_dropdown").wait_clickable().click()
+        self.javascript_clic(option)
+        time.sleep(3)
 
     def get_search_message(self):
         logging.info("Get search results message")

@@ -7,6 +7,7 @@ import json
 import pytest
 
 from src.page_objects.home_page import HomePage
+
 _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "HomePage.json")
 
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
@@ -96,7 +97,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #         f"Vehicle Edited successful")
 #     logging.info(f"\nOriginal Submodel:{submodel} -> {expected_submodel}\nOriginal Engine:{engine} -> {expected_engine}")
 
-#XTEST-8285
+# XTEST-8285
 # def test_Garage_Remove_Vehicle(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -203,7 +204,6 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     assert lasted_viewed_list.sort() == expected_product_selected_list.sort()
 
 
-
 # MXTEST-8290
 
 # def test_Footer_Validation_Tool_section_elements(web_drivers):
@@ -240,18 +240,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     search_results_number = home_page.get_search_results_number()
 #
 #     logging.info(f"Search results number: {search_results_number}")
-"""     # todo falta crear la query y comparar los resultados"""
-#     # DB Connection
-#     #data = home_page.cargar_json_data(_JSON_PATH)
-#     #expected_data = data['query_MXTEST-8263']
-#     # logging.info(f"Expected data: {expected_data}")
-#     #home_page.mysql_connection()
 #
-#     # send query
-#
-#     # recover result number of query
-#
-#     # assert search result number showed in page with querey result
 
 
 # # MXTEST-8265, MXTEST-8267
@@ -262,17 +251,19 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     home_page.wait_until_page_load_complete()
 #
 #     home_page.click_on_Picker_vehicle_btn()
+#     time.sleep(2)
 #     home_page.click_on_vehicle_type_and_select()
 #
 #     year = home_page.click_on_year_and_select()
 #     make = home_page.click_on_make_and_select()
+#     print(f"make es:{make}")
 #     home_page.click_on_model_and_select()
 #     home_page.click_on_submodel_and_select()
 #     home_page.click_on_engine_and_select()
 #     home_page.click_on_add_vehicle_submit_btn()
 #     expected_vehicle_selected = f"{year} {make}"
 #     vehicle_selected = home_page.get_vehicle_selected()
-#     assert vehicle_selected == expected_vehicle_selected, f"The button must shows: '{expected_vehicle_selected}' instead of '{vehicle_selected}' on the button."
+#     assert vehicle_selected.upper() in expected_vehicle_selected.upper(), f"The button must shows: {expected_vehicle_selected}\n in: {vehicle_selected} on the button."
 #     # CLIC BRANDS DROPDOWN
 #     home_page.click_on_brands()
 #     # CLIC SHOW ALL BRANDS LINK TEXT
@@ -283,65 +274,10 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     search_results_number = home_page.get_search_results_number()
 #     assert search_results_number > 0, "No elements displayed"
 #
-#
 #     logging.info(f"Search results number: {search_results_number}")
-"""# todo falta crear la query y comparar los resultados"""
-#     # DB Connection
-#     #data = home_page.cargar_json_data(_JSON_PATH)
-#     #expected_data = data['query_MXTEST-8263']
-#     # logging.info(f"Expected data: {expected_data}")
-#     #home_page.mysql_connection()
 #
-#     # send query
-#
-#     # recover result number of query
-#
-#     # assert search result number showed in page with querey result
 
 
-# # MXTEST-8265, MXTEST-8267
-# def test_search_all_brands_vehicle_selected(web_drivers):
-#
-#     home_page = HomePage(*web_drivers)
-#     home_page.open()
-#     home_page.wait_until_page_load_complete()
-#
-#     home_page.click_on_Picker_vehicle_btn()
-#     home_page.click_on_vehicle_type_and_select()
-#
-#     year = home_page.click_on_year_and_select()
-#     make = home_page.click_on_make_and_select()
-#     home_page.click_on_model_and_select()
-#     home_page.click_on_submodel_and_select()
-#     home_page.click_on_engine_and_select()
-#     home_page.click_on_add_vehicle_submit_btn()
-#     expected_vehicle_selected = f"{year} {make}"
-#     vehicle_selected = home_page.get_vehicle_selected()
-#     assert vehicle_selected == expected_vehicle_selected, f"The button must shows: '{expected_vehicle_selected}' instead of '{vehicle_selected}' on the button."
-#     # CLIC BRANDS DROPDOWN
-#     home_page.click_on_brands()
-#     # CLIC SHOW ALL BRANDS LINK TEXT
-#     home_page.click_on_show_all_brands()
-#     # click on any brand
-#     home_page.get_random_brand()
-#     # # get number of elements
-#     search_results_number = home_page.get_search_results_number()
-#     assert search_results_number > 0, "No elements displayed"
-#
-#
-#     logging.info(f"Search results number: {search_results_number}")
-#     """"# todo falta crear la query y comparar los resultados"""
-#     # DB Connection
-#     #data = home_page.cargar_json_data(_JSON_PATH)
-#     #expected_data = data['query_MXTEST-8263']
-#     # logging.info(f"Expected data: {expected_data}")
-#     #home_page.mysql_connection()
-#
-#     # send query
-#
-#     # recover result number of query
-#
-#     # assert search result number showed in page with querey result
 
 
 
@@ -385,8 +321,6 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     home_page.close_categories()
 
 
-
-
 # EQUIVALENTS-----------------------------------------------------------------------------------------------------------
 
 # # MXTEST-8256
@@ -402,10 +336,8 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #
 #     # get part type list of step 2
 #     step_2_part_type_list_1 = home_page.get_part_interchange_step_2_list()
+#     home_page.show_product_list(step_2_part_type_list_1)
 #
-#     # execute a query to get the the part type list (category list) corresponding to part_number
-#
-#     # compare the results
 
 
 # # MXTEST-8276
@@ -567,7 +499,10 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
 #     word = "eng"
+#     print(f"Search word: {word} and select a suggest result")
 #     home_page.search_product(word)
+#     home_page.take_screenshot("test_AutofillOption_FreeTextSearchBar")
+#
 
 
 # NEW CLIENT------------------------------------------------------------------------------------------------------------
@@ -613,3 +548,182 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     home_page.click_new_client_cancel_btn()
 #
 #     home_page.wait_until_page_load_complete()
+
+# PLP-------------------------------------------------------------------------------------------------------------------
+
+# # MXTEST-8258
+# def test_PLP_Search_with_Selected_Vehicle(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#
+#     home_page.click_on_Picker_vehicle_btn()
+#     time.sleep(4)
+#     vehicle_type_list = home_page.click_on_vehicle_type_dropdown()
+#     vehicle_type = "Automotive Light Duty"
+#     home_page.click_element_text_of_list(vehicle_type_list, vehicle_type)
+#     home_page.click_on_year_and_select()
+#     home_page.click_on_make_and_select()
+#     home_page.click_on_model_and_select()
+#     home_page.click_on_submodel_and_select()
+#     home_page.click_on_engine_and_select()
+#     home_page.click_on_add_vehicle_submit_btn()
+#     home_page.click_on_brands()
+#     home_page.click_on_show_all_brands()
+#     home_page.get_random_brand()
+#     product_list = home_page.get_link_product_list(0)
+#     home_page.show_product_list(product_list)
+#     home_page.take_screenshot("test_PLP_Search_with_Selected_Vehicle")
+
+# # MXTEST-8259
+# def test_PLP_Search_filter_No_results_found(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     wrong_product_name = "MOTTOR OIL"
+#     home_page.search_wrong_product_name(wrong_product_name)
+#     expected_message = "We're sorry, no results were found"
+#     actual_message = home_page.get_no_results_message()
+#     assert actual_message == expected_message, f"the message displayed shoeld be: {expected_message} instead of: {actual_message}"
+#     home_page.take_screenshot("test_PLP_Search_filter_No_results_found")
+
+# # MXTEST-8260
+# def test_PLP_Search_without_vehicle_selected(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     product_name = "Motor Oil"
+#     home_page.search_product(product_name)
+#     product_list = home_page.get_link_product_list(1)
+#     for product in product_list:
+#         assert product_name.upper() in product.text.upper(), f"'{product_name.upper()}' must appears in description product, but has: {product.text.upper()}"
+#     home_page.take_screenshot("test_PLP_Search_without_vehicle_selected")
+
+# # MXTEST-8262
+# def test_PLP_Navigation_Categories(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     time.sleep(5)
+#     home_page.click_on_categories_button()
+#     category_list = home_page.get_general_categories_list()
+#     # click en categoria random
+#     category_selected = home_page.select_random_element_of_list(category_list)
+#
+#     logging.info(f"category selected: {category_selected}")
+#     # obtener lista de subcategorias
+#     subcategory_list = home_page.get_subcategory_list()
+#     home_page.select_random_element_of_list(subcategory_list)
+#     home_page.wait_until_page_load_complete()
+#     home_page.take_screenshot("test_PLP_Navigation_Categories")
+
+# # MXTEST-8264 mod1
+# def test_PLP_Sort_by_option_az(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#
+#     home_page.wait_until_page_load_complete()
+#     product_name = "Skid Plate"
+#     home_page.search_product(product_name)
+#     # obtener lista original
+#     product_list = home_page.get_link_product_list(0)
+#     product_list_text = []
+#     original_first_char = ''
+#     for product in product_list:
+#         description = product.text.split('\n')
+#         product_description = description[1].split("-")
+#         product_list_text.append(product_description[0])
+#         original_first_char = product_description[0][0]
+#         break
+#     print("Primer caracter original")
+#     print(original_first_char)
+#
+#
+#     # ordenar con filter by de a-z
+#     home_page.click_order_by_dropdown_and_select_option("A - Z")
+#     home_page.wait_until_page_load_complete()
+#     # obtener lista ordenada de a-z
+#     az_product_list = home_page.get_link_product_list(0)
+#     az_product_list_text = []
+#     az_first_char=''
+#     for product in az_product_list:
+#         description = product.text.split('\n')
+#         product_description = description[1].split("-")
+#         az_product_list_text.append(product_description[0])
+#         az_first_char = product_description[0][0]
+#         break
+#     print("primer caracter obtenido")
+#     print(az_first_char)
+#     assert az_first_char <= original_first_char, f"{az_first_char} should be <= {original_first_char}"
+#     home_page.take_screenshot("test_PLP_Sort_by_option_az")
+
+
+# # MXTEST-8264 mod2
+# def test_PLP_Sort_by_option_za(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#
+#     home_page.wait_until_page_load_complete()
+#     product_name = "Skid Plate"
+#     home_page.search_product(product_name)
+#     # obtener lista original
+#     product_list = home_page.get_link_product_list(0)
+#     product_list_text = []
+#     original_first_char = ''
+#     for product in product_list:
+#         description = product.text.split('\n')
+#         product_description = description[1].split("-")
+#         product_list_text.append(product_description[0])
+#         original_first_char = product_description[0][0]
+#         break
+#     print("Primer caracter original")
+#     print(original_first_char)
+#
+#     # ordenar con filter by de a-z
+#     home_page.click_order_by_dropdown_and_select_option("Z - A")
+#     home_page.wait_until_page_load_complete()
+#     # obtener lista ordenada de a-z
+#     za_product_list = home_page.get_link_product_list(0)
+#     za_product_list_text = []
+#     za_first_char = ''
+#     for product in za_product_list:
+#         description = product.text.split('\n')
+#         product_description = description[1].split("-")
+#         za_product_list_text.append(product_description[0])
+#         za_first_char = product_description[0][0]
+#         break
+#     print("primer caracter obtenido")
+#     print(za_first_char)
+#     assert za_first_char >= original_first_char, f"{za_first_char} should be <= {original_first_char}"
+#     home_page.take_screenshot("test_PLP_Sort_by_option_za")
+
+# # MXTEST-8264 mod3
+# def test_PLP_Sort_by_option_relevance(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#
+#     home_page.wait_until_page_load_complete()
+#     product_name = "Skid Plate"
+#     home_page.search_product(product_name)
+#
+#     # ordenar con filter by relevance
+#     home_page.click_order_by_dropdown_and_select_option("Relevance")
+#     home_page.wait_until_page_load_complete()
+#
+#     # obtener lista ordenada por relevance
+#     relevance_product_list = home_page.get_link_product_list(0)
+#     home_page.take_screenshot("before of order by relevance")
+#     relevance_product_list_text = []
+#     relevance_first_part_number = ''
+#     for product in relevance_product_list:
+#         description = product.text.split('\n')
+#         # print(f"DESCRIPTION 0: {description[1]}")
+#         description_aux = description[1].split('-')
+#         # print(f"DESCRIPTION AUX: {description_aux}")
+#         # print(f"DESCRIPTION AUX[0]: {description_aux[0]}")
+#         # print(f"DESCRIPTION AUX[1]: {description_aux[1]}")
+#         relevance_first_part_number = description_aux[1].lstrip()
+#         relevance_product_list_text.append(int(relevance_first_part_number))
+#     # print("relevance")
+#     # print(relevance_product_list_text)
+#     # print("sorted")
+#     # print(sorted(relevance_product_list_text))
+#     assert relevance_product_list_text == sorted(relevance_product_list_text), f"part number in ascending order: {relevance_product_list_text} \nshould be: {sorted(relevance_product_list_text)}"
+#
+#     home_page.take_screenshot("after of order by relevance")
