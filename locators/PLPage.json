@@ -1,0 +1,167 @@
+{
+
+  "url": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "locators": {
+    "carousel": {
+      "by": "XPATH",
+      "value": "//p-carousel[@styleclass='o-banners-carousel']//ul[@ng-reflect-ng-class='p-carousel-indicators p-reset']"
+    },
+    "categories_btn": {
+      "by": "XPATH",
+      "value": "//section//span[contains(text(),'CATEGORIES')]/following-sibling::i"
+    },
+    "popular_categories_list_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='category-popular-categories d-inline-block ng-star-inserted']//div[@role='button']"
+    },
+    "list_container": {
+      "by": "XPATH",
+      "value": "//div[@class='category-iterable-body']"
+    },
+    "general_category_list": {
+      "by": "XPATH",
+      "value": "//div[@class='m-0 category-list-colums']/div/span"
+    },
+    "subcategory_list": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'m-0 category-list-colums')]/div/span"
+    },
+    "label_subcategory_selected": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'category-button-text')]//span"
+    },
+    "homePage_button": {
+      "by": "XPATH",
+      "value": "//div[@id='search_section']/img"
+    },
+    "lasted_products_viewed_list": {
+      "by": "XPATH",
+      "value": "//p[@tooltipposition='top']"
+    },
+    "last_category_on_list": {
+      "by": "XPATH",
+      "value": "//span[normalize-space()='Turbocharger & Supercharger']"
+    },
+    "category_landing_elements_img": {
+      "by": "XPATH",
+      "value": "//div[@role='button']//p"
+    },
+    "category_landing_title": {
+      "by": "XPATH",
+      "value": "//div[@class='category-nav-limiter']/h2"
+    },
+    "filter_section": {
+      "by": "XPATH",
+      "value": "//div[@class='filters-column ng-star-inserted']"
+    },
+    "plp_title": {
+      "by": "XPATH",
+      "value": "//span[@class='roboto-800 fs-16px notranslate']"
+    },
+    "loading_img": {
+      "by": "XPATH",
+      "value": "//div[@role='alert']//*[name()='svg']",
+      "value1": "//p[contains(text(),'Loading')]"
+    },
+    "plp_error": {
+      "by": "XPATH",
+      "value": "//div[@class='description']/span[contains(text(),'no results were found')]"
+    },
+    "add_vehicle_btn": {
+      "by": "XPATH",
+      "value": "//span[@class='vehicle-selected']"
+    },
+    "vehicle_type_tbx": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@field='vehicleTypeDescription']//input"
+    },
+    "vehicle_type_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@field='vehicleTypeDescription']//button"
+    },
+    "list_box": {
+      "by": "XPATH",
+      "value": "//ul[@role='listbox']/li"
+    },
+    "autocomplet_panel": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'p-autocomplete-panel')]"
+    },
+    "model_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='model']//button"
+    },
+    "model_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='model']//input"
+    },
+    "submodel_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='subModel']//button"
+    },
+    "submodel_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='subModel']//input"
+    },
+    "engine_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='engine']//button"
+    },
+    "engine_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='engine']//input"
+    },
+    "year_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='year']//button"
+    },
+    "year_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='year']//input"
+    },
+    "make_dropdown": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='make']//button"
+    },
+    "make_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='make']//input"
+    },
+    "add_vehicle_button_submit": {
+      "by": "XPATH",
+      "value": "//button[@type='submit']"
+    },
+    "vehicle_selected": {
+      "by": "XPATH",
+      "value": "//span[@class='vehicle-selected']"
+    },
+    "additional_cat_names": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'category-nav-button-text')]/span"
+    },
+    "img_cat_names": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'category-nav-card')]//p"
+    },
+    "span_filter_by": {
+      "by": "XPATH",
+      "value": "//div[@class='title']//span[contains(text(),'filter by')]"
+    },
+    "sort_by_dropdown": {
+      "by": "XPATH",
+      "value": "//p-dropdown[@optionlabel='name']"
+    },
+    "search_results_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Search Results')]"
+    },
+    "fits_element": {
+      "by": "XPATH",
+      "value": "//div[@role='badge']/p/span[contains(@class,'roboto-400')]"
+    },
+    "part_number": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'copy-to-clipboard')]/span"
+    }
+  }
+}
