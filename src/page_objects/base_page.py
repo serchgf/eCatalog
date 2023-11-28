@@ -48,7 +48,7 @@ class BasePage:
     def take_screenshot(self, img_name: str):
         file_path = os.path.join(_SCREENSHOTS_DIR_PATH, f"{img_name}.png")
         self.__driver.save_screenshot(file_path)
-        allure.attach(name="para_Allure_report", attachment_type=AttachmentType.PNG)
+        allure.attach(self.__driver.get_screenshot_as_png(), name=f"{img_name}.png", attachment_type=AttachmentType.PNG)
 
     def scroll_down(self):
         time.sleep(1)

@@ -277,10 +277,6 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     logging.info(f"Search results number: {search_results_number}")
 #
 
-
-
-
-
 # MODAL NAVIGATION------------------------------------------------------------------------------------------------------
 
 # # MXTEST-8257
@@ -295,6 +291,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     logging.info("Validation the number of categories in the 'Categorias populares' section")
 #     assert len(popular_category_list) == expected_len_popopular_category_list, f"Number of popular categories must be: '{expected_len_popopular_category_list}' instead of '{len(popular_category_list)}'."
 #
+
 # # MXTEST-8273
 # def test_GoBackButton(web_drivers):
 #
@@ -397,7 +394,6 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     home_page.close_part_interchange()
 #     home_page.click_on_part_interchange_btn()
 #
-
 
 # # MXTEST-8283
 # def test_Search_FromProductPage(web_drivers):
@@ -575,17 +571,19 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     home_page.take_screenshot("test_PLP_Search_with_Selected_Vehicle")
 
 # # MXTEST-8259
-# def test_PLP_Search_filter_No_results_found(web_drivers):
-#     home_page = HomePage(*web_drivers)
-#     home_page.open()
-#     wrong_product_name = "MOTTOR OIL"
-#     home_page.search_wrong_product_name(wrong_product_name)
-#     expected_message = "We're sorry, no results were found"
-#     actual_message = home_page.get_no_results_message()
-#     assert actual_message == expected_message, f"the message displayed shoeld be: {expected_message} instead of: {actual_message}"
-#     home_page.take_screenshot("test_PLP_Search_filter_No_results_found")
+@pytest.mark.ecatalog_demo
+def test_PLP_Search_filter_No_results_found(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    wrong_product_name = "MOTTOR OIL"
+    home_page.search_wrong_product_name(wrong_product_name)
+    expected_message = "We're sorry, no results were found"
+    actual_message = home_page.get_no_results_message()
+    assert actual_message == expected_message, f"the message displayed shoeld be: {expected_message} instead of: {actual_message}"
+    home_page.take_screenshot("test_PLP_Search_filter_No_results_found")
 
 # # MXTEST-8260
+# @pytest.mark.ecatalog_demo
 # def test_PLP_Search_without_vehicle_selected(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -594,9 +592,10 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     product_list = home_page.get_link_product_list(1)
 #     for product in product_list:
 #         assert product_name.upper() in product.text.upper(), f"'{product_name.upper()}' must appears in description product, but has: {product.text.upper()}"
-#     home_page.take_screenshot("test_PLP_Search_without_vehicle_selected")
+#
 
 # # MXTEST-8262
+# @pytest.mark.ecatalog_demo
 # def test_PLP_Navigation_Categories(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -613,10 +612,52 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     home_page.wait_until_page_load_complete()
 #     home_page.take_screenshot("test_PLP_Navigation_Categories")
 
-# # MXTEST-8264 mod1
+# # MXTEST-8264 mod1 without vehicle selected
 # def test_PLP_Sort_by_option_az(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
+#
+#     home_page.wait_until_page_load_complete()
+#     product_name = "Skid Plate"
+#     home_page.search_product(product_name)
+#     # obtener lista original
+#     product_list = home_page.get_link_product_list(0)
+#     product_list_text = []
+#     original_first_char = ''
+#     for product in product_list:
+#         description = product.text.split('\n')
+#         product_description = description[1].split("-")
+#         product_list_text.append(product_description[0])
+#         original_first_char = product_description[0][0]
+#         break
+#     print("Primer caracter original")
+#     print(original_first_char)
+#
+#
+#     # ordenar con filter by de a-z
+#     home_page.click_order_by_dropdown_and_select_option("A - Z")
+#     home_page.wait_until_page_load_complete()
+#     # obtener lista ordenada de a-z
+#     az_product_list = home_page.get_link_product_list(0)
+#     az_product_list_text = []
+#     az_first_char=''
+#     for product in az_product_list:
+#         description = product.text.split('\n')
+#         product_description = description[1].split("-")
+#         az_product_list_text.append(product_description[0])
+#         az_first_char = product_description[0][0]
+#         break
+#     print("primer caracter obtenido")
+#     print(az_first_char)
+#     assert az_first_char <= original_first_char, f"{az_first_char} should be <= {original_first_char}"
+#     home_page.take_screenshot("test_PLP_Sort_by_option_az")
+
+
+# MXTEST-8264 mod1 with vehicle selected
+# def test_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-full-synthetic/l/n2728"
+#     home_page.open_new_url(url)
 #
 #     home_page.wait_until_page_load_complete()
 #     product_name = "Skid Plate"
