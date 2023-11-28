@@ -12,6 +12,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-8263
+# @pytest.mark.homepage
 # def test_Vehicle_Filtering_Functionality_Validation(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -32,6 +33,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     # home_page.connect_and_consult() consultas no requeridas
 
 # MXTEST-8282
+# @pytest.mark.homepage
 # def test_Garage_Garage_Vehicle_Limit(web_drivers):
 #     # se necesita actualizar el jira, el Maximo permitido en la lista es de 15 en vez de 10
 #     home_page = HomePage(*web_drivers)
@@ -63,6 +65,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     logging.info(f"{n_vehicles}: are listed")
 #
 # MXTEST-8284
+# @pytest.mark.homepage
 # def test_Garage_Edit_Vehicle(web_drivers):
 #     # se necesita actualizar el tc en jira, los campos que se pueden editar son submodel y Engine
 #     home_page = HomePage(*web_drivers)
@@ -97,7 +100,8 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #         f"Vehicle Edited successful")
 #     logging.info(f"\nOriginal Submodel:{submodel} -> {expected_submodel}\nOriginal Engine:{engine} -> {expected_engine}")
 
-# XTEST-8285
+# MXTEST-8285
+# @pytest.mark.homepage
 # def test_Garage_Remove_Vehicle(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -132,6 +136,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 
 # # MXTEST-8287
+# @pytest.mark.homepage
 # def test_Garage_Category_Navigation(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -155,7 +160,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     assert home_page.validate_parent_category_list_page()
 
 # MXTEST-8271
-
+# @pytest.mark.homepage
 # def test_Last_Viewed_Products(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -205,7 +210,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 
 # MXTEST-8290
-
+# @pytest.mark.homepage
 # def test_Footer_Validation_Tool_section_elements(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -224,6 +229,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 # BRAND NAVIGATION------------------------------------------------------------------------------------------------------
 # # MXTEST-8255, MXTEST-8266
+# @pytest.mark.brandNavigation
 # def test_search_single_brand_without_vehicle_selected(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -244,6 +250,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 
 # # MXTEST-8265, MXTEST-8267
+# @pytest.mark.brandNavigation
 # def test_search_all_brands_vehicle_selected(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -280,6 +287,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # MODAL NAVIGATION------------------------------------------------------------------------------------------------------
 
 # # MXTEST-8257
+# @pytest.mark.modalNavigation
 # def test_Popular_Categories(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -293,6 +301,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #
 
 # # MXTEST-8273
+# @pytest.mark.modalNavigation
 # def test_GoBackButton(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -308,6 +317,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #
 
 # # MXTEST-8274
+# @pytest.mark.modalNavigation
 # def test_PopupClose_Button(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -321,6 +331,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # EQUIVALENTS-----------------------------------------------------------------------------------------------------------
 
 # # MXTEST-8256
+# @pytest.mark.equivalents
 # def test_Search_Compatible(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -338,6 +349,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 
 # # MXTEST-8276
+# @pytest.mark.equivalents
 # def test_ChangeSearchedNumber(web_drivers):
 
 #     home_page = HomePage(*web_drivers)
@@ -364,6 +376,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #
 
 # # MXTEST-8277
+# @pytest.mark.equivalents
 # def test_Search_WrongNumber(web_drivers):
 
 #     home_page = HomePage(*web_drivers)
@@ -382,6 +395,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     assert expected_message2 in actual_message, f"The message should contains: {expected_message2}"
 
 # # MXTEST-8280
+# @pytest.mark.equivalents
 # def test_Search_PopupClose_Button(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -396,6 +410,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #
 
 # # MXTEST-8283
+# @pytest.mark.equivalents
 # def test_Search_FromProductPage(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -420,6 +435,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # PDP-------------------------------------------------------------------------------------------------------------------
 
 # # MXTEST-8275
+# @pytest.mark.pdp
 # def test_Compatibility_Vehicle_selected(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -446,6 +462,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 #     assert expected_message in actual_message or expected_message_2 in actual_message, f"The message {actual_message} should be: {expected_message} or {expected_message_2}"
 
 # # MXTEST-8286
+# @pytest.mark.pdp
 # def test_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
 #
 #     home_page = HomePage(*web_drivers)
@@ -467,6 +484,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 #
 # # # MXTEST-8289
+# @pytest.mark.pdp
 # def test_DirectLink_CompatibilityError_PreselectedVehicle(web_drivers):
 #     # falta dato URL: https://testintranet.oreillyauto.mx/ecatalog/<<ID DEL ARTICULO >>
 #     home_page = HomePage(*web_drivers)
@@ -491,6 +509,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # AUTO FILL OPTION------------------------------------------------------------------------------------------------------
 
 # # MXTEST-8292
+# @pytest.mark.autofilloption
 # def test_AutofillOption_FreeTextSearchBar(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -504,6 +523,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # NEW CLIENT------------------------------------------------------------------------------------------------------------
 
 # # MXTEST-8291
+# @pytest.mark.newclient
 # def test_NewClient_CallWindow(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -548,6 +568,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # PLP-------------------------------------------------------------------------------------------------------------------
 
 # # MXTEST-8258
+# @pytest.mark.plp
 # def test_PLP_Search_with_Selected_Vehicle(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -572,6 +593,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 # # MXTEST-8259
 @pytest.mark.ecatalog_demo
+# @pytest.mark.plp
 def test_PLP_Search_filter_No_results_found(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -584,6 +606,7 @@ def test_PLP_Search_filter_No_results_found(web_drivers):
 
 # # MXTEST-8260
 # @pytest.mark.ecatalog_demo
+# @pytest.mark.plp
 # def test_PLP_Search_without_vehicle_selected(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -595,6 +618,7 @@ def test_PLP_Search_filter_No_results_found(web_drivers):
 #
 
 # # MXTEST-8262
+# @pytest.mark.plp
 # @pytest.mark.ecatalog_demo
 # def test_PLP_Navigation_Categories(web_drivers):
 #     home_page = HomePage(*web_drivers)
@@ -613,6 +637,7 @@ def test_PLP_Search_filter_No_results_found(web_drivers):
 #     home_page.take_screenshot("test_PLP_Navigation_Categories")
 
 # # MXTEST-8264 mod1 without vehicle selected
+# @pytest.mark.plp
 # def test_PLP_Sort_by_option_az(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -654,6 +679,7 @@ def test_PLP_Search_filter_No_results_found(web_drivers):
 
 
 # MXTEST-8264 mod1 with vehicle selected
+# @pytest.mark.plp
 # def test_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-full-synthetic/l/n2728"
@@ -696,6 +722,7 @@ def test_PLP_Search_filter_No_results_found(web_drivers):
 
 
 # # MXTEST-8264 mod2
+# @pytest.mark.plp
 # def test_PLP_Sort_by_option_za(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
@@ -735,6 +762,7 @@ def test_PLP_Search_filter_No_results_found(web_drivers):
 #     home_page.take_screenshot("test_PLP_Sort_by_option_za")
 
 # # MXTEST-8264 mod3
+# @pytest.mark.plp
 # def test_PLP_Sort_by_option_relevance(web_drivers):
 #     home_page = HomePage(*web_drivers)
 #     home_page.open()
