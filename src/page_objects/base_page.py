@@ -132,9 +132,14 @@ class BasePage:
         actions.move_to_element(element).perform()
 
     def press_end_key(self):
-        logging.info("Press end key")
+        logging.info("Press END key")
         actions = AC(self.__driver)
         actions.send_keys(Keys.END)
+        actions.perform()
+    def press_esc_key(self):
+        logging.info("Press ESCAPE key")
+        actions = AC(self.__driver)
+        actions.send_keys(Keys.ESCAPE)
         actions.perform()
     def page_down_key_from_element(self, element):
         logging.info(f"Press Page Down key from Element: {element}")

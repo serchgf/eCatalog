@@ -146,7 +146,7 @@ class HomePage(BasePage):
         logging.info(f"Click on year dropdown")
         print(f"Click on year dropdown")
         dropdown = self.element("year_dropdown").wait_visible()
-        dropdown.click()
+        #dropdown.click()
         time.sleep(.3)
         year = self.select_index_list_element(index)
         return year
@@ -439,15 +439,23 @@ class HomePage(BasePage):
             logging.info(f"select element on the list with index: {index}: {element_selected}")
             print(f"select element on the list with index: {index}: {element_selected}")
             #self.clic_javacript(lista[index])
-            lista[index].click()
+            if element_selected in ' No results found ':
+                self.press_esc_key()
+                return 0
+
+            else:
+                lista[index].click()
         else:
             index = 0
             time.sleep(.2)
             element_selected = lista[index].text
             logging.info(f"select element on the list with index: {index}: {element_selected}")
             print(f"select element on the list with index: {index}: {element_selected}")
-            self.clic_javacript(lista[index])
-            #lista[index].click()
+            if element_selected in ' No results found ':
+                self.press_esc_key()
+                return 0
+            else:
+                lista[index].click()
 
         return element_selected
 
