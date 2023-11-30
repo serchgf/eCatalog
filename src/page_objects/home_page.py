@@ -439,14 +439,16 @@ class HomePage(BasePage):
             logging.info(f"select element on the list with index: {index}: {element_selected}")
             print(f"select element on the list with index: {index}: {element_selected}")
             #self.clic_javacript(lista[index])
-            lista[index].click()
+            if element_selected !=' No results found ':
+                lista[index].click()
         else:
             index = 0
             time.sleep(.2)
             element_selected = lista[index].text
             logging.info(f"select element on the list with index: {index}: {element_selected}")
             print(f"select element on the list with index: {index}: {element_selected}")
-            self.clic_javacript(lista[index])
+            if element_selected !=' No results found ':
+                self.clic_javacript(lista[index])
             #lista[index].click()
 
         return element_selected
