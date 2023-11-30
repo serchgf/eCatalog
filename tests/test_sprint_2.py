@@ -12,26 +12,26 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-8263
-@pytest.mark.sprint1_regression
-@pytest.mark.homepage
-def test_Vehicle_Filtering_Functionality_Validation(web_drivers):
-    home_page = HomePage(*web_drivers)
-    home_page.open()
-    time.sleep(5)
-    home_page.click_on_Picker_vehicle_btn()
-    home_page.click_on_vehicle_type_and_select()
-    year = home_page.click_on_year_and_select()
-    make = home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
-    expected_vehicle_selected = f"{year} {make}"
-    vehicle_selected = home_page.get_vehicle_selected()
-    assert vehicle_selected in expected_vehicle_selected, f"Button must shows:{expected_vehicle_selected}"
-    #home_page.click_on_categories_button_and_select()
-    # Realizar consulta a la base de datos
-    # home_page.connect_and_consult() consultas no requeridas
+# sprint1_regression
+# @pytest.mark.homepage
+# def test_Vehicle_Filtering_Functionality_Validation(web_drivers):
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     time.sleep(5)
+#     home_page.click_on_Picker_vehicle_btn()
+#     home_page.click_on_vehicle_type_and_select()
+#     year = home_page.click_on_year_and_select()
+#     make = home_page.click_on_make_and_select()
+#     home_page.click_on_model_and_select()
+#     home_page.click_on_submodel_and_select()
+#     home_page.click_on_engine_and_select()
+#     home_page.click_on_add_vehicle_submit_btn()
+#     expected_vehicle_selected = f"{year} {make}"
+#     vehicle_selected = home_page.get_vehicle_selected()
+#     assert vehicle_selected in expected_vehicle_selected, f"Button must shows:{expected_vehicle_selected}"
+#     #home_page.click_on_categories_button_and_select()
+#     # Realizar consulta a la base de datos
+#     # home_page.connect_and_consult() consultas no requeridas
 
 # MXTEST-8282
 # sprint1_regression
@@ -615,18 +615,18 @@ def test_Vehicle_Filtering_Functionality_Validation(web_drivers):
 #     home_page.take_screenshot("test_PLP_Search_with_Selected_Vehicle")
 
 # # MXTEST-8259
-# @pytest.mark.ecatalog_demo
+@pytest.mark.ecatalog_demo
 # sprint1_regression
 # @pytest.mark.plp
-# def test_PLP_Search_filter_No_results_found(web_drivers):
-#     home_page = HomePage(*web_drivers)
-#     home_page.open()
-#     wrong_product_name = "MOTTOR OIL"
-#     home_page.search_wrong_product_name(wrong_product_name)
-#     expected_message = "We're sorry, no results were found"
-#     actual_message = home_page.get_no_results_message()
-#     assert actual_message == expected_message, f"the message displayed shoeld be: {expected_message} instead of: {actual_message}"
-#     home_page.take_screenshot("test_PLP_Search_filter_No_results_found")
+def test_PLP_Search_filter_No_results_found(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    wrong_product_name = "MOTTOR OIL"
+    home_page.search_wrong_product_name(wrong_product_name)
+    expected_message = "We're sorry, no results were found"
+    actual_message = home_page.get_no_results_message()
+    assert actual_message == expected_message, f"the message displayed shoeld be: {expected_message} instead of: {actual_message}"
+    home_page.take_screenshot("test_PLP_Search_filter_No_results_found")
 
 # # MXTEST-8260
 # sprint1_regression

@@ -25,7 +25,7 @@
     },
     "add_vehicle_btn": {
       "by": "XPATH",
-      "value": "//span[@class='vehicle-selected notranslate']"
+      "value": "//span[@class='vehicle-selected']"
     },
     "vehicle_country_checkbox_icons": {
       "by": "XPATH",
