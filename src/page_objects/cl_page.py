@@ -1,7 +1,7 @@
 import logging
 import random
 import time
-import mysql.connector
+#import mysql.connector
 from selenium.common import NoSuchElementException, ElementClickInterceptedException
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait

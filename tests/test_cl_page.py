@@ -1,10 +1,13 @@
 import logging
 import time
 
+import pytest
+
 from src.page_objects.cl_page import CLPage
 
 
 # # MXTEST-8261
+#@pytest.mark.clp
 def test_Navigation_Categories(web_drivers):
     cl_page = CLPage(*web_drivers)
 
@@ -48,6 +51,7 @@ def test_Navigation_Categories(web_drivers):
 
 
 # MXTEST-8279 - MXTEST-8278
+@pytest.mark.clp
 def test_Navigation_Vehicle_Selected(web_drivers):
 
     cl_page = CLPage(*web_drivers)
