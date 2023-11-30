@@ -202,14 +202,10 @@ class PLPage(BasePage):
     def validate_product_list_page(self, subcategory_selected):
 
         logging.info("Validate product list page")
-        try:
-            self.element("span_filter_by").wait_visible()
-            self.element("sort_by_dropdown").wait_visible()
-        except TimeoutError:
-            self.element("span_filter_by").wait_visible()
-            self.element("sort_by_dropdown").wait_visible()
+        products_number = self.get_search_results_number()
 
-        assert self.element("plp_title").find_element().text == subcategory_selected, "The subcategory is not match"
+        assert self.element("plp_title").find_element().text == subcategory_selected.title(), "The subcategory is not match"
+        return products_number
 
     def validate_pagination(self):
 
@@ -220,4 +216,78 @@ class PLPage(BasePage):
             elements_in_page = self.element("part_number").find_elements()
             assert len(elements_in_page) == 20, "The number of elements in page is minor than 20"
             logging.info(f"Elements per page: {len(elements_in_page)}")
+
+    def click_on_brands(self):
+        logging.info(f"Click on brands dropdown list")
+        self.element("brands_dropdown").wait_visible().click()
+
+
+    def click_on_show_all_brands(self):
+        logging.info(f"Click on show all brands link text ")
+        self.element("show_all_brands_link").wait_clickable().click()
+
+    def get_random_brand(self):
+        logging.info("Click Random Brand")
+        self.element("explore_brands_label").wait_visible()
+        brands_list = self.element("all_brands_link_list").find_elements()
+        logging.info(f"El numero de marcas son: {len(brands_list)}")
+
+        index = random.randint(0, len(brands_list))
+        brand_selected = brands_list[index].text
+        logging.info(f"Brand Selected: {brand_selected}")
+        brands_list[index].click()
+        return brand_selected
+
+    def select_random_category_filter(self):
+        logging.info("Select a category from Categories filter")
+        category_filter = self.element("filter_option_list").find_elements()
+        index = 0
+        if len(category_filter) > 1:
+            index = random.randint(0, len(category_filter))
+        category_selected = category_filter[index].text
+        logging.info(f"Category Selected: {category_selected}")
+        category_filter[index].click()
+        return category_selected
+
+    def validate_page_filtered(self, category_selected, total, total_filtered):
+        logging.info("Validate filtered")
+        category = self.element("filter_option_selected").wait_visible().text
+        assert category == category_selected, "The category selected is not match"
+        assert total > total_filtered, "The number of products must be minor when filter"
+
+    def select_brand_filter(self):
+        logging.info("Select a brand from Brands filter")
+        filter_buttons = self.element("filters_buttons").find_elements()
+        filter_buttons[0].click()
+
+        brand_filter = self.element("filter_option_list").find_elements()
+        brand = brand_filter[0].text
+        logging.info(f"Brand Selected: {brand}")
+        brand_filter[0].click()
+        return brand
+
+    def select_random_attribute(self):
+        logging.info("Select an attribute")
+        attribute_filter_list = self.element("filters_buttons").find_elements()
+        index = random.randint(0, len(attribute_filter_list)-1)
+        attribute_selected = attribute_filter_list[index].text
+        logging.info(f"Attribute Selected: {attribute_selected}")
+        attribute_filter_list[index].click()
+
+        attribute_option_list = self.element("filter_option_list").find_elements()
+        index = random.randint(0, len(attribute_option_list)-1)
+        attribute_option_selected = attribute_option_list[index].text
+        logging.info(f"Attribute Option Selected: {attribute_option_selected}")
+        attribute_option_list[index].click()
+        return attribute_option_selected
+
+    def validate_filtered_page(self, brand_selected, attribute, total, total_filtered):
+        logging.info("Validate filtered")
+        options = self.element("filter_option_selected").find_elements()
+
+        assert options[0].text == brand_selected, "The Brand selected is not match"
+        assert options[1].text == attribute, "The attribute is not the correct"
+        assert total > total_filtered, "The number of products must be minor when filter"
+
+
 

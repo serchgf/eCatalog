@@ -162,6 +162,36 @@
     "part_number": {
       "by": "XPATH",
       "value": "//div[contains(@class,'copy-to-clipboard')]/span"
+    },
+    "brands_dropdown": {
+      "by": "XPATH",
+      "value": "//section[@class='submenu ps-5 ng-star-inserted']//span[contains(text(),'BRANDS')]"
+    },
+     "show_all_brands_link": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),' Show all brands ')]"
+    },
+    "explore_brands_label": {
+      "by": "XPATH",
+      "value": "//div[contains(text(),' Explore Brands ')]"
+    },
+    "all_brands_link_list":{
+      "by": "XPATH",
+      "value": "//span[@class='p-button-label ng-star-inserted']"
+    },
+
+    "filter_option_selected":{
+      "by": "XPATH",
+      "value": "//div[@class='p-element filter']/span"
+    },
+    "filters_buttons": {
+      "by": "XPATH",
+      "value": "//button[contains(@class,'filter-button')]"
+    },
+    "filter_option_list": {
+      "by": "XPATH",
+      "value": "//div[@class='option ng-star-inserted']/a"
     }
   }
+
 }
