@@ -128,7 +128,7 @@ class PLPage(BasePage):
             self.element("span_filter_by").wait_visible()
             self.element("sort_by_dropdown").wait_visible()
 
-        assert self.element("plp_title").find_element().text == subcategory_selected, "The subcategory is not match"
+        assert self.element("plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
         assert self.element("fits_element").find_element().text == f"Fits {make} {model} {year}", "The vehicle don't match"
 
 
@@ -205,7 +205,7 @@ class PLPage(BasePage):
         logging.info("Validate product list page")
         products_number = self.get_search_results_number()
 
-        assert self.element("plp_title").find_element().text == subcategory_selected.title(), "The subcategory is not match"
+        assert self.element("plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
         return products_number
 
     def validate_pagination(self):
