@@ -12,6 +12,9 @@ from selenium.webdriver.common.keys import Keys
 from src.web_elements.common import WebElementWrapper
 from selenium.webdriver.common.action_chains import ActionChains as AC
 from selenium.webdriver.support import expected_conditions as EC
+import allure
+from allure_commons.types import AttachmentType
+
 
 
 _LOCATOR_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "locators")
@@ -26,6 +29,9 @@ class BasePage:
 
     def open(self):
         self.__driver.get(self.url)
+
+    def open_new_url(self, url: str):
+        self.__driver.get(url)
 
     def close(self):
         self.__driver.close()
@@ -42,17 +48,28 @@ class BasePage:
     def take_screenshot(self, img_name: str):
         file_path = os.path.join(_SCREENSHOTS_DIR_PATH, f"{img_name}.png")
         self.__driver.save_screenshot(file_path)
+        allure.attach(self.__driver.get_screenshot_as_png(), name=f"{img_name}.png", attachment_type=AttachmentType.PNG)
 
     def scroll_down(self):
         time.sleep(1)
         logging.info("SCROLL DOWN TO HEIGHT")
         self.__driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
 
+    def back_to_previous_page(self):
+        logging.info("BACK TO PREVIOUS PAGE")
+        self.__driver.back()
+
+    def actionChain(self):
+        logging.info("RETURN ACTION CHAIN")
+        actions = AC(self.__driver)
+        return actions
+
     def zoom_out(self, percent: int):
         logging.info(F"ZOOM OUT: {percent}")
         self.__driver.execute_script(f"document.body.style.zoom='{percent}%'")
+
     def wait_until_page_load_complete(self):
-        time.sleep(4)
+        #time.sleep(4)
         logging.info(f"wait until page loads complete")
         try:
             state = self.__driver.execute_script('return document.readyState')
@@ -63,7 +80,6 @@ class BasePage:
         finally:
             state = self.__driver.execute_script('return document.readyState')
             assert state == 'complete', "Page does not loads correctly"
-
 
     def clic_javacript(self, element):
         """
@@ -85,6 +101,7 @@ class BasePage:
         :param element_text:
         :return:
         """
+        logging.info(f"Click on: {element_text}")
         xpath = f"//span[normalize-space()='{element_text}']"
         script = f'var elemento = document.evaluate("{xpath}", document, null, 9, null).singleNodeValue; elemento.click();'
         self.__driver.execute_script(script)
@@ -99,11 +116,29 @@ class BasePage:
         actions = AC(self.__driver)
         actions.move_to_element(element).click().perform()
 
+    def move_to_element_coordinates(self, element,xoffset:int, yoffset:int):
+        """
+        Recibe un webElement
+        :param element:
+        :return:
+        """
+        logging.info(f"Move to Element and click")
+        actions = AC(self.__driver)
+        actions.move_to_element_with_offset(element, xoffset, yoffset).click().perform()
+
     def scroll_to_element(self, element):
-        logging.info(f"Scroll Down to Element")
+        logging.info(f"Scroll Down to Element: {element}")
         actions = AC(self.__driver)
         actions.move_to_element(element).perform()
 
+    def press_end_key(self):
+        logging.info("Press end key")
+        actions = AC(self.__driver)
+        actions.send_keys(Keys.END)
+        actions.perform()
+    def page_down_key_from_element(self, element):
+        logging.info(f"Press Page Down key from Element: {element}")
+        self.__driver.find_element(element).send_keys(Keys.PAGE_DOWN)
 
     def __load_locators_attributes(self):
         locator_config = self.__load_locators_config()
