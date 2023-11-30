@@ -146,7 +146,7 @@ class HomePage(BasePage):
         logging.info(f"Click on year dropdown")
         print(f"Click on year dropdown")
         dropdown = self.element("year_dropdown").wait_visible()
-        dropdown.click()
+        #dropdown.click()
         time.sleep(.3)
         year = self.select_index_list_element(index)
         return year
