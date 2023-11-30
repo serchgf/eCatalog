@@ -103,18 +103,6 @@
       "by": "XPATH",
       "value": "//ul[@role='listbox']/li"
     },
-    "vehicle_selected": {
-      "by": "XPATH",
-      "value": "//span[@class='vehicle-selected notranslate']"
-    },
-    "categories_btn": {
-      "by": "XPATH",
-      "value": "//section//span[contains(text(),'CATEGORIES')]"
-    },
-    "popular_categories_list_btn": {
-      "by": "XPATH",
-      "value": "//div[@class='category-popular-categories d-inline-block ng-star-inserted']//div[@role='button']"
-    },
     "add_new_vehicle_btn": {
       "by": "XPATH",
       "value": "//p-button[@ng-reflect-label='Add new vehicle']"
@@ -342,6 +330,105 @@
     "no_part_copy_to_clipboard": {
       "by": "XPATH",
       "value": "//app-copy-to-clipboard"
+    },
+       "categories_btn": {
+      "by": "XPATH",
+      "value": "//section//span[contains(text(),'CATEGORIES')]/following-sibling::i"
+    },
+    "popular_categories_list_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='category-popular-categories d-inline-block ng-star-inserted']//div[@role='button']"
+    },
+    "list_container": {
+      "by": "XPATH",
+      "value": "//div[@class='category-iterable-body']"
+    },
+    "last_category_on_list": {
+      "by": "XPATH",
+      "value": "//span[normalize-space()='Turbocharger & Supercharger']"
+    },
+    "category_landing_elements_img": {
+      "by": "XPATH",
+      "value": "//div[@role='button']//p"
+    },
+    "category_landing_title": {
+      "by": "XPATH",
+      "value": "//div[@class='category-nav-limiter']/h2"
+    },
+    "filter_section": {
+      "by": "XPATH",
+      "value": "//div[@class='filters-column ng-star-inserted']"
+    },
+    "plp_title": {
+      "by": "XPATH",
+      "value": "//span[@class='roboto-800 fs-16px notranslate']"
+    },
+    "loading_img": {
+      "by": "XPATH",
+      "value": "//div[@role='alert']//*[name()='svg']",
+      "value1": "//p[contains(text(),'Loading')]"
+    },
+    "plp_error": {
+      "by": "XPATH",
+      "value": "//div[@class='description']/span[contains(text(),'no results were found')]"
+    },
+
+    "autocomplet_panel": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'p-autocomplete-panel')]"
+    },
+
+    "model_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='model']//input"
+    },
+    "submodel_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='subModel']//input"
+    },
+
+    "engine_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='engine']//input"
+    },
+
+    "year_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='year']//input"
+    },
+
+    "make_input": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='make']//input"
+    },
+
+    "additional_cat_names": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'category-nav-button-text')]/span"
+    },
+    "img_cat_names": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'category-nav-card')]//p"
+    },
+    "fits_element": {
+      "by": "XPATH",
+      "value": "//div[@role='badge']/p/span[contains(@class,'roboto-400')]"
+    },
+    "filter_option_selected":{
+      "by": "XPATH",
+      "value": "//div[@class='p-element filter']/span"
+    },
+    "filters_buttons": {
+      "by": "XPATH",
+      "value": "//button[contains(@class,'filter-button')]"
+    },
+    "filter_option_list": {
+      "by": "XPATH",
+      "value": "//div[@class='option ng-star-inserted']/a"
+    },
+    "vehicle_selected": {
+      "by": "XPATH",
+      "value": "//span[@class='vehicle-selected']"
     }
   }
 }
