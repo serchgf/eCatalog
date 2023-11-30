@@ -72,7 +72,7 @@
     },
     "add_vehicle_btn": {
       "by": "XPATH",
-      "value": "//span[@class='vehicle-selected']"
+      "value": "//button[contains(@class,'vehicle-button')]"
     },
      "vehicle_type_tbx": {
       "by": "XPATH",
