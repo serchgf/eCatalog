@@ -1,15 +1,18 @@
 import logging
 import time
 
+import pytest
+
 from src.page_objects.pl_page import PLPage
 
 
 # # MXTEST-8261
+@pytest.mark.plp
 def test_Vehicle_compatibility_confirmation(web_drivers):
 
     pl_page = PLPage(*web_drivers)
     pl_page.open()
-    pl_page.wait_until_page_load_complete()
+    #pl_page.wait_until_page_load_complete()
     pl_page.element("loading_img").wait_until_disappears()
 
     # seleccionar vehiculo
@@ -30,15 +33,15 @@ def test_Vehicle_compatibility_confirmation(web_drivers):
     if len(subcategory_list) < 1:
         subcategory_list = pl_page.get_subcategory_list()
     # click en subcategoria
-    pl_page.select_specific_category_of_list(subcategory_list, 9)
+    pl_page.select_specific_category_of_list(subcategory_list, 0)
 
     pl_page.wait_until_page_load_complete()
 
     subcategory = pl_page.select_first_subcategory()
-
+    pl_page.element("loading_img").wait_until_disappears()
     pl_page.validate_product_list_page_vehicle(subcategory, vehicle)
 
-
+@pytest.mark.plp
 def test_Pagination(web_drivers):
 
     pl_page = PLPage(*web_drivers)
@@ -65,7 +68,7 @@ def test_Pagination(web_drivers):
     pl_page.validate_product_list_page(subcategory)
     pl_page.validate_pagination()
 
-
+@pytest.mark.plp
 def test_Navigation_searchby_brand_category_filter(web_drivers):
 
     pl_page = PLPage(*web_drivers)
@@ -84,7 +87,7 @@ def test_Navigation_searchby_brand_category_filter(web_drivers):
     total_products_filtered = pl_page.validate_product_list_page(brand.title())
     pl_page.validate_page_filtered(category_selected, total_products, total_products_filtered)
 
-
+@pytest.mark.plp
 def test_Navigation_searchby_category_brand_filter(web_drivers):
 
     pl_page = PLPage(*web_drivers)
