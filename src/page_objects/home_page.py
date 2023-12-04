@@ -79,6 +79,7 @@ class HomePage(BasePage):
         print(f"Write model: {model}")
         time.sleep(.5)
         self.element("list_box").wait_visible()
+        self.element("list_box").wait_clickable()
         self.javascript_clic(model)
 
     def write_a_submodel(self, submodel: str):
@@ -86,6 +87,7 @@ class HomePage(BasePage):
         print(f"Write submodel: {submodel}")
         time.sleep(.5)
         self.element("list_box").wait_visible()
+        self.element("list_box").wait_clickable()
         self.javascript_clic(submodel)
 
     def write_a_engine(self, engine: str):
@@ -93,6 +95,7 @@ class HomePage(BasePage):
         print(f"Write engine: {engine}")
         time.sleep(.5)
         self.element("list_box").wait_visible()
+        self.element("list_box").wait_clickable()
         self.javascript_clic(engine)
 
     def click_on_vehicle_type_and_select(self, index=0):
@@ -106,13 +109,19 @@ class HomePage(BasePage):
         self.element("vehicle_type_label").wait_visible()
         logging.info(f"Click on Vehicle dropdown")
         print(f"Click on Vehicle dropdown")
+        self.element("vehicle_type_dropdown").wait_visible()
         dropdown = self.element("vehicle_type_dropdown").wait_clickable()
         #self.clic_javacript(dropdown)
         #time.sleep(4)
         dropdown.click()
-        time.sleep(1)
-        vehicle_type = self.select_index_list_element(index)
-        return vehicle_type
+        time.sleep(.5)
+        try:
+            vehicle_type = self.select_index_list_element(index)
+            return vehicle_type
+        except IndexError:
+            vehicle_type = self.select_index_list_element(index)
+            return vehicle_type
+
 
         # if index is None:
         #     self.select_first_list_element()
@@ -130,7 +139,10 @@ class HomePage(BasePage):
         self.element("vehicle_type_label").wait_visible()
         dropdown = self.element("vehicle_type_dropdown").wait_clickable()
         dropdown.click()
-        time.sleep(1)
+        time.sleep(.5)
+        self.element("list_box").wait_visible()
+        self.element("list_box").wait_clickable()
+
         vehicle_type_list = self.element("list_box").find_elements()
         return vehicle_type_list
 
@@ -141,14 +153,17 @@ class HomePage(BasePage):
         :param index:
         :return:
         """
-        time.sleep(.3)
+        time.sleep(.5)
 
         logging.info(f"Click on year dropdown")
         print(f"Click on year dropdown")
         dropdown = self.element("year_dropdown").wait_visible()
+        self.element("year_dropdown").wait_clickable()
         #dropdown.click()
-        time.sleep(.3)
-        year = self.select_index_list_element(index)
+        try:
+            year = self.select_index_list_element(index)
+        except IndexError:
+            year = self.select_index_list_element(index)
         return year
 
     def click_on_make_and_select(self, index=0):
@@ -162,10 +177,13 @@ class HomePage(BasePage):
         logging.info(f"Click on make dropdown")
         print(f"Click on make dropdown")
         dropdown = self.element("make_dropdown").wait_visible()
-        #dropdown.click()
-        time.sleep(.4)
+        self.element("make_dropdown").wait_clickable()
+        ##dropdown.click()
 
-        make = self.select_index_list_element(index)
+        try:
+            make = self.select_index_list_element(index)
+        except IndexError:
+            make = self.select_index_list_element(index)
         return make
 
     def click_on_model_and_select(self, index=0):
@@ -175,16 +193,18 @@ class HomePage(BasePage):
         :param index:
         :return:
         """
-        time.sleep(.3)
+        time.sleep(.5)
         logging.info(f"Click on model dropdown")
         print(f"Click on model dropdown")
+        self.element("model_dropdown").wait_visible()
         dropdown = self.element("model_dropdown").wait_clickable()
         # self.clic_javacript(dropdown)
         # dropdown.click()
-
-
-        # dropdown.click()
-        self.select_index_list_element(index)
+        try:
+            model = self.select_index_list_element(index)
+        except IndexError:
+            model = self.select_index_list_element(index)
+        return model
 
     def click_on_submodel_and_select(self, index=0):
         """
@@ -193,12 +213,17 @@ class HomePage(BasePage):
         :param index:
         :return:
         """
-        time.sleep(.3)
+        time.sleep(.5)
         logging.info(f"Click on submodel dropdown")
         print(f"Click on submodel dropdown")
+        self.element("submodel_dropdown").wait_visible()
         dropdown = self.element("submodel_dropdown").wait_clickable()
         # dropdown.click()
-        submodel = self.select_index_list_element(index)
+        time.sleep(.2)
+        try:
+            submodel = self.select_index_list_element(index)
+        except IndexError:
+            submodel = self.select_index_list_element(index)
         return submodel
 
     def click_on_engine_and_select(self, index=0):
@@ -213,7 +238,11 @@ class HomePage(BasePage):
         print(f"Click on engine dropdown")
         dropdown = self.element("engine_dropdown").wait_clickable()
         # dropdown.click()
-        engine = self.select_index_list_element(index)
+        time.sleep(.2)
+        try:
+            engine = self.select_index_list_element(index)
+        except IndexError:
+            engine = self.select_index_list_element(index)
         return engine
 
     def send_text_vehicle_type(self, vehicle_type: str):
@@ -230,15 +259,17 @@ class HomePage(BasePage):
 
         :return: other randome element on the list at least only one element exist
         """
+
         time.sleep(.2)
         logging.info(f"Click on submodel dropdown")
         dropdown = self.element("submodel_dropdown").wait_clickable()
         dropdown.click()
         time.sleep(.2)
         lista = self.element("list_box").find_elements()
-        time.sleep(.2)
-        dropdown.click()
+        #time.sleep(.2)
+        ##dropdown.click()
         new_submodel_text = ""
+        new_submodel_text_list = []
         if len(lista) == 1:
             submodel = lista[0].text
             lista[0].click()
@@ -253,11 +284,12 @@ class HomePage(BasePage):
                     index = i
                     new_submodel = ele
                     new_submodel_text = new_submodel.text
+                    new_submodel_text_list = new_submodel_text.split("\n")
                     logging.info(f"select NEW SUBMODEL with index:{index}-> {new_submodel_text}")
-                    print(f"select NEW SUBMODEL with index:{index}-> {new_submodel_text}")
+                    print(f"select NEW SUBMODEL with index:{index}-> {new_submodel_text_list[0]}")
                     ele.click()
                     break
-            return new_submodel_text
+            return new_submodel_text_list[0]
 
     #
     def new_engine_and_select(self, engine: str):
@@ -274,15 +306,17 @@ class HomePage(BasePage):
         dropdown.click()
         time.sleep(.2)
         lista = self.element("list_box").find_elements()
-        time.sleep(.2)
-        dropdown.click()
+
         new_engine_text = ""
+        new_engine_text_list = []
+        engine_list =[]
         if len(lista)==1:
             engine = lista[0].text
             lista[0].click()
+            engine_list = engine.split('\n')
             logging.info(f"select element on the list with index: 0: {engine}")
-            print(f"select element on the list with index: 0: {engine}")
-            return engine
+            print(f"select element on the list with index: 0: {engine_list[0]}")
+            return engine_list[0]
         else:
             for i, ele in enumerate(lista):
                 if ele.text == engine:
@@ -291,11 +325,12 @@ class HomePage(BasePage):
                     index = i
                     new_engine = ele
                     new_engine_text = new_engine.text
-                    logging.info(f"select NEW SUBMODEL with index:{index}-> {new_engine_text}")
-                    print(f"select NEW SUBMODEL with index:{index}-> {new_engine_text}")
+                    new_engine_text_list = new_engine_text.split("\n")
+                    logging.info(f"select NEW ENGINE with index:{index}-> {new_engine_text}")
+                    print(f"select NEW ENGINE with index:{index}-> {new_engine_text_list[0]}")
                     ele.click()
                     break
-            return new_engine_text
+            return new_engine_text_list[0]
 
     def click_new_client_continue_btn(self):
         logging.info(f"Click new client continue button")
@@ -315,6 +350,7 @@ class HomePage(BasePage):
         action = self.actionChain()
         action.send_keys(Keys.SHIFT + 'C')
         action.perform()
+        time.sleep(1)
 
     def click_on_category_by_text(self, text:str):
         logging.info(f"Click on category: {text}")
@@ -354,6 +390,7 @@ class HomePage(BasePage):
 
     def get_general_categories_list(self):
         logging.info(f"Get General Category List")
+        self.element("general_categories_label").wait_visible()
         print(f"Get General Category List")
         self.element("general_category_list").wait_visible()
         general_category_list = self.element("general_category_list").find_elements()
@@ -366,11 +403,17 @@ class HomePage(BasePage):
         #self.element("label_subcategory_selected").wait_visible()
         self.element("go_back_btn").wait_visible()
         try:
+            logging.info(f"try subcategory_list")
+            print(f"try subcategory_list")
             subcategory_list = self.element("subcategory_list").find_elements()
         except:
             try:
-             subcategory_list = self.element("subcategory_list_2").find_elements()
+                logging.info(f"try subcategory_list_2")
+                print(f"try subcategory_list_2")
+                subcategory_list = self.element("subcategory_list_2").find_elements()
             except:
+                logging.info(f"try subcategory_list_3")
+                print(f"try subcategory_list_3")
                 subcategory_list = self.element("subcategory_list_3").find_elements()
         return subcategory_list
 
@@ -422,15 +465,17 @@ class HomePage(BasePage):
         lista = self.element("breadcrum_section_link_list").find_elements()
         logging.info(f"select first element on the list: {lista[1].text}")
         print(f"select first element on the list: {lista[1].text}")
-        first_element = lista[1].text
+        first_element = lista[1].text.upper()
         lista[1].click()
         return first_element
-
     def select_index_list_element(self, index=0):
         logging.info(f"Get element list")
         print(f"Get element list")
         self.element("vehicle_type_label").wait_visible()
+        self.element("list_box").wait_visible()
+
         lista = self.element("list_box").find_elements()
+
         if index != 0:
             n_elementos = len(lista)
             index = random.randint(0, n_elementos)
@@ -441,9 +486,11 @@ class HomePage(BasePage):
             #self.clic_javacript(lista[index])
             if element_selected in ' No results found ':
                 self.press_esc_key()
+                time.sleep(.5)
                 return 0
-
             else:
+                if index > len(lista):
+                    index = index - len(lista)
                 lista[index].click()
         else:
             index = 0
@@ -455,6 +502,8 @@ class HomePage(BasePage):
                 self.press_esc_key()
                 return 0
             else:
+                if index > len(lista):
+                    index = index - len(lista)
                 lista[index].click()
 
         return element_selected
@@ -586,7 +635,8 @@ class HomePage(BasePage):
         logging.info(f"SUBMODEL LABEL: {submodel_label}")
         print(f"SUBMODEL LABEL: {submodel_label}")
         engine_label = labels[1].text
-        logging.info(f"ENGINE LABEL: {engine_label}")
+        engine_label_list = engine_label.split('\n')
+        logging.info(f"ENGINE LABEL: {engine_label_list[0]}")
         print(f"ENGINE LABEL: {engine_label}")
         return submodel_label, engine_label
 
@@ -653,10 +703,12 @@ class HomePage(BasePage):
             return lista
 
     def show_product_list(self, product_list: list):
+        logging.info("show product list")
         for product in product_list:
-            if product is not str:
+            if type(product) is not str:
                 logging.info(product.text)
-            logging.info(product)
+            else:
+                logging.info(product)
 
     def click_homepage_button(self):
         logging.info(f"Click home page button")
@@ -717,8 +769,9 @@ class HomePage(BasePage):
     def get_text_part_interchange_input(self):
         logging.info(f"Get Text from Part Interchange input tbx")
         print(f"Get Text from Part Interchange input tbx")
+        time.sleep(.2)
         texto = self.element("part_interchange_input_tbx").wait_visible().get_attribute('ng-reflect-model')
-        # logging.info(f"Text from Part Interchange input tbx: {texto}")
+        #logging.info(f"Text from Part Interchange input tbx: {texto}")
         return texto
 
     def write_part_in_interchange_tbx(self, part):
@@ -793,10 +846,11 @@ class HomePage(BasePage):
         logging.info("Get message:'We're sorry, no results were found'")
         print("Get message:'We're sorry, no results were found'")
         return self.element("no_results_message").wait_visible().text
-    def get_does_not_fit_meessage(self):
+    def get_compatibility_meessage(self):
         logging.info("Get does not fit message")
         print("Get does not fit message")
-        return self.element("does_not_fit_message_label").wait_visible().text
+        #return self.element("does_not_fit_message_label").wait_visible().text
+        return self.element("compatibility_message_label").wait_visible().text
     def click_on_logo_oreily_home(self):
         logging.info("Click logo oreilly home")
         print("Click logo oreilly home")
@@ -813,14 +867,24 @@ class HomePage(BasePage):
         self.element("explore_brands_label").wait_visible()
         brands_list = self.element("all_brands_link_list").find_elements()
         logging.info(f"El numero de marcas son: {len(brands_list)}")
-        print("El numero de marcas son: {len(brands_list)}")
+        print(f"El numero de marcas son: {len(brands_list)}")
 
         index = random.randint(0, len(brands_list))
+
         brand_selected = brands_list[index].text
         logging.info(f"Brand Selected: {brand_selected}")
         print(f"Brand Selected: {brand_selected}")
-        time.sleep(.5)
-        self.javascript_clic(brand_selected)
+        try:
+            logging.info(f"Try click on: {brand_selected}")
+            print(f"Try click on: {brand_selected}")
+            self.javascript_clic(brand_selected)
+        except JavascriptException:
+
+            time.sleep(1)
+            logging.info(f"Java except click on: {brand_selected}")
+            print(f"Try click on: {brand_selected}")
+            self.clic_javacript(brands_list[index])
+            #brands_list[index].click()
         #brands_list[index].click() funciona original
         return brand_selected
 
@@ -915,7 +979,6 @@ class HomePage(BasePage):
             index = random.randint(0, len(lista))
             element_selected = lista[index - 1]
             element_text = element_selected.text
-
             try:
                 element_selected.click()
             except ElementClickInterceptedException:
@@ -949,7 +1012,7 @@ class HomePage(BasePage):
 
     def validate_product_list_page_vehicle(self, subcategory_selected, vehicle):
 
-        year, make, model, submodel, engine = vehicle
+        year, make, model, submodel= vehicle
         make = make.split('\n')[0]
         model = model.split('\n')[0]
         submodel = submodel.split('\n')[0]
@@ -977,28 +1040,20 @@ class HomePage(BasePage):
 
         self.click_on_Picker_vehicle_btn()
         time.sleep(0.5)
-        self.element("year_input").find_element().send_keys("2021")
-        self.element("autocomplet_panel").wait_visible()
-        year = self.select_index_list_element()
-
-        self.element("make_input").find_element().send_keys("Toyota")
-        self.element("autocomplet_panel").wait_visible()
-        make = self.select_index_list_element()
-
-        self.element("model_input").find_element().send_keys("Rav4")
-        self.element("autocomplet_panel").wait_visible()
-        model = self.select_index_list_element()
-
-        self.element("submodel_input").find_element().send_keys("XLE")
-        self.element("autocomplet_panel").wait_visible()
-        submodel = self.select_index_list_element()
-
-        self.element("autocomplet_panel").wait_visible()
-        engine = self.select_index_list_element()
-
+        year= "2021"
+        make = "Toyota"
+        model = "Avalon"
+        submodel = "Hybrid Limited"
+        self.write_a_vehicle_type("Automotive Light Duty")
+        self.write_a_year(year)
+        self.write_a_make(make)
+        self.write_a_model(model)
+        self.write_a_submodel(submodel)
+        self.click_on_engine_and_select()
+        time.sleep(.5)
         self.click_on_add_vehicle_submit_btn()
 
-        return year, make, model, submodel, engine
+        return year, make, model, submodel
 
     def validate_product_list_page(self, subcategory_selected):
 
@@ -1014,8 +1069,8 @@ class HomePage(BasePage):
         products_number = self.get_search_results_number()
 
         if products_number > 20:
-            elements_in_page = self.element("part_number").find_elements()
-            assert len(elements_in_page) == 20, "The number of elements in page is minor than 20"
+            elements_in_page = self.element("no_part_copy_to_clipboard").find_elements()
+            assert len(elements_in_page) == 20, f"The number of elements: {len(elements_in_page)}  in page is minor than 20"
             logging.info(f"Elements per page: {len(elements_in_page)}")
 
     def select_random_category_filter(self):
@@ -1069,3 +1124,33 @@ class HomePage(BasePage):
         assert options[1].text == attribute, "The attribute is not the correct"
         assert total > total_filtered, "The number of products must be minor when filter"
 
+    def validate_category_landing_page(self, subcategory_selected):
+        try:
+            if self.element("category_landing_title").find_element().text == subcategory_selected:
+                logging.info(f"Validate categories in landing page")
+                total = self.clp_category_result()
+                logging.info(f"The total of categories in page = {total}")
+                return True
+        except NoSuchElementException:
+            return False
+
+    def clp_category_result(self):
+        logging.info("Get the total of categories on page")
+        img_cat = self.element("img_cat_names").find_elements()
+        additional = self.element("additional_cat_names").find_elements()
+        total = len(img_cat) + len(additional)
+        return total
+
+    def get_product_list_2(self):
+        logging.info("Get product list 2")
+        time.sleep(.5)
+        self.wait_until_page_load_complete()
+        self.element("link_products_list_2").wait_visible()
+        lista = self.element("link_products_list_2").find_elements()
+        if len(lista) != 0:
+            return lista
+        else:
+            self.wait_until_page_load_complete()
+            self.element("link_products_list_2").wait_visible()
+            lista = self.element("link_products_list_2").find_elements()
+            return lista

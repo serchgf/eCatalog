@@ -89,7 +89,7 @@
     },
     "engine_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@formcontrolname='engine']//button/span"
+      "value": "//p-autocomplete[@formcontrolname='engine']//button/span[1]"
     },
     "engine_tbx": {
       "by": "XPATH",
@@ -141,7 +141,7 @@
     },
     "subcategory_list": {
       "by": "XPATH",
-      "value": "//div[@class='m-0 category-list-colums']/div/span"
+      "value": "//div[@role='button']/span"
     },
     "subcategory_list_2": {
       "by": "XPATH",
@@ -157,7 +157,7 @@
     },
     "breadcrum_section_link_list": {
       "by": "XPATH",
-      "value": "//section[@id='breadcrum-section']//li/a"
+      "value": "//section[@class='breadcrum-section']//li/a"
     },
     "element_buttons_grid_category": {
       "by": "XPATH",
@@ -303,9 +303,9 @@
       "by": "XPATH",
       "value": "//div[@class='check-compatibility-action']//button"
     },
-    "does_not_fit_message_label": {
+    "compatibility_message_label": {
       "by": "XPATH",
-      "value": "//p[@class='badge-text']/span[contains(text(),'Does NOT Fit')]"
+      "value": "//p[@class='badge-text']/span[2]"
     },
     "new_client_label": {
       "by": "XPATH",
@@ -428,7 +428,7 @@
     },
     "vehicle_selected": {
       "by": "XPATH",
-      "value": "//span[@class='vehicle-selected']"
+      "value": "//span[@class='vehicle-selected notranslate']"
     }
   }
 }

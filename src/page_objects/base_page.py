@@ -104,6 +104,7 @@ class BasePage:
         logging.info(f"Click on: {element_text}")
         xpath = f"//span[normalize-space()='{element_text}']"
         script = f'var elemento = document.evaluate("{xpath}", document, null, 9, null).singleNodeValue; elemento.click();'
+        time.sleep(1)
         self.__driver.execute_script(script)
 
     def move_to_element_and_click(self, element):
