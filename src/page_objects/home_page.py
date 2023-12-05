@@ -54,6 +54,7 @@ class HomePage(BasePage):
         print(f"Click on Picker vehicle btn")
         self.element("add_vehicle_btn").wait_clickable().click()
 
+
     def write_a_vehicle_type(self, vehicle: str):
         logging.info(f"Write a vehicle type: {vehicle}")
         print(f"Write a vehicle type: {vehicle}")
@@ -531,6 +532,13 @@ class HomePage(BasePage):
         logging.info(f"Get vehicle selected text")
         print(f"Get vehicle selected text")
         return self.element("vehicle_selected").wait_visible().text
+
+
+    def get_country_span(self):
+        logging.info("Get MEX span")
+
+        span = self.element("MEX_span").wait_visible().text
+        return span
 
 
         # text = self.element("vehicle_selected").wait_visible().text

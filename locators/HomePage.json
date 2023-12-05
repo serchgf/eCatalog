@@ -429,6 +429,18 @@
     "vehicle_selected": {
       "by": "XPATH",
       "value": "//span[@class='vehicle-selected notranslate']"
+    },
+    "MEX_span":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),'MEX')]"
+    },
+    "CAN_span":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),'CAN')]"
+    },
+    "USA_span":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),'USA')]"
     }
   }
 }
