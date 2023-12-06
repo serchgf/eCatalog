@@ -8,32 +8,72 @@ import pytest
 
 from src.page_objects.home_page import HomePage
 
-_JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "sprint_2.json")
+_JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "HomePage.json")
 
 
 # --------------------------------------------JUAN LARIOS---------------------------------------------------------------
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-9075
+@pytest.mark.homepages2
+def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    #home_page.element("loading_img").wait_until_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    home_page.click_on_year_dropdown(1)
+    home_page.click_on_make_and_select(1)
+    home_page.click_on_model_and_select(1)
+    home_page.click_on_submodel_and_select()
+    home_page.click_on_engine_and_select()
+    home_page.take_screenshot("'USA'-'MEX'-'CAN' selected")
+    home_page.click_on_add_vehicle_submit_btn()
+    home_page.click_on_Picker_vehicle_btn()
+    span_country = home_page.get_country_chips()
+    logging.info(span_country)
+    assert "MEX" and "CAN" and "USA" in span_country, f"MEX and USA an CAN should be in: {span_country} message"
+
 # MXTEST-9074
+#@pytest.mark.homepages2
+def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    #home_page.element("loading_img").wait_until_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    home_page.select_usa_can_country()
+    home_page.click_on_year_dropdown(1)
+    home_page.click_on_make_and_select(1)
+    home_page.click_on_model_and_select(1)
+    home_page.click_on_submodel_and_select()
+    home_page.click_on_engine_and_select()
+    home_page.take_screenshot("'USA'-'MEX' selected")
+    home_page.click_on_add_vehicle_submit_btn()
+    home_page.click_on_Picker_vehicle_btn()
+    span_country = home_page.get_country_chips()
+    logging.info(span_country)
+    assert "CAN" or "USA" in span_country, f"USA or CAN should be in: {span_country} message"
 
 # MXTEST-9073
-@pytest.mark.haha
+#@pytest.mark.homepages2
 def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
+    #home_page.element("loading_img").wait_until_disappears()
     home_page.click_on_Picker_vehicle_btn()
-    home_page.click_on_vehicle_type_and_select()
-    year = home_page.click_on_year_and_select()
-    make = home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
+    home_page.select_mex_country()
+    home_page.click_on_year_dropdown(1)
+    home_page.click_on_make_and_select(1)
+    home_page.click_on_model_and_select(1)
     home_page.click_on_submodel_and_select()
     home_page.click_on_engine_and_select()
+    home_page.take_screenshot("'MEX' selected")
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_Picker_vehicle_btn()
     span_country = home_page.get_country_span()
     logging.info(span_country)
-    assert "MEX" in span_country or "CAN" in span_country or "USA" in span_country, f"MEX should be in: {span_country} message"
+    assert "MEX" in span_country, f"MEX should be in: {span_country} message"
 
 
 # MXTEST-9058

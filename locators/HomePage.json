@@ -441,6 +441,22 @@
     "USA_span":{
       "by": "XPATH",
       "value": "//span[contains(text(),'USA')]"
+    },
+    "MEX_check":{
+      "by": "XPATH",
+      "value": "//p-checkbox[@ng-reflect-value='2']"
+    },
+    "CAN_check":{
+      "by": "XPATH",
+      "value": "//p-checkbox[@ng-reflect-value='1']"
+    },
+    "USA_check":{
+      "by": "XPATH",
+      "value": "//p-checkbox[@ng-reflect-value='3']"
+    },
+    "chip_elements":{
+      "by": "XPATH",
+      "value": "//div[@class='ng-star-inserted']//p-chip"
     }
   }
 }

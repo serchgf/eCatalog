@@ -1162,3 +1162,35 @@ class HomePage(BasePage):
             self.element("link_products_list_2").wait_visible()
             lista = self.element("link_products_list_2").find_elements()
             return lista
+
+    def select_mex_country(self):
+        logging.info("Select MEX in vehicle country selection")
+        time.sleep(.5)
+        self.element("vehicle_country_checkbox_icons").wait_visible()
+        self.element("USA_check").find_element().click()
+        self.element("CAN_check").find_element().click()
+
+    def select_usa_can_country(self):
+        logging.info("Select USA in vehicle country selection")
+        time.sleep(.5)
+        self.element("vehicle_country_checkbox_icons").wait_visible()
+        self.element("MEX_check").find_element().click()
+
+    def click_on_year_dropdown(self, index=0):
+        time.sleep(.5)
+        logging.info("Click on year dropdown")
+        print("Click on year dropdown")
+        self.element("year_dropdown").wait_clickable().click()
+        try:
+            self.select_index_list_element(index)
+        except IndexError:
+            self.select_index_list_element(index)
+
+    def get_country_chips(self):
+        time.sleep(.5)
+        logging.info("Get country chips text")
+        lista = self.element("chip_elements").find_elements()
+        texto = []
+        for e in lista:
+            texto.append(e.text)
+        return texto
