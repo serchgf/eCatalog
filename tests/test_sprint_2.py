@@ -116,17 +116,76 @@ def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
 
 
 # ---------------------------------------------GRECIA LOPEZ-------------------------------------------------------------
-# MXTEST-9047
-# MXTEST-9046
-# MXTEST-9045
-# MXTEST-9044
-# MXTEST-9018
-# MXTEST-9017
-# MXTEST-9016
-# MXTEST-9015
-# MXTEST-9014
-# MXTEST-9040
-# MXTEST-9039
-# MXTEST-9037
-# MXTEST-9035
-# MXTEST-9031
+# SEARCH BAR-------------------------------------------------------------------------------------------------------------
+
+# MXTEST-9046 SearchBar_Valid_Item Name_Vehicle_Selected
+@pytest.mark.pruebitas
+def test_MXTEST_9046_SearchBar_Valid_Item_Name_Vehicle_Selected(web_drivers):
+    print("PRUEBA")
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.click_on_Picker_vehicle_btn()
+    home_page.click_on_vehicle_type_and_select()
+    year = home_page.click_on_year_and_select()
+    make = home_page.click_on_make_and_select()
+    home_page.click_on_model_and_select()
+    home_page.click_on_submodel_and_select()
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    time.sleep(4)
+
+    #home_page.element("search_bar").wait_clickable().send_keys("restore")
+    time.sleep(10)
+    # home_page.element("search_bar").press_enter_key()
+    # time.sleep(4)
+
+    #Go to the database and run the following <query>.
+
+# MXTEST-9045 SearchBar_Valid_Part Number_Vehicle_Selected
+
+# MXTEST-9044 SearchBar_Valid_Category_Vehicle_Selected
+
+# MXTEST-9018 SearchBar_Partial_Search_Term
+
+# MXTEST-9016 SearchBar_Valid_Item Name
+
+# MXTEST-9015 SearchBar_Valid_Part Number
+
+# MXTEST-9014 SearchBar_Valid_Category
+
+    #@pytest.mark.pruebitas
+# MXTEST-9040 SearchBar_Autocomplete_Select_Brand
+#     print("PRUEBA")
+#     home_page = HomePage(*web_drivers)
+#     # url= "www.google.com"
+#     # home_page.open_new_url(url)
+#     home_page.open()
+#     time.sleep(4)
+#     #home_page.search_product("Motor Oil") #Busqueda por valor
+#     home_page.element("search_bar").wait_clickable().send_keys("bos")
+#     bosch_brand = home_page.element("highlight_search_result").find_element()
+#     home_page.clic_javacript(bosch_brand)
+    #Go to the database and run the following <query>.
+
+# MXTEST-9039 SearchBar_Autocomplete_Select_Category
+
+# MXTEST-9037 SearchBar_Autosuggestions
+
+# MXTEST-9035 SearchBar_Invalid_Search Term
+
+# MXTEST-9031 SearchBar_Keywords_search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
