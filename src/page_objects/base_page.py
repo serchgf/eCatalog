@@ -137,6 +137,12 @@ class BasePage:
         actions = AC(self.__driver)
         actions.send_keys(Keys.END)
         actions.perform()
+    def press_enter_key(self):
+        logging.info("Press ENTER key")
+        actions = AC(self.__driver)
+        actions.send_keys(Keys.ENTER)
+        actions.perform()
+
     def press_esc_key(self):
         logging.info("Press ESCAPE key")
         actions = AC(self.__driver)

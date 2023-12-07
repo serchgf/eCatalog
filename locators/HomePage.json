@@ -1,5 +1,5 @@
 {
-  "url": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "url": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/",
   "url_dev": "https://172.22.210.30/ecatalog-us/#/",
   "url_qa": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
   "query_MXTEST-8263": "SELECT * FROM epc.application_vehicle_indexes avi INNER JOIN epc.vehicles v on v.a_vehicle_id = avi.vehicle_id WHERE avi.application_id='161096296'  AND avi.part_type_id = '02512' GROUP BY avi.application_id, avi.vehicle_id;",
@@ -441,6 +441,10 @@
     "USA_span":{
       "by": "XPATH",
       "value": "//span[contains(text(),'USA')]"
+    },
+    "add_vehicle_span": {
+      "by": "XPATH",
+      "value": "//span[text()='Add vehicle']"
     }
   }
 }
