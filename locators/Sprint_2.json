@@ -441,6 +441,14 @@
     "USA_span":{
       "by": "XPATH",
       "value": "//span[contains(text(),'USA')]"
+    },
+    "explore_bands_icons_h3":{
+      "by": "XPATH",
+      "value": "//h3[contains(text(),'EXPLORE BRANDS')]"
+      },
+    "explore_brand_icons": {
+      "by": "XPATH",
+      "value": "//o-brand-menu//img"
     }
   }
 }

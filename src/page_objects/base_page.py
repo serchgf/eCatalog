@@ -137,6 +137,13 @@ class BasePage:
         actions = AC(self.__driver)
         actions.send_keys(Keys.END)
         actions.perform()
+
+    def press_PageDown_key(self):
+        logging.info("Press PAGE DOWN key")
+        actions = AC(self.__driver)
+        actions.send_keys(Keys.PAGE_DOWN)
+        actions.perform()
+        time.sleep(1)
     def press_esc_key(self):
         logging.info("Press ESCAPE key")
         actions = AC(self.__driver)

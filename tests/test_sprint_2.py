@@ -8,7 +8,7 @@ import pytest
 
 from src.page_objects.home_page import HomePage
 
-_JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "sprint_2.json")
+_JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "HomePage.json")
 
 
 # --------------------------------------------JUAN LARIOS---------------------------------------------------------------
@@ -17,7 +17,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "spr
 # MXTEST-9074
 
 # MXTEST-9073
-@pytest.mark.haha
+
 def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -33,6 +33,7 @@ def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
     home_page.click_on_Picker_vehicle_btn()
     span_country = home_page.get_country_span()
     logging.info(span_country)
+
     assert "MEX" in span_country or "CAN" in span_country or "USA" in span_country, f"MEX should be in: {span_country} message"
 
 
@@ -63,13 +64,41 @@ def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
 # MXTEST-9069
 # MXTEST-9068
 # MXTEST-9067
+# PDP ------------------------------------------------------------------------------------------------------------------
 # MXTEST-9034
-
 
 
 # ---------------------------------------------SERGIO GARCIA------------------------------------------------------------
 # MXTEST-9033
+#@pytest.mark.haha
+def test_MXTEST_9033_PDP_ProductDetailsCompatibility(web_drivers):
+    home_page = HomePage(*web_drivers)
+    url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accel/acc/detail/accel-spark-plug-0526-4/acc0/05264"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.press_PageDown_key()
+    home_page.wait_spinner_disappears()
+    home_page.click_compatibility_tab()
+    home_page.press_PageDown_key()
+    home_page.wait_until_page_load_complete()
+    #compatibility_list = home_page.get_compatibility_list()
+    home_page.show_compatibility_vehicle_list_tab()
+    # todo Verify the information given in COMPATIBILITY tab in the database using the following query: <QUERY>.
+
 # MXTEST-9032
+#@pytest.mark.haha
+def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
+    home_page = HomePage(*web_drivers)
+    url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accel/acc/detail/accel-spark-plug-0526-4/acc0/05264"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.press_PageDown_key()
+    home_page.wait_spinner_disappears()
+    home_page.click_compatibility_tab()
+    home_page.press_PageDown_key()
+    home_page.wait_until_page_load_complete()
+
+
 # MXTEST-9060
 # MXTEST-9059
 # MXTEST-9057
