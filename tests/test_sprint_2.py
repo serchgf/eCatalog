@@ -8,7 +8,7 @@ import pytest
 
 from src.page_objects.home_page import HomePage
 
-_JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "HomePage.json")
+_JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "sprint_2.json")
 
 
 # --------------------------------------------JUAN LARIOS---------------------------------------------------------------
