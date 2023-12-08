@@ -2,6 +2,7 @@
   "url": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/",
   "url_dev": "https://172.22.210.30/ecatalog-us/#/",
   "url_qa": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "url_prod": "https://teamnet.oreillyauto.mx/catalogo",
   "query_MXTEST-8263": "SELECT * FROM epc.application_vehicle_indexes avi INNER JOIN epc.vehicles v on v.a_vehicle_id = avi.vehicle_id WHERE avi.application_id='161096296'  AND avi.part_type_id = '02512' GROUP BY avi.application_id, avi.vehicle_id;",
   "query_MXTEST_8255": "hola mundo",
   "footer_href_links":{
@@ -439,6 +440,10 @@
       "by": "XPATH",
       "value": "//span[contains(text(),'USA')]"
     },
+    "add_vehicle_span": {
+      "by": "XPATH",
+      "value": "//span[text()='Add vehicle']"
+    },
     "MEX_check":{
       "by": "XPATH",
       "value": "//p-checkbox[@ng-reflect-value='2']"
@@ -479,6 +484,5 @@
       "by": "XPATH",
       "value": "//p-panel/div/div/div/div/span"
     }
-
   }
 }
