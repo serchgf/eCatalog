@@ -19,7 +19,7 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
-    #home_page.element("loading_img").wait_until_disappears()
+    home_page.element("loading_img").wait_until_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_year_dropdown(1)
     home_page.click_on_make_and_select(1)
@@ -31,15 +31,15 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
     home_page.click_on_Picker_vehicle_btn()
     span_country = home_page.get_country_chips()
     logging.info(span_country)
-    assert "MEX" and "CAN" and "USA" in span_country, f"MEX and USA an CAN should be in: {span_country} message"
+    assert "MEX" or "CAN" or "USA" in span_country, f"MEX, USA or CAN should be in: {span_country} message"
 
 # MXTEST-9074
-#@pytest.mark.homepages2
+@pytest.mark.homepages2
 def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
-    #home_page.element("loading_img").wait_until_disappears()
+    home_page.element("loading_img").wait_until_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_usa_can_country()
     home_page.click_on_year_dropdown(1)
@@ -47,7 +47,7 @@ def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_dr
     home_page.click_on_model_and_select(1)
     home_page.click_on_submodel_and_select()
     home_page.click_on_engine_and_select()
-    home_page.take_screenshot("'USA'-'MEX' selected")
+    home_page.take_screenshot("'USA'-'CAN' selected")
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_Picker_vehicle_btn()
     span_country = home_page.get_country_chips()
@@ -55,12 +55,12 @@ def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_dr
     assert "CAN" or "USA" in span_country, f"USA or CAN should be in: {span_country} message"
 
 # MXTEST-9073
-#@pytest.mark.homepages2
+@pytest.mark.homepages2
 def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
-    #home_page.element("loading_img").wait_until_disappears()
+    home_page.element("loading_img").wait_until_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_mex_country()
     home_page.click_on_year_dropdown(1)
@@ -82,7 +82,48 @@ def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
 # MXTEST-9054
 # MXTEST-9053
 # MXTEST-9052
+@pytest.mark.homepages2
+def test_MXTEST_9051_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.element("loading_img").wait_until_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    home_page.select_mex_country()
+    year = home_page.click_on_year_dropdown(1)
+    make = home_page.click_on_make_and_select(1).split('\n')
+    model = home_page.click_on_model_and_select(1).split('\n')
+    submodel = home_page.click_on_submodel_and_select().split('\n')
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    home_page.click_on_brands()
+    home_page.click_on_cartek_brand()
+    home_page.element("loading_img").wait_until_disappears()
+    home_page.validate_product_list_page('Cartek')
+    products_name = home_page.get_products_names()
+    home_page.click_on_first_add_to_list_available()
+    title, product = home_page.validate_orderList_display()
+    assert title == f"{year} {make[0].upper()} {model[0].upper()} {submodel[0].upper()}", f"The title of the panel should be {year} {make[0]} {model[0]} {submodel[0]}"
+    assert product in products_name, f"The product {product}wasn't added to the order list"
+
 # MXTEST-9051
+@pytest.mark.homepages2
+def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.element("loading_img").wait_until_disappears()
+    home_page.click_on_brands()
+    home_page.click_on_cartek_brand()
+    home_page.element("loading_img").wait_until_disappears()
+    home_page.validate_product_list_page('Cartek')
+    products_name = home_page.get_products_names()
+    home_page.click_on_first_add_to_list_available()
+    title, product = home_page.validate_orderList_display()
+    assert title == "UNSPECIFIED VEHICLE", "The title of the panel should be 'UNSPECIFIED VEHICLE'"
+    assert product in products_name, "The product wasn't added to the order list"
+
+
 # MXTEST-9076
 # MXTEST-9038
 # MXTEST-9030

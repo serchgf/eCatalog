@@ -1068,7 +1068,7 @@ class HomePage(BasePage):
         logging.info("Validate product list page")
         products_number = self.get_search_results_number()
 
-        assert self.element("plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
+        assert self.element("plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory or brand is not match"
         return products_number
 
     def validate_pagination(self):
@@ -1171,7 +1171,7 @@ class HomePage(BasePage):
         self.element("CAN_check").find_element().click()
 
     def select_usa_can_country(self):
-        logging.info("Select USA in vehicle country selection")
+        logging.info("Select USA and CAN in vehicle country selection")
         time.sleep(.5)
         self.element("vehicle_country_checkbox_icons").wait_visible()
         self.element("MEX_check").find_element().click()
@@ -1182,9 +1182,10 @@ class HomePage(BasePage):
         print("Click on year dropdown")
         self.element("year_dropdown").wait_clickable().click()
         try:
-            self.select_index_list_element(index)
+            year = self.select_index_list_element(index)
         except IndexError:
-            self.select_index_list_element(index)
+            year = self.select_index_list_element(index)
+        return year
 
     def get_country_chips(self):
         time.sleep(.5)
@@ -1194,3 +1195,41 @@ class HomePage(BasePage):
         for e in lista:
             texto.append(e.text)
         return texto
+
+    def click_on_cartek_brand(self):
+        time.sleep(.5)
+        logging.info("Click on Cartek brand ")
+        print("Click on Cartek brand ")
+        self.element("explore_brands_label").wait_visible()
+        self.element("cartek_brand").find_element().click()
+
+    def click_on_first_add_to_list_available(self):
+        time.sleep(.5)
+        logging.info("Click on ADD TO LIST button")
+        print("Click on ADD TO LIST button")
+        self.element("add_to_list_btn").wait_clickable().click()
+
+    def get_products_names(self):
+        time.sleep(.5)
+        logging.info("Get the products names")
+        print("Get the products names")
+        list_name = self.element("product_name").find_elements()
+        names = []
+        for name in list_name:
+            names.append(name.text)
+        return names
+
+    def validate_orderList_display(self):
+        time.sleep(.5)
+        logging.info("Validate the order list display")
+        print("Validate the order list display")
+        self.element("order_list_label").wait_visible()
+        title = self.element("panel_title").find_element()
+        product = self.element("product_name_ol").find_element()
+        return title.text, product.text
+
+
+
+
+
+
