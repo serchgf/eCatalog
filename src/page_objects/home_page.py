@@ -1077,7 +1077,6 @@ class HomePage(BasePage):
             return False
 
     def select_vehicle_specific(self):
-
         self.click_on_Picker_vehicle_btn()
         time.sleep(0.5)
         year= "2021"
@@ -1264,11 +1263,12 @@ class HomePage(BasePage):
         sections_list_in_webpage_text = []
         for section in sections_list_in_webpage:
             sections_list_in_webpage_text.append(section.text)
-
+        about_this_brand_section_label = self.element("about_this_brand_section_label").find_element().text
+        sections_list_in_webpage_text.append(about_this_brand_section_label)
         assert sections_list_in_webpage_text == expected_sections, f"sections in webpage: {sections_list_in_webpage_text} should be:: {expected_sections}"
 
     def get_data_from_detailed_description_section(self):
-        logging.info("Get data from details detailed description section")
+        logging.info("Get data from details 'detailed description' section")
         product_name = self.element("detailed_description_product_name").find_element().text
         print(product_name)
         lista = self.element("detailed_description_product_list").find_elements()
@@ -1276,46 +1276,63 @@ class HomePage(BasePage):
             print(ele.text)
 
     def get_data_from_details_product_information_section(self):
-        logging.info("Get data from details product information section")
+        logging.info("Get data from details 'product information' section")
         lista = self.element("product_information_section_list").find_elements()
         for ele in lista:
             print(ele.text)
 
 
     def get_data_from_details_how_to_use_the_product_section(self):
-        logging.info("Get data from details how to use the product section")
+        logging.info("Get data from details 'how to use the product' section")
         lista = self.element("how_to_use_the_product_description_list").find_elements()
         for ele in lista:
             print(ele.text)
 
     def get_data_from_details_about_this_brand_section(self):
-        pass
+        logging.info("Get data from details 'about this brand' section")
+        texto = self.element("about_this_brand_text").find_element().text
+        print(texto)
+
+        p = self.element("about_this_brand_p").find_element().text
+        print(p)
+
+        lista = self.element("about_this_brand_li").find_elements()
+        for ele in lista:
+            print(ele.text)
 
     def click_send_a_report_link(self):
         logging.info("Click on send a report link")
         self.element("send_report_btn").wait_visible()
         send_a_report_btn = self.element("send_report_btn").wait_clickable()
-        self.clic_javacript(send_a_report_btn)
+        try:
+            self.clic_javacript(send_a_report_btn)
+        except ElementClickInterceptedException:
+            self.javascript_clic('Send a report')
 
-    def fill_product_info_report(self, name: str, email: str, phone: str, store: str, issue_type: str):
+
+    def fill_product_info_report(self, name: str, email: str, phone: str, store: str, issue_type: str, description_error_text:str):
         """
         :param name: str
         :param email: str
         :param phone: str
         :param store: str
         :param issue_type: str
+        :param description_error_text: str
         :return:
         """
         logging.info("Fill Product Info Report")
+        time.sleep(1)
         self.element("product_info_report_label").wait_visible()
         self.write_fullName(name)
         self.write_email(email)
         self.write_phoneNumber(phone)
         self.click_store_dropdown()
         self.select_a_store(store)
+        self.element("about_the_issue_span").wait_visible()
+        self.press_PageDown_key()
         self.click_issue_type_dropdown()
         self.select_a_issue_type(issue_type)
-
+        self.write_describe_the_issue(description_error_text)
     def write_fullName(self, fullname:str):
         logging.info(f"Write Full Name: {fullname}")
         self.element("input_fullName_tbx").wait_clickable().send_keys(fullname)
@@ -1337,3 +1354,79 @@ class HomePage(BasePage):
     def select_a_issue_type(self, issue_type:str):
         logging.info(f"Select the issue: {issue_type}")
         self.javascript_clic(issue_type)
+
+    def write_describe_the_issue(self, description: str):
+        logging.info(f"Writing the issue type description")
+        self.element("textarea_description_error").wait_clickable().send_keys(description)
+
+    def click_send_report_button_info_report_btn(self):
+        logging.info("Clic send report btn product info report")
+        self.element("send_report_btn_product_info_report").wait_clickable().click()
+
+    def validate_report_created_confirmation(self):
+        logging.info("Validate Report Created confirmation")
+        # self.element("report_created_confirmation").wait_visible()
+        assert self.element("report_created_confirmation").find_element().is_displayed(), "Expected message is not displayed"
+
+    def get_report_ticket_number(self):
+        logging.info("Get Report ticket number")
+        assert self.element("report_ticket_number").find_element().is_displayed(), "Ticket number is not displayed"
+        ticket_number = self.element("report_ticket_number").wait_visible().text
+        logging.info(f"{ticket_number}")
+        #print(f"ticket_number: {ticket_number}")
+        return ticket_number
+
+    def click_add_to_list_btn(self):
+        logging.info("Click 'ADD TO LIST' button")
+        self.element("add_to_list_btn").wait_clickable().click()
+
+    def validate_presence_of_modal_order_list_elements(self):
+        logging.info("Validate presence of modal order list elements")
+        logging.info("Validate presence of order list subtitle")
+        assert self.element("modal_order_list_subtitle").find_element().is_displayed(), f"Order list subtitle is not displayed"
+        logging.info("Validate presence of Quantity of items in the list")
+        assert self.element("modal_order_list_items_number").find_element().is_displayed(), f"Quantity of items is not displayed"
+        items_span = self.element("modal_order_list_items_number").find_element().text.lstrip().rstrip().split(" ")
+        items = items_span[0]
+        logging.info(f"number of items: {items}")
+        print(f"number of items: {items}")
+        assert self.element("modal_order_list_deleteAll_btn").find_element().is_displayed(), f"Delete All button is not displayed"
+        assert self.element(
+            "modal_order_list_vehicle_information").find_element().is_displayed(), f"Vehicle information is not displayed"
+        vehicle_description = self.element("modal_order_list_vehicle_information").find_element().text
+        assert self.element(
+            "modal_order_list_product_description").find_element().is_displayed(), f"Product description is not displayed"
+        assert self.element(
+            "modal_order_list_part_number").find_element().is_displayed(), f"Part number is not displayed"
+        assert self.element(
+            "modal_order_list_delete_btn").find_element().is_displayed(), f"Delete button is not displayed"
+        return vehicle_description
+
+    def validate_nonAplication_product_label(self):
+        logging.info("Validate universal product message:'Non Application'")
+        assert self.element("nonApplication_message").find_element().is_displayed(), "'Non Applicatioon' messages is not displayed as expected"
+        logging.info("universal product message:'Non Application' is displayed correctly")
+
+    def get_number_of_nonApplication_product_label_in_PLP(self):
+        logging.info("Get number of 'Non Application' productos in Product List Page")
+        number_of_nonApplication = self.element("nonApplication_message").find_elements()
+        logging.info(f"Exists '{len(number_of_nonApplication)}' 'Non Application' product in the current Product list Page")
+        assert len(number_of_nonApplication) > 0, f"At least one 'non Application' product must exists in the list"
+    def validate_compatibility_tab_is_not_displayed(self):
+        logging.info("validate Compatibility tab is not displayed")
+        try:
+            self.element("compatibility_tab").find_element().is_displayed()
+            assert False, f"Compatibility tab should not be displayed"
+        except NoSuchElementException:
+            logging.info("Compatibility tab is not displayed Correctly")
+            assert True
+
+    def validate_presence_of_default_image_src(self):
+        logging.info("validate Compatibility tab is not displayed")
+        try:
+            self.element("compatibility_tab").find_element().is_displayed()
+            assert False, f"Compatibility tab should not be displayed"
+        except NoSuchElementException:
+            logging.info("Compatibility tab is not displayed Correctly")
+            assert True
+

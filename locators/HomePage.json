@@ -483,6 +483,22 @@
       "by": "XPATH",
       "value": "//div[@role='tabpanel']//span[@class='roboto-600 o-text-secondary tabs-section-title']"
     },
+    "about_this_brand_section_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About this brand')]"
+    },
+    "about_this_brand_text": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About this brand')]/parent::div/span[2]"
+    },
+    "about_this_brand_p": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About this brand')]/parent::div/span[2]/p"
+    },
+    "about_this_brand_li": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About this brand')]/parent::div/span[2]//li"
+    },
     "detailed_description_product_name": {
       "by": "XPATH",
       "value": "//div[@role='tabpanel']/div[1]/span[2]"
@@ -525,7 +541,67 @@
     },
     "issue_type_dropdown": {
       "by": "XPATH",
-      "value": "//p-dropdown[@id='errorsOptions']"
+      "value": "//p-dropdown[@id='errorsOptions' and @optionlabel='name']"
+    },
+    "about_the_issue_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About the issue')]"
+    },
+    "textarea_description_error": {
+      "by": "XPATH",
+      "value": "//textarea[@id='descriptionError']"
+    },
+    "send_report_btn_product_info_report": {
+      "by": "XPATH",
+      "value": "//p-button[@ng-reflect-label='Send Report']"
+    },
+    "report_created_confirmation": {
+      "by":"XPATH",
+      "value": "//span[contains(text(),'Report created')]"
+    },
+    "report_ticket_number": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'TICKET')]"
+    },
+    "add_to_list_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='button-container']/button"
+    },
+    "modal_order_list_subtitle": {
+      "by": "XPATH",
+      "value": "//h3[contains(text(),'Order List')]"
+    },
+    "modal_order_list_items_number": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'ITEM')]"
+    },
+    "modal_order_list_deleteAll_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'DELETE ALL')]/parent::button"
+    },
+    "modal_order_list_vehicle_information": {
+      "by": "XPATH",
+      "value": "//span[@class='material-symbols-outlined fs-24px notranslate']/parent::div/div/span"
+    },
+    "modal_order_list_product_description": {
+      "by": "XPATH",
+      "value": "//div[@role='region']//p"
+    },
+    "modal_order_list_delete_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Delete')]/parent::button"
+    },
+    "modal_order_list_part_number": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'# Part: ')]/parent::div/a"
+    },
+    "nonApplication_message": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Non application')]"
+    },
+    "default_img_product": {
+      "by": "XPATH",
+      "value": "//img[@src='assets/images/product/coming-soon.png']"
     }
   }
 }

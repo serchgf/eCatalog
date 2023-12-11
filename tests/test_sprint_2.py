@@ -89,45 +89,133 @@ def test_MXTEST_9033_PDP_ProductDetailsCompatibility(web_drivers):
 #@pytest.mark.haha
 def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
     home_page = HomePage(*web_drivers)
-    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
+    #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
+    #nueva url con todas las secciones
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/husky-spring/hsk/detail/husky-spring-suspension-leveling-kit-069409bds/hsk0/069409bds"
     #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates-mx/mnv/detail/gates-mx-v-belt-1140/mnv0/1140"
+    #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/red-line-full-synthetic-motor-oil-0w-30-1-quart-11114/rl00/11114"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
-    # expected_sections = ['Detailed description', 'Product information', 'How to use the product', 'About this brand']
-    expected_sections = ['Detailed description', 'Product information', 'How to use the product']
+    expected_sections = ['Detailed description', 'Product information', 'How to use the product', 'About this brand']
+    # expected_sections = ['Detailed description', 'Product information', 'How to use the product']
     home_page.validate_presence_of_details_sections(expected_sections)
     home_page.get_data_from_detailed_description_section()
     home_page.get_data_from_details_product_information_section()
     home_page.get_data_from_details_how_to_use_the_product_section()
+    home_page.get_data_from_details_about_this_brand_section()
 
 #url con datos junto con vehiculo : 2021 Alfa Romeo Giulia Lusso
 #breacrumb: Home-All brands-Cartek-CCD2052
 #"https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
 
 # MXTEST-9060
-@pytest.mark.haha
+#@pytest.mark.haha
 def test_MXTEST_9060_PDP_Report_discrepances_fitment_notes(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
     #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates-mx/mnv/detail/gates-mx-v-belt-1140/mnv0/1140"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    home_page.scroll_down()
     home_page.click_send_a_report_link()
     full_name = "Sergio Garcia"
     email = "email_fake@fake.com"
     phone = "1234567890"
     store = "Abastos"
-    issue_type = "Vehicle Fitment"
+    #issue_type = "Vehicle Fitment"
+    issue_type = "Wrong Image"
+    description_error_text = "Test message text, the image is Wrong"
     home_page.scroll_down()
     home_page.wait_spinner_disappears()
-    home_page.fill_product_info_report(full_name, email, phone, store, issue_type)
+    home_page.fill_product_info_report(full_name, email, phone, store, issue_type, description_error_text)
+    home_page.click_send_report_button_info_report_btn()
+    home_page.validate_report_created_confirmation()
 
 # MXTEST-9059
+#@pytest.mark.haha
+def test_MXTEST_9059_PDP_Report_Discrepancies(web_drivers):
+    home_page = HomePage(*web_drivers)
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.scroll_down()
+    home_page.click_send_a_report_link()
+    full_name = "Sergio Garcia"
+    email = "email_fake@fake.com"
+    phone = "1234567890"
+    store = "Abastos"
+    issue_type = "Wrong Image"
+    description_error_text = "Test message text, the image is Wrong"
+    home_page.scroll_down()
+    home_page.wait_spinner_disappears()
+    home_page.fill_product_info_report(full_name, email, phone, store, issue_type, description_error_text)
+    home_page.click_send_report_button_info_report_btn()
+    home_page.validate_report_created_confirmation()
+    home_page.get_report_ticket_number()
+
 # MXTEST-9057
+#@pytest.mark.haha
+def test_MXTEST_9057_PDP_Add_to_List(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    home_page.wait_spinner_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    year = "2021"
+    make = "Alfa Romeo"
+    model = "Giulia"
+    submodel = "Lusso"
+    home_page.write_a_vehicle_type("Automotive Light Duty")
+    home_page.write_a_year(year)
+    home_page.write_a_make(make)
+    home_page.write_a_model(model)
+    home_page.write_a_submodel(submodel)
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.click_add_to_list_btn()
+    vehicle_description = home_page.validate_presence_of_modal_order_list_elements()
+    assert f"{year.upper()} {make.upper()} {model.upper()} {submodel.upper()}" in vehicle_description, f"Vehicle information does not match"
+
 # MXTEST-9043
+#@pytest.mark.haha
+def test_MXTEST_9043_PDP_ProductDetailsNotCompatibility(web_drivers):
+    home_page = HomePage(*web_drivers)
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc/detail/accel-ignition-condenser-111131/acc0/111131"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.validate_nonAplication_product_label()
+
 # MXTEST-9042
+#@pytest.mark.haha
+def test_MXTEST_9042_PDP_UniversalProductTagPLP(web_drivers):
+    home_page = HomePage(*web_drivers)
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.get_number_of_nonApplication_product_label_in_PLP()
+
 # MXTEST-9041
+#@pytest.mark.haha
+def test_MXTEST_9041_PDP_ResourcesNotDisplaying(web_drivers):
+    # encontrar un producto que contenga la tab "resources"
+    # home_page = HomePage(*web_drivers)
+    # url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc"
+    # home_page.open_new_url(url)
+    # home_page.wait_spinner_disappears()
+    # home_page.get_number_of_nonApplication_product_label_in_PLP()
+    pass
+
 # MXTEST-9028
+@pytest.mark.haha
+def test_MXTEST_9028_PDP_Generic_images_from_Selected_Brand(web_drivers):
+    home_page = HomePage(*web_drivers)
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/filters/cabin-air-filter/l/02700"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.get_number_of_nonApplication_product_label_in_PLP()
+
 # MXTEST-9036
 # MXTEST-9026
 # MXTEST-9050
