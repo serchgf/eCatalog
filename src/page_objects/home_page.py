@@ -1216,8 +1216,14 @@ class HomePage(BasePage):
     def click_compatibility_tab(self):
         logging.info("Click Compability tab")
         print("Click Contability tab")
+        self.element("compatibility_tab").wait_visible()
         self.element("compatibility_tab").wait_clickable().click()
 
+    def click_details_tab(self):
+        logging.info("Click Compability tab")
+        print("Click Contability tab")
+        self.element("details_tab").wait_visible()
+        self.element("details_tab").wait_clickable().click()
     def get_compatibility_list(self):
         logging.info("Get Compatibility List")
         print("Get Compatibility List")
@@ -1246,9 +1252,88 @@ class HomePage(BasePage):
             # logging.info(f"{brand} ({cars})")
             # print(f"{brand} ({cars})")
 
+    def validate_presence_of_details_sections(self, expected_sections: list):
+        """
+        compare expected sections list passed, with sections displayed in webpage
+        :param expected_sections: list
+        :return: assertion
+        """
+        logging.info("Validate presence of Details sections")
+        self.element("details_sections_list").wait_visible()
+        sections_list_in_webpage = self.element("details_sections_list").find_elements()
+        sections_list_in_webpage_text = []
+        for section in sections_list_in_webpage:
+            sections_list_in_webpage_text.append(section.text)
+
+        assert sections_list_in_webpage_text == expected_sections, f"sections in webpage: {sections_list_in_webpage_text} should be:: {expected_sections}"
+
+    def get_data_from_detailed_description_section(self):
+        logging.info("Get data from details detailed description section")
+        product_name = self.element("detailed_description_product_name").find_element().text
+        print(product_name)
+        lista = self.element("detailed_description_product_list").find_elements()
+        for ele in lista:
+            print(ele.text)
+
+    def get_data_from_details_product_information_section(self):
+        logging.info("Get data from details product information section")
+        lista = self.element("product_information_section_list").find_elements()
+        for ele in lista:
+            print(ele.text)
 
 
+    def get_data_from_details_how_to_use_the_product_section(self):
+        logging.info("Get data from details how to use the product section")
+        lista = self.element("how_to_use_the_product_description_list").find_elements()
+        for ele in lista:
+            print(ele.text)
 
+    def get_data_from_details_about_this_brand_section(self):
+        pass
 
+    def click_send_a_report_link(self):
+        logging.info("Click on send a report link")
+        self.element("send_report_btn").wait_visible()
+        send_a_report_btn = self.element("send_report_btn").wait_clickable()
+        self.clic_javacript(send_a_report_btn)
 
+    def fill_product_info_report(self, name: str, email: str, phone: str, store: str, issue_type: str):
+        """
+        :param name: str
+        :param email: str
+        :param phone: str
+        :param store: str
+        :param issue_type: str
+        :return:
+        """
+        logging.info("Fill Product Info Report")
+        self.element("product_info_report_label").wait_visible()
+        self.write_fullName(name)
+        self.write_email(email)
+        self.write_phoneNumber(phone)
+        self.click_store_dropdown()
+        self.select_a_store(store)
+        self.click_issue_type_dropdown()
+        self.select_a_issue_type(issue_type)
 
+    def write_fullName(self, fullname:str):
+        logging.info(f"Write Full Name: {fullname}")
+        self.element("input_fullName_tbx").wait_clickable().send_keys(fullname)
+    def write_email(self, email:str):
+        logging.info(f"Write email: {email}")
+        self.element("input_email_tbx").wait_clickable().send_keys(email)
+    def write_phoneNumber(self, phone_number: str):
+        logging.info(f"Write phone_number: {phone_number}")
+        self.element("input_phoneNumber_tbx").wait_clickable().send_keys(phone_number)
+    def click_store_dropdown(self):
+        logging.info("Click Store dropdown")
+        self.element("store_dropdown").wait_clickable().click()
+    def select_a_store(self, store:str):
+        logging.info(f"Select the Storer: {store}")
+        self.javascript_clic(store)
+    def click_issue_type_dropdown(self):
+        logging.info("Click Issue Type dropdown")
+        self.element("issue_type_dropdown").wait_clickable().click()
+    def select_a_issue_type(self, issue_type:str):
+        logging.info(f"Select the issue: {issue_type}")
+        self.javascript_clic(issue_type)

@@ -73,7 +73,7 @@ def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
 #@pytest.mark.haha
 def test_MXTEST_9033_PDP_ProductDetailsCompatibility(web_drivers):
     home_page = HomePage(*web_drivers)
-    url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accel/acc/detail/accel-spark-plug-0526-4/acc0/05264"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-brake-master-cylinder-new-05019401aa/mkg0/05019401aa"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
     home_page.press_PageDown_key()
@@ -89,17 +89,39 @@ def test_MXTEST_9033_PDP_ProductDetailsCompatibility(web_drivers):
 #@pytest.mark.haha
 def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
     home_page = HomePage(*web_drivers)
-    url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accel/acc/detail/accel-spark-plug-0526-4/acc0/05264"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
+    #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates-mx/mnv/detail/gates-mx-v-belt-1140/mnv0/1140"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
-    home_page.press_PageDown_key()
-    home_page.wait_spinner_disappears()
-    home_page.click_compatibility_tab()
-    home_page.press_PageDown_key()
-    home_page.wait_until_page_load_complete()
+    # expected_sections = ['Detailed description', 'Product information', 'How to use the product', 'About this brand']
+    expected_sections = ['Detailed description', 'Product information', 'How to use the product']
+    home_page.validate_presence_of_details_sections(expected_sections)
+    home_page.get_data_from_detailed_description_section()
+    home_page.get_data_from_details_product_information_section()
+    home_page.get_data_from_details_how_to_use_the_product_section()
 
+#url con datos junto con vehiculo : 2021 Alfa Romeo Giulia Lusso
+#breacrumb: Home-All brands-Cartek-CCD2052
+#"https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
 
 # MXTEST-9060
+@pytest.mark.haha
+def test_MXTEST_9060_PDP_Report_discrepances_fitment_notes(web_drivers):
+    home_page = HomePage(*web_drivers)
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
+    #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates-mx/mnv/detail/gates-mx-v-belt-1140/mnv0/1140"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.click_send_a_report_link()
+    full_name = "Sergio Garcia"
+    email = "email_fake@fake.com"
+    phone = "1234567890"
+    store = "Abastos"
+    issue_type = "Vehicle Fitment"
+    home_page.scroll_down()
+    home_page.wait_spinner_disappears()
+    home_page.fill_product_info_report(full_name, email, phone, store, issue_type)
+
 # MXTEST-9059
 # MXTEST-9057
 # MXTEST-9043

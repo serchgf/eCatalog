@@ -1,7 +1,7 @@
 {
   "url": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/",
   "url_dev": "https://172.22.210.30/ecatalog-us/#/",
-  "url_qa": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "url_qa": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/",
   "url_prod": "https://teamnet.oreillyauto.mx/catalogo",
   "query_MXTEST-8263": "SELECT * FROM epc.application_vehicle_indexes avi INNER JOIN epc.vehicles v on v.a_vehicle_id = avi.vehicle_id WHERE avi.application_id='161096296'  AND avi.part_type_id = '02512' GROUP BY avi.application_id, avi.vehicle_id;",
   "query_MXTEST_8255": "hola mundo",
@@ -308,6 +308,18 @@
       "by": "XPATH",
       "value": "//p[@class='badge-text']/span[2]"
     },
+    "compatibility_tab": {
+      "by": "XPATH",
+      "value": "//a[@role='tab']/span[contains(text(),'Compatibility')]"
+    },
+    "compatibility_list_span": {
+      "by": "XPATH",
+      "value": "//div[@role='tabpanel']//a[@role='tab']"
+    },
+    "details_tab": {
+      "by": "XPATH",
+      "value": "//a[@role='tab']/span[contains(text(),'Details')]"
+    },
     "new_client_label": {
       "by": "XPATH",
       "value": "//p[contains(text(),'New Client')]"
@@ -446,6 +458,74 @@
     "add_vehicle_span": {
       "by": "XPATH",
       "value": "//span[text()='Add vehicle']"
+    },
+    "detailed_description_span":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),' Detailed description ')]"
+    },
+    "product_information_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),' Product information ')]"
+    },
+    "how_to_use_the_product_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),' How to use the product ')]"
+    },
+    "error_information_given_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Did you find any error for the information given?')]"
+    },
+    "send_report_btn": {
+      "by": "XPATH",
+      "value": "//button[@id='linkTrigger']"
+    },
+    "details_sections_list": {
+      "by": "XPATH",
+      "value": "//div[@role='tabpanel']//span[@class='roboto-600 o-text-secondary tabs-section-title']"
+    },
+    "detailed_description_product_name": {
+      "by": "XPATH",
+      "value": "//div[@role='tabpanel']/div[1]/span[2]"
+    },
+    "detailed_description_product_list": {
+      "by": "XPATH",
+      "value": "//div[@class='ng-star-inserted']//li"
+    },
+    "product_information_section_list": {
+      "by": "XPATH",
+      "value": "//div[@role='tabpanel']//ul//div"
+    },
+    "How_to_use_the_product_section": {
+      "by": "XPATH",
+      "value": "//div[@id='applications']/span"
+    },
+    "how_to_use_the_product_description_list": {
+      "by": "XPATH",
+      "value": "//div[@id='applications']/div//li"
+    },
+    "product_info_report_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Product info report')]"
+    },
+    "input_fullName_tbx": {
+      "by": "XPATH",
+      "value": "//input[@id='fullName']"
+    },
+    "input_email_tbx": {
+      "by": "XPATH",
+      "value": "//input[@id='email']"
+    },
+    "input_phoneNumber_tbx": {
+      "by": "XPATH",
+      "value": "//input[@id='phone']"
+    },
+    "store_dropdown": {
+      "by": "XPATH",
+      "value": "//p-dropdown[@id='storeOptions']"
+    },
+    "issue_type_dropdown": {
+      "by": "XPATH",
+      "value": "//p-dropdown[@id='errorsOptions']"
     }
   }
 }
