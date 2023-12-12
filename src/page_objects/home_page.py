@@ -700,7 +700,7 @@ class HomePage(BasePage):
         print(f"Get Products list")
         self.wait_until_page_load_complete()
         if type_of_label == 1:
-            self.element("additional_label").wait_visible()
+            #self.element("additional_label").wait_visible()
             time.sleep(1)
             lista = self.element("link_products_list_2").find_elements()
             if len(lista)!= 0:
@@ -1422,11 +1422,55 @@ class HomePage(BasePage):
             assert True
 
     def validate_presence_of_default_image_src(self):
-        logging.info("validate Compatibility tab is not displayed")
+        logging.info("validate presence of default image")
+        assert self.element("default_img_product").find_element().is_displayed(), f"default image src should be displayed"
+
+    def validate_resources_tab_is_not_displayed(self):
+        logging.info("Validate 'Resources' tab is not displayed")
         try:
-            self.element("compatibility_tab").find_element().is_displayed()
-            assert False, f"Compatibility tab should not be displayed"
+            self.element("resources_tab").find_element().is_displayed()
+            assert False, f"Resources tab should not be displayed"
         except NoSuchElementException:
-            logging.info("Compatibility tab is not displayed Correctly")
+            logging.info("Resources tab is not displayed Correctly")
             assert True
 
+    def click_resources_tab(self):
+        logging.info("Click 'Resources' tab")
+        print("Click Resources tab")
+        self.element("resources_tab").wait_visible()
+        self.element("resources_tab").wait_clickable().click()
+
+    def click_main_product_img(self):
+        logging.info("Click main product img")
+        print("Click main product img")
+        self.element("main_product_img").wait_visible()
+        self.element("main_product_img").wait_clickable().click()
+
+    def click_img_arrow_back_button(self):
+        logging.info("Click img arrow back button")
+        print("Click img arrow back button")
+        self.element("img_arrow_back_button").wait_visible()
+        self.element("img_arrow_back_button").wait_clickable().click()
+
+    def click_img_arrow_forward_button(self):
+        logging.info("img arrow forward button")
+        print("img arrow forward button")
+        self.element("img_arrow_forward_button").wait_visible()
+        self.element("img_arrow_forward_button").wait_clickable().click()
+
+    def select_first_suggestion_brand(self, keyword:str):
+        logging.info("Select first suggestion brand")
+
+        print(f"Search product: {keyword}")
+        search_bar = self.element("search_bar").wait_clickable()
+        search_bar.send_keys(keyword)
+        time.sleep(1)
+        self.element("first_suggestion_brand_highlight").wait_visible()
+        self.element("first_suggestion_brand_highlight").wait_clickable().click()
+
+    def validate_keyword_in_p_text_of_results_list(self, keyword: str):
+        logging.info("Get 'p' text of results list")
+        self.element("p_text_results").wait_visible()
+        p_text_list = self.element("p_text_results").find_elements()
+        for p in p_text_list:
+            assert keyword.upper() in p.text.upper(), f"The keyword: '{keyword.upper()}' should be appears in {p.text.upper()}"

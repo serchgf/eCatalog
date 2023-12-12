@@ -199,28 +199,121 @@ def test_MXTEST_9042_PDP_UniversalProductTagPLP(web_drivers):
 # MXTEST-9041
 #@pytest.mark.haha
 def test_MXTEST_9041_PDP_ResourcesNotDisplaying(web_drivers):
-    # encontrar un producto que contenga la tab "resources"
-    # home_page = HomePage(*web_drivers)
-    # url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc"
-    # home_page.open_new_url(url)
-    # home_page.wait_spinner_disappears()
-    # home_page.get_number_of_nonApplication_product_label_in_PLP()
-    pass
+    home_page = HomePage(*web_drivers)
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc/detail/accel-spark-plug-0526-4/acc0/05264"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.wait_until_page_load_complete()
+    home_page.validate_resources_tab_is_not_displayed()
+
+
 
 # MXTEST-9028
-@pytest.mark.haha
+# @pytest.mark.haha
 def test_MXTEST_9028_PDP_Generic_images_from_Selected_Brand(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/filters/cabin-air-filter/l/02700"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
-    home_page.get_number_of_nonApplication_product_label_in_PLP()
+    home_page.validate_presence_of_default_image_src()
+    product_list = home_page.get_link_product_list()
+    home_page.validate_presence_of_default_image_src()
+    home_page.select_random_element_of_list(product_list)
+    home_page.validate_presence_of_default_image_src()
 
 # MXTEST-9036
+#@pytest.mark.haha
+def test_MXTEST_9036_PDP_ResourcesDisplay(web_drivers):
+    # encontrar un producto que contenga la tab "resources"
+    home_page = HomePage(*web_drivers)
+    url = "pagina con resources tab"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.click_resources_tab()
+
 # MXTEST-9026
+#@pytest.mark.haha
+def test_MXTEST_9026_PDP_Product_image_with_available_images_Selected_Brand(web_drivers):
+    #falta producto que contenga imagen en 360
+    home_page = HomePage(*web_drivers)
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates-mx/mnv/detail/gates-mx-g-force-carbon-cord-cvt-belt-11c3218/mnv0/11c3218"
+    home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.click_img_arrow_back_button()
+    home_page.click_img_arrow_forward_button()
+    home_page.click_main_product_img()
+
+# SEARCH BAR-------------------------------------------------------------------------------------------------------------
 # MXTEST-9050
+
+#@pytest.mark.haha
+def test_MXTEST_9050_SearchBar_Autocomplete_Select_Brand_Vehicle_selected(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    home_page.wait_spinner_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    year = "2021"
+    make = "Alfa Romeo"
+    model = "Giulia"
+    submodel = "Lusso"
+    home_page.write_a_vehicle_type("Automotive Light Duty")
+    home_page.write_a_year(year)
+    home_page.write_a_make(make)
+    home_page.write_a_model(model)
+    home_page.write_a_submodel(submodel)
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    search_criteria = "acc"
+    home_page.select_first_suggestion_brand(search_criteria)
+
+
 # MXTEST-9049
+#@pytest.mark.haha
+def test_MXTEST_9049_SearchBar_Autocomplete_Select_Category_Vehicle_Selected(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    home_page.wait_spinner_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    year = "2021"
+    make = "Alfa Romeo"
+    model = "Giulia"
+    submodel = "Lusso"
+    home_page.write_a_vehicle_type("Automotive Light Duty")
+    home_page.write_a_year(year)
+    home_page.write_a_make(make)
+    home_page.write_a_model(model)
+    home_page.write_a_submodel(submodel)
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    search_criteria = "whe"
+    home_page.search_product(search_criteria)
+    product_list = home_page.get_link_product_list(1)
+    home_page.scroll_down()
+    home_page.select_random_element_of_list(product_list)
+    home_page.wait_spinner_disappears()
+
 # MXTEST-9048
+#@pytest.mark.haha
+def test_MXTEST_9048_SearchBar_Partial_Search_Term_Vehicle_selected(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    home_page.wait_spinner_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    year = "2021"
+    make = "Alfa Romeo"
+    model = "Giulia"
+    submodel = "Lusso"
+    home_page.write_a_vehicle_type("Automotive Light Duty")
+    home_page.write_a_year(year)
+    home_page.write_a_make(make)
+    home_page.write_a_model(model)
+    home_page.write_a_submodel(submodel)
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    search_criteria = "brake"
+    home_page.search_product(search_criteria)
+    home_page.wait_spinner_disappears()
+    home_page.validate_keyword_in_p_text_of_results_list(search_criteria)
 
 
 

@@ -602,6 +602,30 @@
     "default_img_product": {
       "by": "XPATH",
       "value": "//img[@src='assets/images/product/coming-soon.png']"
+    },
+    "resources_tab": {
+      "by": "XPATH",
+      "value": "//a[@role='tab']/span[contains(text(),'Resources')]"
+    },
+    "img_arrow_forward_button": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'arrow_forward')]/parent::button"
+    },
+    "img_arrow_back_button": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'arrow_back')]/parent::button"
+    },
+    "main_product_img": {
+      "by": "XPATH",
+      "value": "//p-galleriaitem//img[@onerror]"
+    },
+    "first_suggestion_brand_highlight": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Brands')]/parent::div/parent::li/following::li[1]"
+    },
+    "p_text_results": {
+      "by": "XPATH",
+      "value": "//p"
     }
   }
 }
