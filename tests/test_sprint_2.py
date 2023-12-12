@@ -104,20 +104,55 @@ def test_MXTEST_9046_SearchBar_Valid_Item_Name_Vehicle_Selected(web_drivers):
     home_page.click_on_submodel_and_select()
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
-    time.sleep(4)
-
-    #home_page.element("search_bar").wait_clickable().send_keys("restore")
-    time.sleep(10)
-    # home_page.element("search_bar").press_enter_key()
-    # time.sleep(4)
+    home_page.element("search_bar").wait_clickable().send_keys("borgeson steering coupler")
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    part_number = home_page.get_part_number()
+    print(part_number)
 
     #Go to the database and run the following <query>.
 
 # MXTEST-9045 SearchBar_Valid_Part Number_Vehicle_Selected
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     time.sleep(4)
+#     home_page.click_on_Picker_vehicle_btn()
+#     home_page.click_on_vehicle_type_and_select()
+#     year = home_page.click_on_year_and_select()
+#     make = home_page.click_on_make_and_select()
+#     home_page.click_on_model_and_select()
+#     home_page.click_on_submodel_and_select()
+#     home_page.click_on_engine_and_select()
+#     home_page.click_on_add_vehicle_submit_btn()
+#     home_page.element("search_bar").wait_clickable().send_keys("restore")
 
 # MXTEST-9044 SearchBar_Valid_Category_Vehicle_Selected
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     time.sleep(4)
+#     home_page.click_on_Picker_vehicle_btn()
+#     home_page.click_on_vehicle_type_and_select()
+#     year = home_page.click_on_year_and_select()
+#     make = home_page.click_on_make_and_select()
+#     home_page.click_on_model_and_select()
+#     home_page.click_on_submodel_and_select()
+#     home_page.click_on_engine_and_select()
+#     home_page.click_on_add_vehicle_submit_btn()
+#     home_page.element("search_bar").wait_clickable().send_keys("restore")
 
 # MXTEST-9018 SearchBar_Partial_Search_Term
+#     home_page = HomePage(*web_drivers)
+#     home_page.open()
+#     time.sleep(4)
+#     home_page.click_on_Picker_vehicle_btn()
+#     home_page.click_on_vehicle_type_and_select()
+#     year = home_page.click_on_year_and_select()
+#     make = home_page.click_on_make_and_select()
+#     home_page.click_on_model_and_select()
+#     home_page.click_on_submodel_and_select()
+#     home_page.click_on_engine_and_select()
+#     home_page.click_on_add_vehicle_submit_btn()
+#     home_page.element("search_bar").wait_clickable().send_keys("restore")
 
 # MXTEST-9016 SearchBar_Valid_Item Name
 
