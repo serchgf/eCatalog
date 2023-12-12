@@ -1,7 +1,8 @@
 {
   "url": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/",
   "url_dev": "https://172.22.210.30/ecatalog-us/#/",
-  "url_qa": "https://testintranet.oreillyauto.mx/ecatalog-us/#/",
+  "url_qa": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/",
+  "url_prod": "https://teamnet.oreillyauto.mx/catalogo",
   "query_MXTEST-8263": "SELECT * FROM epc.application_vehicle_indexes avi INNER JOIN epc.vehicles v on v.a_vehicle_id = avi.vehicle_id WHERE avi.application_id='161096296'  AND avi.part_type_id = '02512' GROUP BY avi.application_id, avi.vehicle_id;",
   "query_MXTEST_8255": "hola mundo",
   "footer_href_links":{
@@ -307,6 +308,18 @@
       "by": "XPATH",
       "value": "//p[@class='badge-text']/span[2]"
     },
+    "compatibility_tab": {
+      "by": "XPATH",
+      "value": "//a[@role='tab']/span[contains(text(),'Compatibility')]"
+    },
+    "compatibility_list_span": {
+      "by": "XPATH",
+      "value": "//div[@role='tabpanel']//a[@role='tab']"
+    },
+    "details_tab": {
+      "by": "XPATH",
+      "value": "//a[@role='tab']/span[contains(text(),'Details')]"
+    },
     "new_client_label": {
       "by": "XPATH",
       "value": "//p[contains(text(),'New Client')]"
@@ -445,6 +458,174 @@
     "add_vehicle_span": {
       "by": "XPATH",
       "value": "//span[text()='Add vehicle']"
+    },
+    "detailed_description_span":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),' Detailed description ')]"
+    },
+    "product_information_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),' Product information ')]"
+    },
+    "how_to_use_the_product_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),' How to use the product ')]"
+    },
+    "error_information_given_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Did you find any error for the information given?')]"
+    },
+    "send_report_btn": {
+      "by": "XPATH",
+      "value": "//button[@id='linkTrigger']"
+    },
+    "details_sections_list": {
+      "by": "XPATH",
+      "value": "//div[@role='tabpanel']//span[@class='roboto-600 o-text-secondary tabs-section-title']"
+    },
+    "about_this_brand_section_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About this brand')]"
+    },
+    "about_this_brand_text": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About this brand')]/parent::div/span[2]"
+    },
+    "about_this_brand_p": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About this brand')]/parent::div/span[2]/p"
+    },
+    "about_this_brand_li": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About this brand')]/parent::div/span[2]//li"
+    },
+    "detailed_description_product_name": {
+      "by": "XPATH",
+      "value": "//div[@role='tabpanel']/div[1]/span[2]"
+    },
+    "detailed_description_product_list": {
+      "by": "XPATH",
+      "value": "//div[@class='ng-star-inserted']//li"
+    },
+    "product_information_section_list": {
+      "by": "XPATH",
+      "value": "//div[@role='tabpanel']//ul//div"
+    },
+    "How_to_use_the_product_section": {
+      "by": "XPATH",
+      "value": "//div[@id='applications']/span"
+    },
+    "how_to_use_the_product_description_list": {
+      "by": "XPATH",
+      "value": "//div[@id='applications']/div//li"
+    },
+    "product_info_report_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Product info report')]"
+    },
+    "input_fullName_tbx": {
+      "by": "XPATH",
+      "value": "//input[@id='fullName']"
+    },
+    "input_email_tbx": {
+      "by": "XPATH",
+      "value": "//input[@id='email']"
+    },
+    "input_phoneNumber_tbx": {
+      "by": "XPATH",
+      "value": "//input[@id='phone']"
+    },
+    "store_dropdown": {
+      "by": "XPATH",
+      "value": "//p-dropdown[@id='storeOptions']"
+    },
+    "issue_type_dropdown": {
+      "by": "XPATH",
+      "value": "//p-dropdown[@id='errorsOptions' and @optionlabel='name']"
+    },
+    "about_the_issue_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'About the issue')]"
+    },
+    "textarea_description_error": {
+      "by": "XPATH",
+      "value": "//textarea[@id='descriptionError']"
+    },
+    "send_report_btn_product_info_report": {
+      "by": "XPATH",
+      "value": "//p-button[@ng-reflect-label='Send Report']"
+    },
+    "report_created_confirmation": {
+      "by":"XPATH",
+      "value": "//span[contains(text(),'Report created')]"
+    },
+    "report_ticket_number": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'TICKET')]"
+    },
+    "add_to_list_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='button-container']/button"
+    },
+    "modal_order_list_subtitle": {
+      "by": "XPATH",
+      "value": "//h3[contains(text(),'Order List')]"
+    },
+    "modal_order_list_items_number": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'ITEM')]"
+    },
+    "modal_order_list_deleteAll_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'DELETE ALL')]/parent::button"
+    },
+    "modal_order_list_vehicle_information": {
+      "by": "XPATH",
+      "value": "//span[@class='material-symbols-outlined fs-24px notranslate']/parent::div/div/span"
+    },
+    "modal_order_list_product_description": {
+      "by": "XPATH",
+      "value": "//div[@role='region']//p"
+    },
+    "modal_order_list_delete_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Delete')]/parent::button"
+    },
+    "modal_order_list_part_number": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'# Part: ')]/parent::div/a"
+    },
+    "nonApplication_message": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Non application')]"
+    },
+    "default_img_product": {
+      "by": "XPATH",
+      "value": "//img[@src='assets/images/product/coming-soon.png']"
+    },
+    "resources_tab": {
+      "by": "XPATH",
+      "value": "//a[@role='tab']/span[contains(text(),'Resources')]"
+    },
+    "img_arrow_forward_button": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'arrow_forward')]/parent::button"
+    },
+    "img_arrow_back_button": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'arrow_back')]/parent::button"
+    },
+    "main_product_img": {
+      "by": "XPATH",
+      "value": "//p-galleriaitem//img[@onerror]"
+    },
+    "first_suggestion_brand_highlight": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Brands')]/parent::div/parent::li/following::li[1]"
+    },
+    "p_text_results": {
+      "by": "XPATH",
+      "value": "//p"
     }
   }
 }
