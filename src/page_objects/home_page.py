@@ -21,8 +21,9 @@ class HomePage(BasePage):
     def search(self, value: str):
         logging.info(f"Search {value}")
         print(f"Search {value}")
-        self.element("search_input").wait_clickable().send_keys(value)
-        self.element("search_btn").wait_clickable().click()
+        self.element("search_bar").wait_clickable().send_keys(value)
+        #self.element("search_btn").wait_clickable().click()
+
 
     def search_product(self, value: str):
         #time.sleep(3)
@@ -738,6 +739,21 @@ class HomePage(BasePage):
             lista.append(element)
         return lista
 
+    def get_lasted_viewed_products_list2(self):
+        """
+        regresa la lista obtenida sin modificar texto (texto original)
+        :return:
+        """
+        logging.info(f"Get Lasted viewed products list")
+        print(f"Get Lasted viewed products list")
+        self.element('last_viewed_products_label').wait_visible()
+        #self.scroll_to_element(self.element('last_viewed_products_label'))
+        self.scroll_down()
+        lista =[]
+        # self.element("last_viewed_products_label").scroll_down_to_element()
+        lista_0 = self.element("lasted_products_viewed_list").find_elements()
+        return lista_0
+
     def clean_product_selected(self, expected_product_selected: str):
         print(f"clean product selected")
         product_selected = expected_product_selected.split('#')
@@ -1162,3 +1178,103 @@ class HomePage(BasePage):
             self.element("link_products_list_2").wait_visible()
             lista = self.element("link_products_list_2").find_elements()
             return lista
+#*******************FUNCIONES DE LUIS**************************************
+    def click_on_brands_images_btn(self):
+        time.sleep(1)
+        logging.info(f"Click on brands images btn")
+        print(f"Click on brands images btn")
+        self.element("brands_images").wait_clickable().click()
+        time.sleep(3)
+        self.scroll_down()
+        self.scroll_down()
+        self.scroll_down()
+
+    def get_img_part_brand(self):
+        logging.info("Get img part brand")
+
+        img = self.element("img_parts_of_brands").wait_visible().text
+        return img
+
+    def click_on_search_history(self):
+        time.sleep(1)
+        logging.info(f"Click on search history btn")
+        print(f"Click on search history btn")
+        self.element("search_history_link").wait_clickable().click()
+
+    def click_on_last_searches(self):
+        time.sleep(1)
+        logging.info(f"Click on search history btn")
+        print(f"Click on search history btn")
+        self.element("search_history_last_searches").wait_clickable().click()
+
+    def clean_search(self):
+        logging.info(f"clean Search")
+        print(f"clean search")
+        self.element("search_bar").clean_element()
+
+    def accept_alert_message(self):
+        logging.info(f"accept alert message")
+        print(f"accept alert message")
+        self.accept_alert_message()
+
+    def click_on_open_search(self):
+        time.sleep(1)
+        logging.info(f"Click on search history btn")
+        print(f"Click on search history btn")
+        self.element("open_search").wait_clickable().click()
+
+    def click_on_first_product(self):
+        time.sleep(1)
+        logging.info(f"Click on search history btn")
+        print(f"Click on search history btn")
+        self.element("img_of_product").wait_clickable().click()
+
+    def clicks_carousel_last_viewed_products(self):
+        logging.info(f"show_last_viewed_products_label")
+        print(f"show_last_viewed_products_label")
+        self.element("carousel").wait_clickable().click()
+        time.sleep(2)
+        self.press_page_down()
+        time.sleep(2)
+        self.element("backward_button_latest").wait_clickable().click()
+        self.element("backward_button_latest").wait_clickable().click()
+        self.element("backward_button_latest").wait_clickable().click()
+        self.element("backward_button_latest").wait_clickable().click()
+        time.sleep(4)
+        self.element("forward_button_latest").wait_clickable().click()
+        self.element("forward_button_latest").wait_clickable().click()
+        self.element("forward_button_latest").wait_clickable().click()
+        self.element("forward_button_latest").wait_clickable().click()
+        time.sleep(3)
+
+
+
+    def delete_element_from_open_search(self):
+        logging.info(f"delete element from open search")
+        print(f"delete element from open search")
+        self.element("search_history_criteria").wait_visible()
+        #lista = self.element("search_history_criteria").find_elements()
+        elemento = self.element("search_history_criteria").wait_clickable()
+        #elemento = lista[2]
+
+        self.move_to_element(elemento)
+        self.element('button_remove_from_search_history').wait_clickable().click()
+
+
+
+        #self.javascript_clic("remove_from_search_history")
+        time.sleep(2)
+
+    def search_into_search_history(self, value: str):
+        logging.info(f"Search {value}")
+        print(f"Search {value}")
+        self.element("searchbar_in_search_history").wait_clickable().send_keys(value)
+
+    def clean_searchbar_in_search_history(self):
+        logging.info(f"clean Search history")
+        print(f"clean search history")
+        self.element("searchbar_in_search_history").clean_element()
+
+
+
+    # *******************FIN DE FUNCIONES DE LUIS**************************************
