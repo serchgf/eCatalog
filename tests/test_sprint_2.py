@@ -5,6 +5,7 @@ import time
 import json
 
 import pytest
+from selenium.common import TimeoutException
 
 from src.page_objects.home_page import HomePage
 
@@ -19,7 +20,7 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
-    home_page.element("loading_img").wait_until_disappears()
+    home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_year_dropdown(1)
     home_page.click_on_make_and_select(1)
@@ -39,7 +40,7 @@ def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_dr
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
-    home_page.element("loading_img").wait_until_disappears()
+    home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_usa_can_country()
     home_page.click_on_year_dropdown(1)
@@ -60,7 +61,7 @@ def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
-    home_page.element("loading_img").wait_until_disappears()
+    home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_mex_country()
     home_page.click_on_year_dropdown(1)
@@ -77,17 +78,95 @@ def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
 
 
 # MXTEST-9058
+@pytest.mark.homepages2
+def test_MXTEST_9058_OrderList_Modal_Individual_Deletion(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open_new_url("https://devintranet.oreillyauto.mx/ecatalog-mx/#/")
+    time.sleep(4)
+    home_page.wait_spinner_disappears()
+    home_page.click_on_brands()
+    home_page.click_on_cartek_brand()
+    #home_page.wait_spinner_disappears()
+    home_page.validate_product_list_page('Cartek')
+    ol_products = home_page.add_multiple_products_to_order_list(1)
+    product = home_page.delete_product_from_order_list()
+
+    if product == "You haven't added items on your order list.":
+        logging.info(f"Order list is empty")
+        assert True
+    if type(product) is list:
+        deleted_product = list(set(ol_products) - set(product))[0]
+        logging.info(f"Product {deleted_product} was deleted from list")
+        assert True
+
+
+
+
+
 # MXTEST-9056
 # MXTEST-9055
-# MXTEST-9054
-# MXTEST-9053
-# MXTEST-9052
 @pytest.mark.homepages2
-def test_MXTEST_9051_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drivers):
+def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
-    home_page.element("loading_img").wait_until_disappears()
+    home_page.wait_spinner_disappears()
+    home_page.click_on_brands()
+    home_page.click_on_cartek_brand()
+    try:
+        home_page.wait_spinner_disappears()
+    except TimeoutException:
+        home_page.wait_spinner_disappears()
+
+    home_page.validate_product_list_page('Cartek')
+    order_list_Bc = home_page.add_multiple_products_to_order_list(5)  # ORDER LIST BEFORE CANCEL
+    order_list_Ac = home_page.delete_all_products_cancel()  # ORDER LIST AFTER CANCEL
+    assert order_list_Ac == order_list_Bc, "The order list was change after cancellation"
+
+# MXTEST-9054
+@pytest.mark.homepages2
+def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.wait_spinner_disappears()
+    home_page.click_on_brands()
+    home_page.click_on_cartek_brand()
+    #home_page.wait_spinner_disappears()
+    home_page.validate_product_list_page('Cartek')
+    home_page.add_multiple_products_to_order_list(5)
+    order_list = home_page.delete_all_products()
+    if order_list == "You haven't added items on your order list.":
+        logging.info(f"Order list is empty")
+        assert True
+
+
+
+
+# MXTEST-9053
+@pytest.mark.homepages2
+def test_MXTEST_9053_OrderList_Modal_Contents_Display_Non_Application_Product(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.wait_spinner_disappears()
+    home_page.click_on_brands()
+    home_page.click_on_bodyglove_brand()
+    #home_page.wait_spinner_disappears()
+    home_page.validate_product_list_page('Body Glove - MX')
+    products_name = home_page.get_products_names()
+    home_page.click_on_first_add_to_list_available()
+    title, product = home_page.validate_orderList_display()
+    assert title == "NON VEHICLE SPECIFIC", "The title of the panel should be 'NON VEHICLE SPECIFIC'"
+    assert product in products_name, "The product wasn't added to the order list"
+
+# MXTEST-9052
+@pytest.mark.homepages2
+def test_MXTEST_9052_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_mex_country()
     year = home_page.click_on_year_dropdown(1)
@@ -98,7 +177,7 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drive
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_brands()
     home_page.click_on_cartek_brand()
-    home_page.element("loading_img").wait_until_disappears()
+    #home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     products_name = home_page.get_products_names()
     home_page.click_on_first_add_to_list_available()
@@ -112,10 +191,10 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
-    home_page.element("loading_img").wait_until_disappears()
+    home_page.wait_spinner_disappears()
     home_page.click_on_brands()
     home_page.click_on_cartek_brand()
-    home_page.element("loading_img").wait_until_disappears()
+    #home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     products_name = home_page.get_products_names()
     home_page.click_on_first_add_to_list_available()

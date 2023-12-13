@@ -496,7 +496,7 @@ class HomePage(BasePage):
         lista = self.element("list_box").find_elements()
 
         if index != 0:
-            n_elementos = len(lista)
+            n_elementos = len(lista) -1
             index = random.randint(0, n_elementos)
             time.sleep(.2)
             element_selected = lista[index].text
@@ -1239,6 +1239,13 @@ class HomePage(BasePage):
         self.element("explore_brands_label").wait_visible()
         self.element("cartek_brand").find_element().click()
 
+    def click_on_bodyglove_brand(self):
+        time.sleep(.5)
+        logging.info("Click on Body Glove brand ")
+        print("Click on Body Glovebrand ")
+        self.element("explore_brands_label").wait_visible()
+        self.element("bodyglove_brand").find_element().click()
+
     def click_on_first_add_to_list_available(self):
         time.sleep(.5)
         logging.info("Click on ADD TO LIST button")
@@ -1264,9 +1271,52 @@ class HomePage(BasePage):
         product = self.element("product_name_ol").find_element()
         return title.text, product.text
 
+    def add_multiple_products_to_order_list(self, qty):
+        time.sleep(.5)
+        logging.info("Add multiple products to order list")
+        print("Add multiple products to order list")
+        for i in range(qty):
+            self.click_on_first_add_to_list_available()
+            self.element("close_modal").find_element().click()
+        self.element("order_list_button").wait_visible().click()
+        products = self.element("product_name_ol").find_elements()
+        product_name = [product.text for product in products]
+        return product_name
 
+    def delete_product_from_order_list(self):
+        time.sleep(.5)
+        logging.info("Delete product from order list")
+        print("Delete product from order list")
+        self.element("delete_button").wait_clickable().click()
+        products = self.element("product_name_ol").find_elements()
+        if len(products) == 0:
+            label = self.element("no_added_label").wait_visible().text
+            return label
+        else:
+            product_name = [product.text for product in products]
+            return product_name
 
+    def delete_all_products(self):
+        time.sleep(.5)
+        logging.info("Delete all products from order list")
+        print("Delete all products from order list")
+        self.element("delete_all_button").wait_clickable().click()
+        self.element("clear_label").wait_visible()
+        self.element("yes_remove_button").wait_clickable().click()
+        self.take_screenshot("Delete all successfully")
+        label = self.element("no_added_label").wait_visible().text
+        return label
 
+    def delete_all_products_cancel(self):
+        time.sleep(.5)
+        logging.info("Delete all products from order list")
+        print("Delete all products from order list")
+        self.element("delete_all_button").wait_clickable().click()
+        self.element("clear_label").wait_visible()
+        self.element("cancel_btn").wait_clickable().click()
+        products = self.element("product_name_ol").find_elements()
+        product_name = [product.text for product in products]
+        return product_name
 
 
 

@@ -464,6 +464,10 @@
       "by": "XPATH",
       "value": "//o-brand-menu//img/following-sibling::span[text()='Cartek']"
     },
+    "bodyglove_brand":{
+      "by": "XPATH",
+      "value": "//o-brand-menu//img/following-sibling::span[contains(text(),'Body Glove')]"
+    },
     "add_to_list_btn":{
       "by": "XPATH",
       "value": "//button/span[text()='add to list']"
@@ -474,7 +478,7 @@
     },
     "product_name_ol": {
       "by": "XPATH",
-      "value": "//p"
+      "value": "//div[@class='col']/div/p"
     },
     "order_list_label": {
       "by": "XPATH",
@@ -483,6 +487,39 @@
     "panel_title": {
       "by": "XPATH",
       "value": "//p-panel/div/div/div/div/span"
+    },
+    "close_modal": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'p-sidebar-close')]"
+    },
+    "delete_button": {
+      "by": "XPATH",
+      "value": "//span[text()='Delete']"
+    },
+    "no_added_label": {
+      "by": "XPATH",
+      "value": "//span[contains(.,'You haven')]"
+    },
+     "order_list_button": {
+      "by": "XPATH",
+      "value": "//span[contains(.,'ORDER LIST')]"
+    },
+    "delete_all_button": {
+      "by": "XPATH",
+      "value": "//span[text()='DELETE ALL']"
+    },
+    "yes_remove_button": {
+      "by": "XPATH",
+      "value": "//button[text()='yes, remove all']"
+    },
+    "clear_label": {
+      "by": "XPATH",
+      "value": "//p[text()='Clear item list']"
+    },
+    "cancel_btn": {
+      "by": "XPATH",
+      "value": "//button[normalize-space()='cancel']"
     }
+
   }
 }
