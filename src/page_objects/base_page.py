@@ -55,6 +55,7 @@ class BasePage:
         logging.info("SCROLL DOWN TO HEIGHT")
         self.__driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
 
+
     def back_to_previous_page(self):
         logging.info("BACK TO PREVIOUS PAGE")
         self.__driver.back()
@@ -109,7 +110,7 @@ class BasePage:
 
     def move_to_element_and_click(self, element):
         """
-        Recibe un webElement y posiciona el mouse sobre el elemento y da click
+        Recibe un webElement
         :param element:
         :return:
         """
@@ -117,15 +118,6 @@ class BasePage:
         actions = AC(self.__driver)
         actions.move_to_element(element).click().perform()
 
-    def move_to_element(self, element):
-        """
-        Recibe un webElement y posiciona el mouse sobre el elemento sin dar click
-        :param element:
-        :return:
-        """
-        logging.info(f"Move to Element and click")
-        actions = AC(self.__driver)
-        actions.move_to_element(element).perform()
     def move_to_element_coordinates(self, element,xoffset:int, yoffset:int):
         """
         Recibe un webElement
@@ -146,23 +138,25 @@ class BasePage:
         actions = AC(self.__driver)
         actions.send_keys(Keys.END)
         actions.perform()
-
-    def press_page_down(self):
-        logging.info("Press PAGE_DOWN key")
+        time.sleep(1)
+    def press_enter_key(self):
+        logging.info("Press ENTER key")
         actions = AC(self.__driver)
-        actions.send_keys(Keys.PAGE_DOWN)
+        actions.send_keys(Keys.ENTER)
         actions.perform()
+
     def press_esc_key(self):
         logging.info("Press ESCAPE key")
         actions = AC(self.__driver)
         actions.send_keys(Keys.ESCAPE)
         actions.perform()
 
-    def press_enter_key(self):
-        logging.info("Press ENTER key")
+    def press_PageDown_key(self):
+        logging.info("Press PAGE DOWN key")
         actions = AC(self.__driver)
-        actions.send_keys(Keys.ENTER)
+        actions.send_keys(Keys.PAGE_DOWN)
         actions.perform()
+        time.sleep(1)
     def page_down_key_from_element(self, element):
         logging.info(f"Press Page Down key from Element: {element}")
         self.__driver.find_element(element).send_keys(Keys.PAGE_DOWN)

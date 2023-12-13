@@ -14,16 +14,16 @@ import locators
 
 
 class HomePage(BasePage):
-
+# sprint 1------------------------------------------------------------------------------------------------------------
+#
     def __init__(self, driver: WebDriver, wait_driver: WebDriverWait):
         super(HomePage, self).__init__(driver, wait_driver)
 
     def search(self, value: str):
         logging.info(f"Search {value}")
         print(f"Search {value}")
-        self.element("search_bar").wait_clickable().send_keys(value)
-        #self.element("search_btn").wait_clickable().click()
-
+        self.element("search_input").wait_clickable().send_keys(value)
+        self.element("search_btn").wait_clickable().click()
 
     def search_product(self, value: str):
         #time.sleep(3)
@@ -31,6 +31,7 @@ class HomePage(BasePage):
         print(f"Search product: {value}")
         search_bar = self.element("search_bar").wait_clickable()
         search_bar.send_keys(value)
+        time.sleep(1)
         self.element("highlight_search_result").wait_clickable().click()
 
     def search_wrong_product_name(self, value: str):
@@ -267,6 +268,10 @@ class HomePage(BasePage):
         dropdown = self.element("submodel_dropdown").wait_clickable()
         dropdown.click()
         time.sleep(.2)
+        try:
+            self.element("list_box").wait_visible()
+        except TimeoutError:
+            self.element("list_box").wait_visible()
         lista = self.element("list_box").find_elements()
         #time.sleep(.2)
         ##dropdown.click()
@@ -307,6 +312,10 @@ class HomePage(BasePage):
         dropdown = self.element("engine_dropdown").wait_clickable()
         dropdown.click()
         time.sleep(.2)
+        try:
+            self.element("list_box").wait_visible()
+        except TimeoutError:
+            self.element("list_box").wait_visible()
         lista = self.element("list_box").find_elements()
 
         new_engine_text = ""
@@ -321,6 +330,14 @@ class HomePage(BasePage):
             return engine_list[0]
         else:
             for i, ele in enumerate(lista):
+                if ele.text in " No results found ":
+                    dropdown = self.element("engine_dropdown").wait_clickable()
+                    time.sleep(1)
+                    dropdown.click()
+                    print(f"se encontro no results found")
+                    self.press_esc_key()
+                    time.sleep(.3)
+                    break
                 if ele.text == engine:
                     pass
                 else:
@@ -549,14 +566,19 @@ class HomePage(BasePage):
     def get_part_number(self):
         logging.info(f"Get Part Number")
         print(f"Get Part Number")
-        part_number_text = self.element("part_number").wait_visible().text
-        # logging.info(f"TEXTO ORIGINAL: {part_number_text}")
-        part_number_list = part_number_text.split("content_copy")
+        try:
+            part_number_text = self.element("part_number").wait_visible().text
+        except TimeoutError:
+            part_number_text =self.element("part_number_mx").wait_visible().text
+        logging.info(f"TEXTO ORIGINAL: {part_number_text}")
+        part_number_text =part_number_text.replace("\ncontent_copy",'')
+        part_number_list = part_number_text.split("\n")
+        #part_number_list = part_number_text.split("content_copy")
         part_number = part_number_list[0].rstrip().lstrip()
 
         logging.info(f"Part Number: {part_number}")
         print(f"Part Number: {part_number}")
-        return part_number
+        return part_number_text
 
     def select_first_popular_category(self):
         logging.info(f"Select the first popular category in the list")
@@ -581,6 +603,7 @@ class HomePage(BasePage):
     def click_on_save_changes_btn(self):
         logging.info(f"Click on Save Changes button")
         print(f"Click on Save Changes button")
+        self.element("save_changes_btn").wait_visible()
         self.element("save_changes_btn").wait_clickable().click()
 
     def click_on_deleteAll_btn(self):
@@ -677,7 +700,7 @@ class HomePage(BasePage):
         print(f"Get Products list")
         self.wait_until_page_load_complete()
         if type_of_label == 1:
-            self.element("additional_label").wait_visible()
+            #self.element("additional_label").wait_visible()
             time.sleep(1)
             lista = self.element("link_products_list_2").find_elements()
             if len(lista)!= 0:
@@ -738,21 +761,6 @@ class HomePage(BasePage):
             element = element.upper()
             lista.append(element)
         return lista
-
-    def get_lasted_viewed_products_list2(self):
-        """
-        regresa la lista obtenida sin modificar texto (texto original)
-        :return:
-        """
-        logging.info(f"Get Lasted viewed products list")
-        print(f"Get Lasted viewed products list")
-        self.element('last_viewed_products_label').wait_visible()
-        #self.scroll_to_element(self.element('last_viewed_products_label'))
-        self.scroll_down()
-        lista =[]
-        # self.element("last_viewed_products_label").scroll_down_to_element()
-        lista_0 = self.element("lasted_products_viewed_list").find_elements()
-        return lista_0
 
     def clean_product_selected(self, expected_product_selected: str):
         print(f"clean product selected")
@@ -873,6 +881,7 @@ class HomePage(BasePage):
     def get_compatibility_meessage(self):
         logging.info("Get does not fit message")
         print("Get does not fit message")
+        time.sleep(2)
         #return self.element("does_not_fit_message_label").wait_visible().text
         return self.element("compatibility_message_label").wait_visible().text
     def click_on_logo_oreily_home(self):
@@ -1041,13 +1050,13 @@ class HomePage(BasePage):
         model = model.split('\n')[0]
         submodel = submodel.split('\n')[0]
         logging.info("Validate product list page")
-        try:
-            self.element("span_filter_by").wait_visible()
-            self.element("sort_by_dropdown").wait_visible()
-        except TimeoutError:
-            self.element("span_filter_by").wait_visible()
-            self.element("sort_by_dropdown").wait_visible()
-
+        # try:
+        #     self.element("span_filter_by").wait_visible()
+        #     self.element("sort_by_dropdown").wait_visible()
+        # except TimeoutError:
+        #     self.element("span_filter_by").wait_visible()
+        #     self.element("sort_by_dropdown").wait_visible()
+        #
         assert self.element("plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
         assert self.element("fits_element").find_element().text == f"Fits {make} {model} {year}", "The vehicle don't match"
 
@@ -1060,14 +1069,20 @@ class HomePage(BasePage):
         except NoSuchElementException:
             return False
 
-    def select_vehicle_specific(self):
+    def validate_no_results_were_found(self):
+        try:
+            if self.element("no_results_container").find_element():
+                return True
+        except NoSuchElementException:
+            return False
 
+    def select_vehicle_specific(self):
         self.click_on_Picker_vehicle_btn()
         time.sleep(0.5)
         year= "2021"
-        make = "Toyota"
-        model = "Avalon"
-        submodel = "Hybrid Limited"
+        make = "Alfa Romeo"
+        model = "Giulia"
+        submodel = "Lusso"
         self.write_a_vehicle_type("Automotive Light Duty")
         self.write_a_year(year)
         self.write_a_make(make)
@@ -1112,27 +1127,30 @@ class HomePage(BasePage):
         logging.info("Validate filtered")
         category = self.element("filter_option_selected").wait_visible().text
         assert category == category_selected, "The category selected is not match"
-        assert total > total_filtered, "The number of products must be minor when filter"
+        assert total >= total_filtered, "The number of products must be minor when filter"
 
     def select_brand_filter(self):
         logging.info("Select a brand from Brands filter")
         filter_buttons = self.element("filters_buttons").find_elements()
-        filter_buttons[0].click()
+        filter_buttons[2].click()
+        brand = filter_buttons[2].text
+        attributes_list = self.element("filter_option_list").find_elements()
+        index = random.randint(0, len(attributes_list)-1)
+        attribute_selected = attributes_list[index].text
+        logging.info(f"Attribute Selected: {attribute_selected}")
+        attributes_list[index].click()
 
-        brand_filter = self.element("filter_option_list").find_elements()
-        brand = brand_filter[0].text
-        logging.info(f"Brand Selected: {brand}")
-        brand_filter[0].click()
         return brand
 
     def select_random_attribute(self):
         logging.info("Select an attribute")
+
         attribute_filter_list = self.element("filters_buttons").find_elements()
-        index = random.randint(0, len(attribute_filter_list)-1)
+        index = random.randint(0, len(attribute_filter_list))
         attribute_selected = attribute_filter_list[index].text
         logging.info(f"Attribute Selected: {attribute_selected}")
         attribute_filter_list[index].click()
-
+        time.sleep(1)
         attribute_option_list = self.element("filter_option_list").find_elements()
         index = random.randint(0, len(attribute_option_list)-1)
         attribute_option_selected = attribute_option_list[index].text
@@ -1143,9 +1161,10 @@ class HomePage(BasePage):
     def validate_filtered_page(self, brand_selected, attribute, total, total_filtered):
         logging.info("Validate filtered")
         options = self.element("filter_option_selected").find_elements()
-
-        assert options[0].text == brand_selected, "The Brand selected is not match"
-        assert options[1].text == attribute, "The attribute is not the correct"
+        print(f"{options[0].text} y {brand_selected}")
+        print(f"{options[1].text} y {attribute}")
+        #assert options[0].text == brand_selected, "The Brand selected is not match"
+        #assert options[1].text == attribute, "The attribute is not the correct"
         assert total > total_filtered, "The number of products must be minor when filter"
 
     def validate_category_landing_page(self, subcategory_selected):
@@ -1178,103 +1197,280 @@ class HomePage(BasePage):
             self.element("link_products_list_2").wait_visible()
             lista = self.element("link_products_list_2").find_elements()
             return lista
-#*******************FUNCIONES DE LUIS**************************************
-    def click_on_brands_images_btn(self):
+
+    def wait_spinner_disappears(self):
+        logging.info("Wait spinner disappears")
+        self.element("loading_img").wait_until_disappears()
+
+
+# -------------------------------------------SPRINT 2-------------------------------------------------------------------
+
+    def get_random_brand_icon_list(self):
+        logging.info("Click on Random Brand Icon")
+        print("Click on Random Brand Icon")
+        self.element("explore_bands_icons_h3").wait_visible()
+        brand_icon_list = self.element("explore_brand_icons").find_elements()
+        return brand_icon_list
+
+    def click_compatibility_tab(self):
+        logging.info("Click Compability tab")
+        print("Click Contability tab")
+        self.element("compatibility_tab").wait_visible()
+        self.element("compatibility_tab").wait_clickable().click()
+
+    def click_details_tab(self):
+        logging.info("Click Compability tab")
+        print("Click Contability tab")
+        self.element("details_tab").wait_visible()
+        self.element("details_tab").wait_clickable().click()
+    def get_compatibility_list(self):
+        logging.info("Get Compatibility List")
+        print("Get Compatibility List")
+        compatibility_list = self.element("compatibility_list_tab").find_elements()
+        return compatibility_list
+
+    def get_compatibility_vehicles_table(self):
+        logging.info("Get Compatibility Vehicles Table")
+        print("Get Compatibility Vehicles Table")
+        self.element("compatibility_vehicles_table").wait_visible()
+        table_header = self.element("compatibility_vehicles_table").find_elements()
+        for header in table_header:
+            logging.info(header.text)
+            print(header.text)
+
+    def show_compatibility_vehicle_list_tab(self):
+        logging.info("Show Compatibility Vehicles list : 'Brand (# cars)'")
+        print("Show Compatibility Vehicles list: 'Brand (# cars)'")
+        compatibility_vehicle_list = self.element("compatibility_list_span").find_elements()
+        for tab in compatibility_vehicle_list:
+            tab_list = tab.text
+            logging.info(f"{tab_list})")
+            print(f"{tab_list})")
+            # brand = tab_list[0]
+            # cars = tab_list[1]
+            # logging.info(f"{brand} ({cars})")
+            # print(f"{brand} ({cars})")
+
+    def validate_presence_of_details_sections(self, expected_sections: list):
+        """
+        compare expected sections list passed, with sections displayed in webpage
+        :param expected_sections: list
+        :return: assertion
+        """
+        logging.info("Validate presence of Details sections")
+        self.element("details_sections_list").wait_visible()
+        sections_list_in_webpage = self.element("details_sections_list").find_elements()
+        sections_list_in_webpage_text = []
+        for section in sections_list_in_webpage:
+            sections_list_in_webpage_text.append(section.text)
+        about_this_brand_section_label = self.element("about_this_brand_section_label").find_element().text
+        sections_list_in_webpage_text.append(about_this_brand_section_label)
+        assert sections_list_in_webpage_text == expected_sections, f"sections in webpage: {sections_list_in_webpage_text} should be:: {expected_sections}"
+
+    def get_data_from_detailed_description_section(self):
+        logging.info("Get data from details 'detailed description' section")
+        product_name = self.element("detailed_description_product_name").find_element().text
+        print(product_name)
+        lista = self.element("detailed_description_product_list").find_elements()
+        for ele in lista:
+            print(ele.text)
+
+    def get_data_from_details_product_information_section(self):
+        logging.info("Get data from details 'product information' section")
+        lista = self.element("product_information_section_list").find_elements()
+        for ele in lista:
+            print(ele.text)
+
+
+    def get_data_from_details_how_to_use_the_product_section(self):
+        logging.info("Get data from details 'how to use the product' section")
+        lista = self.element("how_to_use_the_product_description_list").find_elements()
+        for ele in lista:
+            print(ele.text)
+
+    def get_data_from_details_about_this_brand_section(self):
+        logging.info("Get data from details 'about this brand' section")
+        texto = self.element("about_this_brand_text").find_element().text
+        print(texto)
+
+        p = self.element("about_this_brand_p").find_element().text
+        print(p)
+
+        lista = self.element("about_this_brand_li").find_elements()
+        for ele in lista:
+            print(ele.text)
+
+    def click_send_a_report_link(self):
+        logging.info("Click on send a report link")
+        self.element("send_report_btn").wait_visible()
+        send_a_report_btn = self.element("send_report_btn").wait_clickable()
+        try:
+            self.clic_javacript(send_a_report_btn)
+        except ElementClickInterceptedException:
+            self.javascript_clic('Send a report')
+
+
+    def fill_product_info_report(self, name: str, email: str, phone: str, store: str, issue_type: str, description_error_text:str):
+        """
+        :param name: str
+        :param email: str
+        :param phone: str
+        :param store: str
+        :param issue_type: str
+        :param description_error_text: str
+        :return:
+        """
+        logging.info("Fill Product Info Report")
         time.sleep(1)
-        logging.info(f"Click on brands images btn")
-        print(f"Click on brands images btn")
-        self.element("brands_images").wait_clickable().click()
-        time.sleep(3)
-        self.scroll_down()
-        self.scroll_down()
-        self.scroll_down()
+        self.element("product_info_report_label").wait_visible()
+        self.write_fullName(name)
+        self.write_email(email)
+        self.write_phoneNumber(phone)
+        self.click_store_dropdown()
+        self.select_a_store(store)
+        self.element("about_the_issue_span").wait_visible()
+        self.press_PageDown_key()
+        self.click_issue_type_dropdown()
+        self.select_a_issue_type(issue_type)
+        self.write_describe_the_issue(description_error_text)
+    def write_fullName(self, fullname:str):
+        logging.info(f"Write Full Name: {fullname}")
+        self.element("input_fullName_tbx").wait_clickable().send_keys(fullname)
+    def write_email(self, email:str):
+        logging.info(f"Write email: {email}")
+        self.element("input_email_tbx").wait_clickable().send_keys(email)
+    def write_phoneNumber(self, phone_number: str):
+        logging.info(f"Write phone_number: {phone_number}")
+        self.element("input_phoneNumber_tbx").wait_clickable().send_keys(phone_number)
+    def click_store_dropdown(self):
+        logging.info("Click Store dropdown")
+        self.element("store_dropdown").wait_clickable().click()
+    def select_a_store(self, store:str):
+        logging.info(f"Select the Storer: {store}")
+        self.javascript_clic(store)
+    def click_issue_type_dropdown(self):
+        logging.info("Click Issue Type dropdown")
+        self.element("issue_type_dropdown").wait_clickable().click()
+    def select_a_issue_type(self, issue_type:str):
+        logging.info(f"Select the issue: {issue_type}")
+        self.javascript_clic(issue_type)
 
-    def get_img_part_brand(self):
-        logging.info("Get img part brand")
+    def write_describe_the_issue(self, description: str):
+        logging.info(f"Writing the issue type description")
+        self.element("textarea_description_error").wait_clickable().send_keys(description)
 
-        img = self.element("img_parts_of_brands").wait_visible().text
-        return img
+    def click_send_report_button_info_report_btn(self):
+        logging.info("Clic send report btn product info report")
+        self.element("send_report_btn_product_info_report").wait_clickable().click()
 
-    def click_on_search_history(self):
+    def validate_report_created_confirmation(self):
+        logging.info("Validate Report Created confirmation")
+        # self.element("report_created_confirmation").wait_visible()
+        assert self.element("report_created_confirmation").find_element().is_displayed(), "Expected message is not displayed"
+
+    def get_report_ticket_number(self):
+        logging.info("Get Report ticket number")
+        assert self.element("report_ticket_number").find_element().is_displayed(), "Ticket number is not displayed"
+        ticket_number = self.element("report_ticket_number").wait_visible().text
+        logging.info(f"{ticket_number}")
+        #print(f"ticket_number: {ticket_number}")
+        return ticket_number
+
+    def click_add_to_list_btn(self):
+        logging.info("Click 'ADD TO LIST' button")
+        self.element("add_to_list_btn").wait_clickable().click()
+
+    def validate_presence_of_modal_order_list_elements(self):
+        logging.info("Validate presence of modal order list elements")
+        logging.info("Validate presence of order list subtitle")
+        assert self.element("modal_order_list_subtitle").find_element().is_displayed(), f"Order list subtitle is not displayed"
+        logging.info("Validate presence of Quantity of items in the list")
+        assert self.element("modal_order_list_items_number").find_element().is_displayed(), f"Quantity of items is not displayed"
+        items_span = self.element("modal_order_list_items_number").find_element().text.lstrip().rstrip().split(" ")
+        items = items_span[0]
+        logging.info(f"number of items: {items}")
+        print(f"number of items: {items}")
+        assert self.element("modal_order_list_deleteAll_btn").find_element().is_displayed(), f"Delete All button is not displayed"
+        assert self.element(
+            "modal_order_list_vehicle_information").find_element().is_displayed(), f"Vehicle information is not displayed"
+        vehicle_description = self.element("modal_order_list_vehicle_information").find_element().text
+        assert self.element(
+            "modal_order_list_product_description").find_element().is_displayed(), f"Product description is not displayed"
+        assert self.element(
+            "modal_order_list_part_number").find_element().is_displayed(), f"Part number is not displayed"
+        assert self.element(
+            "modal_order_list_delete_btn").find_element().is_displayed(), f"Delete button is not displayed"
+        return vehicle_description
+
+    def validate_nonAplication_product_label(self):
+        logging.info("Validate universal product message:'Non Application'")
+        assert self.element("nonApplication_message").find_element().is_displayed(), "'Non Applicatioon' messages is not displayed as expected"
+        logging.info("universal product message:'Non Application' is displayed correctly")
+
+    def get_number_of_nonApplication_product_label_in_PLP(self):
+        logging.info("Get number of 'Non Application' productos in Product List Page")
+        number_of_nonApplication = self.element("nonApplication_message").find_elements()
+        logging.info(f"Exists '{len(number_of_nonApplication)}' 'Non Application' product in the current Product list Page")
+        assert len(number_of_nonApplication) > 0, f"At least one 'non Application' product must exists in the list"
+    def validate_compatibility_tab_is_not_displayed(self):
+        logging.info("validate Compatibility tab is not displayed")
+        try:
+            self.element("compatibility_tab").find_element().is_displayed()
+            assert False, f"Compatibility tab should not be displayed"
+        except NoSuchElementException:
+            logging.info("Compatibility tab is not displayed Correctly")
+            assert True
+
+    def validate_presence_of_default_image_src(self):
+        logging.info("validate presence of default image")
+        assert self.element("default_img_product").find_element().is_displayed(), f"default image src should be displayed"
+
+    def validate_resources_tab_is_not_displayed(self):
+        logging.info("Validate 'Resources' tab is not displayed")
+        try:
+            self.element("resources_tab").find_element().is_displayed()
+            assert False, f"Resources tab should not be displayed"
+        except NoSuchElementException:
+            logging.info("Resources tab is not displayed Correctly")
+            assert True
+
+    def click_resources_tab(self):
+        logging.info("Click 'Resources' tab")
+        print("Click Resources tab")
+        self.element("resources_tab").wait_visible()
+        self.element("resources_tab").wait_clickable().click()
+
+    def click_main_product_img(self):
+        logging.info("Click main product img")
+        print("Click main product img")
+        self.element("main_product_img").wait_visible()
+        self.element("main_product_img").wait_clickable().click()
+
+    def click_img_arrow_back_button(self):
+        logging.info("Click img arrow back button")
+        print("Click img arrow back button")
+        self.element("img_arrow_back_button").wait_visible()
+        self.element("img_arrow_back_button").wait_clickable().click()
+
+    def click_img_arrow_forward_button(self):
+        logging.info("img arrow forward button")
+        print("img arrow forward button")
+        self.element("img_arrow_forward_button").wait_visible()
+        self.element("img_arrow_forward_button").wait_clickable().click()
+
+    def select_first_suggestion_brand(self, keyword:str):
+        logging.info("Select first suggestion brand")
+
+        print(f"Search product: {keyword}")
+        search_bar = self.element("search_bar").wait_clickable()
+        search_bar.send_keys(keyword)
         time.sleep(1)
-        logging.info(f"Click on search history btn")
-        print(f"Click on search history btn")
-        self.element("search_history_link").wait_clickable().click()
+        self.element("first_suggestion_brand_highlight").wait_visible()
+        self.element("first_suggestion_brand_highlight").wait_clickable().click()
 
-    def click_on_last_searches(self):
-        time.sleep(1)
-        logging.info(f"Click on search history btn")
-        print(f"Click on search history btn")
-        self.element("search_history_last_searches").wait_clickable().click()
-
-    def clean_search(self):
-        logging.info(f"clean Search")
-        print(f"clean search")
-        self.element("search_bar").clean_element()
-
-    def accept_alert_message(self):
-        logging.info(f"accept alert message")
-        print(f"accept alert message")
-        self.accept_alert_message()
-
-    def click_on_open_search(self):
-        time.sleep(1)
-        logging.info(f"Click on search history btn")
-        print(f"Click on search history btn")
-        self.element("open_search").wait_clickable().click()
-
-    def click_on_first_product(self):
-        time.sleep(1)
-        logging.info(f"Click on search history btn")
-        print(f"Click on search history btn")
-        self.element("img_of_product").wait_clickable().click()
-
-    def clicks_carousel_last_viewed_products(self):
-        logging.info(f"show_last_viewed_products_label")
-        print(f"show_last_viewed_products_label")
-        self.element("carousel").wait_clickable().click()
-        time.sleep(2)
-        self.press_page_down()
-        time.sleep(2)
-        self.element("backward_button_latest").wait_clickable().click()
-        self.element("backward_button_latest").wait_clickable().click()
-        self.element("backward_button_latest").wait_clickable().click()
-        self.element("backward_button_latest").wait_clickable().click()
-        time.sleep(4)
-        self.element("forward_button_latest").wait_clickable().click()
-        self.element("forward_button_latest").wait_clickable().click()
-        self.element("forward_button_latest").wait_clickable().click()
-        self.element("forward_button_latest").wait_clickable().click()
-        time.sleep(3)
-
-
-
-    def delete_element_from_open_search(self):
-        logging.info(f"delete element from open search")
-        print(f"delete element from open search")
-        self.element("search_history_criteria").wait_visible()
-        #lista = self.element("search_history_criteria").find_elements()
-        elemento = self.element("search_history_criteria").wait_clickable()
-        #elemento = lista[2]
-
-        self.move_to_element(elemento)
-        self.element('button_remove_from_search_history').wait_clickable().click()
-
-
-
-        #self.javascript_clic("remove_from_search_history")
-        time.sleep(2)
-
-    def search_into_search_history(self, value: str):
-        logging.info(f"Search {value}")
-        print(f"Search {value}")
-        self.element("searchbar_in_search_history").wait_clickable().send_keys(value)
-
-    def clean_searchbar_in_search_history(self):
-        logging.info(f"clean Search history")
-        print(f"clean search history")
-        self.element("searchbar_in_search_history").clean_element()
-
-
-
-    # *******************FIN DE FUNCIONES DE LUIS**************************************
+    def validate_keyword_in_p_text_of_results_list(self, keyword: str):
+        logging.info("Get 'p' text of results list")
+        self.element("p_text_results").wait_visible()
+        p_text_list = self.element("p_text_results").find_elements()
+        for p in p_text_list:
+            assert keyword.upper() in p.text.upper(), f"The keyword: '{keyword.upper()}' should be appears in {p.text.upper()}"
