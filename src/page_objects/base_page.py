@@ -55,6 +55,7 @@ class BasePage:
         logging.info("SCROLL DOWN TO HEIGHT")
         self.__driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
 
+
     def back_to_previous_page(self):
         logging.info("BACK TO PREVIOUS PAGE")
         self.__driver.back()
@@ -137,6 +138,7 @@ class BasePage:
         actions = AC(self.__driver)
         actions.send_keys(Keys.END)
         actions.perform()
+        time.sleep(1)
     def press_enter_key(self):
         logging.info("Press ENTER key")
         actions = AC(self.__driver)
@@ -154,6 +156,7 @@ class BasePage:
         actions = AC(self.__driver)
         actions.send_keys(Keys.PAGE_DOWN)
         actions.perform()
+        time.sleep(1)
     def page_down_key_from_element(self, element):
         logging.info(f"Press Page Down key from Element: {element}")
         self.__driver.find_element(element).send_keys(Keys.PAGE_DOWN)
