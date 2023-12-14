@@ -1198,6 +1198,7 @@ class HomePage(BasePage):
             lista = self.element("link_products_list_2").find_elements()
             return lista
 
+# -------------------------------------------SPRINT 2-------------------------------------------------------------------
     def select_mex_country(self):
         logging.info("Select MEX in vehicle country selection")
         time.sleep(.5)
@@ -1317,7 +1318,26 @@ class HomePage(BasePage):
         product_name = [product.text for product in products]
         return product_name
 
+    def click_img_thumbnail(self):
+        time.sleep(.5)
+        logging.info("Click on the image thumbnail")
+        print("Click on the image thumbnail")
+        self.element("img_thumbnail").wait_clickable().click()
 
+    def get_pdp_title(self):
+        time.sleep(.5)
+        logging.info("Validate that the PDP is the correct")
+        print("Validate that the PDP is the correct")
+        title = self.element("pdp_title").find_element().text
+        return title
+
+    def get_plp_images(self):
+        time.sleep(.5)
+        logging.info("Get the plp images")
+        print("Get the plp images")
+        images = self.element("plp_images").find_elements()
+        img_src = [image.get_attribute("src") for image in images]
+        return img_src
 
 
     def wait_spinner_disappears(self):
@@ -1325,7 +1345,7 @@ class HomePage(BasePage):
         self.element("loading_img").wait_until_disappears()
 
 
-# -------------------------------------------SPRINT 2-------------------------------------------------------------------
+
 
     def get_random_brand_icon_list(self):
         logging.info("Click on Random Brand Icon")

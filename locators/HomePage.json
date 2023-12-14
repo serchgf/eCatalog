@@ -699,6 +699,18 @@
     "cancel_btn": {
       "by": "XPATH",
       "value": "//button[normalize-space()='cancel']"
+    },
+    "img_thumbnail": {
+      "by": "XPATH",
+      "value": "//img[contains(@class,'rounded-2')]"
+    },
+    "pdp_title": {
+      "by": "XPATH",
+      "value": "//div[@class='product-detail-tile header']/div/div/span"
+    },
+    "plp_images": {
+      "by": "XPATH",
+      "value": "//li//img"
     }
   }
 }

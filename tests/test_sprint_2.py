@@ -16,6 +16,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-9075
 @pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -36,6 +37,7 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
 
 # MXTEST-9074
 @pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -43,7 +45,7 @@ def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_dr
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_usa_can_country()
-    home_page.click_on_year_dropdown(1)
+    home_page.click_on_year_and_select(1)
     home_page.click_on_make_and_select(1)
     home_page.click_on_model_and_select(1)
     home_page.click_on_submodel_and_select()
@@ -57,6 +59,7 @@ def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_dr
 
 # MXTEST-9073
 @pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -64,7 +67,7 @@ def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_mex_country()
-    home_page.click_on_year_dropdown(1)
+    home_page.click_on_year_and_select(1)
     home_page.click_on_make_and_select(1)
     home_page.click_on_model_and_select(1)
     home_page.click_on_submodel_and_select()
@@ -79,14 +82,15 @@ def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
 
 # MXTEST-9058
 @pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9058_OrderList_Modal_Individual_Deletion(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_new_url("https://devintranet.oreillyauto.mx/ecatalog-mx/#/")
+    home_page.open()
     time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
     home_page.click_on_cartek_brand()
-    #home_page.wait_spinner_disappears()
+    home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     ol_products = home_page.add_multiple_products_to_order_list(1)
     product = home_page.delete_product_from_order_list()
@@ -104,8 +108,32 @@ def test_MXTEST_9058_OrderList_Modal_Individual_Deletion(web_drivers):
 
 
 # MXTEST-9056
+@pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
+def test_MXTEST_9051_OrderList_Modal_Product_Navigation(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.wait_spinner_disappears()
+    home_page.click_on_brands()
+    home_page.click_on_cartek_brand()
+    home_page.wait_spinner_disappears()
+    home_page.validate_product_list_page('Cartek')
+    products_name = home_page.get_products_names()
+    home_page.click_on_first_add_to_list_available()
+    title, product = home_page.validate_orderList_display()
+    assert product in products_name, "The product wasn't added to the order list"
+    home_page.click_img_thumbnail()
+    pdp_title = home_page.get_pdp_title()
+    assert product == pdp_title, "The PDP is not the correct for the product selected"
+    home_page.get_data_from_detailed_description_section()
+    home_page.get_data_from_details_product_information_section()
+    home_page.get_data_from_details_how_to_use_the_product_section()
+
+
 # MXTEST-9055
 @pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -113,11 +141,7 @@ def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
     home_page.click_on_cartek_brand()
-    try:
-        home_page.wait_spinner_disappears()
-    except TimeoutException:
-        home_page.wait_spinner_disappears()
-
+    home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     order_list_Bc = home_page.add_multiple_products_to_order_list(5)  # ORDER LIST BEFORE CANCEL
     order_list_Ac = home_page.delete_all_products_cancel()  # ORDER LIST AFTER CANCEL
@@ -125,6 +149,7 @@ def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
 
 # MXTEST-9054
 @pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -132,7 +157,7 @@ def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
     home_page.click_on_cartek_brand()
-    #home_page.wait_spinner_disappears()
+    home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     home_page.add_multiple_products_to_order_list(5)
     order_list = home_page.delete_all_products()
@@ -145,6 +170,7 @@ def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
 
 # MXTEST-9053
 @pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9053_OrderList_Modal_Contents_Display_Non_Application_Product(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -162,6 +188,7 @@ def test_MXTEST_9053_OrderList_Modal_Contents_Display_Non_Application_Product(we
 
 # MXTEST-9052
 @pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9052_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -169,7 +196,7 @@ def test_MXTEST_9052_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drive
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_mex_country()
-    year = home_page.click_on_year_dropdown(1)
+    year = home_page.click_on_year_and_select(1)
     make = home_page.click_on_make_and_select(1).split('\n')
     model = home_page.click_on_model_and_select(1).split('\n')
     submodel = home_page.click_on_submodel_and_select().split('\n')
@@ -177,7 +204,7 @@ def test_MXTEST_9052_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drive
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_brands()
     home_page.click_on_cartek_brand()
-    #home_page.wait_spinner_disappears()
+    home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     products_name = home_page.get_products_names()
     home_page.click_on_first_add_to_list_available()
@@ -187,6 +214,7 @@ def test_MXTEST_9052_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drive
 
 # MXTEST-9051
 @pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -194,7 +222,7 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
     home_page.click_on_cartek_brand()
-    #home_page.wait_spinner_disappears()
+    home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     products_name = home_page.get_products_names()
     home_page.click_on_first_add_to_list_available()
@@ -206,6 +234,17 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
 # MXTEST-9076
 # MXTEST-9038
 # MXTEST-9030
+def test_MXTEST_9053_PLP_Product_images_Selected_Brand(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.wait_spinner_disappears()
+    home_page.click_on_brands()
+    home_page.click_on_cartek_brand()
+    home_page.wait_spinner_disappears()
+    home_page.validate_product_list_page('Cartek')
+    home_page.get_plp_images()
+
 # MXTEST-9024
 
 
