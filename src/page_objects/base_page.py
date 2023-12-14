@@ -110,7 +110,7 @@ class BasePage:
 
     def move_to_element_and_click(self, element):
         """
-        Recibe un webElement
+        Recibe un webElement y posiciona el mouse sobre el elemento y da click
         :param element:
         :return:
         """
@@ -118,6 +118,15 @@ class BasePage:
         actions = AC(self.__driver)
         actions.move_to_element(element).click().perform()
 
+    def move_to_element(self, element):
+        """
+        Recibe un webElement y posiciona el mouse sobre el elemento sin dar click
+        :param element:
+        :return:
+        """
+        logging.info(f"Move to Element and click")
+        actions = AC(self.__driver)
+        actions.move_to_element(element).perform()
     def move_to_element_coordinates(self, element,xoffset:int, yoffset:int):
         """
         Recibe un webElement
@@ -138,6 +147,13 @@ class BasePage:
         actions = AC(self.__driver)
         actions.send_keys(Keys.END)
         actions.perform()
+
+
+    def press_page_down(self):
+        logging.info("Press PAGE_DOWN key")
+        actions = AC(self.__driver)
+        actions.send_keys(Keys.PAGE_DOWN)
+        actions.perform()
         time.sleep(1)
     def press_enter_key(self):
         logging.info("Press ENTER key")
@@ -155,12 +171,20 @@ class BasePage:
         actions.send_keys(Keys.ESCAPE)
         actions.perform()
 
+
+    def press_enter_key(self):
+        logging.info("Press ENTER key")
+        actions = AC(self.__driver)
+        actions.send_keys(Keys.ENTER)
+        actions.perform()
+
     def press_PageDown_key(self):
         logging.info("Press PAGE DOWN key")
         actions = AC(self.__driver)
         actions.send_keys(Keys.PAGE_DOWN)
         actions.perform()
         time.sleep(1)
+
     def page_down_key_from_element(self, element):
         logging.info(f"Press Page Down key from Element: {element}")
         self.__driver.find_element(element).send_keys(Keys.PAGE_DOWN)

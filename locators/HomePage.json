@@ -238,16 +238,13 @@
     },
     "explore_brands_label": {
       "by": "XPATH",
-      "value": "//div[contains(text(),' Explore Brands ')]"
+      "value": "//h3[contains(text(),'EXPLORE BRANDS')]"
     },
     "all_brands_link_list":{
       "by": "XPATH",
       "value": "//span[@class='p-button-label ng-star-inserted']"
     },
-    "explore_bands_label":{
-      "by": "XPATH",
-      "value": "//div[contains(text(),' Explore Brands ')]"
-      },
+
     "no_results_message": {
       "by": "XPATH",
       "value": "//div[@class='description']/span[1]"
@@ -455,6 +452,55 @@
       "by": "XPATH",
       "value": "//span[contains(text(),'USA')]"
     },
+
+    "search_history_link":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),'SEARCH HISTORY')]"
+    },
+    "search_history_last_searches": {
+      "by": "XPATH",
+      "value": "//button[@class='p-ripple p-element p-treetable-toggler p-link']"
+    },
+      "open_search":{
+        "by": "ID",
+        "value": "p-tabpanel-2-label"
+    },
+    "img_of_product": {
+      "by": "XPATH",
+      "value": "//img[@class='p-1']"
+    },
+    "backward_button_latest":{
+      "by": "XPATH",
+      "value": "//span[@class='p-carousel-prev-icon pi pi-chevron-left']"
+    },
+    "forward_button_latest":{
+      "by": "XPATH",
+      "value": "//span[@class='p-carousel-prev-icon pi pi-chevron-right']"
+    },
+    "click_firts_lastest_product":{
+      "by": "XPATH",
+      "value": "//div[@class='o-products-carousel p-carousel p-component p-carousel-horizontal']"
+    },
+    "delete_element_open_search":{
+    "by": "XPATH",
+    "value": "//i[@class='pi pi-times remove-button-icon']"
+    },
+    "searchbar_in_search_history":{
+    "by": "XPATH",
+    "value": "//div[@id='p-tabpanel-0']//input[@placeholder='Search']"
+    },
+    "Empty_Brand_Dupli_Color_MX":{
+    "by": "XPATH",
+    "value": "//span[contains(text(),'Dupli-Color')]"
+    },
+    "button_remove_from_search_history": {
+      "by": "XPATH",
+      "value": "//*[@id='p-tabpanel-2']//div[2]/button//i"
+    },
+    "search_history_criteria": {
+      "by": "XPATH",
+      "value": "//div[@id='p-tabpanel-2']//o-tree-table-history/div/div[3]/p-treetable//td/div"
+    },
     "add_vehicle_span": {
       "by": "XPATH",
       "value": "//span[text()='Add vehicle']"
@@ -626,6 +672,94 @@
     "p_text_results": {
       "by": "XPATH",
       "value": "//p"
+    },
+    "MEX_check":{
+      "by": "XPATH",
+      "value": "//p-checkbox[@ng-reflect-value='2']"
+    },
+    "CAN_check":{
+      "by": "XPATH",
+      "value": "//p-checkbox[@ng-reflect-value='1']"
+    },
+    "USA_check":{
+      "by": "XPATH",
+      "value": "//p-checkbox[@ng-reflect-value='3']"
+    },
+    "chip_elements":{
+      "by": "XPATH",
+      "value": "//div[@class='ng-star-inserted']//p-chip"
+    },
+    "cartek_brand":{
+      "by": "XPATH",
+      "value": "//o-brand-menu//img/following-sibling::span[text()='Cartek']"
+    },
+    "bodyglove_brand":{
+      "by": "XPATH",
+      "value": "//o-brand-menu//img/following-sibling::span[contains(text(),'Body Glove')]"
+    },
+    "add_to_list_btn":{
+      "by": "XPATH",
+      "value": "//button/span[text()='add to list']"
+    },
+    "product_name": {
+      "by": "XPATH",
+      "value": "//a/div/div/span[2]"
+    },
+    "product_name_ol": {
+      "by": "XPATH",
+      "value": "//div[@class='col']/div/p"
+    },
+    "order_list_label": {
+      "by": "XPATH",
+      "value": "//h3[contains(text(),'Order List')]"
+    },
+    "panel_title": {
+      "by": "XPATH",
+      "value": "//p-panel/div/div/div/div/span"
+    },
+    "close_modal": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'p-sidebar-close')]"
+    },
+    "delete_button": {
+      "by": "XPATH",
+      "value": "//span[text()='Delete']"
+    },
+    "no_added_label": {
+      "by": "XPATH",
+      "value": "//span[contains(.,'You haven')]"
+    },
+     "order_list_button": {
+      "by": "XPATH",
+      "value": "//span[contains(.,'ORDER LIST')]"
+    },
+    "delete_all_button": {
+      "by": "XPATH",
+      "value": "//span[text()='DELETE ALL']"
+    },
+    "yes_remove_button": {
+      "by": "XPATH",
+      "value": "//button[text()='yes, remove all']"
+    },
+    "clear_label": {
+      "by": "XPATH",
+      "value": "//p[text()='Clear item list']"
+    },
+    "cancel_btn": {
+      "by": "XPATH",
+      "value": "//button[normalize-space()='cancel']"
+    },
+    "img_thumbnail": {
+      "by": "XPATH",
+      "value": "//img[contains(@class,'rounded-2')]"
+    },
+    "pdp_title": {
+      "by": "XPATH",
+      "value": "//div[@class='product-detail-tile header']/div/div/span"
+    },
+    "plp_images": {
+      "by": "XPATH",
+      "value": "//li//img"
     },
     "part_number_button": {
       "by": "XPATH",
