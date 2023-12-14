@@ -322,12 +322,40 @@ def test_MXTEST_9048_SearchBar_Partial_Search_Term_Vehicle_selected(web_drivers)
 # SEARCH BAR-------------------------------------------------------------------------------------------------------------
 
 # MXTEST-9046 SearchBar_Valid_Item Name_Vehicle_Selected
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 def test_MXTEST_9046_SearchBar_Valid_Item_Name_Vehicle_Selected(web_drivers):
-    print("PRUEBA")
     home_page = HomePage(*web_drivers)
     home_page.open()
-    time.sleep(4)
+    search_criteria = "strut mount"
+    home_page.wait_spinner_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    year = "2019"
+    make = "Acura"
+    model = "ILX"
+    submodel = "A-Spec"
+    home_page.write_a_vehicle_type("Automotive Light Duty")
+    home_page.write_a_year(year)
+    home_page.write_a_make(make)
+    time.sleep(1)
+    home_page.write_a_model(model)
+    home_page.write_a_submodel(submodel)
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto, f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+    #Go to the database and run the following <query>.
+
+#@pytest.mark.pruebitas
+def test_MXTEST_9045_searchBar_valid_part_number_vehicle_selected(web_drivers):
+# MXTEST-9045 SearchBar_Valid_Part Number_Vehicle_Selected
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    part_number = "33849"
+    home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_vehicle_type_and_select()
     year = home_page.click_on_year_and_select()
@@ -336,84 +364,178 @@ def test_MXTEST_9046_SearchBar_Valid_Item_Name_Vehicle_Selected(web_drivers):
     home_page.click_on_submodel_and_select()
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
-    home_page.element("search_bar").wait_clickable().send_keys("borgeson steering coupler")
+    home_page.element("search_bar").wait_clickable().send_keys(part_number)
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
-    part_number = home_page.get_part_number()
-    print(part_number)
+    part_number_list = home_page.element("part_number_button").find_elements()
+    #logging.info(f"El tamaño de la lista es: {len(part_number_list)}")
+    #for part in part_number_list:
+    #    logging.info(part.text)
+    assert part_number in part_number_list[0].text, f"No se encontro el numero de parte:{part_number} en la busqueda:{part_number_list[0].text}"
+    # Go to the database and run the following <query>.
 
-    #Go to the database and run the following <query>.
+#@pytest.mark.pruebitas
+def test_MXTEST_9044_searchBar_valid_category_vehicle_selected(web_drivers):
+    # MXTEST-9044 SearchBar_Valid_Category_Vehicle_Selected
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    home_page.wait_spinner_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    year = "2021"
+    make = "Alfa Romeo"
+    model = "Giulia"
+    submodel = "Lusso"
+    home_page.write_a_vehicle_type("Automotive Light Duty")
+    home_page.write_a_year(year)
+    home_page.write_a_make(make)
+    home_page.write_a_model(model)
+    home_page.write_a_submodel(submodel)
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    search_criteria = "Brake Pads & Shoes"
+    home_page.search_product(search_criteria)
+    home_page.wait_spinner_disappears()
+    product_list = home_page.get_link_product_list(1)
+    assert len(product_list) > 0, f"No mostro resultados la categoria: {search_criteria}"
 
-# MXTEST-9045 SearchBar_Valid_Part Number_Vehicle_Selected
-#     home_page = HomePage(*web_drivers)
-#     home_page.open()
-#     time.sleep(4)
-#     home_page.click_on_Picker_vehicle_btn()
-#     home_page.click_on_vehicle_type_and_select()
-#     year = home_page.click_on_year_and_select()
-#     make = home_page.click_on_make_and_select()
-#     home_page.click_on_model_and_select()
-#     home_page.click_on_submodel_and_select()
-#     home_page.click_on_engine_and_select()
-#     home_page.click_on_add_vehicle_submit_btn()
-#     home_page.element("search_bar").wait_clickable().send_keys("restore")
+#@pytest.mark.pruebitas
+def test_MXTEST_9018_searchBar_partial_search_term(web_drivers):
+    # MXTEST-9018 SearchBar_Partial_Search_Term
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    search_criteria = "strut m"
+    home_page.wait_spinner_disappears()
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto, f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
 
-# MXTEST-9044 SearchBar_Valid_Category_Vehicle_Selected
-#     home_page = HomePage(*web_drivers)
-#     home_page.open()
-#     time.sleep(4)
-#     home_page.click_on_Picker_vehicle_btn()
-#     home_page.click_on_vehicle_type_and_select()
-#     year = home_page.click_on_year_and_select()
-#     make = home_page.click_on_make_and_select()
-#     home_page.click_on_model_and_select()
-#     home_page.click_on_submodel_and_select()
-#     home_page.click_on_engine_and_select()
-#     home_page.click_on_add_vehicle_submit_btn()
-#     home_page.element("search_bar").wait_clickable().send_keys("restore")
 
-# MXTEST-9018 SearchBar_Partial_Search_Term
-#     home_page = HomePage(*web_drivers)
-#     home_page.open()
-#     time.sleep(4)
-#     home_page.click_on_Picker_vehicle_btn()
-#     home_page.click_on_vehicle_type_and_select()
-#     year = home_page.click_on_year_and_select()
-#     make = home_page.click_on_make_and_select()
-#     home_page.click_on_model_and_select()
-#     home_page.click_on_submodel_and_select()
-#     home_page.click_on_engine_and_select()
-#     home_page.click_on_add_vehicle_submit_btn()
-#     home_page.element("search_bar").wait_clickable().send_keys("restore")
-
+#@pytest.mark.pruebitas
+def test_MXTEST_9016_searchBar_valid_item_name(web_drivers):
 # MXTEST-9016 SearchBar_Valid_Item Name
-
-# MXTEST-9015 SearchBar_Valid_Part Number
-
-# MXTEST-9014 SearchBar_Valid_Category
-
-    #@pytest.mark.pruebitas
-# MXTEST-9040 SearchBar_Autocomplete_Select_Brand
-#     print("PRUEBA")
-#     home_page = HomePage(*web_drivers)
-#     # url= "www.google.com"
-#     # home_page.open_new_url(url)
-#     home_page.open()
-#     time.sleep(4)
-#     #home_page.search_product("Motor Oil") #Busqueda por valor
-#     home_page.element("search_bar").wait_clickable().send_keys("bos")
-#     bosch_brand = home_page.element("highlight_search_result").find_element()
-#     home_page.clic_javacript(bosch_brand)
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    search_criteria = "strut mount"
+    home_page.wait_spinner_disappears()
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto, f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
     #Go to the database and run the following <query>.
 
-# MXTEST-9039 SearchBar_Autocomplete_Select_Category
+#@pytest.mark.pruebitas
+def test_MXTEST_9015_searchBar_valid_part_number(web_drivers):
+# MXTEST-9015 SearchBar_Valid_Part Number
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    part_number = "33849"
+    home_page.wait_spinner_disappears()
+    home_page.element("search_bar").wait_clickable().send_keys(part_number)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    part_number_list = home_page.element("part_number_button").find_elements()
+    #logging.info(f"El tamaño de la lista es: {len(part_number_list)}")
+    #for part in part_number_list:
+    #    logging.info(part.text)
+    assert part_number in part_number_list[0].text, f"No se encontro el numero de parte:{part_number} en la busqueda:{part_number_list[0].text}"
+    # Go to the database and run the following <query>.
 
-# MXTEST-9037 SearchBar_Autosuggestions
+@pytest.mark.pruebitas
+def test_MXTEST_9014_searchBar_valid_category(web_drivers):
+# MXTEST-9014 SearchBar_Valid_Category
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    home_page.wait_spinner_disappears()
+    search_criteria = "Brake Pads & Shoes"
+    home_page.search_product(search_criteria)
+    home_page.wait_spinner_disappears()
+    product_list = home_page.get_link_product_list(1)
+    assert len(product_list) > 0, f"No mostro resultados la categoria: {search_criteria}"
 
-# MXTEST-9035 SearchBar_Invalid_Search Term
 
-# MXTEST-9031 SearchBar_Keywords_search
+#@pytest.mark.pruebitas
+def test_MXTEST_9040_searchBar_autocomplete_select_brand(web_drivers):
+    #MXTEST-9040 SearchBar_Autocomplete_Select_Brand
+    home_page = HomePage(*web_drivers)
+    # url= "www.google.com"
+    # home_page.open_new_url(url)
+    home_page.open()
+    search_criteria = "bos"
+    home_page.wait_spinner_disappears()
+    #home_page.search_product("Motor Oil") #Busqueda por valor
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    bosch_brand = home_page.element("highlight_search_result").find_element()
+    home_page.clic_javacript(bosch_brand)
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto.upper()}"
 
+    #Go to the database and run the following <query>.
+
+#@pytest.mark.pruebitas
+def test_MXTEST_9039_searchBar_autocomplete_select_category(web_drivers):
+    # MXTEST-9039 SearchBar_Autocomplete_Select_Category
+    home_page = HomePage(*web_drivers)
+    # url= "www.google.com"
+    # home_page.open_new_url(url)
+    home_page.open()
+    search_criteria = "acce"
+    home_page.wait_spinner_disappears()
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    bosch_brand = home_page.element("highlight_search_result").find_element()
+    home_page.clic_javacript(bosch_brand)
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto.upper()}"
+
+
+#@pytest.mark.pruebitas
+def test_MXTEST_9037_searchBar_autosuggestions(web_drivers):
+    # MXTEST-9037 SearchBar_Autosuggestions
+    home_page = HomePage(*web_drivers)
+    search_criteria = "bra"
+    # url= "www.google.com"
+    # home_page.open_new_url(url)
+    home_page.open()
+    home_page.wait_spinner_disappears()
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    suggestion_list = home_page.get_suggestion_list()
+    assert len(suggestion_list) > 0, "No se mostraron sugerencias"
+    for element in suggestion_list:
+        print(element)
+
+#@pytest.mark.pruebitas
+def test_MXTEST_9035_searchBar_invalid_search_term(web_drivers):
+    # MXTEST-9035 SearchBar_Invalid_Search Term
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    search_criteria = "#$$$$"
+    expected_message = "We're sorry, no results were found"
+    home_page.wait_spinner_disappears()
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    actual_message = home_page.get_no_results_message()
+    assert actual_message == expected_message, f"El mensaje actual deberia ser: {expected_message}, en vez de {actual_message}"
+
+#@pytest.mark.pruebitas
+def test_MXTEST_9035_searchBar_keywords_search(web_drivers):
+    # MXTEST-9031 SearchBar_Keywords_search
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    search_criteria = "oil"
+    home_page.wait_spinner_disappears()
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto, f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
 
 
 

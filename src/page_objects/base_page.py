@@ -145,6 +145,10 @@ class BasePage:
         actions.send_keys(Keys.ENTER)
         actions.perform()
 
+    def wait_spinner_disappears(self):
+        logging.info("Wait spinner disappears")
+        self.element("loading_img").wait_until_disappears()
+
     def press_esc_key(self):
         logging.info("Press ESCAPE key")
         actions = AC(self.__driver)

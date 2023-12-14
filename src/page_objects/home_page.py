@@ -27,6 +27,10 @@ class HomePage(BasePage):
 
     def search_product(self, value: str):
         #time.sleep(3)
+        """
+        Esta funcion escribe un valor en el buscador y da clic en el primer elemento
+        resaltado en las sugerencias
+        """
         logging.info(f"Search product: {value}")
         print(f"Search product: {value}")
         search_bar = self.element("search_bar").wait_clickable()
@@ -1474,3 +1478,19 @@ class HomePage(BasePage):
         p_text_list = self.element("p_text_results").find_elements()
         for p in p_text_list:
             assert keyword.upper() in p.text.upper(), f"The keyword: '{keyword.upper()}' should be appears in {p.text.upper()}"
+#****************************************************Grecia************************************
+    def get_description_product(self):
+        logging.info("Get description product")
+        description_text_list = []
+        description_list = self.element("description_product_result").find_elements()
+        for description in description_list:
+            description_text_list.append(description.text)
+        return description_text_list
+
+    def get_suggestion_list(self):
+        logging.info("Get suggestion list")
+        suggestion_text_list = []
+        lista = self.element("suggestion_list").find_elements()
+        for suggestion in lista:
+            suggestion_text_list.append(suggestion.text)
+        return suggestion_text_list

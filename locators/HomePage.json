@@ -626,6 +626,18 @@
     "p_text_results": {
       "by": "XPATH",
       "value": "//p"
+    },
+    "part_number_button": {
+      "by": "XPATH",
+      "value": "//app-copy-to-clipboard//div[@role='button']"
+    },
+    "description_product_result": {
+      "by": "XPATH",
+      "value": "//a[@queryparamshandling]/div/div/span[2]"
+    },
+    "suggestion_list": {
+      "by": "XPATH",
+      "value": "//p-autocomplete//li"
     }
   }
 }
