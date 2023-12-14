@@ -22,12 +22,15 @@ class HomePage(BasePage):
     def search(self, value: str):
         logging.info(f"Search {value}")
         print(f"Search {value}")
-        self.element("search_bar").wait_clickable().send_keys(value)
-        #self.element("search_btn").wait_clickable().click()
-
+        self.element("search_input").wait_clickable().send_keys(value)
+        self.element("search_btn").wait_clickable().click()
 
     def search_product(self, value: str):
         #time.sleep(3)
+        """
+        Esta funcion escribe un valor en el buscador y da clic en el primer elemento
+        resaltado en las sugerencias
+        """
         logging.info(f"Search product: {value}")
         print(f"Search product: {value}")
         search_bar = self.element("search_bar").wait_clickable()
@@ -1331,6 +1334,148 @@ class HomePage(BasePage):
     # *******************FIN DE FUNCIONES DE LUIS**************************************
 
 
+# -------------------------------------------SPRINT 2-------------------------------------------------------------------
+    def select_mex_country(self):
+        logging.info("Select MEX in vehicle country selection")
+        time.sleep(.5)
+        self.element("vehicle_country_checkbox_icons").wait_visible()
+        self.element("USA_check").find_element().click()
+        self.element("CAN_check").find_element().click()
+
+    def select_usa_can_country(self):
+        logging.info("Select USA and CAN in vehicle country selection")
+        time.sleep(.5)
+        self.element("vehicle_country_checkbox_icons").wait_visible()
+        self.element("MEX_check").find_element().click()
+
+    def click_on_year_dropdown(self, index=0):
+        time.sleep(.5)
+        logging.info("Click on year dropdown")
+        print("Click on year dropdown")
+        self.element("year_dropdown").wait_clickable().click()
+        try:
+            year = self.select_index_list_element(index)
+        except IndexError:
+            year = self.select_index_list_element(index)
+        return year
+
+    def get_country_chips(self):
+        time.sleep(.5)
+        logging.info("Get country chips text")
+        lista = self.element("chip_elements").find_elements()
+        texto = []
+        for e in lista:
+            texto.append(e.text)
+        return texto
+
+    def click_on_cartek_brand(self):
+        time.sleep(.5)
+        logging.info("Click on Cartek brand ")
+        print("Click on Cartek brand ")
+        self.element("explore_brands_label").wait_visible()
+        self.element("cartek_brand").find_element().click()
+
+    def click_on_bodyglove_brand(self):
+        time.sleep(.5)
+        logging.info("Click on Body Glove brand ")
+        print("Click on Body Glovebrand ")
+        self.element("explore_brands_label").wait_visible()
+        self.element("bodyglove_brand").find_element().click()
+
+    def click_on_first_add_to_list_available(self):
+        time.sleep(.5)
+        logging.info("Click on ADD TO LIST button")
+        print("Click on ADD TO LIST button")
+        self.element("add_to_list_btn").wait_clickable().click()
+
+    def get_products_names(self):
+        time.sleep(.5)
+        logging.info("Get the products names")
+        print("Get the products names")
+        list_name = self.element("product_name").find_elements()
+        names = []
+        for name in list_name:
+            names.append(name.text)
+        return names
+
+    def validate_orderList_display(self):
+        time.sleep(.5)
+        logging.info("Validate the order list display")
+        print("Validate the order list display")
+        self.element("order_list_label").wait_visible()
+        title = self.element("panel_title").find_element()
+        product = self.element("product_name_ol").find_element()
+        return title.text, product.text
+
+    def add_multiple_products_to_order_list(self, qty):
+        time.sleep(.5)
+        logging.info("Add multiple products to order list")
+        print("Add multiple products to order list")
+        for i in range(qty):
+            self.click_on_first_add_to_list_available()
+            self.element("close_modal").find_element().click()
+        self.element("order_list_button").wait_visible().click()
+        products = self.element("product_name_ol").find_elements()
+        product_name = [product.text for product in products]
+        return product_name
+
+    def delete_product_from_order_list(self):
+        time.sleep(.5)
+        logging.info("Delete product from order list")
+        print("Delete product from order list")
+        self.element("delete_button").wait_clickable().click()
+        products = self.element("product_name_ol").find_elements()
+        if len(products) == 0:
+            label = self.element("no_added_label").wait_visible().text
+            return label
+        else:
+            product_name = [product.text for product in products]
+            return product_name
+
+    def delete_all_products(self):
+        time.sleep(.5)
+        logging.info("Delete all products from order list")
+        print("Delete all products from order list")
+        self.element("delete_all_button").wait_clickable().click()
+        self.element("clear_label").wait_visible()
+        self.element("yes_remove_button").wait_clickable().click()
+        self.take_screenshot("Delete all successfully")
+        label = self.element("no_added_label").wait_visible().text
+        return label
+
+    def delete_all_products_cancel(self):
+        time.sleep(.5)
+        logging.info("Delete all products from order list")
+        print("Delete all products from order list")
+        self.element("delete_all_button").wait_clickable().click()
+        self.element("clear_label").wait_visible()
+        self.element("cancel_btn").wait_clickable().click()
+        products = self.element("product_name_ol").find_elements()
+        product_name = [product.text for product in products]
+        return product_name
+
+    def click_img_thumbnail(self):
+        time.sleep(.5)
+        logging.info("Click on the image thumbnail")
+        print("Click on the image thumbnail")
+        self.element("img_thumbnail").wait_clickable().click()
+
+    def get_pdp_title(self):
+        time.sleep(.5)
+        logging.info("Validate that the PDP is the correct")
+        print("Validate that the PDP is the correct")
+        title = self.element("pdp_title").find_element().text
+        return title
+
+    def get_plp_images(self):
+        time.sleep(.5)
+        logging.info("Get the plp images")
+        print("Get the plp images")
+        images = self.element("plp_images").find_elements()
+        img_src = [image.get_attribute("src") for image in images]
+        return img_src
+
+
     def wait_spinner_disappears(self):
         logging.info("Wait spinner disappears")
         self.element("loading_img").wait_until_disappears()
@@ -1607,15 +1752,4 @@ class HomePage(BasePage):
         p_text_list = self.element("p_text_results").find_elements()
         for p in p_text_list:
             assert keyword.upper() in p.text.upper(), f"The keyword: '{keyword.upper()}' should be appears in {p.text.upper()}"
-
-    def get_last_research_product_list(self):
-        logging.info("get_last_research_product_list")
-        print(f"get_last_research_product_list")
-        self.element("search_history_criteria").wait_clickable()
-        lista = self.element("search_history_criteria").find_elements()
-        elementos_lista = []
-        for element in lista:
-            elementos_lista.append(element.text)
-        return elementos_lista
-
 
