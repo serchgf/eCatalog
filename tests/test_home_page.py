@@ -591,7 +591,6 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     time.sleep(1)
     home_page.click_on_category_by_text("Oil, Chemicals & Fluids")
     home_page.click_on_subcategory_by_text("Motor Oil")
-
     home_page.shortcut_new_client()
     home_page.click_new_client_cancel_btn()
     product_list = home_page.get_link_product_list(1)

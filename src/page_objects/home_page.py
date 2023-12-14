@@ -1312,6 +1312,21 @@ class HomePage(BasePage):
         self.element("searchbar_in_search_history").clean_element()
 
 
+    def click_clear_search_history_btn(self):
+        logging.info(f"click_new_clear_search_history_btn")
+        print(f"click_new_clear_search_history_btn")
+        self.element("clear_search_history_label").wait_visible()
+        self.element("clear_search_history_btn").wait_clickable().click()
+
+    def validate_carousel_is_visible(self):
+        logging.info(f"validate_carousel_is_visible")
+        print(f"validate_carousel_is_visible")
+        element = self.element("carousel").wait_visible().is_displayed()
+        return element
+
+    def validate_presence_of_oil_product(self):
+        logging.info("validate_presence_of_oil_product")
+        assert self.element("oil_product_label").find_element().is_displayed(), f"oil product is not displayed"
 
     # *******************FIN DE FUNCIONES DE LUIS**************************************
 
@@ -1592,4 +1607,15 @@ class HomePage(BasePage):
         p_text_list = self.element("p_text_results").find_elements()
         for p in p_text_list:
             assert keyword.upper() in p.text.upper(), f"The keyword: '{keyword.upper()}' should be appears in {p.text.upper()}"
+
+    def get_last_research_product_list(self):
+        logging.info("get_last_research_product_list")
+        print(f"get_last_research_product_list")
+        self.element("search_history_criteria").wait_clickable()
+        lista = self.element("search_history_criteria").find_elements()
+        elementos_lista = []
+        for element in lista:
+            elementos_lista.append(element.text)
+        return elementos_lista
+
 

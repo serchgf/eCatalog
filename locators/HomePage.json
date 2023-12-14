@@ -675,7 +675,22 @@
     "p_text_results": {
       "by": "XPATH",
       "value": "//p"
-
+    },
+    "clear_history_btn": {
+      "by": "XPATH",
+      "value":"//span[contains(text(),'CLEAR HISTORY')]"
+    },
+    "clear_search_history_label": {
+      "by": "XPATH",
+      "value": "//p[contains(text(),'Clear search history')]"
+    },
+    "clear_search_history_btn": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'Yes, Remove All')]"
+    },
+    "oil_product_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'oil')]"
     }
   }
 }
