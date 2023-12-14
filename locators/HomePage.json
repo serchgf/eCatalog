@@ -697,6 +697,14 @@
       "by": "XPATH",
       "value": "//o-brand-menu//img/following-sibling::span[contains(text(),'Body Glove')]"
     },
+    "armorall_brand":{
+      "by": "XPATH",
+      "value": "//o-brand-menu//img/following-sibling::span[contains(text(),'Armor All')]"
+    },
+    "gates_brand":{
+      "by": "XPATH",
+      "value": "//o-brand-menu//img/following-sibling::span[contains(text(),'Gates')]"
+    },
     "add_to_list_btn":{
       "by": "XPATH",
       "value": "//button/span[text()='add to list']"
@@ -760,6 +768,10 @@
     "plp_images": {
       "by": "XPATH",
       "value": "//li//img"
+    },
+    "fitment_notes": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'d-block')]/b"
     }
   }
 }

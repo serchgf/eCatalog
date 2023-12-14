@@ -89,7 +89,7 @@ def test_MXTEST_9058_OrderList_Modal_Individual_Deletion(web_drivers):
     time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
-    home_page.click_on_cartek_brand()
+    home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     ol_products = home_page.add_multiple_products_to_order_list(1)
@@ -116,7 +116,7 @@ def test_MXTEST_9051_OrderList_Modal_Product_Navigation(web_drivers):
     time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
-    home_page.click_on_cartek_brand()
+    home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     products_name = home_page.get_products_names()
@@ -140,7 +140,7 @@ def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
     time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
-    home_page.click_on_cartek_brand()
+    home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     order_list_Bc = home_page.add_multiple_products_to_order_list(5)  # ORDER LIST BEFORE CANCEL
@@ -156,7 +156,7 @@ def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
     time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
-    home_page.click_on_cartek_brand()
+    home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     home_page.add_multiple_products_to_order_list(5)
@@ -177,7 +177,7 @@ def test_MXTEST_9053_OrderList_Modal_Contents_Display_Non_Application_Product(we
     time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
-    home_page.click_on_bodyglove_brand()
+    home_page.click_on_brand('Body Glove - MX')
     #home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Body Glove - MX')
     products_name = home_page.get_products_names()
@@ -203,7 +203,7 @@ def test_MXTEST_9052_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drive
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_brands()
-    home_page.click_on_cartek_brand()
+    home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     products_name = home_page.get_products_names()
@@ -221,7 +221,7 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
     time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
-    home_page.click_on_cartek_brand()
+    home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
     home_page.validate_product_list_page('Cartek')
     products_name = home_page.get_products_names()
@@ -233,19 +233,122 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
 
 # MXTEST-9076
 # MXTEST-9038
+@pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
+def test_MXTEST_9038_Vehicle_Fitment_notes_PLP(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.wait_spinner_disappears()
+    home_page.click_on_Picker_vehicle_btn()
+    home_page.select_mex_country()
+    #home_page.write_a_vehicle_type("Automotive Light Duty")
+    home_page.write_a_year("2020")
+    home_page.write_a_make("Chevrolet")
+    home_page.write_a_model("Aveo")
+    home_page.write_a_submodel("LT")
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    home_page.click_on_brands()
+    home_page.click_on_brand('Cartek')
+    home_page.wait_spinner_disappears()
+    fit_notes = home_page.get_plp_fit_notes()
+    assert fit_notes > 0, "The products shown in page has not fitment notes"
+
+
+
 # MXTEST-9030
+@pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_9053_PLP_Product_images_Selected_Brand(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
-    home_page.click_on_cartek_brand()
+    home_page.click_on_brand('Gates - MX')
     home_page.wait_spinner_disappears()
-    home_page.validate_product_list_page('Cartek')
-    home_page.get_plp_images()
+    home_page.validate_product_list_page('Gates - MX')
+    img_src = home_page.get_plp_images()
+    img_error = "https://testintranet.oreillyauto.mx/ecatalog-mx/assets/images/product/coming-soon.png"
+    if len(img_src) > 0:
+        logging.info("The images was loaded correctly")
+        print("The images was loaded correctly")
+        assert True
+
+        if len(img_src) == len(set(img_src)):
+            logging.info("All images are distinct")
+            print("All images are distinct")
+            assert True
+
+        if len(img_src) != len(set(img_src)) and img_error in img_src:
+
+            logging.info("Image coming soon displayed")
+            print("Image coming soon displayed")
+            assert True
+
+        if len(img_src) != len(set(img_src)) and img_error not in img_src:
+            logging.info("Some images are the same")
+            print("Some images are the same")
+            assert False, "The images should be different"
+
+    else:
+        logging.info("The images do not load correctly")
+        print("The images do not load correctly")
+        assert False, "The images should be loaded"
+
+
 
 # MXTEST-9024
+@pytest.mark.homepages2
+@pytest.mark.flaky(reruns=1)
+def test_MXTEST_9053_PLP_Product_images_Selected_Category(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    time.sleep(4)
+    home_page.wait_spinner_disappears()
+    home_page.click_on_categories_button()
+    category_list = home_page.get_general_categories_list()
+    if len(category_list) < 1:
+        category_list = home_page.get_general_categories_list()
+    # click en categoria
+    home_page.select_specific_category_of_list(category_list, 24)
+    # obtener lista de subcategorias
+    subcategory_list = home_page.get_subcategory_list()
+    if len(subcategory_list) < 1:
+        subcategory_list = home_page.get_subcategory_list()
+    # click en subcategoria
+    home_page.select_specific_category_of_list(subcategory_list, 0)
+    subcategory = home_page.select_first_subcategory()
+    home_page.wait_spinner_disappears()
+    home_page.validate_product_list_page(subcategory)
+    img_src = home_page.get_plp_images()
+    img_error = "https://testintranet.oreillyauto.mx/ecatalog-mx/assets/images/product/coming-soon.png"
+    if len(img_src) > 0:
+        logging.info("The images was loaded correctly")
+        print("The images was loaded correctly")
+        assert True
+
+        if len(img_src) == len(set(img_src)):
+            logging.info("All images are distinct")
+            print("All images are distinct")
+            assert True
+
+        if len(img_src) != len(set(img_src)) and img_error in img_src:
+            logging.info("Image coming soon displayed")
+            print("Image coming soon displayed")
+            assert True
+
+        if len(img_src) != len(set(img_src)) and img_error not in img_src:
+            logging.info("Some images are the same")
+            print("Some images are the same")
+            assert False, "The images should be different"
+
+    else:
+        logging.info("The images do not load correctly")
+        print("The images do not load correctly")
+        assert False, "The images should be loaded"
+
 
 
 # ---------------------------------------------lUIS ESPINOSA------------------------------------------------------------
