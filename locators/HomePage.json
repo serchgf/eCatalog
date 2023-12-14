@@ -452,6 +452,55 @@
       "by": "XPATH",
       "value": "//span[contains(text(),'USA')]"
     },
+
+    "search_history_link":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),'SEARCH HISTORY')]"
+    },
+    "search_history_last_searches": {
+      "by": "XPATH",
+      "value": "//button[@class='p-ripple p-element p-treetable-toggler p-link']"
+    },
+      "open_search":{
+        "by": "ID",
+        "value": "p-tabpanel-2-label"
+    },
+    "img_of_product": {
+      "by": "XPATH",
+      "value": "//img[@class='p-1']"
+    },
+    "backward_button_latest":{
+      "by": "XPATH",
+      "value": "//span[@class='p-carousel-prev-icon pi pi-chevron-left']"
+    },
+    "forward_button_latest":{
+      "by": "XPATH",
+      "value": "//span[@class='p-carousel-prev-icon pi pi-chevron-right']"
+    },
+    "click_firts_lastest_product":{
+      "by": "XPATH",
+      "value": "//div[@class='o-products-carousel p-carousel p-component p-carousel-horizontal']"
+    },
+    "delete_element_open_search":{
+    "by": "XPATH",
+    "value": "//i[@class='pi pi-times remove-button-icon']"
+    },
+    "searchbar_in_search_history":{
+    "by": "XPATH",
+    "value": "//div[@id='p-tabpanel-0']//input[@placeholder='Search']"
+    },
+    "Empty_Brand_Dupli_Color_MX":{
+    "by": "XPATH",
+    "value": "//span[contains(text(),'Dupli-Color')]"
+    },
+    "button_remove_from_search_history": {
+      "by": "XPATH",
+      "value": "//*[@id='p-tabpanel-2']//div[2]/button//i"
+    },
+    "search_history_criteria": {
+      "by": "XPATH",
+      "value": "//div[@id='p-tabpanel-2']//o-tree-table-history/div/div[3]/p-treetable//td/div"
+    },
     "add_vehicle_span": {
       "by": "XPATH",
       "value": "//span[text()='Add vehicle']"
