@@ -253,7 +253,7 @@ def test_MXTEST_9038_Vehicle_Fitment_notes_PLP(web_drivers):
     home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
     fit_notes = home_page.get_plp_fit_notes()
-    assert fit_notes > 0, "The products shown in page has not fitment notes"
+    assert len(fit_notes) > 0, "The products shown in page has not fitment notes"
 
 
 

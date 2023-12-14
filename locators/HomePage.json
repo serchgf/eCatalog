@@ -768,6 +768,10 @@
     "plp_images": {
       "by": "XPATH",
       "value": "//li//img"
+    },
+    "fitment_notes": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'d-block')]/b"
     }
   }
 }
