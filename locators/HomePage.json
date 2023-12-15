@@ -788,6 +788,14 @@
     "suggestion_list": {
       "by": "XPATH",
       "value": "//p-autocomplete//li"
+    },
+    "fitment_notes": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'d-block')]/b"
+    },
+    "gates_brand":{
+      "by": "XPATH",
+      "value": "//o-brand-menu//img/following-sibling::span[text()='Gates - MX']"
     }
   }
 }
