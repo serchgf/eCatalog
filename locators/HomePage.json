@@ -788,10 +788,6 @@
     "suggestion_list": {
       "by": "XPATH",
       "value": "//p-autocomplete//li"
-    },
-    "last_searches_labels": {
-      "by": "XPATH",
-      "value": "//tbody[@class='p-element p-treetable-tbody']"
     }
   }
 }

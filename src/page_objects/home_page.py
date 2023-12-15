@@ -1378,19 +1378,19 @@ class HomePage(BasePage):
             texto.append(e.text)
         return texto
 
-    def click_on_cartek_brand(self):
+    def click_on_brand(self, brand):
         time.sleep(.5)
-        logging.info("Click on Cartek brand ")
-        print("Click on Cartek brand ")
+        logging.info(f"Click on {brand} brand ")
+        print(f"Click on {brand} brand ")
         self.element("explore_brands_label").wait_visible()
-        self.element("cartek_brand").find_element().click()
-
-    def click_on_bodyglove_brand(self):
-        time.sleep(.5)
-        logging.info("Click on Body Glove brand ")
-        print("Click on Body Glovebrand ")
-        self.element("explore_brands_label").wait_visible()
-        self.element("bodyglove_brand").find_element().click()
+        if brand == 'Body Glove - MX':
+            self.element("bodyglove_brand").find_element().click()
+        if brand == 'Cartek':
+            self.element("cartek_brand").find_element().click()
+        if brand == 'Armor All - MX':
+            self.element("armorall_brand").find_element().click()
+        if brand == 'Gates - MX':
+            self.element("gates_brand").find_element().click()
 
     def click_on_first_add_to_list_available(self):
         time.sleep(.5)
@@ -1485,6 +1485,12 @@ class HomePage(BasePage):
         img_src = [image.get_attribute("src") for image in images]
         return img_src
 
+    def get_plp_fit_notes(self):
+        time.sleep(.5)
+        logging.info("Get the fitment notes from products")
+        print("Get the fitment notes from products")
+        fit_notes = self.element("fitment_notes").find_elements()
+        return fit_notes
 
     def wait_spinner_disappears(self):
         logging.info("Wait spinner disappears")
