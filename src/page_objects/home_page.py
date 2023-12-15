@@ -781,6 +781,16 @@ class HomePage(BasePage):
         lista_0 = self.element("lasted_products_viewed_list").find_elements()
         return lista_0
 
+    def get_last_research_product_list(self):
+        """
+        regresa la lista obtenida del search history
+        :return:
+        """
+        logging.info(f"get_last_research_product_list")
+        print(f"Get Lasted viewed products list")
+        lista_0 = self.element("last_searches_labels").find_elements()
+        return lista_0
+
     def clean_product_selected(self, expected_product_selected: str):
         print(f"clean product selected")
         product_selected = expected_product_selected.split('#')

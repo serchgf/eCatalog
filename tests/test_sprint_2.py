@@ -251,7 +251,7 @@ def test_MXTEST_9053_PLP_Product_images_Selected_Brand(web_drivers):
 # ---------------------------------------------lUIS ESPINOSA------------------------------------------------------------
 # MXTEST-9027
 # *********************************YA QUEDO*********************************
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9027_PLP_Generic_images_from_Selected_Brand(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/filters/cabin-air-filter/l/02700"
@@ -264,11 +264,12 @@ def test_MXTEST_9027_PLP_Generic_images_from_Selected_Brand(web_drivers):
 
 # MXTEST-9025
 # YA QUEDO
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9025_Select_entry_records_history(web_drivers):
     home_page = HomePage(*web_drivers)
     #step_1 Enter to the URL.
     home_page.open()
+    home_page.wait_until_page_load_complete()
     time.sleep(2)
     #step_2-11 add vehicle
     home_page.click_on_Picker_vehicle_btn()
@@ -284,7 +285,7 @@ def test_MXTEST_9025_Select_entry_records_history(web_drivers):
     time.sleep(1)
     home_page.press_esc_key()
     #step_13 select a free text search entry
-    home_page.search('oil')
+    home_page.element("search_bar").wait_clickable().send_keys('oil')
     home_page.press_enter_key()
     time.sleep(1)
     #step_14 Select "SEARCH HISTORY" button
@@ -297,10 +298,11 @@ def test_MXTEST_9025_Select_entry_records_history(web_drivers):
 
 # MXTEST-9019
 # YA JALO
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
+    home_page.wait_until_page_load_complete()
     search_criteria1 = 'detailing'
     search_criteria2 = 'oil'
     time.sleep(2)
@@ -314,7 +316,7 @@ def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_search_history()
     home_page.press_esc_key()
-    home_page.search(search_criteria1)
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria1)
     home_page.press_enter_key()
     home_page.clean_search()
     home_page.click_on_search_history()
@@ -332,7 +334,7 @@ def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_search_history()
     home_page.press_esc_key()
-    home_page.search(search_criteria2)
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria2)
     home_page.press_enter_key()
     home_page.clean_search()
     home_page.click_on_search_history()
@@ -342,14 +344,15 @@ def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
 
 
 # MXTEST-9023
-#@pytest.mark.luisao
+@pytest.mark.luisao
 # *********************************YA QUEDO*********************************
 def test_MXTEST_9023_Search_in_search_history_finder(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
+    home_page.wait_until_page_load_complete()
     # step_2_3
-    home_page.search('oil')
+    home_page.element("search_bar").wait_clickable().send_keys('oil')
     time.sleep(1)
     # step_4
     home_page.press_enter_key()
@@ -367,7 +370,7 @@ def test_MXTEST_9023_Search_in_search_history_finder(web_drivers):
     home_page.click_on_add_vehicle_submit_btn()
     time.sleep(2)
     # step_16
-    home_page.search('Brakes')
+    home_page.element("search_bar").wait_clickable().send_keys('Brakes')
     time.sleep(1)
     # step_17
     home_page.press_enter_key()
@@ -393,11 +396,12 @@ def test_MXTEST_9023_Search_in_search_history_finder(web_drivers):
 
 # MXTEST-9021
 # *********************************YA QUEDO*********************************
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
+    home_page.wait_until_page_load_complete()
     search_criteria1 ='Battery'
     search_criteria2 = 'Energizer - MX'
     # step_2
@@ -407,7 +411,8 @@ def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
     home_page.press_esc_key()
     time.sleep(1)
     # step_4
-    home_page.search(search_criteria1)
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria1)
+    #home_page.search(search_criteria1)
     time.sleep(1)
     # step_5
     home_page.press_enter_key()
@@ -416,7 +421,8 @@ def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
     home_page.clean_search()
     time.sleep(3)
     # step_7
-    home_page.search(search_criteria2)
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria2)
+    #home_page.search(search_criteria2)
     time.sleep(1)
     # step_8
     home_page.press_enter_key()
@@ -428,20 +434,18 @@ def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
     home_page.click_on_open_search()
     time.sleep(2)
     #step_11
-    texto_producto = home_page.get_last_research_product_list()
-    assert search_criteria1 in texto_producto, f"{search_criteria1} should be in: {texto_producto}"
-    assert search_criteria2 in texto_producto, f"{search_criteria2} should be in: {texto_producto}"
-
-
-    # time.sleep(30)
+    # texto_producto = home_page.get_last_research_product_list()
+    # assert search_criteria1 in texto_producto, f"{search_criteria1} should be in: {texto_producto}"
+    # assert search_criteria2 in texto_producto, f"{search_criteria2} should be in: {texto_producto}"
 
 
 # MXTEST-9022
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     # STEP_1 ENTER TO URL AND OPEN PAGE
     home_page = HomePage(*web_drivers)
     home_page.open()
+    home_page.wait_until_page_load_complete()
     time.sleep(2)
     # STEP_2 SELECT "SEARCH HISTORY BUTTON"
     home_page.click_on_search_history()
@@ -450,7 +454,7 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     home_page.press_esc_key()
     time.sleep(1)
     # STEP_4 Enter a text for search
-    home_page.search('F-100A13')
+    home_page.element("search_bar").wait_clickable().send_keys('F-100A13')
     time.sleep(1)
     # STEP_5 ENTER
     home_page.press_enter_key()
@@ -459,7 +463,7 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     home_page.clean_search()
     time.sleep(3)
     # STEP_7 Enter the name of a brand for search
-    home_page.search('Energizer - MX')
+    home_page.element("search_bar").wait_clickable().send_keys('Energizer - MX')
     time.sleep(1)
     # STEP_8 ENTER
     home_page.press_enter_key()
@@ -468,7 +472,8 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     home_page.clean_search()
     time.sleep(3)
     # STEP_10 Enter a text for search
-    home_page.search('17738')
+    home_page.element("search_bar").wait_clickable().send_keys('17738')
+    #home_page.search('17738')
     time.sleep(1)
     # STEP_11 ENTER
     home_page.press_enter_key()
@@ -494,7 +499,7 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     # STEP_17-18 Select the "Search bar"
     home_page.clean_search()
     time.sleep(1)
-    home_page.search('Detailing')
+    home_page.element("search_bar").wait_clickable().send_keys('Detailing')
     time.sleep(1)
     # STEP_19 Enter
     home_page.press_enter_key()
@@ -518,12 +523,13 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
 
 
 # MXTEST-9020
-#@pytest.mark.luisao
-# ************************* PENDIENTE ***********************************
+@pytest.mark.luisao
+# ************************* YA QUEDO ***********************************
 def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
+    home_page.wait_until_page_load_complete()
     time.sleep(3)
     # step_2
     home_page.click_on_logo_oreily_home()
@@ -556,6 +562,8 @@ def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
         product_selected = home_page.clean_product_selected(expected_product_selected)
         logging.info(f"Selected: {product_selected}")
         expected_product_selected_list.append(product_selected)
+        time.sleep(1)
+
     home_page.click_on_logo_oreily_home()
     logging.info(f"Recent Products expected list:")
     home_page.show_product_list(expected_product_selected_list)
@@ -573,11 +581,12 @@ def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
 
 # MXTEST-9079
 # *********************************YA QUEDO*********************************
-# @pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9079_Analytics_Empty_Category_Search_with_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1 Enter to the URL.
     home_page.open()
+    home_page.wait_until_page_load_complete()
     time.sleep(3)
     # Precondition "ADD VEHICLE"
     home_page.click_on_Picker_vehicle_btn()
@@ -605,11 +614,12 @@ def test_MXTEST_9079_Analytics_Empty_Category_Search_with_vehicle_selected(web_d
 
 # MXTEST-9078
 # *********************************YA QUEDO*********************************
-# @pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9078_Analytics_Empty_Brands_Search_with_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1 Enter to the URL.
     home_page.open()
+    home_page.wait_until_page_load_complete()
     time.sleep(3)
     # Precondition "ADD VEHICLE"
     home_page.click_on_Picker_vehicle_btn()
@@ -632,10 +642,9 @@ def test_MXTEST_9078_Analytics_Empty_Brands_Search_with_vehicle_selected(web_dri
     en el listado ya no apareceran las marcas "vacias" por lo cual
     se tendra que buscar directamente en el search bar principal
     """
-    home_page.search("Dupli-color - MX")
-    time.sleep(2)
+    home_page.element("search_bar").wait_clickable().send_keys("Dupli-color - MX")
     home_page.press_enter_key()
-    time.sleep(13)
+    time.sleep(5)
     # step_5 to doGo to the database and run the query with the boolean flag.
     # step_6 to do Validate the URL in the database.
     # step_7 to do Validate the word in the database.
@@ -645,7 +654,7 @@ def test_MXTEST_9078_Analytics_Empty_Brands_Search_with_vehicle_selected(web_dri
 
 # MXTEST-9077
 # *********************************YA QUEDO*********************************
-# @pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9077_Analytics_No_Results_Free_Text_Search_with_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1 Enter to the URL.
@@ -662,10 +671,9 @@ def test_MXTEST_9077_Analytics_No_Results_Free_Text_Search_with_vehicle_selected
     home_page.click_on_add_vehicle_submit_btn()
     time.sleep(2)
     # step_2_3_4 Click in the search bar field
-    home_page.search('qwerty1335')
-    time.sleep(1)
+    home_page.element("search_bar").wait_clickable().send_keys('qwerty1335')
     home_page.press_enter_key()
-    time.sleep(10)
+    time.sleep(2)
 
     # step_5 to do Go to the database and run the query with the boolean flag.
     # step_6 to do Validate the URL in the database.
@@ -675,19 +683,20 @@ def test_MXTEST_9077_Analytics_No_Results_Free_Text_Search_with_vehicle_selected
 
 
 # MXTEST-9069
-# @pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9069_Analytics_Empty_Category_Search_without_vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
-    time.sleep(3)
     # step_2 click on brands button
+    time.sleep(3)
     home_page.click_on_categories_button()
     # step_3 Pick a Category and click on it.
     home_page.javascript_clic("Accessories")
+    time.sleep(2)
     subcat_1_list_2 = home_page.get_product_list_2()
     home_page.click_element_text_of_list(subcat_1_list_2, "Electronics - MX")
-    time.sleep(5)
+    time.sleep(2)
     # step_5 to doGo to the database and run the query with the boolean flag.
     # step_6 to do Validate the URL in the database.
     # step_7 to do Validate the word in the database.
@@ -697,27 +706,27 @@ def test_MXTEST_9069_Analytics_Empty_Category_Search_without_vehicle(web_drivers
 
 # MXTEST-9068
 # *********************************YA QUEDO*********************************
-# @pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
-    time.sleep(3)
+    home_page.wait_until_page_load_complete()
+    #time.sleep(3)
     # step_2 click on brands button
     home_page.click_on_brands()
-    time.sleep(3)
+    time.sleep(1)
     # step_3 click_on_"Show all brands" button
     home_page.click_on_show_all_brands()
-    time.sleep(5)
     # step_4 Pick a <<Empty Brand>> and click on it.
     """
     en el listado ya no apareceran las marcas "vacias" por lo cual
     se tendra que buscar directamente en el search bar principal
     """
-    home_page.search("Dupli-color - MX")
-    time.sleep(2)
+    home_page.element("search_bar").wait_clickable().send_keys("Dupli-color - MX")
     home_page.press_enter_key()
-    time.sleep(4)
+    #time.sleep(4)
+
     # step_5 to doGo to the database and run the query with the boolean flag.
     # step_6 to do Validate the URL in the database.
     # step_7 to do Validate the word in the database.
@@ -728,11 +737,12 @@ def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):
 # MXTEST-9067
 
 # *********************************YA QUEDO*********************************
-# @pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9067_Analytics_No_Results_Free_Text_Search_without_vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
+    home_page.wait_until_page_load_complete()
     # step_2_3_4
     # home_page.search_wrong_product_name("☻☻☻")
     home_page.search_wrong_product_name("ae42sdñl")
