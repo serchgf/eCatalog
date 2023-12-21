@@ -42,6 +42,14 @@ class WebElementWrapper:
         logging.info(f"Wait until disappears: {self.__locator}")
         self.__wait_driver.until(EC.invisibility_of_element_located(self.__locator))
 
+    #crea funcion luisao
+    def clean_element(self) -> WebElement:
+        logging.info(f"Find element using: {self.__locator}")
+        return self.__driver.find_element(*self.__locator).clear()
+
+    def accept_alert_message(self):
+        logging.info(f"Accept alert : ")
+        return self.__driver.switchTo().alert().accept()
 
 
 

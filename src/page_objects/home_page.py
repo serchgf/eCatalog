@@ -793,6 +793,16 @@ class HomePage(BasePage):
         lista_0 = self.element("lasted_products_viewed_list").find_elements()
         return lista_0
 
+    def get_last_research_product_list(self):
+        """
+        regresa la lista obtenida del search history
+        :return:
+        """
+        logging.info(f"get_last_research_product_list")
+        print(f"Get Lasted viewed products list")
+        lista_0 = self.element("last_searches_labels").find_elements()
+        return lista_0
+
     def clean_product_selected(self, expected_product_selected: str):
         print(f"clean product selected")
         product_selected = expected_product_selected.split('#')
@@ -1330,6 +1340,23 @@ class HomePage(BasePage):
         print(f"clean search history")
         self.element("searchbar_in_search_history").clean_element()
 
+
+    def click_clear_search_history_btn(self):
+        logging.info(f"click_new_clear_search_history_btn")
+        print(f"click_new_clear_search_history_btn")
+        self.element("clear_search_history_label").wait_visible()
+        self.element("clear_search_history_btn").wait_clickable().click()
+
+    def validate_carousel_is_visible(self):
+        logging.info(f"validate_carousel_is_visible")
+        print(f"validate_carousel_is_visible")
+        element = self.element("carousel").wait_visible().is_displayed()
+        return element
+
+    def validate_presence_of_oil_product(self):
+        logging.info("validate_presence_of_oil_product")
+        assert self.element("oil_product_label").find_element().is_displayed(), f"oil product is not displayed"
+
     # *******************FIN DE FUNCIONES DE LUIS**************************************
 
     # -------------------------------------------SPRINT 2-------------------------------------------------------------------
@@ -1366,19 +1393,19 @@ class HomePage(BasePage):
             texto.append(e.text)
         return texto
 
-    def click_on_cartek_brand(self):
+    def click_on_brand(self, brand):
         time.sleep(.5)
-        logging.info("Click on Cartek brand ")
-        print("Click on Cartek brand ")
+        logging.info(f"Click on {brand} brand ")
+        print(f"Click on {brand} brand ")
         self.element("explore_brands_label").wait_visible()
-        self.element("cartek_brand").find_element().click()
-
-    def click_on_bodyglove_brand(self):
-        time.sleep(.5)
-        logging.info("Click on Body Glove brand ")
-        print("Click on Body Glovebrand ")
-        self.element("explore_brands_label").wait_visible()
-        self.element("bodyglove_brand").find_element().click()
+        if brand == 'Body Glove - MX':
+            self.element("bodyglove_brand").find_element().click()
+        if brand == 'Cartek':
+            self.element("cartek_brand").find_element().click()
+        if brand == 'Armor All - MX':
+            self.element("armorall_brand").find_element().click()
+        if brand == 'Gates - MX':
+            self.element("gates_brand").find_element().click()
 
     def click_on_first_add_to_list_available(self):
         time.sleep(.5)
@@ -1472,6 +1499,13 @@ class HomePage(BasePage):
         images = self.element("plp_images").find_elements()
         img_src = [image.get_attribute("src") for image in images]
         return img_src
+
+    def get_plp_fit_notes(self):
+        time.sleep(.5)
+        logging.info("Get the fitment notes from products")
+        print("Get the fitment notes from products")
+        fit_notes = self.element("fitment_notes").find_elements()
+        return fit_notes
 
     def wait_spinner_disappears(self):
         logging.info("Wait spinner disappears")
@@ -1780,3 +1814,4 @@ class HomePage(BasePage):
         for suggestion in lista:
             suggestion_text_list.append(suggestion.text)
         return suggestion_text_list
+

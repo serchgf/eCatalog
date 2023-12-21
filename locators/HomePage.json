@@ -677,6 +677,22 @@
       "by": "XPATH",
       "value": "//p"
     },
+    "clear_history_btn": {
+      "by": "XPATH",
+      "value":"//span[contains(text(),'CLEAR HISTORY')]"
+    },
+    "clear_search_history_label": {
+      "by": "XPATH",
+      "value": "//p[contains(text(),'Clear search history')]"
+    },
+    "clear_search_history_btn": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'Yes, Remove All')]"
+    },
+    "oil_product_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'oil')]"
+    },
     "MEX_check":{
       "by": "XPATH",
       "value": "//p-checkbox[@ng-reflect-value='2']"
@@ -776,6 +792,14 @@
     "suggestion_list": {
       "by": "XPATH",
       "value": "//p-autocomplete//li"
+    },
+    "fitment_notes": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'d-block')]/b"
+    },
+    "gates_brand":{
+      "by": "XPATH",
+      "value": "//o-brand-menu//img/following-sibling::span[text()='Gates - MX']"
     }
   }
 }
