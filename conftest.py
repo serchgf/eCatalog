@@ -25,6 +25,10 @@ def web_drivers(request):
     report_directory_path = create_report_directory()
     if not os.path.exists(os.path.join(report_directory_path)):
         os.makedirs(report_directory_path)
+    if not os.path.exists(os.path.join(_SCREENSHOT_PATH)):
+        os.makedirs(_SCREENSHOT_PATH)
+    if not os.path.exists(os.path.join(_LOGS_PATH)):
+        os.makedirs(_LOGS_PATH)
     yield driver, wait_driver
     try_take_screenshot(driver, caller)
     move_to_report_dir(_SCREENSHOT_PATH, report_directory_path)
