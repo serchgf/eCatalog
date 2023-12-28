@@ -1424,7 +1424,7 @@ class HomePage(BasePage):
         return names
 
     def validate_orderList_display(self):
-        time.sleep(.5)
+        time.sleep(1)
         logging.info("Validate the order list display")
         print("Validate the order list display")
         self.element("order_list_label").wait_visible()
@@ -1475,6 +1475,7 @@ class HomePage(BasePage):
         self.element("delete_all_button").wait_clickable().click()
         self.element("clear_label").wait_visible()
         self.element("cancel_btn").wait_clickable().click()
+        time.sleep(.5)
         products = self.element("product_name_ol").find_elements()
         product_name = [product.text for product in products]
         return product_name
