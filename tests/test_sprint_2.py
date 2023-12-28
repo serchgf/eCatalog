@@ -1006,12 +1006,12 @@ def test_MXTEST_9043_PDP_ProductDetailsNotCompatibility(web_drivers):
     home_page.validate_nonAplication_product_label()
 
 # MXTEST-9042
-#@pytest.mark.haha
+@pytest.mark.haha
 def test_MXTEST_9042_PDP_UniversalProductTagPLP(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc"
     home_page.open_new_url(url)
-    home_page.wait_spinner_disappears()
+    #home_page.wait_spinner_disappears()
     home_page.get_number_of_nonApplication_product_label_in_PLP()
 
 # MXTEST-9041
@@ -1027,7 +1027,7 @@ def test_MXTEST_9041_PDP_ResourcesNotDisplaying(web_drivers):
 
 
 # MXTEST-9028
-# @pytest.mark.haha
+#@pytest.mark.haha
 def test_MXTEST_9028_PDP_Generic_images_from_Selected_Brand(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/filters/cabin-air-filter/l/02700"
@@ -1138,7 +1138,7 @@ def test_MXTEST_9048_SearchBar_Partial_Search_Term_Vehicle_selected(web_drivers)
 # SEARCH BAR-------------------------------------------------------------------------------------------------------------
 
 # MXTEST-9046 SearchBar_Valid_Item Name_Vehicle_Selected
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 def test_MXTEST_9046_SearchBar_Valid_Item_Name_Vehicle_Selected(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
