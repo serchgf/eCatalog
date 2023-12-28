@@ -218,7 +218,7 @@ def test_MXTEST_9052_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drive
 def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
-    time.sleep(14)
+    time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
     home_page.click_on_brand('Cartek')
@@ -238,7 +238,7 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
 def test_MXTEST_9038_Vehicle_Fitment_notes_PLP(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
-    time.sleep(14)
+    time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_mex_country()
@@ -354,7 +354,7 @@ def test_MXTEST_9053_PLP_Product_images_Selected_Category(web_drivers):
 # ---------------------------------------------lUIS ESPINOSA------------------------------------------------------------
 # MXTEST-9027
 # *********************************YA QUEDO*********************************
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9027_PLP_Generic_images_from_Selected_Brand(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/filters/cabin-air-filter/l/02700"
@@ -373,7 +373,7 @@ def test_MXTEST_9025_Select_entry_records_history(web_drivers):
     #step_1 Enter to the URL.
     home_page.open()
     home_page.wait_until_page_load_complete()
-    time.sleep(12)
+    time.sleep(2)
     #step_2-11 add vehicle
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_vehicle_type_and_select(2)
@@ -401,7 +401,7 @@ def test_MXTEST_9025_Select_entry_records_history(web_drivers):
 
 # MXTEST-9019
 # YA JALO
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -447,7 +447,7 @@ def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
 
 
 # MXTEST-9023
-#@pytest.mark.luisao
+@pytest.mark.luisao
 # *********************************YA QUEDO*********************************
 def test_MXTEST_9023_Search_in_search_history_finder(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -499,7 +499,7 @@ def test_MXTEST_9023_Search_in_search_history_finder(web_drivers):
 
 # MXTEST-9021
 # *********************************YA QUEDO*********************************
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
@@ -543,7 +543,7 @@ def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
 
 
 # MXTEST-9022
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     # STEP_1 ENTER TO URL AND OPEN PAGE
     home_page = HomePage(*web_drivers)
@@ -626,7 +626,7 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
 
 
 # MXTEST-9020
-#@pytest.mark.luisao
+@pytest.mark.luisao
 # ************************* YA QUEDO ***********************************
 def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -684,7 +684,7 @@ def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
 
 # MXTEST-9079
 # *********************************YA QUEDO*********************************
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9079_Analytics_Empty_Category_Search_with_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1 Enter to the URL.
@@ -717,7 +717,7 @@ def test_MXTEST_9079_Analytics_Empty_Category_Search_with_vehicle_selected(web_d
 
 # MXTEST-9078
 # *********************************YA QUEDO*********************************
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9078_Analytics_Empty_Brands_Search_with_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1 Enter to the URL.
@@ -792,7 +792,7 @@ def test_MXTEST_9069_Analytics_Empty_Category_Search_without_vehicle(web_drivers
     # step_1
     home_page.open()
     # step_2 click on brands button
-    time.sleep(13)
+    time.sleep(3)
     home_page.click_on_categories_button()
     # step_3 Pick a Category and click on it.
     home_page.javascript_clic("Accessories")
@@ -809,7 +809,7 @@ def test_MXTEST_9069_Analytics_Empty_Category_Search_without_vehicle(web_drivers
 
 # MXTEST-9068
 # *********************************YA QUEDO*********************************
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
@@ -840,7 +840,7 @@ def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):
 # MXTEST-9067
 
 # *********************************YA QUEDO*********************************
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9067_Analytics_No_Results_Free_Text_Search_without_vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
@@ -859,7 +859,7 @@ def test_MXTEST_9067_Analytics_No_Results_Free_Text_Search_without_vehicle(web_d
 
 # MXTEST-9034
 # *********************************YA QUEDO*********************************
-#@pytest.mark.luisao
+@pytest.mark.luisao
 def test_MXTEST_9034_PDP_UniversalProductTagPDP(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc/detail/accel-ignition-condenser-111131/acc0/111131"

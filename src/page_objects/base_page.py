@@ -33,6 +33,15 @@ class BasePage:
     def open_new_url(self, url: str):
         self.__driver.get(url)
 
+    def open_url_mx(self):
+        self.__driver.get("https://testintranet.oreillyauto.mx/ecatalog-mx/#/")
+
+    def open_url_us(self):
+        self.__driver.get("https://testintranet.oreillyauto.mx/ecatalog-us/#/")
+
+    def open_url_produccion(self):
+        self.__driver.get("https://teamnet.oreillyauto.mx/catalogo")
+
     def close(self):
         self.__driver.close()
 
