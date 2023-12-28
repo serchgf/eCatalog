@@ -800,6 +800,10 @@
     "gates_brand":{
       "by": "XPATH",
       "value": "//o-brand-menu//img/following-sibling::span[text()='Gates - MX']"
+    },
+    "explore_brand_text": {
+      "by": "XPATH",
+      "value": "//h3[contains(text(),'EXPLORE')]"
     }
   }
 }

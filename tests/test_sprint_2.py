@@ -87,7 +87,7 @@ def test_MXTEST_9058_OrderList_Modal_Individual_Deletion(web_drivers):
     home_page = HomePage(*web_drivers)
     url = 'https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih'
     home_page.open_new_url(url)
-    #time.sleep(4)
+    time.sleep(4)
     home_page.wait_spinner_disappears()
     #home_page.click_on_brands()
     #home_page.click_on_brand('Cartek')
@@ -140,7 +140,7 @@ def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
     #home_page.open()
     url = 'https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih'
     home_page.open_new_url(url)
-    #time.sleep(4)
+    time.sleep(4)
     home_page.wait_spinner_disappears()
     #home_page.click_on_brands()
     #home_page.click_on_brand('Cartek')
@@ -158,7 +158,7 @@ def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
     url = 'https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih'
     home_page.open_new_url(url)
     #home_page.open()
-    #time.sleep(4)
+    time.sleep(4)
     home_page.wait_spinner_disappears()
     #home_page.click_on_brands()
     #home_page.click_on_brand('Cartek')
@@ -180,7 +180,7 @@ def test_MXTEST_9053_OrderList_Modal_Contents_Display_Non_Application_Product(we
     home_page = HomePage(*web_drivers)
     url = 'https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/body-glove-mx/mhg'
     home_page.open_new_url(url)
-    #time.sleep(4)
+    time.sleep(4)
     home_page.wait_spinner_disappears()
     #home_page.click_on_brands()
     #home_page.click_on_brand('Body Glove - MX')
