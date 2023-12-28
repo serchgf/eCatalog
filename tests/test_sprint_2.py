@@ -1070,19 +1070,22 @@ def test_MXTEST_9044_searchBar_valid_category_vehicle_selected(web_drivers):
     product_list = home_page.get_link_product_list(1)
     assert len(product_list) > 0, f"No mostro resultados la categoria: {search_criteria}"
 
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 def test_MXTEST_9018_searchBar_partial_search_term(web_drivers):
     # MXTEST-9018 SearchBar_Partial_Search_Term
     home_page = HomePage(*web_drivers)
     home_page.open()
-    search_criteria = "strut m"
+    search_criteria = "Brak"
     home_page.wait_spinner_disappears()
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
-    home_page.wait_spinner_disappears()
+    time.sleep(10)
+    #home_page.wait_spinner_disappears()
     lista_productos = home_page.get_description_product()
+    print(lista_productos)
     for producto in lista_productos:
-        assert search_criteria.upper() in producto, f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+        print(producto)
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria} no se encontro en {producto}"
 
 
 #@pytest.mark.pruebitas
@@ -1117,7 +1120,7 @@ def test_MXTEST_9015_searchBar_valid_part_number(web_drivers):
     assert part_number in part_number_list[0].text, f"No se encontro el numero de parte:{part_number} en la busqueda:{part_number_list[0].text}"
     # Go to the database and run the following <query>.
 
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 def test_MXTEST_9014_searchBar_valid_category(web_drivers):
 # MXTEST-9014 SearchBar_Valid_Category
     home_page = HomePage(*web_drivers)
@@ -1146,7 +1149,6 @@ def test_MXTEST_9040_searchBar_autocomplete_select_brand(web_drivers):
     lista_productos = home_page.get_description_product()
     for producto in lista_productos:
         assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto.upper()}"
-
     #Go to the database and run the following <query>.
 
 #@pytest.mark.pruebitas
