@@ -1138,7 +1138,7 @@ def test_MXTEST_9048_SearchBar_Partial_Search_Term_Vehicle_selected(web_drivers)
 # SEARCH BAR-------------------------------------------------------------------------------------------------------------
 
 # MXTEST-9046 SearchBar_Valid_Item Name_Vehicle_Selected
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 def test_MXTEST_9046_SearchBar_Valid_Item_Name_Vehicle_Selected(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
