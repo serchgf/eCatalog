@@ -1223,8 +1223,7 @@ def test_MXTEST_9018_searchBar_partial_search_term(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
-    time.sleep(10)
-    #home_page.wait_spinner_disappears()
+    home_page.wait_spinner_disappears()
     lista_productos = home_page.get_description_product()
     print(lista_productos)
     for producto in lista_productos:
