@@ -360,6 +360,8 @@ def test_MXTEST_9027_PLP_Generic_images_from_Selected_Brand(web_drivers):
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/filters/cabin-air-filter/l/02700"
     # step_1_2 Enter to the URL.
     home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    #home_page.wait_until_page_load_complete()
     #step_3_Click on any Brand logo.
     home_page.click_on_first_product()
     #step_4_Check if the product has a default generic image no matter what.
@@ -372,8 +374,7 @@ def test_MXTEST_9025_Select_entry_records_history(web_drivers):
     home_page = HomePage(*web_drivers)
     #step_1 Enter to the URL.
     home_page.open()
-    home_page.wait_until_page_load_complete()
-    time.sleep(2)
+    home_page.wait_spinner_disappears()
     #step_2-11 add vehicle
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_vehicle_type_and_select(2)
@@ -405,7 +406,7 @@ def test_MXTEST_9025_Select_entry_records_history(web_drivers):
 def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
-    home_page.wait_until_page_load_complete()
+    home_page.wait_spinner_disappears()
     search_criteria1 = 'detailing'
     search_criteria2 = 'oil'
     time.sleep(2)
@@ -453,7 +454,7 @@ def test_MXTEST_9023_Search_in_search_history_finder(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
-    home_page.wait_until_page_load_complete()
+    home_page.wait_spinner_disappears()
     # step_2_3
     home_page.element("search_bar").wait_clickable().send_keys('oil')
     time.sleep(1)
@@ -504,7 +505,7 @@ def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
-    home_page.wait_until_page_load_complete()
+    home_page.wait_spinner_disappears()
     search_criteria1 ='Battery'
     search_criteria2 = 'Energizer - MX'
     # step_2
@@ -548,7 +549,7 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     # STEP_1 ENTER TO URL AND OPEN PAGE
     home_page = HomePage(*web_drivers)
     home_page.open()
-    home_page.wait_until_page_load_complete()
+    home_page.wait_spinner_disappears()
     time.sleep(2)
     # STEP_2 SELECT "SEARCH HISTORY BUTTON"
     home_page.click_on_search_history()
@@ -632,7 +633,7 @@ def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
-    home_page.wait_until_page_load_complete()
+    home_page.wait_spinner_disappears()
     time.sleep(3)
     # step_2
     home_page.click_on_logo_oreily_home()
@@ -689,7 +690,7 @@ def test_MXTEST_9079_Analytics_Empty_Category_Search_with_vehicle_selected(web_d
     home_page = HomePage(*web_drivers)
     # step_1 Enter to the URL.
     home_page.open()
-    home_page.wait_until_page_load_complete()
+    home_page.wait_spinner_disappears()
     time.sleep(3)
     # Precondition "ADD VEHICLE"
     home_page.click_on_Picker_vehicle_btn()
@@ -722,8 +723,8 @@ def test_MXTEST_9078_Analytics_Empty_Brands_Search_with_vehicle_selected(web_dri
     home_page = HomePage(*web_drivers)
     # step_1 Enter to the URL.
     home_page.open()
-    home_page.wait_until_page_load_complete()
-    time.sleep(3)
+    home_page.wait_spinner_disappears()
+    #time.sleep(3)
     # Precondition "ADD VEHICLE"
     home_page.click_on_Picker_vehicle_btn()
     home_page.write_a_vehicle_type("Automotive Light Duty")
@@ -762,7 +763,7 @@ def test_MXTEST_9077_Analytics_No_Results_Free_Text_Search_with_vehicle_selected
     home_page = HomePage(*web_drivers)
     # step_1 Enter to the URL.
     home_page.open()
-    time.sleep(3)
+    home_page.wait_spinner_disappears()
     # Precondition "ADD VEHICLE"
     home_page.click_on_Picker_vehicle_btn()
     home_page.write_a_vehicle_type("Automotive Light Duty")
@@ -791,8 +792,8 @@ def test_MXTEST_9069_Analytics_Empty_Category_Search_without_vehicle(web_drivers
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
+    home_page.wait_spinner_disappears()
     # step_2 click on brands button
-    time.sleep(3)
     home_page.click_on_categories_button()
     # step_3 Pick a Category and click on it.
     home_page.javascript_clic("Accessories")
@@ -814,8 +815,7 @@ def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
-    home_page.wait_until_page_load_complete()
-    #time.sleep(3)
+    home_page.wait_spinner_disappears()
     # step_2 click on brands button
     home_page.click_on_brands()
     time.sleep(1)
@@ -845,6 +845,7 @@ def test_MXTEST_9067_Analytics_No_Results_Free_Text_Search_without_vehicle(web_d
     home_page = HomePage(*web_drivers)
     # step_1
     home_page.open()
+    home_page.wait_spinner_disappears()
     home_page.wait_until_page_load_complete()
     # step_2_3_4
     # home_page.search_wrong_product_name("☻☻☻")
