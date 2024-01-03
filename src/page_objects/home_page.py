@@ -1397,7 +1397,7 @@ class HomePage(BasePage):
         time.sleep(.5)
         logging.info(f"Click on {brand} brand ")
         print(f"Click on {brand} brand ")
-        self.element("explore_brands_label").wait_visible()
+        self.element("explore_brand_text").wait_visible()
         if brand == 'Body Glove - MX':
             self.element("bodyglove_brand").find_element().click()
         if brand == 'Cartek':
@@ -1475,7 +1475,7 @@ class HomePage(BasePage):
         self.element("delete_all_button").wait_clickable().click()
         self.element("clear_label").wait_visible()
         self.element("cancel_btn").wait_clickable().click()
-        time.sleep(.5)
+        time.sleep(1)
         products = self.element("product_name_ol").find_elements()
         product_name = [product.text for product in products]
         return product_name
