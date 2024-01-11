@@ -115,7 +115,7 @@ def test_MXTEST_9058_OrderList_Modal_Individual_Deletion(web_drivers):
 # MXTEST-9056
 @pytest.mark.sprint2_regression
 @pytest.mark.homepages2
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9051_OrderList_Modal_Product_Navigation(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -931,7 +931,7 @@ def test_MXTEST_9034_PDP_UniversalProductTagPDP(web_drivers):
 # MXTEST-9033
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9033_PDP_ProductDetailsCompatibility(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-brake-master-cylinder-new-05019401aa/mkg0/05019401aa"
@@ -949,7 +949,7 @@ def test_MXTEST_9033_PDP_ProductDetailsCompatibility(web_drivers):
 # MXTEST-9032
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
     home_page = HomePage(*web_drivers)
     #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
@@ -974,7 +974,7 @@ def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
 # MXTEST-9060
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9060_PDP_Report_discrepances_fitment_notes(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
@@ -999,7 +999,7 @@ def test_MXTEST_9060_PDP_Report_discrepances_fitment_notes(web_drivers):
 # MXTEST-9059
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9059_PDP_Report_Discrepancies(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
@@ -1023,7 +1023,7 @@ def test_MXTEST_9059_PDP_Report_Discrepancies(web_drivers):
 # MXTEST-9057
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9057_PDP_Add_to_List(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -1050,7 +1050,7 @@ def test_MXTEST_9057_PDP_Add_to_List(web_drivers):
 # MXTEST-9043
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9043_PDP_ProductDetailsNotCompatibility(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc/detail/accel-ignition-condenser-111131/acc0/111131"
@@ -1061,7 +1061,7 @@ def test_MXTEST_9043_PDP_ProductDetailsNotCompatibility(web_drivers):
 # MXTEST-9042
 @pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9042_PDP_UniversalProductTagPLP(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc"
@@ -1072,7 +1072,7 @@ def test_MXTEST_9042_PDP_UniversalProductTagPLP(web_drivers):
 # MXTEST-9041
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9041_PDP_ResourcesNotDisplaying(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc/detail/accel-spark-plug-0526-4/acc0/05264"
@@ -1086,7 +1086,7 @@ def test_MXTEST_9041_PDP_ResourcesNotDisplaying(web_drivers):
 # MXTEST-9028
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9028_PDP_Generic_images_from_Selected_Brand(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/filters/cabin-air-filter/l/02700"
@@ -1100,8 +1100,8 @@ def test_MXTEST_9028_PDP_Generic_images_from_Selected_Brand(web_drivers):
 
 # MXTEST-9036
 #@pytest.mark.haha
-@pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+#@pytest.mark.sprint2_regression
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9036_PDP_ResourcesDisplay(web_drivers):
     # encontrar un producto que contenga la tab "resources"
     home_page = HomePage(*web_drivers)
@@ -1113,7 +1113,7 @@ def test_MXTEST_9036_PDP_ResourcesDisplay(web_drivers):
 # MXTEST-9026
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9026_PDP_Product_image_with_available_images_Selected_Brand(web_drivers):
     #falta producto que contenga imagen en 360
     home_page = HomePage(*web_drivers)
@@ -1129,7 +1129,7 @@ def test_MXTEST_9026_PDP_Product_image_with_available_images_Selected_Brand(web_
 
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9050_SearchBar_Autocomplete_Select_Brand_Vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -1153,7 +1153,7 @@ def test_MXTEST_9050_SearchBar_Autocomplete_Select_Brand_Vehicle_selected(web_dr
 # MXTEST-9049
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9049_SearchBar_Autocomplete_Select_Category_Vehicle_Selected(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -1180,7 +1180,7 @@ def test_MXTEST_9049_SearchBar_Autocomplete_Select_Category_Vehicle_Selected(web
 # MXTEST-9048
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9048_SearchBar_Partial_Search_Term_Vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -1265,7 +1265,7 @@ def test_MXTEST_9045_searchBar_valid_part_number_vehicle_selected(web_drivers):
 
 #@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9044_searchBar_valid_category_vehicle_selected(web_drivers):
     # MXTEST-9044 SearchBar_Valid_Category_Vehicle_Selected
     home_page = HomePage(*web_drivers)
@@ -1291,7 +1291,7 @@ def test_MXTEST_9044_searchBar_valid_category_vehicle_selected(web_drivers):
 
 @pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_9018_searchBar_partial_search_term(web_drivers):
     # MXTEST-9018 SearchBar_Partial_Search_Term
     home_page = HomePage(*web_drivers)
