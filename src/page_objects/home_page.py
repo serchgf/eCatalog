@@ -1344,6 +1344,7 @@ class HomePage(BasePage):
     def click_clear_search_history_btn(self):
         logging.info(f"click_new_clear_search_history_btn")
         print(f"click_new_clear_search_history_btn")
+        self.element("clear_history_btn").wait_clickable().click()
         self.element("clear_search_history_label").wait_visible()
         self.element("clear_search_history_btn").wait_clickable().click()
 
@@ -1356,6 +1357,11 @@ class HomePage(BasePage):
     def validate_presence_of_oil_product(self):
         logging.info("validate_presence_of_oil_product")
         assert self.element("oil_product_label").find_element().is_displayed(), f"oil product is not displayed"
+
+    def search_specific_product(self, value: str):
+        logging.info(f"search_specific_product {value}")
+        print(f"search_specific_product {value}")
+        self.element("search_bar").wait_clickable().send_keys(value)
 
     # *******************FIN DE FUNCIONES DE LUIS**************************************
 
