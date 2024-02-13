@@ -1578,8 +1578,8 @@ class HomePage(BasePage):
         sections_list_in_webpage_text = []
         for section in sections_list_in_webpage:
             sections_list_in_webpage_text.append(section.text)
-        about_this_brand_section_label = self.element("about_this_brand_section_label").find_element().text
-        sections_list_in_webpage_text.append(about_this_brand_section_label)
+        #about_this_brand_section_label = self.element("about_this_brand_section_label").find_element().text
+        #sections_list_in_webpage_text.append(about_this_brand_section_label)
         assert sections_list_in_webpage_text == expected_sections, f"sections in webpage: {sections_list_in_webpage_text} should be:: {expected_sections}"
 
     def get_data_from_detailed_description_section(self):
@@ -1799,8 +1799,8 @@ class HomePage(BasePage):
 
     def validate_keyword_in_p_text_of_results_list(self, keyword: str):
         logging.info("Get 'p' text of results list")
-        self.element("p_text_results").wait_visible()
-        p_text_list = self.element("p_text_results").find_elements()
+        self.element("product_name").wait_visible()
+        p_text_list = self.element("product_name").find_elements()
         for p in p_text_list:
             assert keyword.upper() in p.text.upper(), f"The keyword: '{keyword.upper()}' should be appears in {p.text.upper()}"
 

@@ -535,7 +535,7 @@
     },
     "details_sections_list": {
       "by": "XPATH",
-      "value": "//div[@role='tabpanel']//span[@class='roboto-600 o-text-secondary tabs-section-title']"
+      "value": "//div[@role='tabpanel']//span[contains(@class,' tabs-section-title')]"
     },
     "about_this_brand_section_label": {
       "by": "XPATH",
@@ -620,7 +620,7 @@
 
     "modal_order_list_subtitle": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'Order List')]"
+      "value": "//h3[contains(text(),'Order list')]"
     },
     "modal_order_list_items_number": {
       "by": "XPATH",
@@ -632,7 +632,7 @@
     },
     "modal_order_list_vehicle_information": {
       "by": "XPATH",
-      "value": "//span[@class='material-symbols-outlined fs-24px notranslate']/parent::div/div/span"
+      "value": "//span[contains(@class,'material-symbols-outlined')]/parent::div/div/span"
     },
     "modal_order_list_product_description": {
       "by": "XPATH",
@@ -644,7 +644,7 @@
     },
     "modal_order_list_part_number": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'# Part: ')]/parent::div/a"
+      "value": "//span[contains(text(),'Part #:')]/parent::div/a"
     },
     "nonApplication_message": {
       "by": "XPATH",

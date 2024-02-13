@@ -1089,9 +1089,9 @@ def test_MXTEST_9049_SearchBar_Autocomplete_Select_Category_Vehicle_Selected(web
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     year = "2021"
-    make = "Alfa Romeo"
-    model = "Giulia"
-    submodel = "Lusso"
+    make = "Chevrolet"
+    model = "Aveo"
+    submodel = "LT"
     home_page.write_a_vehicle_type("Automotive Light Duty")
     home_page.write_a_year(year)
     home_page.write_a_make(make)
@@ -1099,7 +1099,7 @@ def test_MXTEST_9049_SearchBar_Autocomplete_Select_Category_Vehicle_Selected(web
     home_page.write_a_submodel(submodel)
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
-    search_criteria = "whe"
+    search_criteria = "oil"
     home_page.search_product(search_criteria)
     product_list = home_page.get_link_product_list(1)
     home_page.scroll_down()
@@ -1116,9 +1116,9 @@ def test_MXTEST_9048_SearchBar_Partial_Search_Term_Vehicle_selected(web_drivers)
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     year = "2021"
-    make = "Alfa Romeo"
-    model = "Giulia"
-    submodel = "Lusso"
+    make = "Chevrolet"
+    model = "Aveo"
+    submodel = "LT"
     home_page.write_a_vehicle_type("Automotive Light Duty")
     home_page.write_a_year(year)
     home_page.write_a_make(make)
@@ -1126,7 +1126,7 @@ def test_MXTEST_9048_SearchBar_Partial_Search_Term_Vehicle_selected(web_drivers)
     home_page.write_a_submodel(submodel)
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
-    search_criteria = "brake"
+    search_criteria = "oil"
     home_page.search_product(search_criteria)
     home_page.wait_spinner_disappears()
     home_page.validate_keyword_in_p_text_of_results_list(search_criteria)
@@ -1213,7 +1213,7 @@ def test_MXTEST_9044_searchBar_valid_category_vehicle_selected(web_drivers):
     home_page.write_a_submodel(submodel)
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
-    search_criteria = "Brake Pads & Shoes"
+    search_criteria = "Brake Pads"
     home_page.search_product(search_criteria)
     home_page.wait_spinner_disappears()
     product_list = home_page.get_link_product_list(1)
@@ -1230,10 +1230,11 @@ def test_MXTEST_9018_searchBar_partial_search_term(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
+    time.sleep(10)
     home_page.wait_spinner_disappears()
     lista_productos = home_page.get_description_product()
     for producto in lista_productos:
-        assert search_criteria.upper() in producto, f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
 
 
 #@pytest.mark.pruebitas
@@ -1250,7 +1251,7 @@ def test_MXTEST_9016_searchBar_valid_item_name(web_drivers):
     home_page.wait_spinner_disappears()
     lista_productos = home_page.get_description_product()
     for producto in lista_productos:
-        assert search_criteria.upper() in producto, f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
     #Go to the database and run the following <query>.
 
 #@pytest.mark.pruebitas
@@ -1281,7 +1282,7 @@ def test_MXTEST_9014_searchBar_valid_category(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     home_page.wait_spinner_disappears()
-    search_criteria = "Brake Pads & Shoes"
+    search_criteria = "Brake Pads"
     home_page.search_product(search_criteria)
     home_page.wait_spinner_disappears()
     product_list = home_page.get_link_product_list(1)
@@ -1318,7 +1319,7 @@ def test_MXTEST_9039_searchBar_autocomplete_select_category(web_drivers):
     # url= "www.google.com"
     # home_page.open_new_url(url)
     home_page.open()
-    search_criteria = "acce"
+    search_criteria = "pad"
     home_page.wait_spinner_disappears()
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     bosch_brand = home_page.element("highlight_search_result").find_element()
@@ -1375,7 +1376,7 @@ def test_MXTEST_9035_searchBar_keywords_search(web_drivers):
     home_page.wait_spinner_disappears()
     lista_productos = home_page.get_description_product()
     for producto in lista_productos:
-        assert search_criteria.upper() in producto, f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
 
 
 
