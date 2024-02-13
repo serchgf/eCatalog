@@ -1126,9 +1126,9 @@ class HomePage(BasePage):
         self.click_on_Picker_vehicle_btn()
         time.sleep(0.5)
         year = "2021"
-        make = "Alfa Romeo"
-        model = "Giulia"
-        submodel = "Lusso"
+        make = "Chevrolet"
+        model = "Aveo"
+        submodel = "LT"
         self.write_a_vehicle_type("Automotive Light Duty")
         self.write_a_year(year)
         self.write_a_make(make)
@@ -1142,12 +1142,14 @@ class HomePage(BasePage):
 
     def validate_product_list_page(self, subcategory_selected):
 
-        logging.info("Validate product list page")
-        products_number = self.get_search_results_number()
+            logging.info("Validate product list page")
 
-        assert self.element(
-            "plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
-        return products_number
+            products_number = self.get_search_results_number()
+
+            assert self.element(
+                "plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
+            return products_number
+
 
     def validate_pagination(self):
 
@@ -1217,7 +1219,7 @@ class HomePage(BasePage):
 
     def validate_category_landing_page(self, subcategory_selected):
         try:
-            if self.element("category_landing_title").find_element().text == subcategory_selected:
+            if self.element("category_landing_title").find_element().text.upper() == subcategory_selected.upper():
                 logging.info(f"Validate categories in landing page")
                 total = self.clp_category_result()
                 logging.info(f"The total of categories in page = {total}")

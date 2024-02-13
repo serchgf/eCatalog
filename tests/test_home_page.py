@@ -18,7 +18,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
@@ -45,7 +45,7 @@ def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
 def test_MXTEST_8282_Garage_Garage_Vehicle_Limit(web_drivers):
     # se necesita actualizar el jira, el Maximo permitido en la lista es de 15 en vez de 10
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -83,7 +83,7 @@ def test_MXTEST_8282_Garage_Garage_Vehicle_Limit(web_drivers):
 def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
     # se necesita actualizar el tc en jira, los campos que se pueden editar son submodel y Engine
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
@@ -136,7 +136,7 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
@@ -177,7 +177,7 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
 def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
     home_page.wait_spinner_disappears()
     home_page.click_on_categories_button()
@@ -204,7 +204,7 @@ def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
     home_page.wait_spinner_disappears()
     expected_product_selected_list = []
@@ -260,7 +260,7 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
 def test_MXTEST_8290_Footer_Validation_Tool_section_elements(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
     home_page.wait_spinner_disappears()
     home_page.scroll_down()
@@ -283,7 +283,7 @@ def test_MXTEST_8290_Footer_Validation_Tool_section_elements(web_drivers):
 def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
     home_page.wait_spinner_disappears()
     # CLIC BRANDS DROPDOWN
@@ -309,7 +309,7 @@ def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(we
 def test_MXTEST_8265_MXTEST_8267_search_all_brands_vehicle_selected(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     #home_page.open_url_us()
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
@@ -347,7 +347,7 @@ def test_MXTEST_8265_MXTEST_8267_search_all_brands_vehicle_selected(web_drivers)
 def test_MXTEST_8257_Popular_Categories(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -366,7 +366,7 @@ def test_MXTEST_8257_Popular_Categories(web_drivers):
 def test_MXTEST_8273_GoBackButton(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -389,7 +389,7 @@ def test_MXTEST_8273_GoBackButton(web_drivers):
 def test_MXTEST_8274_PopupClose_Button(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -408,7 +408,7 @@ def test_MXTEST_8274_PopupClose_Button(web_drivers):
 def test_MXTEST_8256_Search_Compatible(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -431,7 +431,7 @@ def test_MXTEST_8256_Search_Compatible(web_drivers):
 def test_MXTEST_8276_ChangeSearchedNumber(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -462,7 +462,7 @@ def test_MXTEST_8276_ChangeSearchedNumber(web_drivers):
 def test_MXTEST_8277_Search_WrongNumber(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -486,7 +486,7 @@ def test_MXTEST_8277_Search_WrongNumber(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8280_Search_PopupClose_Button(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -506,7 +506,7 @@ def test_MXTEST_8280_Search_PopupClose_Button(web_drivers):
 def test_MXTEST_8283_Search_FromProductPage(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/valvoline-mx-synthetic-motor-oil-5w-20-1-quart-875238/m4l0/875238"
     #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accusharp/aus"
     home_page.open_new_url(url)
@@ -606,9 +606,10 @@ def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
 def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_drivers):
     # falta dato URL: https://testintranet.oreillyauto.mx/ecatalog/<<ID DEL ARTICULO >>
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    #home_page.open()
     # home_page.open_url_us()
-
+    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/valvoline-mx-synthetic-motor-oil-5w-20-1-quart-875238/m4l0/875238"
+    home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
     time.sleep(2)
@@ -620,8 +621,7 @@ def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_driver
     home_page.write_a_submodel("Estrema")
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
-    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/valvoline-mx-synthetic-motor-oil-5w-20-1-quart-875238/m4l0/875238"
-    home_page.open_new_url(url)
+
     home_page.wait_spinner_disappears()
     expected_message = "Does NOT Fit"
 
@@ -638,7 +638,7 @@ def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_driver
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -658,7 +658,7 @@ def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -709,7 +709,7 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
 #@pytest.mark.fallo
 def test_MXTEST_8258_PLP_Search_with_Selected_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -737,7 +737,7 @@ def test_MXTEST_8258_PLP_Search_with_Selected_Vehicle(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -756,7 +756,7 @@ def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -773,7 +773,7 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -796,7 +796,7 @@ def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -846,7 +846,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
     #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-full-synthetic/l/n2728"
     #url2 = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/grease-lube/hydraulic-fluid/l/n0419"
     url ="https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/grease-lube/hydraulic-fluid/l/n0419"
-    home_page.open_new_url(url)
+    home_page.open()
     home_page.wait_spinner_disappears()
     home_page.wait_until_page_load_complete()
     product_name = "Skid Plate"
@@ -891,7 +891,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -937,7 +937,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
 #@pytest.mark.fallo
 def test_MXTEST_8264_PLP_Sort_by_option_relevance(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -971,7 +971,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_relevance(web_drivers):
 def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     #pl_page.wait_until_page_load_complete()
@@ -988,7 +988,7 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
     if len(category_list) < 1:
         category_list = home_page.get_general_categories_list()
     # click en categoria
-    home_page.select_specific_category_of_list(category_list, 6)
+    home_page.select_specific_category_of_list(category_list, 3)
 
     # obtener lista de subcategorias
     subcategory_list = home_page.get_subcategory_list()
@@ -1012,7 +1012,7 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
 def test_MXTEST_8272_Pagination(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -1045,7 +1045,7 @@ def test_MXTEST_8272_Pagination(web_drivers):
 def test_MXTEST_8270_Navigation_searchby_brand_category_filter(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -1070,7 +1070,7 @@ def test_MXTEST_8270_Navigation_searchby_brand_category_filter(web_drivers):
 def test_MXTEST_8269_Navigation_searchby_category_brand_filter(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -1111,7 +1111,7 @@ def test_MXTEST_8269_Navigation_searchby_category_brand_filter(web_drivers):
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_8261_Navigation_Categories(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    home_page.open()
     #home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -1138,15 +1138,15 @@ def test_MXTEST_8261_Navigation_Categories(web_drivers):
 
    # cl_page.element("loading_img").wait_until_disappears()
     #cl_page.wait_until_page_load_complete()
-
+    home_page.wait_spinner_disappears()
     if home_page.validate_category_landing_page(subcategory_selected):
         logging.info("The Category Landing Page is displayed")
         assert True
-    elif home_page.validate_product_list_page(subcategory_selected):
-        logging.info("The Product list page is displayed")
-        assert True
     elif home_page.validate_no_products_found():
         logging.info("The subcategory has not items")
+        assert True
+    elif home_page.validate_product_list_page(subcategory_selected):
+        logging.info("The Product list page is displayed")
         assert True
     else:
         logging.info("Error loading the page")
@@ -1161,7 +1161,10 @@ def test_MXTEST_8261_Navigation_Categories(web_drivers):
 def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    home_page.open_url_produccion()
+    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/brakes/brake-hardware/c0064"
+    home_page.open_new_url(url)
+
+    #home_page.open()
     # home_page.open_url_us()
 
     home_page.wait_spinner_disappears()
@@ -1207,8 +1210,6 @@ def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
     # # click en subcategoria random
     # subcategory_selected = home_page.select_random_element_of_list(subcategory_list)
     # logging.info(f"Subcategory selected: {subcategory_selected}")
-    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/brakes/brake-hardware/c0064"
-    home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
     subcategory_selected = "BRAKE HARDWARE"
     if home_page.validate_category_landing_page(subcategory_selected):

@@ -10,7 +10,8 @@
       "Delivery routes Jalisco": "http://intranet.oreillyauto.mx/files/administrativo/logistica/documento.php?d=Y2lyY3VpdG9fc3VjdXJzYWxlc19qYWxpc2NvLnBkZg==&n=Q2lyY3VpdG9zIGVudHJlIHN1Y3Vyc2FsZXMgSmFsaXNjbw==",
       "Delivery routes Leon": "http://intranet.oreillyauto.mx/files/administrativo/almacen/documento.php?d=Y2lyY3VpdG9fbGVvbi5wZGY=&n=Q2lyY3VpdG8gZW50cmUgU3VjdXJzYWxlcyBMZcOzbg==",
       "O'Reilly Stores": "https://www.oreillyauto.com.mx/sucursales",
-      "Product lines": "http://intranet.oreillyauto.mx/files/cat_prov_online.html"
+      "Product lines": "http://intranet.oreillyauto.mx/files/cat_prov_online.html",
+      "Help center": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/help-center"
     },
   "locators": {
     "search_bar": {
@@ -203,7 +204,7 @@
     },
     "footer_links": {
       "by": "XPATH",
-      "value": "//o-footer//div[@class='glossary-tools']//a"
+      "value": "//o-footer//div[@class='links-container']//a"
     },
     "search_results_label": {
       "by": "XPATH",
@@ -215,7 +216,7 @@
     },
     "popular_categories_label": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'POPULAR CATEGORIES')]"
+      "value": "//h3[contains(text(),'POPULAR CATEGORIES')]"
     },
     "close_categories_x_button": {
       "by": "XPATH",
@@ -446,7 +447,7 @@
     },
     "vehicle_selected": {
       "by": "XPATH",
-      "value": "//span[@class='vehicle-selected notranslate']"
+      "value": "//span[contains(@class,'vehicle-selected notranslate')]"
     },
     "MEX_span":{
       "by": "XPATH",
