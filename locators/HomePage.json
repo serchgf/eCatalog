@@ -27,7 +27,7 @@
     },
     "add_vehicle_btn": {
       "by": "XPATH",
-      "value": "//span[@class='vehicle-selected notranslate']"
+      "value": "//span[contains(@class,'vehicle-selected notranslate')]"
     },
     "vehicle_country_checkbox_icons": {
       "by": "XPATH",
@@ -207,7 +207,11 @@
     },
     "search_results_label": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Search Results')]"
+      "value": "//span[contains(text(),'Search results')]"
+    },
+    "search_results_number": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Search results')]/following-sibling::span"
     },
     "popular_categories_label": {
       "by": "XPATH",
@@ -255,7 +259,7 @@
     },
     "general_categories_label": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'GENERAL CATEGORIES')]"
+      "value": "//h3[contains(text(),'GENERAL CATEGORIES')]"
     },
     "part_number":{
       "by": "XPATH",
@@ -499,7 +503,7 @@
     },
     "button_remove_from_search_history": {
       "by": "XPATH",
-      "value": "//*[@id='p-tabpanel-2']//div[2]/button//i"
+      "value": "//*[@id='p-tabpanel-2']//div[2]//i"
     },
     "search_history_criteria": {
       "by": "XPATH",
@@ -613,10 +617,7 @@
       "by": "XPATH",
       "value": "//span[contains(text(),'TICKET')]"
     },
-    "add_to_list_btn": {
-      "by": "XPATH",
-      "value": "//div[@class='button-container']/button"
-    },
+
     "modal_order_list_subtitle": {
       "by": "XPATH",
       "value": "//h3[contains(text(),'Order List')]"
@@ -727,11 +728,11 @@
     },
     "product_name_ol": {
       "by": "XPATH",
-      "value": "//div[@class='col']/div/p"
+      "value": "//div[contains(@class,'col justify-content-center')]/div/p"
     },
     "order_list_label": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'Order List')]"
+      "value": "//h3[contains(text(),'Order list')]"
     },
     "panel_title": {
       "by": "XPATH",
@@ -795,11 +796,11 @@
     },
     "fitment_notes": {
       "by": "XPATH",
-      "value": "//span[contains(@class,'d-block')]/b"
+      "value": "//a[@fragment='applications']"
     },
     "gates_brand":{
       "by": "XPATH",
-      "value": "//o-brand-menu//img/following-sibling::span[text()='Gates - MX']"
+      "value": "//o-brand-menu//img/following-sibling::span[text()='Gates']"
     },
     "explore_brand_text": {
       "by": "XPATH",

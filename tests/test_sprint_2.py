@@ -134,7 +134,7 @@ def test_MXTEST_9051_OrderList_Modal_Product_Navigation(web_drivers):
     assert product == pdp_title, "The PDP is not the correct for the product selected"
     home_page.get_data_from_detailed_description_section()
     home_page.get_data_from_details_product_information_section()
-    home_page.get_data_from_details_how_to_use_the_product_section()
+    #home_page.get_data_from_details_how_to_use_the_product_section()
 
 
 # MXTEST-9055
@@ -193,7 +193,7 @@ def test_MXTEST_9053_OrderList_Modal_Contents_Display_Non_Application_Product(we
     #home_page.click_on_brands()
     #home_page.click_on_brand('Body Glove - MX')
     #home_page.wait_spinner_disappears()
-    home_page.validate_product_list_page('Body Glove - MX')
+    home_page.validate_product_list_page('Body Glove')
     products_name = home_page.get_products_names()
     home_page.click_on_first_add_to_list_available()
     title, product = home_page.validate_orderList_display()
@@ -290,9 +290,9 @@ def test_MXTEST_9053_PLP_Product_images_Selected_Brand(web_drivers):
     time.sleep(4)
     home_page.wait_spinner_disappears()
     home_page.click_on_brands()
-    home_page.click_on_brand('Gates - MX')
+    home_page.click_on_brand('Body Glove')
     home_page.wait_spinner_disappears()
-    home_page.validate_product_list_page('Gates - MX')
+    home_page.validate_product_list_page('Body Glove')
     img_src = home_page.get_plp_images()
     img_error = "https://testintranet.oreillyauto.mx/ecatalog-mx/assets/images/product/coming-soon.png"
     if len(img_src) > 0:

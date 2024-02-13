@@ -982,11 +982,10 @@ class HomePage(BasePage):
                     return self.element("no_results_message").wait_visible().text
 
         self.element("sort_by_dropdown").wait_visible()
-        search_results = self.element("search_results_label").wait_visible().text
+        search_results = self.element("search_results_number").wait_visible().text
         logging.info(f"search result label: {search_results}")
         print(f"search result label: {search_results}")
-        cadena_l = search_results.split('(')
-        numero = cadena_l[1].replace(')', '')
+        numero = search_results.replace('(', '').replace(')', '')
         numero = int(numero)
         return numero
 
@@ -1404,13 +1403,13 @@ class HomePage(BasePage):
         logging.info(f"Click on {brand} brand ")
         print(f"Click on {brand} brand ")
         self.element("explore_brand_text").wait_visible()
-        if brand == 'Body Glove - MX':
+        if brand == 'Body Glove':
             self.element("bodyglove_brand").find_element().click()
         if brand == 'Cartek':
             self.element("cartek_brand").find_element().click()
-        if brand == 'Armor All - MX':
+        if brand == 'Armor All':
             self.element("armorall_brand").find_element().click()
-        if brand == 'Gates - MX':
+        if brand == 'Gates':
             self.element("gates_brand").find_element().click()
 
     def click_on_first_add_to_list_available(self):
