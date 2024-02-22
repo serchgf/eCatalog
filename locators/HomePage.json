@@ -807,6 +807,38 @@
       "by": "XPATH",
       "value": "//h3[contains(text(),'EXPLORE')]"
     },
+    "video_resources_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),' Video resources ')]"
+    },
+    "internal_video_player_resource": {
+      "by": "XPATH",
+      "value": "//div[@class='videos-container row']//img[1]"
+    },
+    "video_player_iframe": {
+      "by": "ID",
+      "value": "ytplayer"
+    },
+    "youtube_play_button": {
+      "by": "XPATH",
+      "value": "//button[@title='Play']"
+    },
+    "related_products_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'RELATED PRODUCTS')]"
+    },
+    "related_categories_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'RELATED CATEGORIES')]"
+    },
+    "related_products_carousel_items": {
+      "by": "XPATH",
+      "value": "//div[@class='related-products-container']/app-carousel[1]//div[@class='card-container']"
+    },
+    "related_category_carousel_items": {
+      "by": "XPATH",
+      "value": "//div[@class='related-products-container']/app-carousel[2]//div[@class='card-container']"
+    },
 
     "help_center_btn": {
       "by": "XPATH",

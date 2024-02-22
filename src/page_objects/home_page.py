@@ -19,11 +19,16 @@ class HomePage(BasePage):
     def __init__(self, driver: WebDriver, wait_driver: WebDriverWait):
         super(HomePage, self).__init__(driver, wait_driver)
 
-    def search(self, value: str):
+    def search_and_enter(self, value: str):
+        """
+        Type the search criteria in search bar and press enter
+        :param value:
+        :return:
+        """
         logging.info(f"Search {value}")
         print(f"Search {value}")
-        self.element("search_input").wait_clickable().send_keys(value)
-        self.element("search_btn").wait_clickable().click()
+        self.element("search_bar").wait_clickable().send_keys(value, Keys.ENTER)
+
 
     def search_product(self, value: str):
         # time.sleep(3)
@@ -711,7 +716,9 @@ class HomePage(BasePage):
 
     def get_link_product_list(self, type_of_label=0):
         """ '0' means the results pages contains 'Search Results' label on top
-            '1' means the results pages contains 'Additional' label at bottom """
+            '1' means the results pages contains 'Additional' label at bottom
+            Returns: a list of elements"""
+
         logging.info(f"Get Products list")
         print(f"Get Products list")
         self.wait_until_page_load_complete()
@@ -941,6 +948,10 @@ class HomePage(BasePage):
         self.element("blank_space").wait_visible().click()
 
     def get_random_brand(self):
+        """
+        selec a random brand
+        :return: random brand selected
+        """
         logging.info(f"Click Random Brand")
         print(f"Click Random Brand")
         self.element("explore_brands_label").wait_visible()
@@ -1041,6 +1052,11 @@ class HomePage(BasePage):
     # ------------------------------------- funciones de Juan
 
     def select_random_element_of_list(self, lista: list):
+        """
+        Select and click on a random element of the list given
+        :param lista:
+        :return: text of element selected
+        """
         self.wait_until_page_load_complete()
         logging.info(f"Select a random element of the list")
         index = random.randint(0, len(lista)-1)
@@ -1402,6 +1418,11 @@ class HomePage(BasePage):
         return texto
 
     def click_on_brand(self, brand):
+        """
+        perform a click action on brand given
+        :param brand:
+        :return:
+        """
         time.sleep(.5)
         logging.info(f"Click on {brand} brand ")
         print(f"Click on {brand} brand ")
@@ -1770,6 +1791,7 @@ class HomePage(BasePage):
         logging.info("Click 'Resources' tab")
         print("Click Resources tab")
         self.element("resources_tab").wait_visible()
+        time.sleep(1)
         self.element("resources_tab").wait_clickable().click()
 
     def click_main_product_img(self):
@@ -1829,6 +1851,66 @@ class HomePage(BasePage):
         self.scroll_down()
         self.element("help_center_btn").find_element().click()
 
+# Phase 2 sprint 1-------------------------------------------------------------------------------------------------
+
+    def click_on_video(self):
+        logging.info("Click on video")
+        print("Click on video")
+        self.element("video_resources_span").wait_visible()
+        self.element("internal_video_player_resource").wait_clickable().click()
+        self.wait_until_page_load_complete()
+        print("switch to iframe")
+        self.element("video_player_iframe").switch_to_iframe()
+        self.element("youtube_play_button").wait_clickable().click()
+        time.sleep(2)
+
+    def validate_hidden_video_resource(self):
+        logging.info("Validate hidden video resource")
+        print("Validate ihidden video resource")
+
+        try:
+            self.element("video_resources_span").wait_visible()
+        except:
+            print("Video resource does not visible as expected")
+            return True
+
+    def click_random_related_product(self):
+        logging.info("Click a Related Product")
+        print("Click a Related Product")
+        self.element("related_products_span").wait_visible()
+        related_items = self.element("related_products_carousel_items").find_elements()
+        n_elementos = len(related_items)
+        index = random.randint(0, n_elementos)
+        self.clic_javacript(related_items[index])
+
+    def click_random_related_Category(self):
+
+        logging.info("Click a Related Category")
+        print("Click a Related Category")
+        self.element("related_categories_span").wait_visible()
+        related_items = self.element("related_category_carousel_items").find_elements()
+        n_elementos = len(related_items)
+        index = random.randint(0, n_elementos)
+        self.clic_javacript(related_items[index])
+
+    def validate_hidden_related_product(self):
+        logging.info("Validate hidden related product")
+        print("Validate hidden related product")
+
+        try:
+            self.element("related_products_span").wait_visible()
+        except:
+            print("related product does not visible as expected")
+            return True
+    def validate_hidden_related_cateogory(self):
+        logging.info("Validate hidden related category")
+        print("Validate hidden related category")
+
+        try:
+            self.element("related_categories_span").wait_visible()
+        except:
+            print("related category does not visible as expected")
+            return True
     def validate_help_center_page(self):
         logging.info("Validate that Help Center page is loaded")
         assert self.element("hcp_title").find_element().text == "Centro de ayuda", "The title should be 'Centro de ayuda'"
@@ -1858,7 +1940,7 @@ class HomePage(BasePage):
         #count = sum(1 for message in messages if message in expected_messages)
 
         return count
-    
+
     def select_incident_type(self):
         self.element("irm_incidentType").find_element().click()
         time.sleep(1)
@@ -1872,7 +1954,7 @@ class HomePage(BasePage):
         options = self.element("irm_dropdown_options").find_elements()
         selection = self.select_random_element_of_list(options)
         logging.info(f"Option selected '{selection}'")
-        
+
     def select_random_video(self):
         videos = self.element("hcp_video_button").find_elements()
         index = random.randint(0, len(videos) - 1)
