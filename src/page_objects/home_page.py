@@ -1043,21 +1043,22 @@ class HomePage(BasePage):
     def select_random_element_of_list(self, lista: list):
         self.wait_until_page_load_complete()
         logging.info(f"Select a random element of the list")
-        index = random.randint(0, len(lista))
+        index = random.randint(0, len(lista)-1)
         try:
-            element_selected = lista[index - 1]
+            element_selected = lista[index]
             element_text = element_selected.text
 
             try:
-                element_selected.click()
-            except ElementClickInterceptedException:
                 self.javascript_clic(element_text)
+            except:
+                element_selected.click()
+
 
             element_text = element_text.upper()
             return element_text
         except IndexError:
-            index = random.randint(0, len(lista))
-            element_selected = lista[index - 1]
+            index = random.randint(0, len(lista)-1)
+            element_selected = lista[index]
             element_text = element_selected.text
             try:
                 element_selected.click()
@@ -1823,3 +1824,63 @@ class HomePage(BasePage):
             suggestion_text_list.append(suggestion.text)
         return suggestion_text_list
 
+    def click_help_center(self):
+        logging.info("Scroll down and click in Help Center button")
+        self.scroll_down()
+        self.element("help_center_btn").find_element().click()
+
+    def validate_help_center_page(self):
+        logging.info("Validate that Help Center page is loaded")
+        assert self.element("hcp_title").find_element().text == "Centro de ayuda", "The title should be 'Centro de ayuda'"
+        assert self.element("hcp_faq_title").find_element().text == "Preguntas frecuentes", "The FAQ´s title should be 'Preguntas frecuentes'"
+        assert self.element("hcp_videos_section").find_element().text == "Videos de apoyo", "The videos section title should be 'Videos de apoyo'"
+        assert self.element("hcp_issue_report").find_element().text == "REPORTAR UN INCIDENTE", "The issue report button title should be 'REPORTAR UN INCIDENTE'"
+
+    def validate_issue_report_modal(self):
+        logging.info("Validate that the issue report modal is displayed in page")
+        time.sleep(1)
+        assert self.element("irm_title").find_element().text == "Reporte de incidente","The modal's title should be 'Reporte de incidente'"
+        assert self.element("irm_user_info").find_element().text == "Información del usuario", "The user info section title should be 'Información del usuario'"
+        assert self.element("irm_about_issue").find_element().text == "Acerca del incidente", "The about issue section title should be 'Acerca del incidente'"
+        assert self.element("irm_issue_description").find_element().text == "Describe el incidente", "The issue description title should be 'Describe el incidente'"
+        assert self.element("irm_submit_btn").find_element().is_displayed(), "The 'Enviar Informe' button should be present"
+
+    def validate_error_messages(self, messages:list):
+        logging.info("Validate that the error messages are displayed")
+        expected_messages = ["Por favor, escriba un NIP.", "Por favor, escribe un correo electrónico válido","Por favor, escribe un nombre",
+                             "Por favor, seleccione un campo.", "Por favor, seleccione un campo.", "Por favor, escribe una descripción"]
+        count = 0
+        for message in messages:
+            if message in expected_messages:
+                logging.info(f"Error message: {message}")
+                count = count + 1
+            if count == 0: logging.info("No error message in page")
+        #count = sum(1 for message in messages if message in expected_messages)
+
+        return count
+    
+    def select_incident_type(self):
+        self.element("irm_incidentType").find_element().click()
+        time.sleep(1)
+        options = self.element("irm_dropdown_options").find_elements()
+        selection = self.select_random_element_of_list(options)
+        logging.info(f"Option selected '{selection}'")
+
+    def select_frequency(self):
+        self.element("irm_frequency").find_element().click()
+        time.sleep(1)
+        options = self.element("irm_dropdown_options").find_elements()
+        selection = self.select_random_element_of_list(options)
+        logging.info(f"Option selected '{selection}'")
+        
+    def select_random_video(self):
+        videos = self.element("hcp_video_button").find_elements()
+        index = random.randint(0, len(videos) - 1)
+        self.scroll_to_element(f"(//div[contains(@class,'video-info')]/span)[{index + 1}]")
+        videos[index].click()
+        self.wait_until_page_load_complete()
+        return self.switch_to_window()
+    def get_video_titles(self):
+        videos_titles = self.element("hcp_video_title").find_elements()
+        title_txt = [title.text for title in videos_titles]
+        return title_txt

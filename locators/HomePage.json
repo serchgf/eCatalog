@@ -806,6 +806,111 @@
     "explore_brand_text": {
       "by": "XPATH",
       "value": "//h3[contains(text(),'EXPLORE')]"
+    },
+
+    "help_center_btn": {
+      "by": "XPATH",
+      "value": "//a[text()='Help center']"
+    },
+
+    "hcp_title": {
+      "by": "XPATH",
+      "value": "//div[@class='help-center-title']/span[1]"
+    },
+    "hcp_faq_title": {
+      "by": "XPATH",
+      "value": "//div[@class='faq-title']/span[1]"
+    },
+    "hcp_videos_section": {
+      "by": "XPATH",
+      "value": "//section[@class='help-center-videos']/span"
+    },
+
+    "hcp_issue_report": {
+      "by": "XPATH",
+      "value": "//div[@class='issue-report-bar']/button/span[2]"
+    },
+
+    "hcp_video_button": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'video-button')]"
+    },
+    "hcp_video_title": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'video-info')]/span"
+    },
+    "hcp_all_videos_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='see-videos']//button"
+    },
+    "irm_title": {
+      "by": "XPATH",
+      "value": "//div[@class='issue-report-title']/span"
+    },
+    "irm_user_info": {
+      "by": "XPATH",
+      "value": "(//div[@class='issue-report-content']/span)[1]"
+    },
+    "irm_about_issue": {
+      "by": "XPATH",
+      "value": "(//div[@class='issue-report-content']/span)[2]"
+    },
+
+    "irm_issue_description": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'issue-report-description')]/span"
+    },
+    "irm_upload_file": {
+      "by": "XPATH",
+      "value": "//o-upload"
+    },
+    "irm_submit_btn": {
+      "by": "XPATH",
+      "value": "//button[@type='submit']"
+    },
+    "irm_add_file": {
+      "by": "XPATH",
+      "value": "//input[@type='file']"
+    },
+    "irm_error_msg": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'o-text-secondary')]"
+    },
+    "irm_employId": {
+      "by": "XPATH",
+      "value": "//input[@formcontrolname='employeID']"
+    },
+    "irm_incidentType": {
+      "by": "XPATH",
+      "value": "//*[@formcontrolname='incidentType']"
+    },
+     "irm_dropdown_options": {
+      "by": "XPATH",
+      "value": "//li[@role='option']"
+    },
+    "irm_frequency": {
+      "by": "XPATH",
+      "value": "//*[@formcontrolname='frequence']"
+    },
+    "irm_upload_error_msg": {
+      "by": "XPATH",
+      "value": "//small[contains(@class,'advice-content')]"
+    },
+    "irm_description": {
+      "by": "XPATH",
+      "value": "//*[@formcontrolname='description']"
+    },
+    "irm_send_notification": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Informe enviado')]"
+    },
+    "irm_form": {
+      "by": "XPATH",
+      "value": "//form[contains(@class,'issue-report-form')]"
+    },
+    "irm_employeeEmail": {
+      "by": "XPATH",
+      "value": "//*[@formcontrolname='employeEmail']"
     }
   }
 }

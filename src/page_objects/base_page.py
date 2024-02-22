@@ -146,10 +146,22 @@ class BasePage:
         actions = AC(self.__driver)
         actions.move_to_element_with_offset(element, xoffset, yoffset).click().perform()
 
+    # def scroll_to_element(self, element):
+    #     logging.info(f"Scroll Down to Element: {element}")
+    #     actions = AC(self.__driver)
+    #     actions.scroll_to_element(element).perform()
+
     def scroll_to_element(self, element):
         logging.info(f"Scroll Down to Element: {element}")
-        actions = AC(self.__driver)
-        actions.move_to_element(element).perform()
+        script = f'var elemento = document.evaluate("{element}", document, null, 9, null).singleNodeValue; elemento.scrollIntoView();'
+        time.sleep(1)
+        self.__driver.execute_script(script)
+
+    def clear_img_input(self):
+        logging.info(f"Clear image from file input element")
+        time.sleep(1)
+        self.__driver.execute_script('document.getElementById("fileInput").value = "";')
+
 
     def press_end_key(self):
         logging.info("Press END key")
@@ -197,6 +209,20 @@ class BasePage:
     def page_down_key_from_element(self, element):
         logging.info(f"Press Page Down key from Element: {element}")
         self.__driver.find_element(element).send_keys(Keys.PAGE_DOWN)
+
+    def switch_to_window(self):
+        logging.info("Switch to new window")
+        windows = self.__driver.window_handles
+        if len(windows) > 1:
+            self.__driver.switch_to.window(windows[1])
+            self.wait_until_page_load_complete()
+            return self.get_title()
+    def back_to_window(self):
+        logging.info("Switch to new window")
+        windows = self.__driver.window_handles
+        self.__driver.switch_to.window(windows[0])
+        self.wait_until_page_load_complete()
+        return self.get_title()
 
     def __load_locators_attributes(self):
         locator_config = self.__load_locators_config()
