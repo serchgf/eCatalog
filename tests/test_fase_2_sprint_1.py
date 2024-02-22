@@ -93,9 +93,43 @@ def test_MXTEST_10427_RelatedCarrousel_Category(web_drivers):
     home_page.click_details_tab()
     home_page.press_PageDown_key()
     home_page.press_PageDown_key()
+    home_page.wait_spinner_disappears()
+    home_page.press_PageDown_key()
     home_page.click_random_related_Category()
     home_page.wait_spinner_disappears()
 
 # MXTEST-10428
+#@pytest.mark.phase2_sp1
+#@pytest.mark.flaky(reruns=1)
+def test_MXTEST_10428_PDP_Article_WITHOUT_Related_Categories(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
+    search_criteria = "dr1040"
+    home_page.search_and_enter(search_criteria)
+    home_page.wait_spinner_disappears()
+    product_list = home_page.get_link_product_list()
+    home_page.clic_javacript(product_list[0])
+    home_page.wait_spinner_disappears()
+    home_page.click_details_tab()
+    home_page.press_PageDown_key()
+    home_page.press_PageDown_key()
+    home_page.validate_hidden_related_cateogory()
 
 # MXTEST-10429
+#@pytest.mark.phase2_sp1
+#@pytest.mark.flaky(reruns=1)
+def test_MXTEST_10429_PDP_Article_WITHOUT_Related_products(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
+    search_criteria = "dr1040"
+    home_page.search_and_enter(search_criteria)
+    home_page.wait_spinner_disappears()
+    product_list = home_page.get_link_product_list()
+    home_page.clic_javacript(product_list[0])
+    home_page.wait_spinner_disappears()
+    home_page.click_details_tab()
+    home_page.press_PageDown_key()
+    home_page.press_PageDown_key()
+    home_page.validate_hidden_related_product()

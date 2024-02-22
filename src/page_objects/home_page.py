@@ -1887,3 +1887,22 @@ class HomePage(BasePage):
         n_elementos = len(related_items)
         index = random.randint(0, n_elementos)
         self.clic_javacript(related_items[index])
+
+    def validate_hidden_related_product(self):
+        logging.info("Validate hidden related product")
+        print("Validate hidden related product")
+
+        try:
+            self.element("related_products_span").wait_visible()
+        except:
+            print("related product does not visible as expected")
+            return True
+    def validate_hidden_related_cateogory(self):
+        logging.info("Validate hidden related category")
+        print("Validate hidden related category")
+
+        try:
+            self.element("related_categories_span").wait_visible()
+        except:
+            print("related category does not visible as expected")
+            return True
