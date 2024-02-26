@@ -59,3 +59,6 @@ class WebElementWrapper:
 
         return self.__driver.switch_to.frame(self.__locator[1])
 
+    def get_locator_value(self):
+        return self.__locator[1]
+

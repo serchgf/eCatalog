@@ -153,7 +153,8 @@ class BasePage:
 
     def scroll_to_element(self, element):
         logging.info(f"Scroll Down to Element: {element}")
-        script = f'var elemento = document.evaluate("{element}", document, null, 9, null).singleNodeValue; elemento.scrollIntoView();'
+        xpath = self.element(element).get_locator_value()
+        script = f'var elemento = document.evaluate("{xpath}", document, null, 9, null).singleNodeValue; elemento.scrollIntoView();'
         time.sleep(1)
         self.__driver.execute_script(script)
 

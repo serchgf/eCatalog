@@ -47,12 +47,41 @@ def test_MXTEST_10419_PDP_With_No_video_Resource(web_drivers):
 
 
 # MXTEST-10420
+@pytest.mark.phase2_sp1
+@pytest.mark.flaky(reruns=1)
+def test_MXTEST_10420_FAQ_Top_Answer(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    home_page.wait_spinner_disappears()
+    home_page.click_help_center()
+    home_page.validate_help_center_page()
+    home_page.scroll_to_element("hcp_all_faq_btn")
+    faq_titles = home_page.element("hcp_faq_titles").find_elements()
+    assert len(faq_titles) == 5, "The page should display 5 frequently asked questions"
+    faq_titles[0].click()
+    home_page.element("hcp_faq_answer").wait_visible()
+    faq_titles[2].click()
+    home_page.element("hcp_faq_answer").wait_visible()
 
 # MXTEST-10421
+@pytest.mark.phase2_sp1
+@pytest.mark.flaky(reruns=1)
+def test_MXTEST_10421_FAQ_All_Answer(web_drivers):
+    home_page = HomePage(*web_drivers)
+    home_page.open()
+    home_page.wait_spinner_disappears()
+    home_page.click_help_center()
+    home_page.validate_help_center_page()
+    home_page.scroll_to_element("hcp_all_faq_btn")
+    faq_5_titles = home_page.element("hcp_faq_titles").find_elements()
+    assert len(faq_5_titles) == 5, "The page should display 5 frequently asked questions"
+    home_page.element("hcp_all_faq_btn").find_element().click()
+    faq_all_titles = home_page.element("hcp_faq_titles").find_elements()
+    assert len(faq_all_titles) >= 18, "The page should display 18 frequently asked questions"
 
 # MXTEST-10422
 @pytest.mark.phase2_sp1
-#@pytest.mark.flaky(reruns=3)
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_10422_HelpCenter_ReportIncident(web_drivers):
     img1 = "C://Users//m1jlariosm//OneDrive - oreillyauto//blue-nature.jpg"
     text = """Lorem ipsum dolor sit amet consectetur adipiscing elit, 
@@ -73,15 +102,13 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.open()
     home_page.wait_spinner_disappears()
     home_page.click_help_center()
-    #home_page.wait_spinner_disappears()
     home_page.validate_help_center_page()
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
-    #home_page.scroll_to_element("//input[@formcontrolname='employeID']") #XPATH for ID employee field
     home_page.element("irm_employId").wait_visible().send_keys("3805", Keys.ENTER)  #
     home_page.select_incident_type()
     home_page.select_frequency()
-    home_page.scroll_to_element("//button[@type='submit']")
+    home_page.scroll_to_element("irm_submit_btn")
     home_page.element("irm_description").find_element().send_keys(text)
     home_page.element("irm_add_file").find_element().send_keys(img1)
     home_page.element("irm_form").find_element().submit()
@@ -89,7 +116,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 
 # MXTEST-10423
 @pytest.mark.phase2_sp1
-#@pytest.mark.flaky(reruns=3)
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_10423_HelpCenter_InvalidEmail(web_drivers):
     img1 = "C://Users//m1jlariosm//OneDrive - oreillyauto//blue-nature.jpg"
     text = """Lorem ipsum dolor sit amet consectetur adipiscing elit, 
@@ -114,7 +141,6 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.validate_help_center_page()
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
-    #home_page.scroll_to_element("//input[@formcontrolname='employeID']") #XPATH for ID employee field
     home_page.element("irm_employId").wait_visible().send_keys("4050", Keys.ENTER)
     home_page.element("irm_employeeEmail").wait_clickable().send_keys("a@b", Keys.ENTER)
     email_error = home_page.element("irm_error_msg").wait_visible().text
@@ -126,7 +152,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.element("irm_employeeEmail").wait_visible().send_keys("juan.larios@oreillyauto.mx", Keys.ENTER)
     home_page.select_incident_type()
     home_page.select_frequency()
-    home_page.scroll_to_element("//button[@type='submit']")
+    home_page.scroll_to_element("irm_submit_btn")
     home_page.element("irm_description").find_element().send_keys(text)
     home_page.element("irm_add_file").find_element().send_keys(img1)
     home_page.element("irm_form").find_element().submit()
@@ -137,7 +163,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 
 # MXTEST-10424
 @pytest.mark.phase2_sp1
-#@pytest.mark.flaky(reruns=3)
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
     img1 = "C:/Users/m1jlariosm/OneDrive - oreillyauto/pic1.jpg"
     img2 = "C:/Users/m1jlariosm/OneDrive - oreillyauto/pic2.jpg"
@@ -149,11 +175,11 @@ def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
     home_page.validate_help_center_page()
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
-    home_page.scroll_to_element("//button[@type='submit']") #XPATH for submint button
+    home_page.scroll_to_element("irm_submit_btn")
     home_page.element("irm_submit_btn").find_element().click()
     messages = [message.text for message in home_page.element("irm_error_msg").find_elements()]
     assert home_page.validate_error_messages(messages) > 0, "The modal should display at least one error message"
-    home_page.scroll_to_element("//input[@formcontrolname='employeID']") #XPATH for ID employee field
+    home_page.scroll_to_element("irm_employId")
     home_page.element("irm_employId").wait_visible().send_keys("3805", Keys.ENTER)  #
     home_page.select_incident_type()
     home_page.element("irm_description").find_element().send_keys(" ")
@@ -173,7 +199,7 @@ def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
 
 # MXTEST-10425
 @pytest.mark.phase2_sp1
-#@pytest.mark.flaky(reruns=3)
+@pytest.mark.flaky(reruns=1)
 def test_MXTEST_10425_HelpCenter_Video_assistance(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -181,7 +207,7 @@ def test_MXTEST_10425_HelpCenter_Video_assistance(web_drivers):
     home_page.click_help_center()
     #home_page.wait_spinner_disappears()
     home_page.validate_help_center_page()
-    home_page.scroll_to_element("//div[contains(@class,'video-info')]")  #XPATH for the videos title
+    home_page.scroll_to_element("hcp_video_title")
     title_txt = home_page.get_video_titles()
     window_title = home_page.select_random_video()
     assert window_title in title_txt, f"The title of the new window should be one of this {title_txt}"

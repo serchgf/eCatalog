@@ -943,6 +943,19 @@
     "irm_employeeEmail": {
       "by": "XPATH",
       "value": "//*[@formcontrolname='employeEmail']"
+    },
+
+    "hcp_all_faq_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'todas las preguntas')]"
+    },
+    "hcp_faq_titles": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'p-accordion-header-text')]"
+    },
+    "hcp_faq_answer": {
+      "by": "XPATH",
+      "value": "//div[@aria-hidden='false']//p"
     }
   }
 }

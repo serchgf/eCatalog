@@ -1958,7 +1958,7 @@ class HomePage(BasePage):
     def select_random_video(self):
         videos = self.element("hcp_video_button").find_elements()
         index = random.randint(0, len(videos) - 1)
-        self.scroll_to_element(f"(//div[contains(@class,'video-info')]/span)[{index + 1}]")
+        # self.scroll_to_element(f"(//div[contains(@class,'video-info')]/span)[{index + 1}]")
         videos[index].click()
         self.wait_until_page_load_complete()
         return self.switch_to_window()
