@@ -9,6 +9,7 @@ from selenium.common import TimeoutException
 from selenium.webdriver.common.keys import Keys
 
 from src.page_objects.home_page import HomePage
+from src.page_objects.base_page import images
 
 _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "HomePage.json")
 
@@ -83,7 +84,7 @@ def test_MXTEST_10421_FAQ_All_Answer(web_drivers):
 @pytest.mark.phase2_sp1
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_10422_HelpCenter_ReportIncident(web_drivers):
-    img1 = "C://Users//m1jlariosm//OneDrive - oreillyauto//blue-nature.jpg"
+
     text = """Lorem ipsum dolor sit amet consectetur adipiscing elit, 
 semper pulvinar ad cubilia turpis porta, varius leo nisi hendrerit hac 
 morbi. Tortor nostra senectus molestie malesuada conubia commodo ultricies 
@@ -110,15 +111,14 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.select_frequency()
     home_page.scroll_to_element("irm_submit_btn")
     home_page.element("irm_description").find_element().send_keys(text)
-    home_page.element("irm_add_file").find_element().send_keys(img1)
+    home_page.element("irm_add_file").find_element().send_keys(os.path.abspath(images.pic3))
     home_page.element("irm_form").find_element().submit()
     home_page.element("irm_send_notification").wait_visible()
 
 # MXTEST-10423
 @pytest.mark.phase2_sp1
-@pytest.mark.flaky(reruns=1)
+#@pytest.mark.flaky(reruns=1)
 def test_MXTEST_10423_HelpCenter_InvalidEmail(web_drivers):
-    img1 = "C://Users//m1jlariosm//OneDrive - oreillyauto//blue-nature.jpg"
     text = """Lorem ipsum dolor sit amet consectetur adipiscing elit, 
 semper pulvinar ad cubilia turpis porta, varius leo nisi hendrerit hac 
 morbi. Tortor nostra senectus molestie malesuada conubia commodo ultricies 
@@ -154,7 +154,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.select_frequency()
     home_page.scroll_to_element("irm_submit_btn")
     home_page.element("irm_description").find_element().send_keys(text)
-    home_page.element("irm_add_file").find_element().send_keys(img1)
+    home_page.element("irm_add_file").find_element().send_keys(os.path.abspath(images.pic3))
     home_page.element("irm_form").find_element().submit()
     messages = [message.text for message in home_page.element("irm_error_msg").find_elements()]
     assert home_page.validate_error_messages(messages) == 0, "The modal should not display any error message"
@@ -165,8 +165,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 @pytest.mark.phase2_sp1
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
-    img1 = "C:/Users/m1jlariosm/OneDrive - oreillyauto/pic1.jpg"
-    img2 = "C:/Users/m1jlariosm/OneDrive - oreillyauto/pic2.jpg"
+
     home_page = HomePage(*web_drivers)
     home_page.open()
     home_page.wait_spinner_disappears()
@@ -183,11 +182,11 @@ def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
     home_page.element("irm_employId").wait_visible().send_keys("3805", Keys.ENTER)  #
     home_page.select_incident_type()
     home_page.element("irm_description").find_element().send_keys(" ")
-    home_page.element("irm_add_file").find_element().send_keys(img1)
+    home_page.element("irm_add_file").find_element().send_keys(os.path.abspath(images.pic1))
     assert home_page.element("irm_upload_error_msg").wait_visible().text == "error Solo se permiten archivos de hasta 2 MB.", "The upload size error message does not appear on the page"
     home_page.element("irm_upload_error_msg").wait_until_disappears()
     home_page.clear_img_input()
-    home_page.element("irm_add_file").find_element().send_keys(img2)
+    home_page.element("irm_add_file").find_element().send_keys(os.path.abspath(images.pic2))
     home_page.element("irm_submit_btn").find_element().click()
     messages = [message.text for message in home_page.element("irm_error_msg").find_elements()]
     assert home_page.validate_error_messages(messages) > 0, "The modal should display at least one error message"
