@@ -956,6 +956,10 @@
     "hcp_faq_answer": {
       "by": "XPATH",
       "value": "//div[@aria-hidden='false']//p"
+    },
+    "hcp_paginator": {
+      "by": "XPATH",
+      "value": "//p-paginator[contains(@class,'videos-paginator')]"
     }
   }
 }

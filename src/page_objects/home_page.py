@@ -1912,6 +1912,7 @@ class HomePage(BasePage):
             print("related category does not visible as expected")
             return True
     def validate_help_center_page(self):
+        time.sleep(1)
         logging.info("Validate that Help Center page is loaded")
         assert self.element("hcp_title").find_element().text == "Centro de ayuda", "The title should be 'Centro de ayuda'"
         assert self.element("hcp_faq_title").find_element().text == "Preguntas frecuentes", "The FAQ´s title should be 'Preguntas frecuentes'"
@@ -1958,7 +1959,10 @@ class HomePage(BasePage):
     def select_random_video(self):
         videos = self.element("hcp_video_button").find_elements()
         index = random.randint(0, len(videos) - 1)
-        # self.scroll_to_element(f"(//div[contains(@class,'video-info')]/span)[{index + 1}]")
+        try:
+            self.scroll_to_element("hcp_paginator")
+        except JavascriptException:
+            pass
         videos[index].click()
         self.wait_until_page_load_complete()
         return self.switch_to_window()
