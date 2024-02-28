@@ -198,6 +198,7 @@ def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
 
 # General System Functionality-------------------------------------------------------------------------------------------------------------
 
+
 # MXTEST-10425
 @pytest.mark.phase2_sp1
 @pytest.mark.flaky(reruns=3)
