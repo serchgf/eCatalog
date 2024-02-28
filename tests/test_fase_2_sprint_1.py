@@ -18,13 +18,14 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # PDP Visualize Product Details Page-------------------------------------------------------------------------------------------------------------
 
 # MXTEST-10418
-#@pytest.mark.phase2_sp1
+@pytest.mark.phase2_sp1
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10418_PDP_Video_Preview(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/search/detail/moog-suspension-control-arm-and-ball-joint-assembly-ck620054/mym0/ck620054?q=ck620054"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    home_page.press_PageDown_key()
     home_page.click_resources_tab()
     home_page.wait_spinner_disappears()
     home_page.click_on_video()
@@ -32,8 +33,8 @@ def test_MXTEST_10418_PDP_Video_Preview(web_drivers):
 
 
 # MXTEST-10419
-#@pytest.mark.phase2_sp1
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.phase2_sp1
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10419_PDP_With_No_video_Resource(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/search/detail/dupli-color-scratch-fix-all-in-1-0.5-ounce-metallic-steel-blue-touch-up-paint-acc0408/dpli/acc0408?q=acc0408"
@@ -42,6 +43,7 @@ def test_MXTEST_10419_PDP_With_No_video_Resource(web_drivers):
     home_page.click_resources_tab()
     home_page.wait_spinner_disappears()
     home_page.press_PageDown_key()
+    home_page.wait_spinner_disappears()
     # CREAR FUNCION QUE VALIDE QUE NO ES VISIBLE EL VIDEO
     assert home_page.validate_hidden_video_resource(), "This video resource should not be visible"
     home_page.take_screenshot("video no exists as expected")
@@ -49,7 +51,7 @@ def test_MXTEST_10419_PDP_With_No_video_Resource(web_drivers):
 
 # MXTEST-10420
 @pytest.mark.phase2_sp1
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10420_FAQ_Top_Answer(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -66,7 +68,7 @@ def test_MXTEST_10420_FAQ_Top_Answer(web_drivers):
 
 # MXTEST-10421
 @pytest.mark.phase2_sp1
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10421_FAQ_All_Answer(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -82,7 +84,7 @@ def test_MXTEST_10421_FAQ_All_Answer(web_drivers):
 
 # MXTEST-10422
 @pytest.mark.phase2_sp1
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10422_HelpCenter_ReportIncident(web_drivers):
 
     text = """Lorem ipsum dolor sit amet consectetur adipiscing elit, 
@@ -117,7 +119,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 
 # MXTEST-10423
 @pytest.mark.phase2_sp1
-#@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10423_HelpCenter_InvalidEmail(web_drivers):
     text = """Lorem ipsum dolor sit amet consectetur adipiscing elit, 
 semper pulvinar ad cubilia turpis porta, varius leo nisi hendrerit hac 
@@ -163,7 +165,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 
 # MXTEST-10424
 @pytest.mark.phase2_sp1
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
 
     home_page = HomePage(*web_drivers)
@@ -198,7 +200,7 @@ def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
 
 # MXTEST-10425
 @pytest.mark.phase2_sp1
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10425_HelpCenter_Video_assistance(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -219,8 +221,8 @@ def test_MXTEST_10425_HelpCenter_Video_assistance(web_drivers):
 
 
 # MXTEST-10426
-#@pytest.mark.phase2_sp1
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.phase2_sp1
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10426_RelatedCarrousel_Product(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -231,14 +233,20 @@ def test_MXTEST_10426_RelatedCarrousel_Product(web_drivers):
     product_list = home_page.get_link_product_list()
     home_page.clic_javacript(product_list[0])
     home_page.wait_spinner_disappears()
+    home_page.press_PageDown_key()
+    home_page.wait_spinner_disappears()
     home_page.click_details_tab()
+    home_page.press_PageDown_key()
+    home_page.press_PageDown_key()
+    home_page.press_PageDown_key()
+    home_page.wait_spinner_disappears()
     home_page.click_random_related_product()
     home_page.wait_spinner_disappears()
 
 
 # MXTEST-10427
 @pytest.mark.phase2_sp1
-#@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10427_RelatedCarrousel_Category(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -252,14 +260,15 @@ def test_MXTEST_10427_RelatedCarrousel_Category(web_drivers):
     home_page.click_details_tab()
     home_page.press_PageDown_key()
     home_page.press_PageDown_key()
-    home_page.wait_spinner_disappears()
     home_page.press_PageDown_key()
+    home_page.press_PageDown_key()
+    home_page.wait_spinner_disappears()
     home_page.click_random_related_Category()
     home_page.wait_spinner_disappears()
 
 # MXTEST-10428
-#@pytest.mark.phase2_sp1
-#@pytest.mark.flaky(reruns=1)
+@pytest.mark.phase2_sp1
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10428_PDP_Article_WITHOUT_Related_Categories(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -276,8 +285,8 @@ def test_MXTEST_10428_PDP_Article_WITHOUT_Related_Categories(web_drivers):
     home_page.validate_hidden_related_cateogory()
 
 # MXTEST-10429
-#@pytest.mark.phase2_sp1
-#@pytest.mark.flaky(reruns=1)
+@pytest.mark.phase2_sp1
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10429_PDP_Article_WITHOUT_Related_products(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -290,5 +299,7 @@ def test_MXTEST_10429_PDP_Article_WITHOUT_Related_products(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.click_details_tab()
     home_page.press_PageDown_key()
+    home_page.press_PageDown_key()
+    home_page.wait_spinner_disappears()
     home_page.press_PageDown_key()
     home_page.validate_hidden_related_product()
