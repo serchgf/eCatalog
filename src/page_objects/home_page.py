@@ -1848,7 +1848,7 @@ class HomePage(BasePage):
 
     def click_help_center(self):
         logging.info("Scroll down and click in Help Center button")
-        self.scroll_down()
+       # self.scroll_down()
         self.element("help_center_btn").find_element().click()
 
 # Phase 2 sprint 1-------------------------------------------------------------------------------------------------
@@ -1914,19 +1914,19 @@ class HomePage(BasePage):
     def validate_help_center_page(self):
         time.sleep(1)
         logging.info("Validate that Help Center page is loaded")
-        assert self.element("hcp_title").find_element().text == "Centro de ayuda", "The title should be 'Centro de ayuda'"
-        assert self.element("hcp_faq_title").find_element().text == "Preguntas frecuentes", "The FAQ´s title should be 'Preguntas frecuentes'"
-        assert self.element("hcp_videos_section").find_element().text == "Videos de apoyo", "The videos section title should be 'Videos de apoyo'"
-        assert self.element("hcp_issue_report").find_element().text == "REPORTAR UN INCIDENTE", "The issue report button title should be 'REPORTAR UN INCIDENTE'"
+        assert self.element("hcp_title").find_element().text == "Help center", "The title should be 'Help center'"
+        assert self.element("hcp_faq_title").find_element().text == "Frequently asked questions", "The FAQ´s title should be 'Frequently asked questions'"
+        assert self.element("hcp_videos_section").find_element().text == "Assistance videos", "The videos section title should be 'Assistance videos'"
+        assert self.element("hcp_issue_report").find_element().text == "REPORT AN ISSUE", "The issue report button title should be 'REPORT AN ISSUE'"
 
     def validate_issue_report_modal(self):
         logging.info("Validate that the issue report modal is displayed in page")
         time.sleep(1)
-        assert self.element("irm_title").find_element().text == "Reporte de incidente","The modal's title should be 'Reporte de incidente'"
-        assert self.element("irm_user_info").find_element().text == "Información del usuario", "The user info section title should be 'Información del usuario'"
-        assert self.element("irm_about_issue").find_element().text == "Acerca del incidente", "The about issue section title should be 'Acerca del incidente'"
-        assert self.element("irm_issue_description").find_element().text == "Describe el incidente", "The issue description title should be 'Describe el incidente'"
-        assert self.element("irm_submit_btn").find_element().is_displayed(), "The 'Enviar Informe' button should be present"
+        assert self.element("irm_title").find_element().text == "Issue report","The modal's title should be 'Issue report'"
+        assert self.element("irm_user_info").find_element().text == "User info", "The user info section title should be 'User info'"
+        assert self.element("irm_about_issue").find_element().text == "About the issue", "The about issue section title should be 'About the issue'"
+        assert self.element("irm_issue_description").find_element().text == "Describe the issue", "The issue description title should be 'Describe the issue'"
+        assert self.element("irm_submit_btn").find_element().is_displayed(), "The 'Send' button should be present"
 
     def validate_error_messages(self, messages:list):
         logging.info("Validate that the error messages are displayed")
@@ -1965,8 +1965,16 @@ class HomePage(BasePage):
             pass
         videos[index].click()
         self.wait_until_page_load_complete()
-        return self.switch_to_window()
+        #return self.switch_to_window()
+        return self.get_title()
+
     def get_video_titles(self):
         videos_titles = self.element("hcp_video_title").find_elements()
         title_txt = [title.text for title in videos_titles]
         return title_txt
+
+    def change_lenguage(self):
+        logging.info("Select 'Español' lenguage")
+        self.element("lenguage_btn").find_element().click()
+        self.element("lenguage_list").wait_visible()
+        self.element("esp_option").find_element().click()

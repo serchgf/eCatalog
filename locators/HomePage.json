@@ -18,7 +18,7 @@
       "by": "XPATH",
       "value": "//input[@role='searchbox']"
     },
-    "carousel" : {
+    "carousel": {
       "by": "XPATH",
       "value": "//ul[@ng-reflect-ng-class='p-carousel-indicators p-reset']"
     },
@@ -186,7 +186,7 @@
       "by": "XPATH",
       "value": "//p[@tooltipposition='top']"
     },
-    "last_viewed_products_label":{
+    "last_viewed_products_label": {
       "by": "XPATH",
       "value": "//span[contains(text(),'Latest Viewed Products')]"
     },
@@ -230,7 +230,7 @@
       "by": "XPATH",
       "value": "//section[@class='submenu ps-5 ng-star-inserted']//span[contains(text(),'BRANDS')]"
     },
-     "deals_button": {
+    "deals_button": {
       "by": "XPATH",
       "value": "//span[contains(text(),'DEALS')]"
     },
@@ -246,7 +246,7 @@
       "by": "XPATH",
       "value": "//div[contains(text(),' Explore Brands ')]"
     },
-    "all_brands_link_list":{
+    "all_brands_link_list": {
       "by": "XPATH",
       "value": "//span[@class='p-button-label ng-star-inserted']"
     },
@@ -262,7 +262,7 @@
       "by": "XPATH",
       "value": "//h3[contains(text(),'GENERAL CATEGORIES')]"
     },
-    "part_number":{
+    "part_number": {
       "by": "XPATH",
       "value": "//div[@class='actions']//div/div"
     },
@@ -298,7 +298,7 @@
       "by": "XPATH",
       "value": "//div[@class='category-nav-limiter']"
     },
-      "category_nav_limiter_h2": {
+    "category_nav_limiter_h2": {
       "by": "XPATH",
       "value": "//div[@class='category-nav-limiter']/h2"
     },
@@ -306,7 +306,7 @@
       "by": "XPATH",
       "value": "//div[@class='check-compatibility-action']//button"
     },
-    "check_vehicle_fit_btn_produccion":{
+    "check_vehicle_fit_btn_produccion": {
       "by": "XPATH",
       "value": "//span[contains(text(),'Check vehicle fit')]/parent::button"
     },
@@ -350,7 +350,7 @@
       "by": "XPATH",
       "value": "//app-copy-to-clipboard"
     },
-       "categories_btn": {
+    "categories_btn": {
       "by": "XPATH",
       "value": "//section//span[contains(text(),'CATEGORIES')]/following-sibling::i"
     },
@@ -391,12 +391,10 @@
       "by": "XPATH",
       "value": "//div[@class='description']/span[contains(text(),'no results were found')]"
     },
-
     "autocomplet_panel": {
       "by": "XPATH",
       "value": "//div[contains(@class,'p-autocomplete-panel')]"
     },
-
     "model_input": {
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='model']//input"
@@ -405,22 +403,18 @@
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='subModel']//input"
     },
-
     "engine_input": {
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='engine']//input"
     },
-
     "year_input": {
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='year']//input"
     },
-
     "make_input": {
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='make']//input"
     },
-
     "additional_cat_names": {
       "by": "XPATH",
       "value": "//div[contains(@class,'category-nav-button-text')]/span"
@@ -433,7 +427,7 @@
       "by": "XPATH",
       "value": "//div[@role='badge']/p/span[contains(@class,'roboto-400')]"
     },
-    "filter_option_selected":{
+    "filter_option_selected": {
       "by": "XPATH",
       "value": "//div[@class='p-element filter']/span"
     },
@@ -449,20 +443,19 @@
       "by": "XPATH",
       "value": "//span[contains(@class,'vehicle-selected notranslate')]"
     },
-    "MEX_span":{
+    "MEX_span": {
       "by": "XPATH",
       "value": "//span[contains(text(),'MEX')]"
     },
-    "CAN_span":{
+    "CAN_span": {
       "by": "XPATH",
       "value": "//span[contains(text(),'CAN')]"
     },
-    "USA_span":{
+    "USA_span": {
       "by": "XPATH",
       "value": "//span[contains(text(),'USA')]"
     },
-
-    "search_history_link":{
+    "search_history_link": {
       "by": "XPATH",
       "value": "//span[contains(text(),'SEARCH HISTORY')]"
     },
@@ -470,37 +463,37 @@
       "by": "XPATH",
       "value": "//button[@class='p-ripple p-element p-treetable-toggler p-link']"
     },
-      "open_search":{
-        "by": "ID",
-        "value": "p-tabpanel-2-label"
+    "open_search": {
+      "by": "ID",
+      "value": "p-tabpanel-2-label"
     },
     "img_of_product": {
       "by": "XPATH",
       "value": "//img[@class='p-1']"
     },
-    "backward_button_latest":{
+    "backward_button_latest": {
       "by": "XPATH",
       "value": "//span[@class='p-carousel-prev-icon pi pi-chevron-left']"
     },
-    "forward_button_latest":{
+    "forward_button_latest": {
       "by": "XPATH",
       "value": "//span[@class='p-carousel-prev-icon pi pi-chevron-right']"
     },
-    "click_firts_lastest_product":{
+    "click_firts_lastest_product": {
       "by": "XPATH",
       "value": "//div[@class='o-products-carousel p-carousel p-component p-carousel-horizontal']"
     },
-    "delete_element_open_search":{
-    "by": "XPATH",
-    "value": "//i[@class='pi pi-times remove-button-icon']"
+    "delete_element_open_search": {
+      "by": "XPATH",
+      "value": "//i[@class='pi pi-times remove-button-icon']"
     },
-    "searchbar_in_search_history":{
-    "by": "XPATH",
-    "value": "//div[@id='p-tabpanel-0']//input[@placeholder='Search']"
+    "searchbar_in_search_history": {
+      "by": "XPATH",
+      "value": "//div[@id='p-tabpanel-0']//input[@placeholder='Search']"
     },
-    "Empty_Brand_Dupli_Color_MX":{
-    "by": "XPATH",
-    "value": "//span[contains(text(),'Dupli-Color')]"
+    "Empty_Brand_Dupli_Color_MX": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Dupli-Color')]"
     },
     "button_remove_from_search_history": {
       "by": "XPATH",
@@ -514,7 +507,7 @@
       "by": "XPATH",
       "value": "//span[text()='Add vehicle']"
     },
-    "detailed_description_span":{
+    "detailed_description_span": {
       "by": "XPATH",
       "value": "//span[contains(text(),' Detailed description ')]"
     },
@@ -611,14 +604,13 @@
       "value": "//p-button[@ng-reflect-label='Send Report']"
     },
     "report_created_confirmation": {
-      "by":"XPATH",
+      "by": "XPATH",
       "value": "//span[contains(text(),'Report created')]"
     },
     "report_ticket_number": {
       "by": "XPATH",
       "value": "//span[contains(text(),'TICKET')]"
     },
-
     "modal_order_list_subtitle": {
       "by": "XPATH",
       "value": "//h3[contains(text(),'Order list')]"
@@ -681,7 +673,7 @@
     },
     "clear_history_btn": {
       "by": "XPATH",
-      "value":"//span[contains(text(),'CLEAR HISTORY')]"
+      "value": "//span[contains(text(),'CLEAR HISTORY')]"
     },
     "clear_search_history_label": {
       "by": "XPATH",
@@ -695,31 +687,31 @@
       "by": "XPATH",
       "value": "//span[contains(text(),'oil')]"
     },
-    "MEX_check":{
+    "MEX_check": {
       "by": "XPATH",
       "value": "//p-checkbox[@ng-reflect-value='2']"
     },
-    "CAN_check":{
+    "CAN_check": {
       "by": "XPATH",
       "value": "//p-checkbox[@ng-reflect-value='1']"
     },
-    "USA_check":{
+    "USA_check": {
       "by": "XPATH",
       "value": "//p-checkbox[@ng-reflect-value='3']"
     },
-    "chip_elements":{
+    "chip_elements": {
       "by": "XPATH",
       "value": "//div[@class='ng-star-inserted']//p-chip"
     },
-    "cartek_brand":{
+    "cartek_brand": {
       "by": "XPATH",
       "value": "//o-brand-menu//img/following-sibling::span[text()='Cartek']"
     },
-    "bodyglove_brand":{
+    "bodyglove_brand": {
       "by": "XPATH",
       "value": "//o-brand-menu//img/following-sibling::span[contains(text(),'Body Glove')]"
     },
-    "add_to_list_btn":{
+    "add_to_list_btn": {
       "by": "XPATH",
       "value": "//button/span[text()='add to list']"
     },
@@ -751,7 +743,7 @@
       "by": "XPATH",
       "value": "//span[contains(.,'You haven')]"
     },
-     "order_list_button": {
+    "order_list_button": {
       "by": "XPATH",
       "value": "//span[contains(.,'ORDER LIST')]"
     },
@@ -799,7 +791,7 @@
       "by": "XPATH",
       "value": "//a[@fragment='applications']"
     },
-    "gates_brand":{
+    "gates_brand": {
       "by": "XPATH",
       "value": "//o-brand-menu//img/following-sibling::span[text()='Gates']"
     },
@@ -839,33 +831,33 @@
       "by": "XPATH",
       "value": "//div[@class='related-products-container']/app-carousel[2]//div[@class='card-container']"
     },
-
     "help_center_btn": {
       "by": "XPATH",
-      "value": "//a[text()='Help center']"
+      "value": "//a[contains(text(),'Help center')]"
     },
-
+    "centro_ayuda_btn": {
+      "by": "XPATH",
+      "value": "//a[contains(text(),'Centro de ayuda')]"
+    },
     "hcp_title": {
       "by": "XPATH",
       "value": "//div[@class='help-center-title']/span[1]"
     },
     "hcp_faq_title": {
       "by": "XPATH",
-      "value": "//div[@class='faq-title']/span[1]"
+      "value": "//div[@class='questions-title']/span[1]"
     },
     "hcp_videos_section": {
       "by": "XPATH",
       "value": "//section[@class='help-center-videos']/span"
     },
-
     "hcp_issue_report": {
       "by": "XPATH",
       "value": "//div[@class='issue-report-bar']/button/span[2]"
     },
-
     "hcp_video_button": {
       "by": "XPATH",
-      "value": "//div[contains(@class,'video-button')]"
+      "value": "//a[contains(@class,'video-button')]"
     },
     "hcp_video_title": {
       "by": "XPATH",
@@ -877,17 +869,16 @@
     },
     "irm_title": {
       "by": "XPATH",
-      "value": "//div[@class='issue-report-title']/span"
+      "value": "//div[contains(@class,'issue-report-title')]/span"
     },
     "irm_user_info": {
       "by": "XPATH",
-      "value": "(//div[@class='issue-report-content']/span)[1]"
+      "value": "(//div[contains(@class,'issue-report-content')]/span)[1]"
     },
     "irm_about_issue": {
       "by": "XPATH",
-      "value": "(//div[@class='issue-report-content']/span)[2]"
+      "value": "(//div[contains(@class,'issue-report-content')]/span)[4]"
     },
-
     "irm_issue_description": {
       "by": "XPATH",
       "value": "//div[contains(@class,'issue-report-description')]/span"
@@ -906,7 +897,7 @@
     },
     "irm_error_msg": {
       "by": "XPATH",
-      "value": "//span[contains(@class,'o-text-secondary')]"
+      "value": "//span[contains(@class,'icon-error-advice')]"
     },
     "irm_employId": {
       "by": "XPATH",
@@ -916,17 +907,17 @@
       "by": "XPATH",
       "value": "//*[@formcontrolname='incidentType']"
     },
-     "irm_dropdown_options": {
+    "irm_dropdown_options": {
       "by": "XPATH",
       "value": "//li[@role='option']"
     },
     "irm_frequency": {
       "by": "XPATH",
-      "value": "//*[@formcontrolname='frequence']"
+      "value": "//*[@formcontrolname='frequency']"
     },
     "irm_upload_error_msg": {
       "by": "XPATH",
-      "value": "//small[contains(@class,'advice-content')]"
+      "value": "//div[contains(@class,'u-advice-content')]/small"
     },
     "irm_description": {
       "by": "XPATH",
@@ -934,7 +925,7 @@
     },
     "irm_send_notification": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Informe enviado')]"
+      "value": "//div[@class='ticket-content-container']"
     },
     "irm_form": {
       "by": "XPATH",
@@ -944,10 +935,9 @@
       "by": "XPATH",
       "value": "//*[@formcontrolname='employeEmail']"
     },
-
     "hcp_all_faq_btn": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'todas las preguntas')]"
+      "value": "//a[contains(@class,'questions-link')]"
     },
     "hcp_faq_titles": {
       "by": "XPATH",
@@ -960,6 +950,22 @@
     "hcp_paginator": {
       "by": "XPATH",
       "value": "//p-paginator[contains(@class,'videos-paginator')]"
+    },
+    "lenguage_btn": {
+      "by": "XPATH",
+      "value": "//button[@aria-label='language']"
+    },
+    "lenguage_list": {
+      "by": "XPATH",
+      "value": "//ul[@role='listbox']"
+    },
+    "esp_option": {
+      "by": "XPATH",
+      "value": "//div[contains(text(),'Espa')]"
+    },
+    "nip_verified": {
+    "by": "XPATH",
+    "value": "//span[contains(text(),'NIP verified')]"
     }
   }
 }
