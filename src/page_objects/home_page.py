@@ -1541,6 +1541,7 @@ class HomePage(BasePage):
         logging.info("Wait spinner disappears")
         self.element("loading_img").wait_until_disappears()
 
+
     # -------------------------------------------SPRINT 2-------------------------------------------------------------------
 
     def get_random_brand_icon_list(self):

@@ -897,7 +897,7 @@
     },
     "irm_error_msg": {
       "by": "XPATH",
-      "value": "//span[contains(@class,'icon-error-advice')]"
+      "value": "//span[contains(@class,'icon-error-advice')]/following-sibling::span"
     },
     "irm_employId": {
       "by": "XPATH",

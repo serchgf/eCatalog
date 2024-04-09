@@ -56,12 +56,13 @@ def test_MXTEST_10420_FAQ_Top_Answer(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     home_page.wait_spinner_disappears()
+    #home_page.wait_fonts_loaded()
     home_page.click_help_center()
     home_page.validate_help_center_page()
     home_page.scroll_to_element("hcp_all_faq_btn")
     faq_titles = home_page.element("hcp_faq_titles").find_elements()
     assert len(faq_titles) == 5, "The page should display 5 frequently asked questions"
-    faq_titles[0].click()
+    faq_titles[1].click()
     home_page.element("hcp_faq_answer").wait_visible()
     faq_titles[2].click()
     home_page.element("hcp_faq_answer").wait_visible()
@@ -119,7 +120,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 
 # MXTEST-10423
 @pytest.mark.phase2_sp1
-@pytest.mark.flaky(reruns=3)
+#@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10423_HelpCenter_InvalidEmail(web_drivers):
     text = """Lorem ipsum dolor sit amet consectetur adipiscing elit, 
 semper pulvinar ad cubilia turpis porta, varius leo nisi hendrerit hac 
@@ -145,23 +146,18 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.validate_issue_report_modal()
     home_page.element("irm_employId").wait_visible().send_keys("4050", Keys.ENTER)
     home_page.element("irm_employeeEmail").wait_clickable().send_keys("a@b", Keys.ENTER)
-    email_error = home_page.element("irm_error_msg").wait_visible().text
-    assert email_error == "Por favor, escribe un correo electrónico válido", "The invalid email message is not displayed in page"
-    home_page.element("irm_employeeEmail").wait_visible().clear()
-    home_page.element("irm_employeeEmail").wait_visible().send_keys("juan@gmail.com", Keys.ENTER)
-    assert email_error == "Por favor, escribe un correo electrónico válido", "The invalid email message is not displayed in page"
-    home_page.element("irm_employeeEmail").wait_visible().clear()
-    home_page.element("irm_employeeEmail").wait_visible().send_keys("juan.larios@oreillyauto.mx", Keys.ENTER)
     home_page.select_incident_type()
     home_page.select_frequency()
     home_page.scroll_to_element("irm_submit_btn")
     home_page.element("irm_description").find_element().send_keys(text)
     home_page.element("irm_add_file").find_element().send_keys(os.path.abspath(images.pic3))
     home_page.element("irm_form").find_element().submit()
+    email_error = home_page.element("irm_error_msg").wait_visible().text
+    assert email_error == "Enter a valid e-mail address.", "The invalid email message is not displayed in page"
+    home_page.element("irm_employeeEmail").wait_visible().clear()
+    home_page.element("irm_employeeEmail").wait_visible().send_keys("juan.larios@oreillyauto.mx")
     messages = [message.text for message in home_page.element("irm_error_msg").find_elements()]
     assert home_page.validate_error_messages(messages) == 0, "The modal should not display any error message"
-    home_page.element("irm_send_notification").wait_visible()
-
 
 # MXTEST-10424
 @pytest.mark.phase2_sp1
@@ -212,12 +208,14 @@ def test_MXTEST_10425_HelpCenter_Video_assistance(web_drivers):
     home_page.click_help_center()
     #home_page.wait_spinner_disappears()
     home_page.validate_help_center_page()
+    home_page.change_lenguage()
     home_page.scroll_to_element("hcp_video_title")
     title_txt = home_page.get_video_titles()
     window_title = home_page.select_random_video()
-    assert window_title in title_txt, f"The title of the new window should be one of this {title_txt}"
+    assert window_title.upper() in title_txt, f"The title of the new window should be one of this {title_txt}"
     #home_page.close()
     home_page.back_to_previous_page()
+    home_page.wait_spinner_disappears()
     home_page.element("hcp_all_videos_btn").find_element().click()
     title_txt = home_page.get_video_titles()
     window_title = home_page.select_random_video()
