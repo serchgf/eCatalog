@@ -842,7 +842,7 @@
 
     "help_center_btn": {
       "by": "XPATH",
-      "value": "//a[text()='Help center']"
+      "value": "//a[text()='Help center ']"
     },
 
     "hcp_title": {
