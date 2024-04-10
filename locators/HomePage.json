@@ -903,6 +903,10 @@
       "by": "XPATH",
       "value": "//input[@formcontrolname='employeID']"
     },
+     "irm_employName": {
+      "by": "XPATH",
+      "value": "//input[@formcontrolname='fullName']"
+    },
     "irm_incidentType": {
       "by": "XPATH",
       "value": "//*[@formcontrolname='incidentType']"
@@ -931,7 +935,7 @@
       "by": "XPATH",
       "value": "//form[contains(@class,'issue-report-form')]"
     },
-    "irm_employeeEmail": {
+    "irm_employEmail": {
       "by": "XPATH",
       "value": "//*[@formcontrolname='employeEmail']"
     },
@@ -966,6 +970,40 @@
     "nip_verified": {
     "by": "XPATH",
     "value": "//span[contains(text(),'NIP verified')]"
+    },
+     "input_nip": {
+      "by": "XPATH",
+      "value": "//*[@formcontrolname='nip']"
+    },
+    "input_email": {
+      "by": "XPATH",
+      "value": "//*[@formcontrolname='email']"
+    },
+    "shortcuts_menu_btn": {
+      "by": "XPATH",
+      "value": "//button[contains(@class,'link-shortcut')]"
+    },
+    "switch_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='p-inputswitch p-component']"
+    },
+    "switch_alert": {
+      "by": "XPATH",
+      "value": "//div[@role='alert']"
+    },
+    "close_modal_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'p-button-icon')]"
+    },
+    "close_alert_btn": {
+      "by": "XPATH",
+      "value": "//button[contains(@class,'p-toast-icon-close')]"
+    },
+    "breadcrumb_elements": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'breadcrum-segment')]/a/span"
     }
+
+
   }
 }

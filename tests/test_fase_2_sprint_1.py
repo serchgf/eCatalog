@@ -55,8 +55,8 @@ def test_MXTEST_10419_PDP_With_No_video_Resource(web_drivers):
 def test_MXTEST_10420_FAQ_Top_Answer(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
-    home_page.wait_spinner_disappears()
-    #home_page.wait_fonts_loaded()
+    #home_page.wait_spinner_disappears()
+    home_page.wait_fonts_loaded()
     home_page.click_help_center()
     home_page.validate_help_center_page()
     home_page.scroll_to_element("hcp_all_faq_btn")
@@ -145,7 +145,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
     home_page.element("irm_employId").wait_visible().send_keys("4050", Keys.ENTER)
-    home_page.element("irm_employeeEmail").wait_clickable().send_keys("a@b", Keys.ENTER)
+    home_page.element("irm_employEmail").wait_clickable().send_keys("a@b", Keys.ENTER)
     home_page.select_incident_type()
     home_page.select_frequency()
     home_page.scroll_to_element("irm_submit_btn")
@@ -154,8 +154,8 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.element("irm_form").find_element().submit()
     email_error = home_page.element("irm_error_msg").wait_visible().text
     assert email_error == "Enter a valid e-mail address.", "The invalid email message is not displayed in page"
-    home_page.element("irm_employeeEmail").wait_visible().clear()
-    home_page.element("irm_employeeEmail").wait_visible().send_keys("juan.larios@oreillyauto.mx")
+    home_page.element("irm_employEmail").wait_visible().clear()
+    home_page.element("irm_employEmail").wait_visible().send_keys("juan.larios@oreillyauto.mx")
     messages = [message.text for message in home_page.element("irm_error_msg").find_elements()]
     assert home_page.validate_error_messages(messages) == 0, "The modal should not display any error message"
 

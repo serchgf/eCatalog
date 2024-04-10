@@ -4,7 +4,8 @@ import random
 import time
 import mysql.connector
 from selenium.common import JavascriptException, ElementClickInterceptedException, NoSuchElementException
-from selenium.webdriver import ActionChains
+#from selenium.webdriver import ActionChains as AC
+from selenium.webdriver.common.action_chains import ActionChains as AC
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -1979,3 +1980,11 @@ class HomePage(BasePage):
         self.element("lenguage_btn").find_element().click()
         self.element("lenguage_list").wait_visible()
         self.element("esp_option").find_element().click()
+
+    def enable_disable_shortcuts(self):
+        logging.info("Click in 'Shortcuts Menu' button and enable/disable shortcuts")
+        self.element("shortcuts_menu_btn").find_element().click()
+        self.element("switch_btn").wait_visible().click()
+        self.element("switch_alert").wait_visible()
+        self.element("close_alert_btn").wait_clickable().click()
+        self.element("close_modal_btn").wait_clickable().click()
