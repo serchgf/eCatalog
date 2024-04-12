@@ -21,9 +21,9 @@ _LOCATOR_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "l
 _SCREENSHOTS_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "screenshots")
 
 class images:
-    pic1 = "image_files_/pic1.jpg"
-    pic2 = "image_files_/pic2.jpg"
-    pic3 = "image_files_/blue-nature.jpg"
+    pic1 = "../image_files_/pic1.jpg"
+    pic2 = "../image_files_/pic2.jpg"
+    pic3 = "../image_files_/blue-nature.jpg"
 class BasePage:
     def __init__(self, driver: WebDriver, wait_driver: WebDriverWait):
         self.__driver = driver
@@ -263,3 +263,51 @@ class BasePage:
         new_webelement_list = self.__driver.find_elements(By.XPATH, xpath_new)
         return new_webelement_list
 
+
+    def press_shortcuts(self, *args):
+        actions = AC(self.__driver)
+        key = [key_element for key_element in args]
+        if (key[0] == 'CTRL') and (key[1] == 'ALT') and (key[2] == 'n' or 'N'):
+            actions.key_down(Keys.CONTROL).key_down(Keys.ALT).send_keys('n')
+            actions.key_up(Keys.CONTROL).key_up(Keys.ALT).perform()
+            logging.info(f"Press keys Ctrl + Alt + N ")
+        if key[0] == 'ALT':
+            actions.key_down(Keys.ALT)
+            match key[1].upper():
+                case 'B':
+                    actions.send_keys('b')
+                case 'V':
+                    actions.send_keys('v')
+                case 'D':
+                    actions.send_keys('d')
+                case 'A':
+                    actions.send_keys('a')
+                case 'J':
+                    actions.send_keys('j')
+                case 'C':
+                    actions.send_keys('c')
+                case 'O':
+                    actions.send_keys('o')
+            actions.key_up(Keys.ALT).perform()
+            logging.info(f"Press keys Alt + {key[1]}")
+        if key[0] == 'SHIFT':
+            actions.key_down(Keys.SHIFT)
+            match key[1].upper():
+                case 'P':
+                    actions.send_keys('p')
+                case 'C':
+                    actions.send_keys('v')
+                case 'D':
+                    actions.send_keys('d')
+                case 'B':
+                    actions.send_keys('b')
+                case 'H':
+                    actions.send_keys('h')
+                case 'L':
+                    actions.send_keys('l')
+                case 'SPACE':
+                    actions.key_down(Keys.SPACE)
+                case 'DELETE':
+                    actions.key_down(Keys.DELETE)
+            actions.key_up(Keys.SHIFT).perform()
+            logging.info(f"Press keys Shift + {key[1]}")

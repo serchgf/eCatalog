@@ -216,7 +216,7 @@
     },
     "popular_categories_label": {
       "by": "XPATH",
-      "value": "//div[@id='top-categories']//span"
+      "value": "//h3[contains(text(),'POPULAR CATEGORIES')]"
     },
     "close_categories_x_button": {
       "by": "XPATH",
@@ -240,7 +240,7 @@
     },
     "show_all_brands_link": {
       "by": "XPATH",
-      "value": "//a[contains(text(),' Show all brands ')]"
+      "value": "//span[contains(text(),' Show all brands ')]"
     },
     "brands_images": {
       "by": "XPATH",
@@ -907,6 +907,10 @@
       "by": "XPATH",
       "value": "//input[@formcontrolname='employeID']"
     },
+     "irm_employName": {
+      "by": "XPATH",
+      "value": "//input[@formcontrolname='fullName']"
+    },
     "irm_incidentType": {
       "by": "XPATH",
       "value": "//*[@formcontrolname='incidentType']"
@@ -935,7 +939,7 @@
       "by": "XPATH",
       "value": "//form[contains(@class,'issue-report-form')]"
     },
-    "irm_employeeEmail": {
+    "irm_employEmail": {
       "by": "XPATH",
       "value": "//*[@formcontrolname='employeEmail']"
     },
@@ -1034,6 +1038,40 @@
     "offer_date_span": {
       "by": "XPATH",
       "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]"
+    "by": "XPATH",
+    "value": "//span[contains(text(),'NIP verified')]"
+    },
+     "input_nip": {
+      "by": "XPATH",
+      "value": "//*[@formcontrolname='nip']"
+    },
+    "input_email": {
+      "by": "XPATH",
+      "value": "//*[@formcontrolname='email']"
+    },
+    "shortcuts_menu_btn": {
+      "by": "XPATH",
+      "value": "//button[contains(@class,'link-shortcut')]"
+    },
+    "switch_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='p-inputswitch p-component']"
+    },
+    "switch_alert": {
+      "by": "XPATH",
+      "value": "//div[@role='alert']"
+    },
+    "close_modal_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'p-button-icon')]"
+    },
+    "close_alert_btn": {
+      "by": "XPATH",
+      "value": "//button[contains(@class,'p-toast-icon-close')]"
+    },
+    "breadcrumb_elements": {
+      "by": "XPATH",
+      "value": "//div[contains(@class,'breadcrum-segment')]/a/span"
     }
   }
 }
