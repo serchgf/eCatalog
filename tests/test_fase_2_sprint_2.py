@@ -65,7 +65,7 @@ def test_MXTEST_10920_Spanish_Dashboard(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    home_page.change_language()
+    home_page.change_language_En_to_Es()
 
     # HEADER
     expected_header = ["AGREGAR VEHÍCULO", "LISTA DE PRODUCTOS"]
@@ -112,7 +112,7 @@ def test_MXTEST_10921_Spanish_Categories(web_drivers):
 
     home_page.close_categories()
 
-    home_page.change_language()
+    home_page.change_language_En_to_Es()
     home_page.click_on_categories_button()
     spanish_popular_category_list = home_page.get_popular_category_list()
     spanish_popular_category_list_text = []
@@ -131,7 +131,7 @@ def test_MXTEST_10921_Spanish_Categories(web_drivers):
 def test_MXTEST_10922_Spanish_Sub_Categories(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
-    home_page.change_language()
+    home_page.change_language_En_to_Es()
     home_page.click_on_categories_button()
     category = "Bateria y Accesorios"
     home_page.click_on_category_by_text(category)
@@ -164,7 +164,7 @@ def test_MXTEST_10923_Spanish_Brands(web_drivers):
     english_brand_list = home_page.get_list_of_brands_from_letter_selected(letter_selected)
     print(f"English brand_list: {english_brand_list}")
 
-    home_page.change_language()
+    home_page.change_language_En_to_Es()
     home_page.click_specified_letter_brand_menu(letter_selected)
 
     # # GET BRANDS LIST IN SPANISH
@@ -204,7 +204,7 @@ def test_MXTEST_10924_Spanish_Deals(web_drivers):
     for footer in expected_english_footer_section:
         assert footer in actual_footer_section
 
-    home_page.change_language()
+    home_page.change_language_En_to_Es()
 
 
     # EXPECTED SPANISH HEADERS

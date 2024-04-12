@@ -1971,7 +1971,7 @@ class HomePage(BasePage):
         title_txt = [title.text for title in videos_titles]
         return title_txt
 
-    def change_language(self):
+    def change_language_En_to_Es(self):
         logging.info("Select 'Español' language")
         self.element("language_btn").find_element().click()
         self.element("language_list").wait_visible()
