@@ -48,7 +48,7 @@
     },
     "vehicle_type_label": {
       "by": "XPATH",
-      "value": "//p[contains(text(),'Vehicle type*')]"
+      "value": "//p[@class=\"roboto-400 fs-14px o-text-gray-900\"]"
     },
     "vehicle_type_tbx": {
       "by": "XPATH",
@@ -1037,9 +1037,9 @@
     },
     "offer_date_span": {
       "by": "XPATH",
-      "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]"
-    "by": "XPATH",
-    "value": "//span[contains(text(),'NIP verified')]"
+      "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]",
+      "by2": "XPATH",
+      "value2": "//span[contains(text(),'NIP verified')]"
     },
      "input_nip": {
       "by": "XPATH",
