@@ -160,7 +160,7 @@
     },
     "breadcrum_section_link_list": {
       "by": "XPATH",
-      "value": "//section[@class='breadcrum-section']//li/a"
+      "value": "//section[@class='breadcrum-section']//span"
     },
     "element_buttons_grid_category": {
       "by": "XPATH",
@@ -216,11 +216,11 @@
     },
     "popular_categories_label": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'POPULAR CATEGORIES')]"
+      "value": "//div[@id='top-categories']//span"
     },
     "close_categories_x_button": {
       "by": "XPATH",
-      "value": "//div[@class='p-card-header ng-star-inserted']//button"
+      "value": "//div[@class='submenu-header-title-container ng-star-inserted']//button"
     },
     "close_part_interchange_x_button": {
       "by": "XPATH",
@@ -230,13 +230,17 @@
       "by": "XPATH",
       "value": "//section[@class='submenu ps-5 ng-star-inserted']//span[contains(text(),'BRANDS')]"
     },
+    "brands_btn": {
+      "by": "XPATH",
+      "value": "//button[@aria-labelledby='brand-button-text']"
+    },
     "deals_button": {
       "by": "XPATH",
       "value": "//span[contains(text(),'DEALS')]"
     },
     "show_all_brands_link": {
       "by": "XPATH",
-      "value": "//span[contains(text(),' Show all brands ')]"
+      "value": "//a[contains(text(),' Show all brands ')]"
     },
     "brands_images": {
       "by": "XPATH",
@@ -260,7 +264,7 @@
     },
     "general_categories_label": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'GENERAL CATEGORIES')]"
+      "value": "//div[@id='categories']//span"
     },
     "part_number": {
       "by": "XPATH",
@@ -276,7 +280,7 @@
     },
     "img_logo_oreilly_home": {
       "by": "XPATH",
-      "value": "//img[@id='logo-no-feedback']"
+      "value": "//a[@href='#/']"
     },
     "part_interchange_search_button": {
       "by": "XPATH",
@@ -352,11 +356,11 @@
     },
     "categories_btn": {
       "by": "XPATH",
-      "value": "//section//span[contains(text(),'CATEGORIES')]/following-sibling::i"
+      "value": "//button[@aria-labelledby='part-type-text']"
     },
     "popular_categories_list_btn": {
       "by": "XPATH",
-      "value": "//div[@class='category-popular-categories d-inline-block ng-star-inserted']//div[@role='button']"
+      "value": "//div[@id='top-categories']/a"
     },
     "list_container": {
       "by": "XPATH",
@@ -833,7 +837,6 @@
     },
     "help_center_btn": {
       "by": "XPATH",
-      "value": "//a[contains(text(),'Help center')]"
       "value": "//a[text()='Help center ']"
     },
     "centro_ayuda_btn": {
@@ -952,11 +955,11 @@
       "by": "XPATH",
       "value": "//p-paginator[contains(@class,'videos-paginator')]"
     },
-    "lenguage_btn": {
+    "language_btn": {
       "by": "XPATH",
       "value": "//button[@aria-label='language']"
     },
-    "lenguage_list": {
+    "language_list": {
       "by": "XPATH",
       "value": "//ul[@role='listbox']"
     },
@@ -965,8 +968,72 @@
       "value": "//div[contains(text(),'Espa')]"
     },
     "nip_verified": {
-    "by": "XPATH",
-    "value": "//span[contains(text(),'NIP verified')]"
+      "by": "XPATH",
+      "value": "//span[contains(text(),'NIP verified')]"
+    },
+    "header_menu_section_span": {
+      "by": "XPATH",
+      "value": "//section[@id='all_menu']//button//span"
+    },
+    "header_nav_menu_section_span": {
+      "by": "XPATH",
+      "value": "//section[@id='id-menu']//span"
+    },
+    "ultimos_productos_vistos_span": {
+      "by": "XPATH",
+      "value": "//o-products-carousel/span"
+    },
+    "styles_num": {
+      "by": "XPATH",
+      "value": "//style"
+    },
+    "footer_glossary_section": {
+      "by": "XPATH",
+      "value": "//section[@class='glossary-section']"
+    },
+    "slogan_footer_section": {
+      "by": "XPATH",
+      "value": "//div[@class='copyright-section notranslate']/a[1]"
+    },
+    "copyright_footer_section": {
+      "by": "XPATH",
+      "value": "//div[@class='copyright-section notranslate']/a[2]"
+    },
+    "catalog_version_footer_section": {
+      "by": "XPATH",
+      "value": "//div[@class='copyright-section notranslate']/a[2]"
+    },
+    "logo_footer_section": {
+      "by": "XPATH",
+      "value": "//img[@class='o-logo']"
+    },
+    "ultimos_productos_vistos_carousel_image_product": {
+      "by": "XPATH",
+      "value": "//section[@class='carousel-product-card-image']"
+    },
+    "ultimos_productos_vistos_product_card_p": {
+      "by": "XPATH",
+      "value": "//section[@class='carousel-product-card-label']/p"
+    },
+    "ver_todo_link": {
+      "by": "XPATH",
+      "value": "//div[@id='categories']//a[text()='Ver todo']"
+    },
+    "abc_expore_brands_btn_menu": {
+      "by": "XPATH",
+      "value": "//div[@class='panel-index o-bg-white']/button"
+    },
+    "pages_navbar_deals": {
+      "by": "XPATH",
+      "value": "//div[@class='custom-bar']//span"
+    },
+    "additional_ads_span": {
+      "by": "XPATH",
+      "value": "//div[@class='carousel-deals-content']/span"
+    },
+    "offer_date_span": {
+      "by": "XPATH",
+      "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]"
     }
   }
 }

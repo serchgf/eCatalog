@@ -21,9 +21,9 @@ _LOCATOR_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "l
 _SCREENSHOTS_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "screenshots")
 
 class images:
-    pic1 = "../image_files_/pic1.jpg"
-    pic2 = "../image_files_/pic2.jpg"
-    pic3 = "../image_files_/blue-nature.jpg"
+    pic1 = "image_files_/pic1.jpg"
+    pic2 = "image_files_/pic2.jpg"
+    pic3 = "image_files_/blue-nature.jpg"
 class BasePage:
     def __init__(self, driver: WebDriver, wait_driver: WebDriverWait):
         self.__driver = driver
@@ -248,4 +248,18 @@ class BasePage:
             raise FileNotFoundError(f"Locator not found: {locator_absolute_path}")
         with open(locator_absolute_path) as locators_file:
             return json.load(locators_file)
+
+
+    def get_brand_webelement_list_by_letter(self, element, text):
+        """
+        this function replace the text specified and return a webelement list
+        :param element: xpath: //div[@id='x_x']/following-sibling::ul/li
+        :param text: p
+        :new element: //div[@id='p']/following-sibling::ul/li
+        :return: webElement list
+        """
+        xpath_new = element.replace("x_x", text.lower())
+        print(f"new XPATH: {xpath_new}")
+        new_webelement_list = self.__driver.find_elements(By.XPATH, xpath_new)
+        return new_webelement_list
 

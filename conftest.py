@@ -10,6 +10,7 @@ from allure_commons.types import AttachmentType
 
 from src.factory.webdriver_factory import get_drivers
 
+
 _SCREENSHOT_PATH = os.path.join(pathlib.Path(__file__).parent, "screenshots")
 _REPORTS_PATH = os.path.join(pathlib.Path(__file__).parent, "Reports")
 _LOGS_PATH = os.path.join(pathlib.Path(__file__).parent, "logs")
@@ -129,5 +130,5 @@ def pytest_html_report_title(report):
 
 def pytest_html_results_summary(prefix, summary, postfix):
     prefix.extend(
-        [html.img(src="../../image_files/logo_oreilly.png", style="right:8%; height:240px; top:0; position:fixed;")])
+        [html.img(src="../../image_files_/logo_oreilly.png", style="right:8%; height:240px; top:0; position:fixed;")])
 

@@ -657,11 +657,7 @@ class HomePage(BasePage):
         print(f"Click on: {text}")
         for element in lista:
             element_text = element.text
-            logging.info(f"***************** {element_text}")
-            print(f"***************** {element_text}")
             if text in element_text:
-                logging.info(f"Click {text.upper()}S*****************")
-                print(f"Click {text.upper()}S*****************")
                 self.clic_javacript(element)
                 break
 
@@ -1974,8 +1970,146 @@ class HomePage(BasePage):
         title_txt = [title.text for title in videos_titles]
         return title_txt
 
-    def change_lenguage(self):
-        logging.info("Select 'Español' lenguage")
-        self.element("lenguage_btn").find_element().click()
-        self.element("lenguage_list").wait_visible()
+    def change_language(self):
+        logging.info("Select 'Español' language")
+        self.element("language_btn").find_element().click()
+        self.element("language_list").wait_visible()
         self.element("esp_option").find_element().click()
+
+    def get_menu_header_span(self):
+        logging.info("Get spans of menu header")
+        spans_header = self.element("header_menu_section_span").find_elements()
+        span_header_text = []
+        for span in spans_header:
+            if span.text != '':
+                span_header_text.append(span.text)
+        return span_header_text
+
+    #header_nav_menu_section_span
+    def get_menu_header_nav_span(self):
+        logging.info("Get spans of menu header nav")
+        spans_header_nav = self.element("header_nav_menu_section_span").find_elements()
+        span_header_text = []
+        for span in spans_header_nav:
+            if span.text != '':
+                span_header_text.append(span.text)
+        return span_header_text
+
+    def wait_until_style_complete(self):
+        logging.info("wait until style complete")
+        styles = self.element("styles_num").find_elements()
+        while len(styles)<27:
+            styles = self.element("styles_num").find_elements()
+        logging.info("ya se completaron los 27 styles")
+        return True
+
+    def footer_section(self):
+        logging.info("footer section")
+        texto = self.element("footer_glossary_section").find_element()
+        return texto.text
+
+    def validate_copyright_footer_section(self):
+        logging.info("validate_copyright in footer section")
+        expected_copyright_text = "Copyright © 2008-2024 O’Reilly Auto Parts | cv"
+        # print(f"expected copyright text: {expected_copyright_text}")
+        actual_copyright_text = self.element("copyright_footer_section").find_element().text
+        # print(f"actual copyright text: {actual_copyright_text}")
+        assert expected_copyright_text in actual_copyright_text
+
+    def validate_catalog_version_footer_section(self):
+        logging.info("Validate catalog version")
+        texto = self.element("catalog_version_footer_section").find_element().text
+        assert "cv" in texto
+
+    def validate_slogan_footer_section(self):
+        logging.info("Validate slogan in footer section")
+        texto = self.element("slogan_footer_section").find_element().text
+        slogan = "PROFESIONALES EN AUTOPARTES ®"
+        assert slogan in texto
+
+    def validate_logo_footer_section(self):
+        logging.info("Validate logo o'reilly in footer section")
+        assert self.element("logo_footer_section").find_element().is_displayed()
+
+    def validate_ultimos_productos_vistos_section(self):
+        logging.info("Validate ultimos productos span")
+        self.element("ultimos_productos_vistos_span").find_element().is_displayed()
+        logging.info("validate image presence in carousel")
+        self.element("ultimos_productos_vistos_carousel_image_product").wait_visible()
+        self.scroll_to_ultimos_productos_vistos()
+        p = self.element("ultimos_productos_vistos_product_card_p").find_elements()
+        logging.info("validate presence of product description")
+        product_description = p[0].text
+        print(f"product description: {product_description}")
+        product_brand = p[1].text
+        print(f"product brand: {product_brand}")
+        product_description_list = product_description.split("-")
+        product_number = product_description_list[1]
+        print(f"product number: {product_number}")
+        assert product_description != '', "should not be empty"
+        assert product_brand != '', "should not be empty"
+        assert product_number != '', "should not be empty"
+
+    def scroll_to_ultimos_productos_vistos(self):
+        logging.info("scroll to ultimos productos vistos")
+        self.scroll_to_element("ultimos_productos_vistos_carousel_image_product")
+
+    def click_ver_todo_link(self):
+        logging.info("Click 'Ver Todo' link")
+        self.element("ver_todo_link").wait_clickable().click()
+
+    def click_brands_btn(self):
+        logging.info("Click 'Brands' button")
+        self.element("brands_btn").wait_clickable().click()
+
+    def click_random_letter_brand_menu(self):
+        logging.info("Click on random a-z letter from menu")
+        abc_list = self.element("abc_expore_brands_btn_menu").find_elements()
+        letter = random.choice(abc_list)
+        letter_text = letter.text
+        print(f"click on letter: {letter_text}")
+        self.clic_javacript(letter)
+        return letter_text
+
+    def click_specified_letter_brand_menu(self, letter: str):
+        logging.info(f"Click on '{letter}' letter from menu")
+        abc_list = self.element("abc_expore_brands_btn_menu").find_elements()
+        self.click_element_text_of_list(abc_list, letter)
+
+    def get_list_of_brands_from_letter_selected(self, text):
+        logging.info("Get list of elements from brand of letter selected")
+        xpath_to_change = "//div[@id='x_x']/following-sibling::ul/li"
+        new_brand_element_list = self.get_brand_webelement_list_by_letter(xpath_to_change, text)
+
+        brand_list_text = []
+        for brand in new_brand_element_list:
+            brand_list_text.append(brand.text)
+
+        return brand_list_text
+
+    def click_deals_button(self):
+        logging.info("Click on Deals button")
+        self.element("deals_button").wait_clickable().click()
+
+    def get_breadcrumb(self):
+        logging.info("Get Breadcrumb text")
+        breadcrumb_link_list = self.element("breadcrum_section_link_list").find_elements()
+        breadcrumb_link_list_text = []
+        for breadcrumb in breadcrumb_link_list:
+            breadcrumb_link_list_text.append(breadcrumb.text)
+
+        return breadcrumb_link_list_text
+
+    def get_element_pages_navbar_deals(self):
+        logging.info("Get element text in the current ads navbar")
+        pages_element_list = self.element("pages_navbar_deals").find_elements()
+        pages_element_list_text = []
+        for element in pages_element_list:
+            pages_element_list_text.append(element.text)
+
+        return pages_element_list_text
+
+    def get_offer_date_info_in_additional_ads(self):
+        logging.info("Validate offer date information in additional ads section")
+        offer_date = self.element("offer_date_span").find_element().text
+        return offer_date
