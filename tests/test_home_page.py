@@ -5,6 +5,8 @@ import time
 import json
 
 import pytest
+from selenium.common.exceptions import NoSuchElementException
+
 
 from src.page_objects.home_page import HomePage
 
@@ -14,7 +16,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-8263
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
@@ -47,16 +49,17 @@ def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
 # #
 # # MXTEST-8282
 @pytest.mark.sprint1_regression
+@pytest.mark.pruebitas
 @pytest.mark.homepage
-@pytest.mark.flaky(reruns=3)
+@pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
 def test_MXTEST_8282_Garage_Garage_Vehicle_Limit(web_drivers):
     # se necesita actualizar el jira, el Maximo permitido en la lista es de 15 en vez de 10
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     logging.info(f"FIRST Iteration----------------------------------------------------------------")
     home_page.click_on_Picker_vehicle_btn()
     time.sleep(3)
@@ -91,9 +94,10 @@ def test_MXTEST_8282_Garage_Garage_Vehicle_Limit(web_drivers):
 def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
     # se necesita actualizar el tc en jira, los campos que se pueden editar son submodel y Engine
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_Picker_vehicle_btn()
     time.sleep(3)
     vehicle = "Automotive Light Duty"
@@ -142,11 +146,11 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_Picker_vehicle_btn()
     vehicles_list = []
     home_page.wait_spinner_disappears()
@@ -183,11 +187,11 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
 def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_categories_button()
     home_page.wait_until_page_load_complete()
     category_list = home_page.get_general_categories_list()
@@ -212,9 +216,10 @@ def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     expected_product_selected_list = []
     lasted_viewed_list = []
     # CICLO DE 3 O 5 VECES
@@ -266,11 +271,11 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
 @pytest.mark.flaky(reruns=1)
 @pytest.mark.fallo
 def test_MXTEST_8290_Footer_Validation_Tool_section_elements(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.scroll_down()
 
     data = home_page.cargar_json_data(_JSON_PATH)
@@ -289,11 +294,11 @@ def test_MXTEST_8290_Footer_Validation_Tool_section_elements(web_drivers):
 @pytest.mark.brandNavigation
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     # CLIC BRANDS DROPDOWN
     home_page.click_on_brands()
     time.sleep(2)
@@ -315,11 +320,11 @@ def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(we
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
 def test_MXTEST_8265_MXTEST_8267_search_all_brands_vehicle_selected(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    #home_page.open_url_us()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_vehicle_type_and_select()
     year = home_page.click_on_year_and_select()
@@ -353,12 +358,11 @@ def test_MXTEST_8265_MXTEST_8267_search_all_brands_vehicle_selected(web_drivers)
 @pytest.mark.modalNavigation
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8257_Popular_Categories(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_categories_button()
     time.sleep(3)
     popular_category_list = home_page.get_popular_category_list()
@@ -372,12 +376,11 @@ def test_MXTEST_8257_Popular_Categories(web_drivers):
 @pytest.mark.modalNavigation
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8273_GoBackButton(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.wait_until_page_load_complete()
     home_page.click_on_categories_button()
     time.sleep(3)
@@ -395,12 +398,11 @@ def test_MXTEST_8273_GoBackButton(web_drivers):
 @pytest.mark.modalNavigation
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8274_PopupClose_Button(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.wait_until_page_load_complete()
     home_page.click_on_categories_button()
     time.sleep(3)
@@ -414,12 +416,11 @@ def test_MXTEST_8274_PopupClose_Button(web_drivers):
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8256_Search_Compatible(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.wait_until_page_load_complete()
     home_page.click_on_part_interchange_btn()
     part_1 = "25455"
@@ -437,12 +438,11 @@ def test_MXTEST_8256_Search_Compatible(web_drivers):
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8276_ChangeSearchedNumber(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_part_interchange_btn()
     part_1 = "25455"
     home_page.write_part_in_interchange_tbx(part_1)
@@ -468,12 +468,11 @@ def test_MXTEST_8276_ChangeSearchedNumber(web_drivers):
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8277_Search_WrongNumber(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.wait_until_page_load_complete()
     home_page.click_on_part_interchange_btn()
     part = "999999999999"
@@ -494,10 +493,10 @@ def test_MXTEST_8277_Search_WrongNumber(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8280_Search_PopupClose_Button(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_part_interchange_btn()
     part = "20123"
     home_page.write_part_in_interchange_tbx(part)
@@ -512,13 +511,11 @@ def test_MXTEST_8280_Search_PopupClose_Button(web_drivers):
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8283_Search_FromProductPage(web_drivers):
-
     home_page = HomePage(*web_drivers)
     home_page.open()
     url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/valvoline-mx-synthetic-motor-oil-5w-20-1-quart-875238/m4l0/875238"
     #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accusharp/aus"
     home_page.open_new_url(url)
-
     home_page.wait_spinner_disappears()
     # product = "Motor Oil"
     # home_page.search_product(product)
@@ -581,7 +578,6 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
 def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
-
     home_page = HomePage(*web_drivers)
     #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/red-line-full-synthetic-motor-oil-0w-30-1-quart-11114/rl00/11114"
     url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/search?q=11114"
@@ -646,10 +642,10 @@ def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_driver
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     word = "eng"
     print(f"Search word: {word} and select a suggest result")
     home_page.search_product(word)
@@ -666,10 +662,10 @@ def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.shortcut_new_client()
     home_page.click_new_client_continue_btn()
     time.sleep(2)
@@ -717,10 +713,10 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
 #@pytest.mark.fallo
 def test_MXTEST_8258_PLP_Search_with_Selected_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_Picker_vehicle_btn()
     time.sleep(3)
     vehicle_type_list = home_page.click_on_vehicle_type_dropdown()
@@ -745,10 +741,10 @@ def test_MXTEST_8258_PLP_Search_with_Selected_Vehicle(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     wrong_product_name = "MOTTOR OIL"
     home_page.wait_until_page_load_complete()
     home_page.element("loading_img").wait_until_disappears()
@@ -764,10 +760,10 @@ def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     product_name = "Motor Oil"
     home_page.search_product(product_name)
     product_list = home_page.get_link_product_list(1)
@@ -781,10 +777,10 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_categories_button()
     time.sleep(2)
     category_list = home_page.get_general_categories_list()
@@ -804,10 +800,10 @@ def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.wait_until_page_load_complete()
     product_name = "Skid Plate"
     home_page.search_product(product_name)
@@ -899,10 +895,10 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.wait_until_page_load_complete()
     product_name = "Skid Plate"
     home_page.search_product(product_name)
@@ -945,10 +941,10 @@ def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
 #@pytest.mark.fallo
 def test_MXTEST_8264_PLP_Sort_by_option_relevance(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.wait_until_page_load_complete()
     product_name = "Battery chargers"
     home_page.search_product(product_name)
@@ -977,14 +973,11 @@ def test_MXTEST_8264_PLP_Sort_by_option_relevance(web_drivers):
 @pytest.mark.flaky(reruns=1)
 # @pytest.mark.fallo
 def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
-    #pl_page.wait_until_page_load_complete()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     # seleccionar vehiculo
     vehicle = home_page.select_vehicle_specific()
     home_page.wait_until_page_load_complete()
@@ -1018,12 +1011,11 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8272_Pagination(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.click_on_categories_button()
     time.sleep(1)
     # obtener lista decategorias
@@ -1051,12 +1043,11 @@ def test_MXTEST_8272_Pagination(web_drivers):
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
 def test_MXTEST_8270_Navigation_searchby_brand_category_filter(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     #home_page.element("loading_img").wait_until_disappears()
     # click en brands
     home_page.click_on_brands()
@@ -1076,13 +1067,11 @@ def test_MXTEST_8270_Navigation_searchby_brand_category_filter(web_drivers):
 @pytest.mark.flaky(reruns=5)
 #@pytest.mark.fallo
 def test_MXTEST_8269_Navigation_searchby_category_brand_filter(web_drivers):
-
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    #
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     #clic en categorias
     home_page.click_on_categories_button()
     time.sleep(2)
@@ -1119,10 +1108,10 @@ def test_MXTEST_8269_Navigation_searchby_category_brand_filter(web_drivers):
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_8261_Navigation_Categories(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    #home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     home_page.wait_until_page_load_complete()
 
     home_page.click_on_categories_button()

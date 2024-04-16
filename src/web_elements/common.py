@@ -34,8 +34,6 @@ class WebElementWrapper:
         logging.info(f"Wait visible: {self.__locator}")
         return self.__wait_driver.until(EC.visibility_of_element_located(self.__locator))
 
-
-
     def wait_text_to_be_present(self, text: str) -> WebElement:
         logging.info(f"Wait text be present, locator: {self.__locator}, text: {text}")
         return self.__wait_driver.until(EC.text_to_be_present_in_element(self.__locator, text))
@@ -62,3 +60,7 @@ class WebElementWrapper:
     def get_locator_value(self):
         return self.__locator[1]
 
+    def element_is_enable(self):
+        logging.info(f"This function is to verify if element is enabled {self.__locator}")
+        element = self.__driver.find_element(*self.__locator).is_enabled()
+        return element #Regresa true si esta habilitado.
