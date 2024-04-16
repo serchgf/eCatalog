@@ -36,11 +36,11 @@
     },
     "part_interchange_linktext": {
       "by": "XPATH",
-      "value": "//div[@id='id-menu-right']//span[@id='interchange_option']"
+      "value": "//span[@id='interchange_option']"
     },
     "part_interchange_input_tbx": {
       "by": "XPATH",
-      "value": "//input[@ng-reflect-model]"
+      "value": "//div[@class='interchange-search-placeholder']//input"
     },
     "part_interchange_txt_label": {
       "by": "XPATH",
@@ -98,10 +98,6 @@
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='engine']//input"
     },
-    "engine_tbx_02": {
-      "by": "XPATH",
-      "value": "//p-autocomplete[@formcontrolname='engine']//input"
-    },
     "add_vehicle_button_submit": {
       "by": "XPATH",
       "value": "//button[@type='submit']"
@@ -112,7 +108,7 @@
     },
     "add_new_vehicle_btn": {
       "by": "XPATH",
-      "value": "//span[@class='p-button-label ng-star-inserted']"
+      "value": "//p-button[@ng-reflect-label='Add new vehicle']"
     },
     "recent_vehicles": {
       "by": "XPATH",
@@ -1041,9 +1037,9 @@
     },
     "offer_date_span": {
       "by": "XPATH",
-      "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]",
-      "by2": "XPATH",
-      "value2": "//span[contains(text(),'NIP verified')]"
+      "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]"
+    "by": "XPATH",
+    "value": "//span[contains(text(),'NIP verified')]"
     },
      "input_nip": {
       "by": "XPATH",
