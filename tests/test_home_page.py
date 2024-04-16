@@ -16,7 +16,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-8263
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
@@ -38,7 +38,7 @@ def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
     #Seleccionar submodelo
     home_page.click_on_submodel_and_select()
     #Seleccionar motor
-    #home_page.click_on_engine_and_select()
+    home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
     expected_vehicle_selected = f"{year} {make}"
     vehicle_selected = home_page.get_vehicle_selected()
@@ -49,7 +49,7 @@ def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
 # #
 # # MXTEST-8282
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo

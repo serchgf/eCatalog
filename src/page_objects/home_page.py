@@ -2122,3 +2122,8 @@ class HomePage(BasePage):
         self.element("switch_alert").wait_visible()
         self.element("close_alert_btn").wait_clickable().click()
         self.element("close_modal_btn").wait_clickable().click()
+
+    def validation_enable_engine(self):
+        enable = self.element("engine_tbx_02").element_is_enable()
+        print(enable)
+        return enable
