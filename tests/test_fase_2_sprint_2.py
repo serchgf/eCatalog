@@ -84,7 +84,7 @@ def test_MXTEST_10920_Spanish_Dashboard(web_drivers):
     for footer in expected_footer_section:
         assert footer in actual_footer_section
 
-    home_page.validate_slogan_footer_section()
+    home_page.validate_spanish_slogan_footer_section()
     home_page.validate_copyright_footer_section()
     home_page.validate_logo_footer_section()
     home_page.validate_catalog_version_footer_section()
@@ -96,8 +96,6 @@ def test_MXTEST_10920_Spanish_Dashboard(web_drivers):
     home_page.click_on_logo_oreily_home()
     # BODY
     home_page.validate_ultimos_productos_vistos_section()
-
-
 
 
 @pytest.mark.flaky(reruns=3)
@@ -147,7 +145,7 @@ def test_MXTEST_10922_Spanish_Sub_Categories(web_drivers):
     for footer in expected_footer_section:
         assert footer in actual_footer_section
 
-    home_page.validate_slogan_footer_section()
+    home_page.validate_spanish_slogan_footer_section()
     home_page.validate_copyright_footer_section()
     home_page.validate_logo_footer_section()
     home_page.validate_catalog_version_footer_section()
@@ -173,12 +171,12 @@ def test_MXTEST_10923_Spanish_Brands(web_drivers):
     assert english_brand_list == spanish_brand_list or len(english_brand_list) == len(spanish_brand_list)
 
 
-@pytest.mark.inprocess
-# @pytest.mark.flaky(reruns=3)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10924_Spanish_Deals(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.click_deals_button()
+    home_page.wait_spinner_disappears()
     #EXPECTED ENGLISH HEADER
     expected_english_header_nav = ["CATEGORIES", "BRANDS", "DEALS", "PART INTERCHANGE", "SEARCH HISTORY", "EN"]
     actual_header_nav = home_page.get_menu_header_nav_span()
@@ -190,12 +188,16 @@ def test_MXTEST_10924_Spanish_Deals(web_drivers):
     assert expected_english_breadcrumb == actual_breadcrumb_nav
 
     # EXPECTED ENGLISH DEALS NAVBAR ELEMENTS
-    expected_english_deals_navbar = "PAGE"
-    actual_breadcrumb_nav = home_page.get_breadcrumb()
-    assert expected_english_breadcrumb == actual_breadcrumb_nav
+    expected_english_deals_navbar = "PAGE 1"
+    actual_english_deals_navbar_text = home_page.get_element_pages_navbar_deals()
+    assert expected_english_deals_navbar in actual_english_deals_navbar_text
 
     # EXPECTED ENGLISH DATE OFFER TEXT
-
+    expected_date_offer_english_text_1 = 'From '
+    expected_date_offer_english_text_2 = ' to '
+    actual_date_offer_english_text = home_page.get_offer_date_info_in_additional_ads()
+    assert expected_date_offer_english_text_1 in actual_date_offer_english_text
+    assert expected_date_offer_english_text_2 in actual_date_offer_english_text
     # FOOTER SECTION
     expected_english_footer_section = ["TOOLS", "Delivery routes Jalisco", "Product lines", "Delivery routes Leon",
                                "O’Reilly Stores", "HELP", "Help center", "Shortcuts menu"]
@@ -211,14 +213,27 @@ def test_MXTEST_10924_Spanish_Deals(web_drivers):
     expected_header_nav = ["CATEGORÍAS", "MARCAS", "OFERTAS", "INTERCAMBIO DE PARTE", "HISTORIAL DE BÚSQUEDA", "ES"]
     actual_header_nav = home_page.get_menu_header_nav_span()
     assert expected_header_nav == actual_header_nav
+
     # EXPECTED SPANISH BREADCRUMB
+    expected_english_breadcrumb = ["Inicio", "Ofertas vigentes"]
+    actual_breadcrumb_nav = home_page.get_breadcrumb()
+    assert expected_english_breadcrumb == actual_breadcrumb_nav
 
-    expected_english_brandcrumb = ["Home", "Current Ads"]
-    actual_header_nav = home_page.get_menu_header_nav_span()
-    assert expected_english_brandcrumb == actual_header_nav
     # EXPECTED SPANISH DEALS NAVBAR ELEMENTS
-
+    expected_spanish_deals_navbar = 'GINA 1'
+    spanish_nav_bar_element_list = home_page.get_element_pages_navbar_deals()
+    cont = 0
+    for element in spanish_nav_bar_element_list:
+        if expected_spanish_deals_navbar in element:
+            cont += 1
+            break
+    assert cont > 0, "No 'Page' span displayed"
     # EXPECTED SPANISH DATE OFFER TEXT
+    expected_date_offer_spanish_text1 = 'Del '
+    expected_date_offer_spanish_text2 = ' a '
+    actual_date_offer_spanish_text = home_page.get_offer_date_info_in_additional_ads()
+    assert expected_date_offer_spanish_text1 in actual_date_offer_spanish_text
+    assert expected_date_offer_spanish_text2 in actual_date_offer_spanish_text
 
     # FOOTER SECTION
     expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
@@ -227,23 +242,75 @@ def test_MXTEST_10924_Spanish_Deals(web_drivers):
     for footer in expected_spanish_footer_section:
         assert footer in actual_footer_section
 
-    home_page.validate_slogan_footer_section()
+    home_page.validate_spanish_slogan_footer_section()
     home_page.validate_copyright_footer_section()
     home_page.validate_logo_footer_section()
     home_page.validate_catalog_version_footer_section()
 
-@pytest.mark.phase2_sp2
+
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10925_Spanish_Parts_interchange(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
+    home_page.change_language_En_to_Es()
+    home_page.click_on_part_interchange_btn()
+    part = '51060R'
+    home_page.write_part_in_interchange_tbx(part)
+    home_page.click_part_interchange_search_btn()
+    spanish_text_expected = ['Intercambio de parte', 'PASO 1: Escribe un número de parte', 'PASO 2: Elige la categoría que quieres reemplazar:', 'Nota: El intercambio es sólo una referencia.']
+    part_interchange_dialog_text = home_page.get_part_interchange_dialog_form_span()
+    for expected_text in spanish_text_expected:
+        assert expected_text in part_interchange_dialog_text
+    home_page.click_first_element_step2_part_interchange()
+    home_page.wait_spinner_disappears()
+    home_page.click_all_brands_step3_part_interchange()
 
-@pytest.mark.phase2_sp2
-@pytest.mark.flaky(reruns=3)
+    # validar que se enentre numero de parte en breadcrumb Inicio Búsqueda de intercambio de partes para '51060r'
+    spanish_breadcrumb = home_page.get_last_element_of_breadcrumb()
+    assert part.lower() in spanish_breadcrumb
+
+    # validad palabra Resultados de búsqueda
+    actual_search_result_text = home_page.get_search_results_span_es()
+    expected_spanish_label_search_results = "Resultados de búsqueda"
+    assert actual_search_result_text == expected_spanish_label_search_results
+
+
+
+    expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
+                               "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
+    actual_footer_section = home_page.footer_section()
+    for footer in expected_spanish_footer_section:
+        assert footer in actual_footer_section
+
+    home_page.validate_spanish_slogan_footer_section()
+    home_page.validate_copyright_footer_section()
+    home_page.validate_logo_footer_section()
+    home_page.validate_catalog_version_footer_section()
+
+@pytest.mark.inprocess
+# @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10926_Spanish_Shortcut(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
+    home_page.change_language_En_to_Es()
+    # click en menu de atajos de teclado
 
+    # obtener todos los elementos de atajos de teclado y comparar
+
+    # lista de atajos de "FUNCIONALIDADES"
+
+    # lista de atajos "IR A" acciones
+
+    # lista "NAVEGACION"
+
+    # VALIDAR PRESENCIA DE "Habilitar / Deshabilitar Atajos del Teclado" toggle
+    # validar cambio de color de los short cuts o la propiedad de enable o disable
+    # y popup
+
+    """
+    Los atajos de teclas han sido habilitados
+    Los atajos de teclas han sido deshabilitados
+    """
 @pytest.mark.phase2_sp2
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10927_Spanish_Search_History(web_drivers):

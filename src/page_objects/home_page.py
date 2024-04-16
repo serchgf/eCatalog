@@ -907,6 +907,25 @@ class HomePage(BasePage):
 
         return step_2_list
 
+    def get_part_interchange_dialog_form_span(self):
+        logging.info("Get part interchange dialog span")
+        print("Get part interchange dialog span")
+        self.element("part_interchange_step_2").wait_visible()
+        part_interchange_dialog_span_list = self.element("part_interchange_dialog_form_spans").find_elements()
+        new_string = ''
+        for span in part_interchange_dialog_span_list:
+            new_string += ''.join(span.text)
+            new_string += ' '
+
+        return new_string
+
+    def click_first_element_step2_part_interchange(self):
+        logging.info("Click first element step 2 part interchange")
+        self.element("part_interchange_step2_first_element").wait_clickable().click()
+
+    def click_all_brands_step3_part_interchange(self):
+        logging.info("Click 'all brands' link step 3 part interchange")
+        self.element("part_interchange_step3_first_element").wait_clickable().click()
     def get_no_results_container_message(self):
         """
         function to get message with locator "no_results_container"
@@ -2022,7 +2041,7 @@ class HomePage(BasePage):
         texto = self.element("catalog_version_footer_section").find_element().text
         assert "cv" in texto
 
-    def validate_slogan_footer_section(self):
+    def validate_spanish_slogan_footer_section(self):
         logging.info("Validate slogan in footer section")
         texto = self.element("slogan_footer_section").find_element().text
         slogan = "PROFESIONALES EN AUTOPARTES ®"
@@ -2092,14 +2111,15 @@ class HomePage(BasePage):
         logging.info("Click on Deals button")
         self.element("deals_button").wait_clickable().click()
 
-    def get_breadcrumb(self):
-        logging.info("Get Breadcrumb text")
+    def get_last_element_of_breadcrumb(self):
+        logging.info("Get text of last element of Breadcrumb")
         breadcrumb_link_list = self.element("breadcrum_section_link_list").find_elements()
         breadcrumb_link_list_text = []
         for breadcrumb in breadcrumb_link_list:
             breadcrumb_link_list_text.append(breadcrumb.text)
-
-        return breadcrumb_link_list_text
+        last_element = breadcrumb_link_list_text[-1]
+        print(f"Last element of breadcrumb; {last_element}")
+        return last_element
 
     def get_element_pages_navbar_deals(self):
         logging.info("Get element text in the current ads navbar")
@@ -2115,6 +2135,16 @@ class HomePage(BasePage):
         offer_date = self.element("offer_date_span").find_element().text
         return offer_date
 
+    def get_interchange_search_info_header(self):
+        logging.info("Get search interchange info header text")
+        header_text = self.element("interchange_search_info_header").wait_visible().text
+        return header_text
+
+    def get_search_results_span_es(self):
+        logging.info("Validate presence of 'Resultados de busqueda'")
+        search_result_span_text = self.element("resultados_de_busqueda_span").wait_visible().text
+        return search_result_span_text
+
     def enable_disable_shortcuts(self):
         logging.info("Click in 'Shortcuts Menu' button and enable/disable shortcuts")
         self.element("shortcuts_menu_btn").find_element().click()
@@ -2122,3 +2152,4 @@ class HomePage(BasePage):
         self.element("switch_alert").wait_visible()
         self.element("close_alert_btn").wait_clickable().click()
         self.element("close_modal_btn").wait_clickable().click()
+

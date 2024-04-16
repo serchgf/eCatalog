@@ -36,11 +36,11 @@
     },
     "part_interchange_linktext": {
       "by": "XPATH",
-      "value": "//div[@id='id-menu-right']//span[@id='interchange_option']"
+      "value": "//span[@id='interchange_option']"
     },
     "part_interchange_input_tbx": {
       "by": "XPATH",
-      "value": "//input[@ng-reflect-model]"
+      "value": "//div[@class='interchange-search-placeholder']//input"
     },
     "part_interchange_txt_label": {
       "by": "XPATH",
@@ -1038,8 +1038,10 @@
     "offer_date_span": {
       "by": "XPATH",
       "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]"
-    "by": "XPATH",
-    "value": "//span[contains(text(),'NIP verified')]"
+    },
+    "span_nip_verified": {
+            "by": "XPATH",
+      "value": "//span[contains(text(),'NIP verified')]"
     },
      "input_nip": {
       "by": "XPATH",
@@ -1072,6 +1074,30 @@
     "breadcrumb_elements": {
       "by": "XPATH",
       "value": "//div[contains(@class,'breadcrum-segment')]/a/span"
+    },
+    "part_interchange_dialog_form_spans": {
+      "by": "XPATH",
+      "value": "//div[@role='dialog']//span"
+    },
+    "part_interchange_step2_first_element": {
+      "by": "XPATH",
+      "value": "//div[@role='dialog']//ul/li[1]"
+    },
+    "part_interchange_step3_first_element": {
+      "by": "XPATH",
+      "value": "//div[@role='dialog']//ul/li[1]"
+    },
+    "interchange_search_info_header": {
+      "by": "XPATH",
+      "value": "//div[@class='info']/span"
+    },
+    "resultados_de_busqueda_span": {
+      "by": "XPATH",
+      "value": "//div[@class='search-results']/span[1]"
+    },
+    "switch_slider_shortcuts": {
+      "by": "XPATH",
+      "value": "//span[@class='p-inputswitch-slider']"
     }
   }
 }
