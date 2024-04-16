@@ -247,14 +247,18 @@ class HomePage(BasePage):
         time.sleep(.2)
         logging.info(f"Click on engine dropdown")
         print(f"Click on engine dropdown")
-        dropdown = self.element("engine_dropdown").wait_clickable()
-        # dropdown.click()
-        time.sleep(.2)
-        try:
-            engine = self.select_index_list_element(index)
-        except IndexError:
-            engine = self.select_index_list_element(index)
-        return engine
+        if not self.validation_enable():
+            print("No va a dar clic porque esta deshabilitado.")
+            pass
+        else:
+            dropdown = self.element("engine_dropdown").wait_clickable()
+            # dropdown.click()
+            time.sleep(.2)
+            try:
+                engine = self.select_index_list_element(index)
+            except IndexError:
+                engine = self.select_index_list_element(index)
+            return engine
 
     def send_text_vehicle_type(self, vehicle_type: str):
         logging.info(f"Write into vehicle type textbox: {vehicle_type}")

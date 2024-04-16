@@ -1041,7 +1041,7 @@
     },
     "offer_date_span": {
       "by": "XPATH",
-      "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]"
+      "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]",
       "by2": "XPATH",
       "value2": "//span[contains(text(),'NIP verified')]"
     },
