@@ -247,7 +247,7 @@ class HomePage(BasePage):
         time.sleep(.2)
         logging.info(f"Click on engine dropdown")
         print(f"Click on engine dropdown")
-        if not self.validation_enable():
+        if not self.validation_enable_engine():
             print("No va a dar clic porque esta deshabilitado.")
             pass
         else:
@@ -274,16 +274,21 @@ class HomePage(BasePage):
 
         :return: other randome element on the list at least only one element exist
         """
-
         time.sleep(.2)
         logging.info(f"Click on submodel dropdown")
-        dropdown = self.element("submodel_dropdown").wait_clickable()
-        dropdown.click()
-        time.sleep(.2)
+        try:
+            dropdown = self.element("submodel_dropdown").wait_clickable()
+            dropdown.click()
+            time.sleep(.2)
+        except TimeoutError:
+            dropdown = self.element("submodel_dropdown").wait_clickable()
+            dropdown.click()
+            time.sleep(.2)
         try:
             self.element("list_box").wait_visible()
         except TimeoutError:
             self.element("list_box").wait_visible()
+            print("Prueba list box is visible")
         lista = self.element("list_box").find_elements()
         # time.sleep(.2)
         ##dropdown.click()
@@ -291,10 +296,29 @@ class HomePage(BasePage):
         new_submodel_text_list = []
         if len(lista) == 1:
             submodel = lista[0].text
-            lista[0].click()
-            logging.info(f"select element on the list with index: {0}: {submodel}")
-            print(f"select element on the list with index: {0}: {submodel}")
-            return submodel
+            print(f"Paso {submodel}")
+            #------------------------------------------------------------------
+            if 'encontrado' in submodel:
+                #Cierra la lista de submodelo
+                dropdown = self.element("submodel_dropdown").wait_clickable()
+                dropdown.click()
+                time.sleep(.2)
+                #Abre la lista de submodelo
+                dropdown = self.element("submodel_dropdown").wait_clickable()
+                dropdown.click()
+                time.sleep(.2)
+                print("Prueba abrio la lista de submodelo")
+                nueva_lista = self.element("list_box").find_elements()
+                nuevo_submodelo = nueva_lista[0].text
+                print(nuevo_submodelo)
+                nueva_lista[0].click()
+                time.sleep(.2)
+                logging.info(f"select element on the list with index: {0}: {nuevo_submodelo}")
+                print(f"select element on the list with index: {0}: {nuevo_submodelo}")
+                texto = self.element("submodel_dropdown").wait_clickable().text
+                return nuevo_submodelo
+            else:
+                pass
         else:
             for i, ele in enumerate(lista):
                 if ele.text == submodel:
@@ -317,7 +341,7 @@ class HomePage(BasePage):
         """
         Input a engine and the function remove that element of the list if len more tha 1
         :param index:
-        :return: other randome element on the list at least only one element exist
+        :return: other random element on the list at least only one element exist
         """
         time.sleep(.2)
         logging.info(f"Click on engine dropdown")
@@ -348,7 +372,7 @@ class HomePage(BasePage):
                     dropdown.click()
                     print(f"se encontro no results found")
                     self.press_esc_key()
-                    time.sleep(.3)
+                    time.sleep(.5)
                     break
                 if ele.text == engine:
                     pass
@@ -624,13 +648,14 @@ class HomePage(BasePage):
     def click_on_edit_info_btn(self):
         logging.info(f"Click on Edit Info button")
         print(f"Click on Edit Info button")
+        time.sleep(.2)
         self.element("edit_info_btn").wait_clickable().click()
 
     def click_on_save_changes_btn(self):
         logging.info(f"Click on Save Changes button")
         print(f"Click on Save Changes button")
-        self.element("save_changes_btn").wait_visible()
-        self.element("save_changes_btn").wait_clickable().click()
+        self.element("save_changes_btn_02").wait_visible()
+        self.element("save_changes_btn_02").wait_clickable().click()
 
     def click_on_deleteAll_btn(self):
         logging.info(f"Click on Delete All button")

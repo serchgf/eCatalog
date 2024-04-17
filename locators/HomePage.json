@@ -88,11 +88,11 @@
     },
     "submodel_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@formcontrolname='subModel']//button/span"
+      "value": "//p-autocomplete[@formcontrolname='subModel']//button"
     },
     "engine_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@formcontrolname='engine']//button/span[1]"
+      "value": "//p-autocomplete[@formcontrolname='engine']//button"
     },
     "engine_tbx": {
       "by": "XPATH",
@@ -120,15 +120,19 @@
     },
     "edit_info_btn": {
       "by": "XPATH",
-      "value": "//button[@ng-reflect-label='Edit info']"
+      "value": "//i[text()='edit_square']"
     },
     "save_changes_btn": {
       "by": "XPATH",
       "value": "//p-button[@ng-reflect-label='Save changes']"
     },
+    "save_changes_btn_02": {
+      "by": "XPATH",
+      "value": "//span[text()='Guardar cambios']"
+    },
     "labels_vehicle_selected": {
       "by": "XPATH",
-      "value": "//div[@class='ng-star-inserted']//div[@class='px-4']/p"
+      "value": "//div[@class='div-chips']/p"
     },
     "delete_all_btn": {
       "by": "XPATH",
