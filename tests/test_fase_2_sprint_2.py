@@ -328,6 +328,7 @@ def test_MXTEST_10926_Spanish_Shortcut(web_drivers):
     visibility = home_page.validate_new_client_popup_visibility()
     assert visibility is False, "The PopUp client should bo visible"
 
+
 @pytest.mark.inprocess
 #@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10927_Spanish_Search_History(web_drivers):
@@ -335,7 +336,15 @@ def test_MXTEST_10927_Spanish_Search_History(web_drivers):
     home_page.open_url_mx()
     # home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
-    home_page.click_on_add_new_vehicle_btn()
+    home_page.click_on_Picker_vehicle_btn()
+    vehicle = "Uso Liviano Automotriz"
+    home_page.write_a_vehicle_type(vehicle)
+    home_page.click_on_year_and_select()
+    home_page.click_on_make_and_select()
+    home_page.click_on_model_and_select()
+    submodel = home_page.click_on_submodel_and_select()
+    engine = home_page.click_on_engine_and_select()
+
 
 @pytest.mark.phase2_sp2
 @pytest.mark.flaky(reruns=3)
