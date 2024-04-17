@@ -334,9 +334,17 @@
       "by": "XPATH",
       "value": "//p[contains(text(),'New Client')]"
     },
+    "new_client_es_label": {
+      "by": "XPATH",
+      "value": "//p[contains(text(),'Nuevo Cliente')]"
+    },
     "new_client_continue_btn": {
       "by": "XPATH",
       "value": "//button[contains(text(),'Continue')]"
+    },
+    "new_client_x_close_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='storage-cleaner-closing-container']/button"
     },
     "new_client_cancel_btn": {
       "by": "XPATH",
@@ -1098,6 +1106,42 @@
     "switch_slider_shortcuts": {
       "by": "XPATH",
       "value": "//span[@class='p-inputswitch-slider']"
+    },
+    "shortcuts_green_span": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'o-bg-green-500')]"
+    },
+    "shortcuts_gray_span": {
+      "by": "XPATH",
+      "value": "//span[contains(@class,'o-bg-gray-200')]"
+    },
+    "shortcuts_submenu_header_title": {
+      "by": "XPATH",
+      "value": "//div[@class='submenu-header-title-container']/h3"
+    },
+    "description_and_shortcuts_list": {
+      "by": "XPATH",
+      "value": "//div[@class='shortcut-container-section ng-star-inserted']"
+    },
+    "shortcut_functionalities_span": {
+      "by": "XPATH",
+      "value": "//div[@class='shortcut-functionalities-section']/div/span"
+    },
+    "shortcut_goto_span": {
+      "by": "XPATH",
+      "value": "//div[@class='shortcut-goto-section']/div/span"
+    },
+    "shortcut_navigation_span": {
+      "by": "XPATH",
+      "value": "//div[@class='shortcut-navigation-section']/div/span"
+    },
+    "alert_shortcut_span": {
+      "by": "XPATH",
+      "value": "//span[@class='p-toast-detail']"
+    },
+    "popup_alert_x_button": {
+      "by": "XPATH",
+      "value": "//div[@role='alert']"
     }
   }
 }

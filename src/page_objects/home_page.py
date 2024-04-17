@@ -4,7 +4,7 @@ import random
 import time
 import mysql.connector
 from selenium.common import JavascriptException, ElementClickInterceptedException, NoSuchElementException
-#from selenium.webdriver import ActionChains as AC
+# from selenium.webdriver import ActionChains as AC
 from selenium.webdriver.common.action_chains import ActionChains as AC
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -29,7 +29,6 @@ class HomePage(BasePage):
         logging.info(f"Search {value}")
         print(f"Search {value}")
         self.element("search_bar").wait_clickable().send_keys(value, Keys.ENTER)
-
 
     def search_product(self, value: str):
         # time.sleep(3)
@@ -370,6 +369,12 @@ class HomePage(BasePage):
         print(f"Click new client cancel button")
         self.element("new_client_label").wait_visible()
         self.element("new_client_cancel_btn").wait_clickable().click()
+
+    def click_new_client_x_close_btn(self):
+        logging.info(f"Click new client x close button")
+        print(f"Click new client x closer button")
+        self.element("new_client_es_label").wait_visible()
+        self.element("new_client_x_close_btn").wait_clickable().click()
 
     def shortcut_new_client(self):
         logging.info("New client shortcut: 'SHIFT+C'")
@@ -926,6 +931,7 @@ class HomePage(BasePage):
     def click_all_brands_step3_part_interchange(self):
         logging.info("Click 'all brands' link step 3 part interchange")
         self.element("part_interchange_step3_first_element").wait_clickable().click()
+
     def get_no_results_container_message(self):
         """
         function to get message with locator "no_results_container"
@@ -1075,7 +1081,7 @@ class HomePage(BasePage):
         """
         self.wait_until_page_load_complete()
         logging.info(f"Select a random element of the list")
-        index = random.randint(0, len(lista)-1)
+        index = random.randint(0, len(lista) - 1)
         try:
             element_selected = lista[index]
             element_text = element_selected.text
@@ -1085,11 +1091,10 @@ class HomePage(BasePage):
             except:
                 element_selected.click()
 
-
             element_text = element_text.upper()
             return element_text
         except IndexError:
-            index = random.randint(0, len(lista)-1)
+            index = random.randint(0, len(lista) - 1)
             element_selected = lista[index]
             element_text = element_selected.text
             try:
@@ -1175,14 +1180,13 @@ class HomePage(BasePage):
 
     def validate_product_list_page(self, subcategory_selected):
 
-            logging.info("Validate product list page")
+        logging.info("Validate product list page")
 
-            products_number = self.get_search_results_number()
+        products_number = self.get_search_results_number()
 
-            assert self.element(
-                "plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
-            return products_number
-
+        assert self.element(
+            "plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
+        return products_number
 
     def validate_pagination(self):
 
@@ -1374,7 +1378,6 @@ class HomePage(BasePage):
         print(f"clean search history")
         self.element("searchbar_in_search_history").clean_element()
 
-
     def click_clear_search_history_btn(self):
         logging.info(f"click_new_clear_search_history_btn")
         print(f"click_new_clear_search_history_btn")
@@ -1557,7 +1560,6 @@ class HomePage(BasePage):
         logging.info("Wait spinner disappears")
         self.element("loading_img").wait_until_disappears()
 
-
     # -------------------------------------------SPRINT 2-------------------------------------------------------------------
 
     def get_random_brand_icon_list(self):
@@ -1619,8 +1621,8 @@ class HomePage(BasePage):
         sections_list_in_webpage_text = []
         for section in sections_list_in_webpage:
             sections_list_in_webpage_text.append(section.text)
-        #about_this_brand_section_label = self.element("about_this_brand_section_label").find_element().text
-        #sections_list_in_webpage_text.append(about_this_brand_section_label)
+        # about_this_brand_section_label = self.element("about_this_brand_section_label").find_element().text
+        # sections_list_in_webpage_text.append(about_this_brand_section_label)
         assert sections_list_in_webpage_text == expected_sections, f"sections in webpage: {sections_list_in_webpage_text} should be:: {expected_sections}"
 
     def get_data_from_detailed_description_section(self):
@@ -1865,10 +1867,10 @@ class HomePage(BasePage):
 
     def click_help_center(self):
         logging.info("Scroll down and click in Help Center button")
-       # self.scroll_down()
+        # self.scroll_down()
         self.element("help_center_btn").find_element().click()
 
-# Phase 2 sprint 1-------------------------------------------------------------------------------------------------
+    # Phase 2 sprint 1-------------------------------------------------------------------------------------------------
 
     def click_on_video(self):
         logging.info("Click on video")
@@ -1919,6 +1921,7 @@ class HomePage(BasePage):
         except:
             print("related product does not visible as expected")
             return True
+
     def validate_hidden_related_cateogory(self):
         logging.info("Validate hidden related category")
         print("Validate hidden related category")
@@ -1928,34 +1931,44 @@ class HomePage(BasePage):
         except:
             print("related category does not visible as expected")
             return True
+
     def validate_help_center_page(self):
         time.sleep(1)
         logging.info("Validate that Help Center page is loaded")
         assert self.element("hcp_title").find_element().text == "Help center", "The title should be 'Help center'"
-        assert self.element("hcp_faq_title").find_element().text == "Frequently asked questions", "The FAQ´s title should be 'Frequently asked questions'"
-        assert self.element("hcp_videos_section").find_element().text == "Assistance videos", "The videos section title should be 'Assistance videos'"
-        assert self.element("hcp_issue_report").find_element().text == "REPORT AN ISSUE", "The issue report button title should be 'REPORT AN ISSUE'"
+        assert self.element(
+            "hcp_faq_title").find_element().text == "Frequently asked questions", "The FAQ´s title should be 'Frequently asked questions'"
+        assert self.element(
+            "hcp_videos_section").find_element().text == "Assistance videos", "The videos section title should be 'Assistance videos'"
+        assert self.element(
+            "hcp_issue_report").find_element().text == "REPORT AN ISSUE", "The issue report button title should be 'REPORT AN ISSUE'"
 
     def validate_issue_report_modal(self):
         logging.info("Validate that the issue report modal is displayed in page")
         time.sleep(1)
-        assert self.element("irm_title").find_element().text == "Issue report","The modal's title should be 'Issue report'"
-        assert self.element("irm_user_info").find_element().text == "User info", "The user info section title should be 'User info'"
-        assert self.element("irm_about_issue").find_element().text == "About the issue", "The about issue section title should be 'About the issue'"
-        assert self.element("irm_issue_description").find_element().text == "Describe the issue", "The issue description title should be 'Describe the issue'"
+        assert self.element(
+            "irm_title").find_element().text == "Issue report", "The modal's title should be 'Issue report'"
+        assert self.element(
+            "irm_user_info").find_element().text == "User info", "The user info section title should be 'User info'"
+        assert self.element(
+            "irm_about_issue").find_element().text == "About the issue", "The about issue section title should be 'About the issue'"
+        assert self.element(
+            "irm_issue_description").find_element().text == "Describe the issue", "The issue description title should be 'Describe the issue'"
         assert self.element("irm_submit_btn").find_element().is_displayed(), "The 'Send' button should be present"
 
-    def validate_error_messages(self, messages:list):
+    def validate_error_messages(self, messages: list):
         logging.info("Validate that the error messages are displayed")
-        expected_messages = ["Por favor, escriba un NIP.", "Por favor, escribe un correo electrónico válido","Por favor, escribe un nombre",
-                             "Por favor, seleccione un campo.", "Por favor, seleccione un campo.", "Por favor, escribe una descripción"]
+        expected_messages = ["Por favor, escriba un NIP.", "Por favor, escribe un correo electrónico válido",
+                             "Por favor, escribe un nombre",
+                             "Por favor, seleccione un campo.", "Por favor, seleccione un campo.",
+                             "Por favor, escribe una descripción"]
         count = 0
         for message in messages:
             if message in expected_messages:
                 logging.info(f"Error message: {message}")
                 count = count + 1
             if count == 0: logging.info("No error message in page")
-        #count = sum(1 for message in messages if message in expected_messages)
+        # count = sum(1 for message in messages if message in expected_messages)
 
         return count
 
@@ -1982,7 +1995,7 @@ class HomePage(BasePage):
             pass
         videos[index].click()
         self.wait_until_page_load_complete()
-        #return self.switch_to_window()
+        # return self.switch_to_window()
         return self.get_title()
 
     def get_video_titles(self):
@@ -2005,7 +2018,7 @@ class HomePage(BasePage):
                 span_header_text.append(span.text)
         return span_header_text
 
-    #header_nav_menu_section_span
+    # header_nav_menu_section_span
     def get_menu_header_nav_span(self):
         logging.info("Get spans of menu header nav")
         spans_header_nav = self.element("header_nav_menu_section_span").find_elements()
@@ -2018,7 +2031,7 @@ class HomePage(BasePage):
     def wait_until_style_complete(self):
         logging.info("wait until style complete")
         styles = self.element("styles_num").find_elements()
-        while len(styles)<27:
+        while len(styles) < 27:
             styles = self.element("styles_num").find_elements()
         logging.info("ya se completaron los 27 styles")
         return True
@@ -2153,3 +2166,56 @@ class HomePage(BasePage):
         self.element("close_alert_btn").wait_clickable().click()
         self.element("close_modal_btn").wait_clickable().click()
 
+    def click_shortcuts_menu_btn(self):
+        logging.info("Click shortcuts menu button")
+        self.element("shortcuts_menu_btn").wait_clickable().click()
+
+    def click_switch_slider_btn(self):
+        logging.info("Click switch slider button")
+        self.element("switch_slider_shortcuts").wait_clickable().click()
+
+    def get_submenu_header_title_container_h3(self):
+        logging.info("Get submenu header title container h3")
+        submenu_header_title = self.element("shortcuts_submenu_header_title").wait_visible().text
+        return submenu_header_title
+
+    def get_description_and_shortcuts_list(self):
+        logging.info("Get description and shortcuts list")
+        description_and_shortcuts_list = self.element("description_and_shortcuts_list").find_elements()
+        description_and_shortcuts_list_text = []
+        for description in description_and_shortcuts_list:
+            description_and_shortcuts_list_text.append(description.text.replace("\n", " "))
+        # print(f"la lista de shortcuts y descripcion es: {description_and_shortcuts_list_text}")
+        return description_and_shortcuts_list_text
+
+    def get_shortcut_functionalities_span(self):
+        logging.info("Get shortcut functionalities span")
+        shortcut_navigation_span_text = self.element("shortcut_functionalities_span").wait_visible().text
+        return shortcut_navigation_span_text
+
+    def get_shortcut_goto_span(self):
+        logging.info("Get shortcut Goto span")
+        shortcut_navigation_span_text = self.element("shortcut_goto_span").wait_visible().text
+        return shortcut_navigation_span_text
+
+    def get_shortcut_navigation_span(self):
+        logging.info("Get shortcut navigation span")
+        shortcut_navigation_span_text = self.element("shortcut_navigation_span").wait_visible().text
+        return shortcut_navigation_span_text
+
+    def close_shortcut_modal(self):
+        logging.info("Close shortcuts modal")
+        print("Close shortcuts modal")
+        print("Close alert popup")
+        self.element("close_alert_btn").wait_clickable().click()
+        print("Close shortcuts modal")
+        self.element("close_modal_btn").wait_clickable().click()
+
+    def validate_new_client_popup_visibility(self):
+        logging.info("validate new client popup visibility")
+        print("validate new client popup visibility")
+        try:
+            self.element("new_client_es_label").find_element().is_displayed()
+            return True
+        except:
+            return False

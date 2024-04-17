@@ -287,35 +287,55 @@ def test_MXTEST_10925_Spanish_Parts_interchange(web_drivers):
     home_page.validate_logo_footer_section()
     home_page.validate_catalog_version_footer_section()
 
-@pytest.mark.inprocess
-# @pytest.mark.flaky(reruns=3)
+
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10926_Spanish_Shortcut(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
+    # home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     # click en menu de atajos de teclado
-
+    home_page.click_shortcuts_menu_btn()
     # obtener todos los elementos de atajos de teclado y comparar
+    expected_submenu_title_header_h3 = "ATAJOS DEL TECLADO"
+    actual_submenu_title_header_h3 = home_page.get_submenu_header_title_container_h3()
+    assert actual_submenu_title_header_h3 == expected_submenu_title_header_h3
+    # Get subtitle shortcut section
+    expected_functionalities_span_spanish = "Funcionalidades"
+    expected_goto_span_spanish = '"Ir a" acciones'
+    expected_navigation_span_spanish = "Navegación"
+    actual_functionalities_span = home_page.get_shortcut_functionalities_span()
+    actual_goto_span = home_page.get_shortcut_goto_span()
+    actual_navigation_span = home_page.get_shortcut_navigation_span()
+    assert actual_functionalities_span == expected_functionalities_span_spanish.upper()
+    assert actual_goto_span == expected_goto_span_spanish.upper()
+    assert actual_navigation_span == expected_navigation_span_spanish.upper()
 
-    # lista de atajos de "FUNCIONALIDADES"
-
-    # lista de atajos "IR A" acciones
-
-    # lista "NAVEGACION"
+    # Get description and shortcuts list
+    expected_description_and_shortcut_list = ['Nuevo Cliente Ctrl Alt N', 'Barra de búsqueda Alt B', 'Agregar / Cambiar vehículo Alt V', 'Eliminar Vehículo Alt D', 'Agregar a la Lista Alt A', 'Limpiar Filtros Alt J', 'Copiar Número de Parte Alt C', 'Ir a la Equivalencia de parte Shift P', 'Ir a Tipos de Parte Shift C', 'Ir a Ofertas Shift D', 'Ir a Marcas Shift B', 'Ir al Historial de Búsqueda Shift H', 'Ir a la Lista de la Orden Shift L', 'Ir a la Página de Inicio Shift Space', 'Regresar Shift Delete', 'Navegar Tab', 'Aceptar / Click CTA Enter', 'Cancelar / Cerrar / Salir Esc', 'Abrir lista de atajos Alt O']
+    actual_description_and_shortcut_list = home_page.get_description_and_shortcuts_list()
+    assert actual_description_and_shortcut_list == expected_description_and_shortcut_list
 
     # VALIDAR PRESENCIA DE "Habilitar / Deshabilitar Atajos del Teclado" toggle
-    # validar cambio de color de los short cuts o la propiedad de enable o disable
-    # y popup
+    home_page.click_switch_slider_btn()
+    home_page.close_shortcut_modal()
+    home_page.press_shortcuts('CTRL', 'ALT', 'N')
+    home_page.click_new_client_x_close_btn()
+    home_page.press_shortcuts("ALT", "O")
+    home_page.click_switch_slider_btn()
+    home_page.close_shortcut_modal()
+    home_page.press_shortcuts('CTRL', 'ALT', 'N')
+    visibility = home_page.validate_new_client_popup_visibility()
+    assert visibility is False, "The PopUp client should bo visible"
 
-    """
-    Los atajos de teclas han sido habilitados
-    Los atajos de teclas han sido deshabilitados
-    """
-@pytest.mark.phase2_sp2
-@pytest.mark.flaky(reruns=3)
+@pytest.mark.inprocess
+#@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10927_Spanish_Search_History(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
+    # home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    home_page.click_on_add_new_vehicle_btn()
 
 @pytest.mark.phase2_sp2
 @pytest.mark.flaky(reruns=3)
