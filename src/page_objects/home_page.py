@@ -246,14 +246,18 @@ class HomePage(BasePage):
         time.sleep(.2)
         logging.info(f"Click on engine dropdown")
         print(f"Click on engine dropdown")
-        dropdown = self.element("engine_dropdown").wait_clickable()
-        # dropdown.click()
-        time.sleep(.2)
-        try:
-            engine = self.select_index_list_element(index)
-        except IndexError:
-            engine = self.select_index_list_element(index)
-        return engine
+        if not self.validation_enable():
+            print("No va a dar clic porque esta deshabilitado.")
+            pass
+        else:
+            dropdown = self.element("engine_dropdown").wait_clickable()
+            # dropdown.click()
+            time.sleep(.2)
+            try:
+                engine = self.select_index_list_element(index)
+            except IndexError:
+                engine = self.select_index_list_element(index)
+            return engine
 
     def send_text_vehicle_type(self, vehicle_type: str):
         logging.info(f"Write into vehicle type textbox: {vehicle_type}")
@@ -1921,7 +1925,6 @@ class HomePage(BasePage):
         except:
             print("related product does not visible as expected")
             return True
-
     def validate_hidden_related_cateogory(self):
         logging.info("Validate hidden related category")
         print("Validate hidden related category")
@@ -1936,24 +1939,17 @@ class HomePage(BasePage):
         time.sleep(1)
         logging.info("Validate that Help Center page is loaded")
         assert self.element("hcp_title").find_element().text == "Help center", "The title should be 'Help center'"
-        assert self.element(
-            "hcp_faq_title").find_element().text == "Frequently asked questions", "The FAQ´s title should be 'Frequently asked questions'"
-        assert self.element(
-            "hcp_videos_section").find_element().text == "Assistance videos", "The videos section title should be 'Assistance videos'"
-        assert self.element(
-            "hcp_issue_report").find_element().text == "REPORT AN ISSUE", "The issue report button title should be 'REPORT AN ISSUE'"
+        assert self.element("hcp_faq_title").find_element().text == "Frequently asked questions", "The FAQ´s title should be 'Frequently asked questions'"
+        assert self.element("hcp_videos_section").find_element().text == "Assistance videos", "The videos section title should be 'Assistance videos'"
+        assert self.element("hcp_issue_report").find_element().text == "REPORT AN ISSUE", "The issue report button title should be 'REPORT AN ISSUE'"
 
     def validate_issue_report_modal(self):
         logging.info("Validate that the issue report modal is displayed in page")
         time.sleep(1)
-        assert self.element(
-            "irm_title").find_element().text == "Issue report", "The modal's title should be 'Issue report'"
-        assert self.element(
-            "irm_user_info").find_element().text == "User info", "The user info section title should be 'User info'"
-        assert self.element(
-            "irm_about_issue").find_element().text == "About the issue", "The about issue section title should be 'About the issue'"
-        assert self.element(
-            "irm_issue_description").find_element().text == "Describe the issue", "The issue description title should be 'Describe the issue'"
+        assert self.element("irm_title").find_element().text == "Issue report","The modal's title should be 'Issue report'"
+        assert self.element("irm_user_info").find_element().text == "User info", "The user info section title should be 'User info'"
+        assert self.element("irm_about_issue").find_element().text == "About the issue", "The about issue section title should be 'About the issue'"
+        assert self.element("irm_issue_description").find_element().text == "Describe the issue", "The issue description title should be 'Describe the issue'"
         assert self.element("irm_submit_btn").find_element().is_displayed(), "The 'Send' button should be present"
 
     def validate_error_messages(self, messages: list):
@@ -2130,9 +2126,8 @@ class HomePage(BasePage):
         breadcrumb_link_list_text = []
         for breadcrumb in breadcrumb_link_list:
             breadcrumb_link_list_text.append(breadcrumb.text)
-        last_element = breadcrumb_link_list_text[-1]
-        print(f"Last element of breadcrumb; {last_element}")
-        return last_element
+
+        return breadcrumb_link_list_text
 
     def get_element_pages_navbar_deals(self):
         logging.info("Get element text in the current ads navbar")
@@ -2147,16 +2142,6 @@ class HomePage(BasePage):
         logging.info("Validate offer date information in additional ads section")
         offer_date = self.element("offer_date_span").find_element().text
         return offer_date
-
-    def get_interchange_search_info_header(self):
-        logging.info("Get search interchange info header text")
-        header_text = self.element("interchange_search_info_header").wait_visible().text
-        return header_text
-
-    def get_search_results_span_es(self):
-        logging.info("Validate presence of 'Resultados de busqueda'")
-        search_result_span_text = self.element("resultados_de_busqueda_span").wait_visible().text
-        return search_result_span_text
 
     def enable_disable_shortcuts(self):
         logging.info("Click in 'Shortcuts Menu' button and enable/disable shortcuts")
@@ -2219,3 +2204,8 @@ class HomePage(BasePage):
             return True
         except:
             return False
+
+    def validation_enable_engine(self):
+        enable = self.element("engine_tbx_02").element_is_enable()
+        print(enable)
+        return enable

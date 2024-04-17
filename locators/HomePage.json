@@ -98,6 +98,10 @@
       "by": "XPATH",
       "value": "//p-autocomplete[@formcontrolname='engine']//input"
     },
+    "engine_tbx_02": {
+      "by": "XPATH",
+      "value": "//p-autocomplete[@formcontrolname='engine']//input"
+    },
     "add_vehicle_button_submit": {
       "by": "XPATH",
       "value": "//button[@type='submit']"
@@ -106,9 +110,9 @@
       "by": "XPATH",
       "value": "//ul[@role='listbox']/li"
     },
-    "add_new_vehicle_btn": {
+     "add_new_vehicle_btn": {
       "by": "XPATH",
-      "value": "//p-button[@ng-reflect-label='Add new vehicle']"
+      "value": "//span[@class='p-button-label ng-star-inserted']"
     },
     "recent_vehicles": {
       "by": "XPATH",
