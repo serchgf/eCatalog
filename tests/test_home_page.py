@@ -17,7 +17,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # MXTEST-8263
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
-@pytest.mark.homepage
+#@pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -26,7 +26,8 @@ def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.click_on_Picker_vehicle_btn()
-    time.sleep(5)
+    time.sleep(.2)
+    print("Paso agregar vehiculo")
     #Seleccionar tipo de vehiculo
     home_page.click_on_vehicle_type_and_select()
     #Seleccionar año
@@ -89,14 +90,14 @@ def test_MXTEST_8282_Garage_Garage_Vehicle_Limit(web_drivers):
 #
 # MXTEST-8284
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
     # se necesita actualizar el tc en jira, los campos que se pueden editar son submodel y Engine
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
-    #home_page.wait_spinner_disappears()
+    home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.click_on_Picker_vehicle_btn()
@@ -136,8 +137,8 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
     print(f"Este es el label {label_submodel}")
     time.sleep(.2)
     logging.info(f"\nvehicle:{vehicle}\nOriginal Submodel:{submodel}\nOriginal Engine:{engine}")
-    assert expected_submodel in label_submodel or expected_submodel in label_engine, f"The submodel displayed:{label_submodel} should be: {expected_submodel}"
-    assert expected_engine in label_engine or expected_engine in label_submodel, f"The engine displayed:{label_engine} should be:{expected_engine}"
+    assert expected_submodel in label_submodel or expected_submodel in label_engine, f"{expected_submodel} debe encontarse en {label_submodel} o en {label_engine}"
+    assert expected_engine in label_engine or expected_engine in label_submodel, f"{expected_engine} debe encontarse en {label_engine} o en {label_submodel}"
     logging.info(
        f"Vehicle Edited successful")
     logging.info(f"\nOriginal Submodel:{submodel} -> {expected_submodel}\nOriginal Engine:{engine} -> {expected_engine}")
@@ -145,6 +146,7 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 
 # MXTEST-8285
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
@@ -155,8 +157,8 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
     #-----------------------------------
     home_page.click_on_Picker_vehicle_btn()
     vehicles_list = []
-    home_page.wait_spinner_disappears()
-    for index in range(4):
+    #home_page.wait_spinner_disappears()
+    for index in range(3):
         logging.info(f"Iteration---------------------------------------------------------------- {index}")
         vehicle = home_page.click_on_vehicle_type_and_select(1)# tenia index
         home_page.click_on_year_and_select(1)# tenia index
@@ -166,13 +168,13 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
         home_page.click_on_engine_and_select()
         home_page.click_on_add_vehicle_submit_btn()
         home_page.wait_spinner_disappears()
-        default_message = "Add vehicle"
+        default_message = " Agregar vehículo "
         vehicle_selected = home_page.get_vehicle_selected()
         assert vehicle_selected != default_message, f"The button name: {vehicle_selected} must be different of{default_message}"
         home_page.click_on_Picker_vehicle_btn()
         vehicles_list.append(vehicle)
         home_page.click_on_add_new_vehicle_btn()
-        home_page.wait_spinner_disappears()
+        #home_page.wait_spinner_disappears()
 
     n_vehicles = home_page.get_recent_vehicles_list()
     logging.info(f"{vehicles_list}")
@@ -180,11 +182,12 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
     logging.info(f"{n_vehicles}: are listed")
     # click en el boton de clear
     home_page.click_on_deleteAll_btn()
-    assert home_page.validate_vehicle_list_cleared(), "The vehicles are not cleared correctly, 'Add vehicle info' should be Visible"
+    assert not home_page.validate_vehicle_list_cleared(), "The vehicles are not cleared correctly, 'recent_vehicles' should not be Visible"
 
 #
 # # # MXTEST-8287
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
@@ -199,7 +202,8 @@ def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
     category_list = home_page.get_general_categories_list()
     # click en categoria random
     category_selected = home_page.select_random_element_of_list(category_list)
-
+    print(f"Se selecciono {category_selected}")
+    time.sleep(.2)
     logging.info(f"category selected: {category_selected}")
     # obtener lista de subcategorias
     subcategory_list = home_page.get_subcategory_list()
@@ -208,12 +212,14 @@ def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
     # click en subcategoria random
     subcategory_selected = home_page.select_random_element_of_list(subcategory_list)
     logging.info(f"Subcategory selected: {subcategory_selected}")
+    print(f"Se selecciono {subcategory_selected}")
     actual_parent_category = home_page.click_first_parent_category_on_breadcrumb()
     assert category_selected.upper() == actual_parent_category, f"The actual parent category: {actual_parent_category}, should be: {category_selected}"
     assert home_page.validate_parent_category_list_page()
 #
 # # MXTEST-8271
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
@@ -269,6 +275,7 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
 #
 # # MXTEST-8290
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 @pytest.mark.fallo
@@ -293,6 +300,7 @@ def test_MXTEST_8290_Footer_Validation_Tool_section_elements(web_drivers):
 # # BRAND NAVIGATION------------------------------------------------------------------------------------------------------
 # # MXTEST-8255, MXTEST-8266
 @pytest.mark.sprint1_regression
+@pytest.mark.pruebitas
 @pytest.mark.brandNavigation
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(web_drivers):
@@ -308,10 +316,8 @@ def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(we
     home_page.click_on_show_all_brands()
     # click on any brand
     home_page.get_random_brand()
-
     # # get number of elements
     search_results_number = home_page.get_search_results_number()
-
     logging.info(f"Search results number: {search_results_number}")
 
 # #

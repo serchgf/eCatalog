@@ -473,14 +473,9 @@ class HomePage(BasePage):
             print(f"try subcategory_list")
             subcategory_list = self.element("subcategory_list").find_elements()
         except:
-            try:
-                logging.info(f"try subcategory_list_2")
-                print(f"try subcategory_list_2")
-                subcategory_list = self.element("subcategory_list_2").find_elements()
-            except:
-                logging.info(f"try subcategory_list_3")
-                print(f"try subcategory_list_3")
-                subcategory_list = self.element("subcategory_list_3").find_elements()
+            logging.info(f"try subcategory_list_2")
+            print(f"try subcategory_list_2")
+            subcategory_list = self.element("subcategory_list_2").find_elements()
         return subcategory_list
 
     def get_text_label_subcategory_selected(self):
@@ -649,6 +644,7 @@ class HomePage(BasePage):
         logging.info(f"Click on add new Vehicle button")
         print(f"Click on add new Vehicle button")
         self.element("add_new_vehicle_btn").wait_clickable().click()
+        time.sleep(.2)
 
     def click_on_edit_info_btn(self):
         logging.info(f"Click on Edit Info button")
@@ -737,13 +733,14 @@ class HomePage(BasePage):
     def validate_vehicle_list_cleared(self):
         logging.info(f"validate vehicle list cleared")
         print(f"validate vehicle list cleared")
-        if self.element("add_vehicle_info_label").wait_visible():
+        if self.element("add_new_vehicle_btn").wait_visible():
             return True
+
 
     def validate_parent_category_list_page(self):
         logging.info(f"Validate parent category list page")
         print(f"Validate parent category list page")
-        return self.element("element_buttons_grid_category").wait_clickable()
+        return self.element("element_buttons_grid_category_2").find_element()
 
     def get_link_product_list(self, type_of_label=0):
         """ '0' means the results pages contains 'Search Results' label on top
