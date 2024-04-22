@@ -219,7 +219,6 @@ def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
 #
 # # MXTEST-8271
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
@@ -300,7 +299,7 @@ def test_MXTEST_8290_Footer_Validation_Tool_section_elements(web_drivers):
 # # BRAND NAVIGATION------------------------------------------------------------------------------------------------------
 # # MXTEST-8255, MXTEST-8266
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.brandNavigation
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(web_drivers):
@@ -324,6 +323,7 @@ def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(we
 #
 # # # MXTEST-8265, MXTEST-8267
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.brandNavigation
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
@@ -363,6 +363,7 @@ def test_MXTEST_8265_MXTEST_8267_search_all_brands_vehicle_selected(web_drivers)
 #
 # # # MXTEST-8257
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.modalNavigation
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8257_Popular_Categories(web_drivers):
@@ -381,6 +382,7 @@ def test_MXTEST_8257_Popular_Categories(web_drivers):
 #
 # # # MXTEST-8273
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.modalNavigation
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8273_GoBackButton(web_drivers):
@@ -403,6 +405,7 @@ def test_MXTEST_8273_GoBackButton(web_drivers):
 #
 # # # MXTEST-8274
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.modalNavigation
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8274_PopupClose_Button(web_drivers):
@@ -421,6 +424,7 @@ def test_MXTEST_8274_PopupClose_Button(web_drivers):
 #
 # # # MXTEST-8256
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8256_Search_Compatible(web_drivers):
@@ -431,18 +435,16 @@ def test_MXTEST_8256_Search_Compatible(web_drivers):
     #-----------------------------------
     home_page.wait_until_page_load_complete()
     home_page.click_on_part_interchange_btn()
-    part_1 = "25455"
+    part_1 = "4598"
     home_page.write_part_in_interchange_tbx(part_1)
     home_page.click_part_interchange_search_btn()
-
     # get part type list of step 2
     step_2_part_type_list_1 = home_page.get_part_interchange_step_2_list()
     home_page.show_product_list(step_2_part_type_list_1)
 
-
-
 # # # MXTEST-8276
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8276_ChangeSearchedNumber(web_drivers):
@@ -452,7 +454,7 @@ def test_MXTEST_8276_ChangeSearchedNumber(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.click_on_part_interchange_btn()
-    part_1 = "25455"
+    part_1 = "2545"
     home_page.write_part_in_interchange_tbx(part_1)
     home_page.click_part_interchange_search_btn()
     # get part type list of step 2
@@ -460,19 +462,18 @@ def test_MXTEST_8276_ChangeSearchedNumber(web_drivers):
     # click a part type of the list
     part_type_selected = home_page.select_random_element_of_list(step_2_part_type_list_1)
     logging.info(f"Part Type selected: {part_type_selected}")
-
     home_page.clear_part_interchange_input_tbx()
 
-    part_2 = "12587"
+    part_2 = "1258"
     home_page.write_part_in_interchange_tbx(part_2)
     home_page.click_part_interchange_search_btn()
     step_2_part_type_list_2 = home_page.get_part_interchange_step_2_list()
-
     assert step_2_part_type_list_1 != step_2_part_type_list_2, "List 1 displayed must be different of list 2"
 
 #
 # # # MXTEST-8277
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8277_Search_WrongNumber(web_drivers):
@@ -487,8 +488,8 @@ def test_MXTEST_8277_Search_WrongNumber(web_drivers):
     home_page.write_part_in_interchange_tbx(part)
 
     home_page.click_part_interchange_search_btn()
-    expected_message1 = "NO RESULTS FOUND"
-    expected_message2 = "Please, type in a new part number."
+    expected_message1 = "NO HAY RESULTADOS"
+    expected_message2 = "Por favor, busca un nuevo número de parte."
     actual_message = home_page.get_no_results_container_message()
     # actual_message = home_page.get_no_results_found_message()
     logging.info(f"VALIDATING CORRECT MESSAGE RESULT")
@@ -497,6 +498,7 @@ def test_MXTEST_8277_Search_WrongNumber(web_drivers):
 #
 # # # MXTEST-8280
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8280_Search_PopupClose_Button(web_drivers):
@@ -646,6 +648,7 @@ def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_driver
 #
 # # # MXTEST-8292
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.autofilloption
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
@@ -654,7 +657,7 @@ def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     #-----------------------------------
-    word = "eng"
+    word = "mot"
     print(f"Search word: {word} and select a suggest result")
     home_page.search_product(word)
     home_page.wait_until_page_load_complete()
@@ -764,6 +767,7 @@ def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
 
 # # # MXTEST-8260
 @pytest.mark.sprint1_regression
+@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
@@ -772,7 +776,7 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     #-----------------------------------
-    product_name = "Motor Oil"
+    product_name = "Oil Engine"
     home_page.search_product(product_name)
     product_list = home_page.get_link_product_list(1)
     for product in product_list:
@@ -781,6 +785,7 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
 #
 # # # MXTEST-8262
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):

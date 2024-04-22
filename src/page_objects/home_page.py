@@ -790,8 +790,10 @@ class HomePage(BasePage):
         for product in product_list:
             if type(product) is not str:
                 logging.info(product.text)
+                print(product.text)
             else:
                 logging.info(product)
+
 
     def click_homepage_button(self):
         logging.info(f"Click home page button")
@@ -933,10 +935,8 @@ class HomePage(BasePage):
         print("Get part interchange step 2 list")
         self.element("part_interchange_step_2").wait_visible()
         step_2_list = self.element("part_interchange_step_2_list").find_elements()
-        # for part_type in step_2_list:
-        #     logging.info(part_type.text)
-
         return step_2_list
+
 
     def get_part_interchange_dialog_form_span(self):
         logging.info("Get part interchange dialog span")

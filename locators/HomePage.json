@@ -224,7 +224,7 @@
     },
     "popular_categories_label": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'POPULAR CATEGORIES')]"
+      "value": "//div[@id='top-categories']//span"
     },
     "close_categories_x_button": {
       "by": "XPATH",
@@ -304,7 +304,11 @@
     },
     "part_interchange_step_2_list": {
       "by": "XPATH",
-      "value": "//div[@class='fade-in-up ng-star-inserted']//li"
+      "value": "//div[@class='fade-in-up ng-star-inserted']//li//a"
+    },
+    "no_results_founf_icon": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'search_off')]"
     },
     "category_nav_limiter": {
       "by": "XPATH",
