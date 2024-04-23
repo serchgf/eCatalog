@@ -1154,6 +1154,10 @@
     "popup_alert_x_button": {
       "by": "XPATH",
       "value": "//div[@role='alert']"
+    },
+    "results_product_description": {
+      "by": "XPATH",
+      "value": "//ol//li//span[@class='roboto-condensed-500 fs-16px o-text-primary']"
     }
   }
 }

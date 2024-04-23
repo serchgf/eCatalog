@@ -748,6 +748,7 @@ def test_MXTEST_8258_PLP_Search_with_Selected_Vehicle(web_drivers):
 
 # # # MXTEST-8259
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
@@ -756,18 +757,19 @@ def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     #-----------------------------------
-    wrong_product_name = "MOTTOR OIL"
+    wrong_product_name = "jsjsjsjs"
     home_page.wait_until_page_load_complete()
-    home_page.element("loading_img").wait_until_disappears()
+    #home_page.element("loading_img").wait_until_disappears()
+    home_page.wait_spinner_disappears()
     home_page.search_wrong_product_name(wrong_product_name)
-    expected_message = "We're sorry, no results were found"
+    expected_message = "Lo sentimos, no se encontraron resultados."
     actual_message = home_page.get_no_results_message()
     assert actual_message == expected_message, f"the message displayed shoeld be: {expected_message} instead of: {actual_message}"
     home_page.take_screenshot("test_PLP_Search_filter_No_results_found")
 
 # # # MXTEST-8260
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
@@ -776,8 +778,9 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     #-----------------------------------
-    product_name = "Oil Engine"
+    product_name = "Cartek"
     home_page.search_product(product_name)
+    home_page.wait_spinner_disappears()
     product_list = home_page.get_link_product_list(1)
     for product in product_list:
         assert product_name.upper() in product.text.upper(), f"'{product_name.upper()}' must appears in description product, but has: {product.text.upper()}"
@@ -860,13 +863,15 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
     #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-full-synthetic/l/n2728"
     #url2 = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/grease-lube/hydraulic-fluid/l/n0419"
-    url ="https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/grease-lube/hydraulic-fluid/l/n0419"
-    home_page.open()
-    home_page.wait_spinner_disappears()
+    #url ="https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/grease-lube/hydraulic-fluid/l/n0419"
     home_page.wait_until_page_load_complete()
-    product_name = "Skid Plate"
+    product_name = "Frenos"
     home_page.search_product(product_name)
     # obtener lista original
     product_list = home_page.get_link_product_list(0)

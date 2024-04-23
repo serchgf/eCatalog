@@ -770,6 +770,16 @@ class HomePage(BasePage):
             else:
                 lista = self.element("link_products_list").find_elements()
                 return lista
+    def get_search_results(self):
+        logging.info("Get search results")
+        print(f"Search results")
+        self.element("search_results_label").wait_visible()
+        lista = self.element("results_product_description").find_elements()
+        if len(lista) != 0:
+            return lista
+        else:
+            print("No hay resultados en la busqueda")
+
 
     def get_popular_category_list(self):
         self.wait_until_page_load_complete()
