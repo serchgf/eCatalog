@@ -719,6 +719,7 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
 #
 # # # MXTEST-8258
 @pytest.mark.sprint1_regression
+@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
@@ -731,7 +732,7 @@ def test_MXTEST_8258_PLP_Search_with_Selected_Vehicle(web_drivers):
     home_page.click_on_Picker_vehicle_btn()
     time.sleep(3)
     vehicle_type_list = home_page.click_on_vehicle_type_dropdown()
-    vehicle_type = "Automotive Light Duty"
+    vehicle_type = "Deportes Motorizados"
     home_page.click_element_text_of_list(vehicle_type_list, vehicle_type)
     home_page.click_on_year_and_select()
     home_page.click_on_make_and_select()
@@ -987,6 +988,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_relevance(web_drivers):
 #
 # # # MXTEST-8288
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 # @pytest.mark.fallo
@@ -995,6 +997,8 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
+    home_page.wait_spinner_disappears()
+
     #-----------------------------------
     # seleccionar vehiculo
     vehicle = home_page.select_vehicle_specific()
@@ -1002,27 +1006,22 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
     time.sleep(1)
     home_page.click_on_categories_button()
     time.sleep(1)
-    # obtener lista decategorias
+    # obtener lista de categorias
     category_list = home_page.get_general_categories_list()
     if len(category_list) < 1:
         category_list = home_page.get_general_categories_list()
     # click en categoria
-    home_page.select_specific_category_of_list(category_list, 3)
-
+    home_page.select_specific_category_of_list(category_list, 2)
     # obtener lista de subcategorias
     subcategory_list = home_page.get_subcategory_list()
     if len(subcategory_list) < 1:
         subcategory_list = home_page.get_subcategory_list()
     # click en subcategoria
-    home_page.select_specific_category_of_list(subcategory_list, 0)
-
+    subcategory = home_page.select_specific_category_of_list(subcategory_list, 0)
     home_page.wait_until_page_load_complete()
-
-    subcategory = home_page.select_first_subcategory()
-    #home_page.element("loading_img").wait_until_disappears()
     home_page.wait_spinner_disappears()
-
     home_page.validate_product_list_page_vehicle(subcategory, vehicle)
+    home_page.select_first_subcategory()
 # #
 # # # MXTEST-8272
 @pytest.mark.sprint1_regression
