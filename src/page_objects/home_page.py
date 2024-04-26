@@ -456,7 +456,7 @@ class HomePage(BasePage):
     def get_general_categories_list(self):
 
         logging.info(f"Get General Category List")
-        self.element("general_categories_label").wait_visible()
+        self.element("general_categories_label").wait_visible() # we have to change that xpath
         print(f"Get General Category List")
         self.element("general_category_list").wait_visible()
         general_category_list = self.element("general_category_list").find_elements()
@@ -1148,7 +1148,7 @@ class HomePage(BasePage):
 
     def select_first_subcategory(self):
         logging.info(f"Select the first subcategory")
-        lista = self.element("elements_first_subcategory").find_elements()
+        lista = self.element("elements_of_one_subcategory").find_elements()
         element_selected = lista[0].text
         logging.info(f"select first element of the list: {element_selected}")
         print(element_selected)
@@ -1188,7 +1188,7 @@ class HomePage(BasePage):
 
     def validate_no_products_found(self):
         try:
-            if self.element("plp_error").find_element():
+            if self.element("no_results_message").find_element():
                 return True
         except NoSuchElementException:
             return False
@@ -1300,13 +1300,14 @@ class HomePage(BasePage):
                 logging.info(f"Validate categories in landing page")
                 total = self.clp_category_result()
                 logging.info(f"The total of categories in page = {total}")
+                print(total)
                 return True
         except NoSuchElementException:
             return False
 
     def clp_category_result(self):
         logging.info("Get the total of categories on page")
-        img_cat = self.element("img_cat_names").find_elements()
+        img_cat = self.element("elements_of_one_subcategory").find_elements()
         additional = self.element("additional_cat_names").find_elements()
         total = len(img_cat) + len(additional)
         return total

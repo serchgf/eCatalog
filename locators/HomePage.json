@@ -390,7 +390,7 @@
       "by": "XPATH",
       "value": "//span[normalize-space()='Turbocharger & Supercharger']"
     },
-    "elements_first_subcategory": {
+    "elements_of_one_subcategory": {
       "by": "XPATH",
       "value": "//div[@class='container-text-margin']//p"
     },
@@ -449,7 +449,7 @@
     },
     "additional_cat_names": {
       "by": "XPATH",
-      "value": "//div[contains(@class,'category-nav-button-text')]/span"
+      "value": "//div[@class='column-count-4']/a"
     },
     "img_cat_names": {
       "by": "XPATH",

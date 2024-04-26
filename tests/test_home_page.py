@@ -719,7 +719,7 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
 #
 # # # MXTEST-8258
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
@@ -782,7 +782,7 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
     product_name = "Cartek"
     home_page.search_product(product_name)
     home_page.wait_spinner_disappears()
-    product_list = home_page.get_link_product_list(1)
+    product_list = home_page.get_link_product_list(0)
     for product in product_list:
         assert product_name.upper() in product.text.upper(), f"'{product_name.upper()}' must appears in description product, but has: {product.text.upper()}"
 
@@ -813,6 +813,7 @@ def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
 #
 # # # MXTEST-8264 mod1 without vehicle selected
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
@@ -822,7 +823,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.wait_until_page_load_complete()
-    product_name = "Skid Plate"
+    product_name = "aceite"
     home_page.search_product(product_name)
     # obtener lista original
     product_list = home_page.get_link_product_list(0)
@@ -830,14 +831,16 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     original_first_char = ''
     for product in product_list:
         description = product.text.split('\n')
+        print(description)
         product_description = description[1].split("-")
+        print(product_description)
         product_list_text.append(product_description[0])
+        print(product_list_text)
         original_first_char = product_description[0][0]
+        print(original_first_char)
         break
     print("Primer caracter original")
     print(original_first_char)
-
-
     # ordenar con filter by de a-z
     home_page.click_order_by_dropdown_and_select_option("A - Z")
     time.sleep(2)
@@ -856,10 +859,10 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     print(az_first_char)
     assert az_first_char <= original_first_char, f"{az_first_char} should be <= {original_first_char}"
     home_page.take_screenshot("test_PLP_Sort_by_option_az")
-#
-#
+
 # # MXTEST-8264 mod1 with vehicle selected
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
@@ -886,8 +889,6 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
         break
     print("Primer caracter original")
     print(original_first_char)
-
-
     # ordenar con filter by de a-z
     home_page.click_order_by_dropdown_and_select_option("A - Z")
     time.sleep(2)
@@ -1120,6 +1121,7 @@ def test_MXTEST_8269_Navigation_searchby_category_brand_filter(web_drivers):
 # # CLP-------------------------------------------------------------------------------------------------------------------
 # # # MXTEST-8261
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.clp
 #@pytest.mark.fallo
 @pytest.mark.flaky(reruns=3)
@@ -1130,7 +1132,6 @@ def test_MXTEST_8261_Navigation_Categories(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.wait_until_page_load_complete()
-
     home_page.click_on_categories_button()
     time.sleep(2)
     # obtener lista decategorias
