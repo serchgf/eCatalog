@@ -311,3 +311,4 @@ class BasePage:
                     actions.key_down(Keys.DELETE)
             actions.key_up(Keys.SHIFT).perform()
             logging.info(f"Press keys Shift + {key[1]}")
+

@@ -68,6 +68,7 @@ class HomePage(BasePage):
     def write_a_vehicle_type(self, vehicle: str):
         logging.info(f"Write a vehicle type: {vehicle}")
         print(f"Write a vehicle type: {vehicle}")
+        self.element("vehicle_type_label").wait_visible()
         self.element("vehicle_type_dropdown").wait_clickable().click()
         time.sleep(.5)
         self.javascript_clic(vehicle)
@@ -1332,6 +1333,10 @@ class HomePage(BasePage):
         return img
 
     def click_on_search_history(self):
+        """
+        work for click 'search history' and 'Historial de Busqueda'
+        :return:
+        """
         time.sleep(1)
         logging.info(f"Click on search history btn")
         print(f"Click on search history btn")
@@ -2234,3 +2239,67 @@ class HomePage(BasePage):
         enable = self.element("engine_tbx_02").element_is_enable()
         print(enable)
         return enable
+
+    def get_search_history_tabs(self) -> list:
+        logging.info("Get search history tabs")
+        print("Get search history tabs")
+        history_tabs_list = self.element("search_history_tab_list").find_elements()
+        history_tabs_list_text = []
+        for tab in history_tabs_list:
+            history_tabs_list_text.append(tab.text)
+
+        return history_tabs_list_text
+
+    def get_search_history_title(self) -> str:
+        logging.info("Get search history title")
+        print("Get search history title")
+        search_history_title = self.element("search_history_title").wait_visible().text
+        return search_history_title
+
+    def click_all_searches_tab(self):
+        logging.info("Click ALL SEARCHES tab")
+        print("Click ALL SEARCHES tab")
+        self.element("search_history_title").wait_visible()
+        list_tab = self.element("search_history_tab_list").find_elements()
+        list_tab[0].click()
+
+    def click_vehicle_search_tab(self):
+        logging.info("Click VEHICLE SEARCH tab")
+        print("Click VEHICLE SEARCH tab")
+        list_tab = self.element("search_history_tab_list").find_elements()
+        list_tab[1].click()
+
+    def click_open_search_tab(self):
+        logging.info("Click OPEN SEARCH tab")
+        print("Click OPEN SEARCH tab")
+        list_tab = self.element("search_history_tab_list").find_elements()
+        list_tab[2].click()
+
+
+    def validate_searchbar_in_all_search(self):
+        logging.info("Validate searchbar presence into search history modal")
+        print("Validate searchbar presence into search history modal")
+        displayed = self.element("searchbar_in_all_search").element_is_displayed()
+        return displayed
+
+    def validate_searchbar_in_vehicle_search(self):
+        logging.info("Validate searchbar presence into search history modal")
+        print("Validate searchbar presence into search history modal")
+        displayed = self.element("searchbar_in_vehicle_search").element_is_displayed()
+        return displayed
+    def validate_searchbar_in_open_search(self):
+        logging.info("Validate searchbar presence into search history modal")
+        print("Validate searchbar presence into search history modal")
+        displayed = self.element("searchbar_in_open_search").element_is_displayed()
+        return displayed
+    def close_search_history_modal(self):
+        logging.info("close search history modal")
+        print("Close search history modal")
+        self.element("close_modal_btn").wait_clickable().click()
+
+    def click_last_searches_expand_btn(self):
+        logging.info("Click last searches expand button")
+        # self.element("last_searches_subtitle_span").wait_visible()
+        print("click las searches expand button")
+        self.element("last_searches_expand_btn").wait_clickable().click()
+
