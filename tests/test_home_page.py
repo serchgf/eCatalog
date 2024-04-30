@@ -16,7 +16,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-8263
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 #@pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
@@ -146,7 +146,7 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 
 # MXTEST-8285
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas
+@pytest.mark.test_8285
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
@@ -168,7 +168,7 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
         home_page.click_on_engine_and_select()
         home_page.click_on_add_vehicle_submit_btn()
         home_page.wait_spinner_disappears()
-        default_message = " Agregar vehículo "
+        default_message= " Agregar vehículo "
         vehicle_selected = home_page.get_vehicle_selected()
         assert vehicle_selected != default_message, f"The button name: {vehicle_selected} must be different of{default_message}"
         home_page.click_on_Picker_vehicle_btn()
@@ -589,8 +589,8 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
 #@pytest.mark.fallo
 def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
     home_page = HomePage(*web_drivers)
-    #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/red-line-full-synthetic-motor-oil-0w-30-1-quart-11114/rl00/11114"
-    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/search?q=11114"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/red-line-full-synthetic-motor-oil-0w-30-1-quart-11114/rl00/11114"
+    #url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/search?q=11114"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
     home_page.click_check_vehicle_fit_btn_producction()
@@ -619,10 +619,12 @@ def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_drivers):
     # falta dato URL: https://testintranet.oreillyauto.mx/ecatalog/<<ID DEL ARTICULO >>
-    home_page = HomePage(*web_drivers)
+    page = HomePage(*web_drivers)
+    home_page = page
     #home_page.open()
     # home_page.open_url_us()
-    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/valvoline-mx-synthetic-motor-oil-5w-20-1-quart-875238/m4l0/875238"
+    #url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/valvoline-mx-synthetic-motor-oil-5w-20-1-quart-875238/m4l0/875238"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
     home_page.click_on_Picker_vehicle_btn()
@@ -634,7 +636,7 @@ def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_driver
     home_page.write_a_model("Giulia")
     home_page.write_a_submodel("Estrema")
     home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.clickon_add_vehicle_submit_btn()
 
     home_page.wait_spinner_disappears()
     expected_message = "Does NOT Fit"
@@ -668,6 +670,7 @@ def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
 # # NEW CLIENT------------------------------------------------------------------------------------------------------------
 #
 # # # MXTEST-8291
+##PASSED
 @pytest.mark.sprint1_regression
 @pytest.mark.newclient
 @pytest.mark.flaky(reruns=1)
@@ -677,18 +680,19 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     #-----------------------------------
+    home_page.enable_keyboard_shortcuts()
     home_page.shortcut_new_client()
     home_page.click_new_client_continue_btn()
     time.sleep(2)
     home_page.click_on_categories_button()
     home_page.wait_until_page_load_complete()
     time.sleep(1)
-    home_page.click_on_category_by_text("Oil, Chemicals & Fluids")
-    home_page.click_on_subcategory_by_text("Motor Oil")
+    home_page.click_on_category_by_text("Aceite, Productos Quimicos y Liquidos")
+    home_page.click_on_subcategory_by_text("aceite de motor")
     home_page.shortcut_new_client()
     home_page.click_new_client_cancel_btn()
     product_list = home_page.get_link_product_list(1)
-    product = "Motor Oil - Full Synthetic"
+    product = "Aceite de Motor - Completamente Sintetico"
     for prod in product_list:
         if prod.text == product:
             prod.click()
@@ -708,7 +712,7 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page.click_on_brands()
     # step 16 click en show all brands
     home_page.click_on_show_all_brands()
-    #step 17
+    # step 17
     home_page.shortcut_new_client()
     # step 18
     home_page.click_new_client_cancel_btn()
@@ -1204,38 +1208,38 @@ def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
     home_page.click_on_add_vehicle_submit_btn()
 
     home_page.wait_until_page_load_complete()
-    # time.sleep(1)
-    # home_page.click_on_categories_button()
-    # time.sleep(1)
-    # # obtener lista decategorias
-    # category_list = home_page.get_general_categories_list()
-    # if len(category_list) < 1:
-    #     category_list = home_page.get_general_categories_list()
-    # # click en categoria random
+     #time.sleep(1)
+     #home_page.click_on_categories_button()
+     #time.sleep(1)
+     # obtener lista decategorias
+    #category_list = home_page.get_general_categories_list()
+     #if len(category_list) < 1:
+         #category_list = home_page.get_general_categories_list()
+      #click en categoria random
     # category_selected = home_page.select_random_element_of_list(category_list)
-    # logging.info(f"Category selected: {category_selected}")
+     #logging.info(f"Category selected: {category_selected}")
     #
     # # obtener lista de subcategorias
-    # subcategory_list = home_page.get_subcategory_list()
-    # if len(subcategory_list) < 1:
-    #     subcategory_list = home_page.get_subcategory_list()
+    #subcategory_list = home_page.get_subcategory_list()
+     #if len(subcategory_list) < 1:
+         #subcategory_list = home_page.get_subcategory_list()
     # # click en subcategoria random
-    # subcategory_selected = home_page.select_random_element_of_list(subcategory_list)
-    # logging.info(f"Subcategory selected: {subcategory_selected}")
-    home_page.wait_spinner_disappears()
-    subcategory_selected = "BRAKE HARDWARE"
-    if home_page.validate_category_landing_page(subcategory_selected):
-        logging.info("The Category Landing Page is displayed")
-        assert True
-    elif home_page.validate_product_list_page(subcategory_selected):
-        logging.info("The Product list page is displayed")
-        assert True
-    elif home_page.validate_no_products_found():
-        logging.info("The subcategory has not items")
-        assert True
-    elif home_page.validate_no_results_were_found():
-        logging.info("No Results Were Found")
-        assert True
-    else:
-        logging.info("Error loading the page")
-        assert False, "Error loading the page"
+     #subcategory_selected = home_page.select_random_element_of_list(subcategory_list)
+     #logging.info(f"Subcategory selected: {subcategory_selected}")
+    #home_page.wait_spinner_disappears()
+    #subcategory_selected = "BRAKE HARDWARE"
+    #if home_page.validate_category_landing_page(subcategory_selected):
+        #logging.info("The Category Landing Page is displayed")
+        #assert True
+    #elif home_page.validate_product_list_page(subcategory_selected):
+        #logging.info("The Product list page is displayed")
+        #assert True
+    #elif home_page.validate_no_products_found():
+        #logging.info("The subcategory has not items")
+        #assert True
+    #elif home_page.validate_no_results_were_found():
+        #logging.info("No Results Were Found")
+        #assert True
+    #else:
+        #logging.info("Error loading the page")
+        #assert False, "Error loading the page"

@@ -110,7 +110,7 @@
       "by": "XPATH",
       "value": "//ul[@role='listbox']/li"
     },
-     "add_new_vehicle_btn": {
+    "add_new_vehicle_btn": {
       "by": "XPATH",
       "value": "//span[@class='p-button-label ng-star-inserted']"
     },
@@ -148,7 +148,7 @@
     },
     "general_category_list": {
       "by": "XPATH",
-      "value": "//div[@id=\"categories\"]//button[@class='category-link category-link-button ng-star-inserted']"
+      "value": "//div[@id='categories']//button[@class='category-link category-link-button ng-star-inserted']"
     },
     "subcategory_list": {
       "by": "XPATH",
@@ -176,11 +176,11 @@
     },
     "link_products_list": {
       "by": "XPATH",
-      "value": "//ol//li//span[@class='roboto-condensed-500 fs-16px o-text-primary']"
+      "value": "//o-products//span[contains(@class,'o-text-primary')]"
     },
     "link_products_list_2": {
       "by": "XPATH",
-      "value": "//div[@role='button']"
+      "value": "//p[contains(@class,'o-text-primary')]"
     },
     "additional_label": {
       "by": "XPATH",
@@ -220,7 +220,7 @@
     },
     "search_results_number": {
       "by": "XPATH",
-      "value": "//div[@class='search-results']/span[@class='roboto-400']"
+      "value": "//span[contains(text(),'Search results')]/following-sibling::span"
     },
     "popular_categories_label": {
       "by": "XPATH",
@@ -390,17 +390,9 @@
       "by": "XPATH",
       "value": "//span[normalize-space()='Turbocharger & Supercharger']"
     },
-    "elements_of_one_subcategory": {
+    "category_landing_elements_img": {
       "by": "XPATH",
-      "value": "//div[@class='container-text-margin']//p"
-    },
-    "element_first_subcategory_compatibility": {
-      "by": "XPATH",
-      "value": "//span[contains(text(),'Compatible')][1]"
-    },
-    "delete_vehicle": {
-      "by": "XPATH",
-      "value": "(//span[@class='p-button-label ng-star-inserted'])[1]"
+      "value": "//div[@role='button']//p"
     },
     "category_landing_title": {
       "by": "XPATH",
@@ -412,7 +404,7 @@
     },
     "plp_title": {
       "by": "XPATH",
-      "value": "//div[@class='category-nav-limiter']//h2"
+      "value": "//div[@class ='info o-text-primary']/span[1]"
     },
     "subcategory_title": {
       "by": "XPATH",
@@ -453,7 +445,7 @@
     },
     "additional_cat_names": {
       "by": "XPATH",
-      "value": "//div[@class='column-count-4']/a"
+      "value": "//div[contains(@class,'category-nav-button-text')]/span"
     },
     "img_cat_names": {
       "by": "XPATH",
@@ -461,7 +453,7 @@
     },
     "fits_element": {
       "by": "XPATH",
-      "value": "//div[@class ='vehicle-info-col']/span[2]"
+      "value": "//div[@role='badge']/p/span[contains(@class,'roboto-400')]"
     },
     "filter_option_selected": {
       "by": "XPATH",
@@ -939,7 +931,7 @@
       "by": "XPATH",
       "value": "//input[@formcontrolname='employeID']"
     },
-     "irm_employName": {
+    "irm_employName": {
       "by": "XPATH",
       "value": "//input[@formcontrolname='fullName']"
     },
@@ -1072,10 +1064,10 @@
       "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]"
     },
     "span_nip_verified": {
-            "by": "XPATH",
+      "by": "XPATH",
       "value": "//span[contains(text(),'NIP verified')]"
     },
-     "input_nip": {
+    "input_nip": {
       "by": "XPATH",
       "value": "//*[@formcontrolname='nip']"
     },
@@ -1166,6 +1158,22 @@
     "popup_alert_x_button": {
       "by": "XPATH",
       "value": "//div[@role='alert']"
+    },
+    "search_history_tab_list": {
+      "by": "XPATH",
+      "value": "//section[@class='rs-large tabs-history-content ng-star-inserted']//li[@role='presentation']/a"
+    },
+    "search_history_title": {
+      "by": "XPATH",
+      "value": "//section[@class='bg-white history-search-title-box rs-large ng-star-inserted']//h3"
+    },
+    "last_searches_expand_btn": {
+      "by": "XPATH",
+      "value": "//p-sidebar//div[@aria-hidden='false']//button//button"
+    },
+    "last_searches_subtitle_span": {
+      "by": "XPATH",
+      "value": "//p-sidebar//div[@aria-hidden='false']//div[contains(@class,'sub-title')]/span"
     },
     "results_product_description": {
       "by": "XPATH",

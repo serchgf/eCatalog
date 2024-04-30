@@ -2,7 +2,7 @@ import json
 import logging
 import random
 import time
-import mysql.connector
+#import mysql.connector
 from selenium.common import JavascriptException, ElementClickInterceptedException, NoSuchElementException
 # from selenium.webdriver import ActionChains as AC
 from selenium.webdriver.common.action_chains import ActionChains as AC
@@ -68,6 +68,7 @@ class HomePage(BasePage):
     def write_a_vehicle_type(self, vehicle: str):
         logging.info(f"Write a vehicle type: {vehicle}")
         print(f"Write a vehicle type: {vehicle}")
+        self.element("vehicle_type_label").wait_visible()
         self.element("vehicle_type_dropdown").wait_clickable().click()
         time.sleep(.5)
         self.javascript_clic(vehicle)
@@ -125,7 +126,7 @@ class HomePage(BasePage):
         # self.clic_javacript(dropdown)
         # time.sleep(4)
         dropdown.click()
-        time.sleep(.5)
+        time.sleep(1.5)
         try:
             vehicle_type = self.select_index_list_element(index)
             return vehicle_type
@@ -389,14 +390,14 @@ class HomePage(BasePage):
     def click_new_client_continue_btn(self):
         logging.info(f"Click new client continue button")
         print(f"Click new client continue button")
-        self.element("new_client_label").wait_visible()
-        self.element("new_client_continue_btn").wait_clickable().click()
+        self.element("new_client_es_label").wait_visible()
+        self.element("new_client_continue_btn_es").wait_clickable().click()
 
     def click_new_client_cancel_btn(self):
         logging.info(f"Click new client cancel button")
         print(f"Click new client cancel button")
-        self.element("new_client_label").wait_visible()
-        self.element("new_client_cancel_btn").wait_clickable().click()
+        self.element("new_client_es_label").wait_visible()
+        self.element("new_client_cancel_btn_es").wait_clickable().click()
 
     def click_new_client_x_close_btn(self):
         logging.info(f"Click new client x close button")
@@ -405,10 +406,10 @@ class HomePage(BasePage):
         self.element("new_client_x_close_btn").wait_clickable().click()
 
     def shortcut_new_client(self):
-        logging.info("New client shortcut: 'SHIFT+C'")
-        print("New client shortcut: 'SHIFT+C'")
+        logging.info("New client shortcut: 'CTRL+ALT+N'")
+        print("New client shortcut: 'CTRL+ALT+N'")
         action = self.actionChain()
-        action.send_keys(Keys.SHIFT + 'C')
+        action.key_down(Keys.CONTROL).key_down(Keys.ALT).send_keys('n').key_up(Keys.ALT).key_up(Keys.CONTROL)
         action.perform()
         time.sleep(1)
 
@@ -643,7 +644,7 @@ class HomePage(BasePage):
     def click_on_add_new_vehicle_btn(self):
         logging.info(f"Click on add new Vehicle button")
         print(f"Click on add new Vehicle button")
-        self.element("add_new_vehicle_btn").wait_clickable().click()
+        self.element("add_new_vehicle_btn").find_element().click()
         time.sleep(.2)
 
     def click_on_edit_info_btn(self):
@@ -1362,6 +1363,10 @@ class HomePage(BasePage):
         return img
 
     def click_on_search_history(self):
+        """
+        work for click 'search history' and 'Historial de Busqueda'
+        :return:
+        """
         time.sleep(1)
         logging.info(f"Click on search history btn")
         print(f"Click on search history btn")
@@ -2060,6 +2065,12 @@ class HomePage(BasePage):
         self.element("language_list").wait_visible()
         self.element("esp_option").find_element().click()
 
+    def enable_keyboard_shortcuts(self):
+        self.element("shortcut_menu_button_esp").find_element().click()
+        self.element("shortcut_menu_popup_window").wait_visible()
+        self.element("keyboard_shortcut_enable_slider").find_element().click()
+
+
     def get_menu_header_span(self):
         logging.info("Get spans of menu header")
         spans_header = self.element("header_menu_section_span").find_elements()
@@ -2264,3 +2275,67 @@ class HomePage(BasePage):
         enable = self.element("engine_tbx_02").element_is_enable()
         print(enable)
         return enable
+
+    def get_search_history_tabs(self) -> list:
+        logging.info("Get search history tabs")
+        print("Get search history tabs")
+        history_tabs_list = self.element("search_history_tab_list").find_elements()
+        history_tabs_list_text = []
+        for tab in history_tabs_list:
+            history_tabs_list_text.append(tab.text)
+
+        return history_tabs_list_text
+
+    def get_search_history_title(self) -> str:
+        logging.info("Get search history title")
+        print("Get search history title")
+        search_history_title = self.element("search_history_title").wait_visible().text
+        return search_history_title
+
+    def click_all_searches_tab(self):
+        logging.info("Click ALL SEARCHES tab")
+        print("Click ALL SEARCHES tab")
+        self.element("search_history_title").wait_visible()
+        list_tab = self.element("search_history_tab_list").find_elements()
+        list_tab[0].click()
+
+    def click_vehicle_search_tab(self):
+        logging.info("Click VEHICLE SEARCH tab")
+        print("Click VEHICLE SEARCH tab")
+        list_tab = self.element("search_history_tab_list").find_elements()
+        list_tab[1].click()
+
+    def click_open_search_tab(self):
+        logging.info("Click OPEN SEARCH tab")
+        print("Click OPEN SEARCH tab")
+        list_tab = self.element("search_history_tab_list").find_elements()
+        list_tab[2].click()
+
+
+    def validate_searchbar_in_all_search(self):
+        logging.info("Validate searchbar presence into search history modal")
+        print("Validate searchbar presence into search history modal")
+        displayed = self.element("searchbar_in_all_search").element_is_displayed()
+        return displayed
+
+    def validate_searchbar_in_vehicle_search(self):
+        logging.info("Validate searchbar presence into search history modal")
+        print("Validate searchbar presence into search history modal")
+        displayed = self.element("searchbar_in_vehicle_search").element_is_displayed()
+        return displayed
+    def validate_searchbar_in_open_search(self):
+        logging.info("Validate searchbar presence into search history modal")
+        print("Validate searchbar presence into search history modal")
+        displayed = self.element("searchbar_in_open_search").element_is_displayed()
+        return displayed
+    def close_search_history_modal(self):
+        logging.info("close search history modal")
+        print("Close search history modal")
+        self.element("close_modal_btn").wait_clickable().click()
+
+    def click_last_searches_expand_btn(self):
+        logging.info("Click last searches expand button")
+        # self.element("last_searches_subtitle_span").wait_visible()
+        print("click las searches expand button")
+        self.element("last_searches_expand_btn").wait_clickable().click()
+
