@@ -354,10 +354,6 @@
       "by": "XPATH",
       "value": "//button[contains(text(),'Continue')]"
     },
-    "new_client_continue_btn_es": {
-      "by": "XPATH",
-      "value": "//button[contains(text(),'Continuar')]"
-    },
     "new_client_x_close_btn": {
       "by": "XPATH",
       "value": "//div[@class='storage-cleaner-closing-container']/button"
@@ -365,10 +361,6 @@
     "new_client_cancel_btn": {
       "by": "XPATH",
       "value": "//button[contains(text(),'Cancel')]"
-    },
-    "new_client_cancel_btn_es": {
-      "by": "XPATH",
-      "value": "//button[contains(text(),'Cancelar')]"
     },
     "sort_by_dropdown": {
       "by": "XPATH",
@@ -1166,18 +1158,6 @@
     "results_product_description": {
       "by": "XPATH",
       "value": "//ol//li//span[@class='roboto-condensed-500 fs-16px o-text-primary']"
-    },
-    "shortcut_menu_button_esp": {
-      "by": "XPATH",
-      "value": "//button[contains(text(),'de atajos del teclado')]"
-    },
-    "shortcut_menu_popup_window": {
-      "by": "XPATH",
-      "value": "//o-shortcut"
-    },
-    "keyboard_shortcut_enable_slider": {
-      "by": "XPATH",
-      "value": "//span[@class='p-inputswitch-slider']"
     }
   }
 }

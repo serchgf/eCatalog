@@ -456,7 +456,7 @@ class HomePage(BasePage):
     def get_general_categories_list(self):
 
         logging.info(f"Get General Category List")
-        self.element("general_categories_label").wait_visible()
+        self.element("general_categories_label").wait_visible() # we have to change that xpath
         print(f"Get General Category List")
         self.element("general_category_list").wait_visible()
         general_category_list = self.element("general_category_list").find_elements()
@@ -1016,24 +1016,15 @@ class HomePage(BasePage):
         brands_list = self.element("all_brands_link_list").find_elements()
         logging.info(f"El numero de marcas son: {len(brands_list)}")
         print(f"El numero de marcas son: {len(brands_list)}")
-
         index = random.randint(0, len(brands_list))
-
         brand_selected = brands_list[index].text
         logging.info(f"Brand Selected: {brand_selected}")
         print(f"Brand Selected: {brand_selected}")
         try:
-            logging.info(f"Try click on: {brand_selected}")
-            print(f"Try click on: {brand_selected}")
-            self.javascript_clic(brand_selected)
-        except JavascriptException:
-
-            time.sleep(1)
-            logging.info(f"Java except click on: {brand_selected}")
-            print(f"Try click on: {brand_selected}")
-            self.clic_javacript(brands_list[index])
-            # brands_list[index].click()
-        # brands_list[index].click() funciona original
+            brands_list[index].click()
+            print("Prueba")
+        except ElementClickInterceptedException:
+            print(f"No se selecciono la marca: {brand_selected}")
         return brand_selected
 
     def get_search_results_number(self):
@@ -1156,15 +1147,23 @@ class HomePage(BasePage):
         return element_text
 
     def select_first_subcategory(self):
-        logging.info(f"Select the first subcategory in the CLP")
-        lista = self.element("category_landing_elements_img").find_elements()
+        logging.info(f"Select the first subcategory")
+        lista = self.element("elements_of_one_subcategory").find_elements()
         element_selected = lista[0].text
         logging.info(f"select first element of the list: {element_selected}")
+        print(element_selected)
         lista[0].click()
+        self.element("element_first_subcategory_compatibility").wait_visible()
+        element = self.element("delete_vehicle").find_element()
+        element.click()
+        time.sleep(.3)
+        print("Vehicle removed")
+        logging.info(f"Vehicle removed")
         return element_selected
-
+        #//p[@class ='badge-text']/span[2]    Compatible 2020 Argo Aurora 850 Responder-R 8x8
     def validate_product_list_page_vehicle(self, subcategory_selected, vehicle):
-
+        #Año-Marca-Modelo-submodelo = vehiculo
+        #motor
         year, make, model, submodel = vehicle
         make = make.split('\n')[0]
         model = model.split('\n')[0]
@@ -1177,14 +1176,19 @@ class HomePage(BasePage):
         #     self.element("span_filter_by").wait_visible()
         #     self.element("sort_by_dropdown").wait_visible()
         #
+        titulo = self.element("plp_title").find_element().text.lower()
+        print(titulo)
+        print(subcategory_selected.lower())
         assert self.element(
-            "plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
+            "plp_title").find_element().text.lower() == subcategory_selected.lower(), f"The subcategory is not match"
+        print("Paso subcategoria")
         assert self.element(
-            "fits_element").find_element().text == f"Fits {make} {model} {year}", "The vehicle don't match"
+            "fits_element").find_element().text == f"{year} {make} {model} {submodel}", "The vehicle don't match"
+        print(f"{year} {make} {model} {submodel}")
 
     def validate_no_products_found(self):
         try:
-            if self.element("plp_error").find_element():
+            if self.element("no_results_message").find_element():
                 return True
         except NoSuchElementException:
             return False
@@ -1199,11 +1203,11 @@ class HomePage(BasePage):
     def select_vehicle_specific(self):
         self.click_on_Picker_vehicle_btn()
         time.sleep(0.5)
-        year = "2021"
-        make = "Chevrolet"
-        model = "Aveo"
-        submodel = "LT"
-        self.write_a_vehicle_type("Automotive Light Duty")
+        year = "2020"
+        make = "Argo"
+        model = "Aurora 850 Responder-R 8x8"
+        submodel = "Base"
+        self.write_a_vehicle_type("Deportes Motorizados")
         self.write_a_year(year)
         self.write_a_make(make)
         self.write_a_model(model)
@@ -1296,13 +1300,14 @@ class HomePage(BasePage):
                 logging.info(f"Validate categories in landing page")
                 total = self.clp_category_result()
                 logging.info(f"The total of categories in page = {total}")
+                print(total)
                 return True
         except NoSuchElementException:
             return False
 
     def clp_category_result(self):
         logging.info("Get the total of categories on page")
-        img_cat = self.element("img_cat_names").find_elements()
+        img_cat = self.element("elements_of_one_subcategory").find_elements()
         additional = self.element("additional_cat_names").find_elements()
         total = len(img_cat) + len(additional)
         return total
