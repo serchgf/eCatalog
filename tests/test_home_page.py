@@ -684,6 +684,7 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page.shortcut_new_client()
     home_page.click_new_client_continue_btn()
     time.sleep(2)
+    print("hola")
     home_page.click_on_categories_button()
     home_page.wait_until_page_load_complete()
     time.sleep(1)
