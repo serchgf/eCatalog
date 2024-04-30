@@ -1062,6 +1062,7 @@ def test_MXTEST_8272_Pagination(web_drivers):
 
 # # # MXTEST-8270
 @pytest.mark.sprint1_regression
+@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
@@ -1086,6 +1087,7 @@ def test_MXTEST_8270_Navigation_searchby_brand_category_filter(web_drivers):
 #
 # # # MXTEST-8269
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=5)
 #@pytest.mark.fallo
@@ -1098,26 +1100,21 @@ def test_MXTEST_8269_Navigation_searchby_category_brand_filter(web_drivers):
     #clic en categorias
     home_page.click_on_categories_button()
     time.sleep(2)
-
     # obtener lista decategorias
     category_list = home_page.get_general_categories_list()
     #if len(category_list) < 1:
     #    category_list = pl_page.get_general_categories_list()
     # click en categoria
     home_page.select_specific_category_of_list(category_list, 14)
-
     # obtener lista de subcategorias
     subcategory_list = home_page.get_subcategory_list()
     #if len(subcategory_list) < 1:
     #    subcategory_list = pl_page.get_subcategory_list()
     # click en subcategoria
     subcategory = home_page.select_specific_category_of_list(subcategory_list, 1)
-
     total_products = home_page.validate_product_list_page(subcategory)
     brand = home_page.select_brand_filter()
-
-    attribute = home_page.select_random_attribute()
-
+    attribute = home_page.select_random_attribute_del_zero_position()
     total_products_filtered = home_page.validate_product_list_page(subcategory.title())
     home_page.wait_spinner_disappears()
     home_page.validate_filtered_page(brand, attribute, total_products, total_products_filtered)

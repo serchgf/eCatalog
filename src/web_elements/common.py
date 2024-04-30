@@ -59,7 +59,13 @@ class WebElementWrapper:
     def get_locator_value(self):
         return self.__locator[1]
 
-    def element_is_enable(self):
+
+    def element_is_enable(self) -> bool:
         logging.info(f"This function is to verify if element is enabled {self.__locator}")
         element = self.__driver.find_element(*self.__locator).is_enabled()
+        return element #Regresa true si esta habilitado.
+
+    def element_is_displayed(self) -> bool:
+        logging.info(f"This function is to verify if element is displayed {self.__locator}")
+        element = self.__driver.find_element(*self.__locator).is_displayed()
         return element #Regresa true si esta habilitado.

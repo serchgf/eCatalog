@@ -110,7 +110,7 @@
       "by": "XPATH",
       "value": "//ul[@role='listbox']/li"
     },
-     "add_new_vehicle_btn": {
+    "add_new_vehicle_btn": {
       "by": "XPATH",
       "value": "//span[@class='p-button-label ng-star-inserted']"
     },
@@ -148,7 +148,7 @@
     },
     "general_category_list": {
       "by": "XPATH",
-      "value": "//div[@id=\"categories\"]//button[@class='category-link category-link-button ng-star-inserted']"
+      "value": "//div[@id='categories']//button[@class='category-link category-link-button ng-star-inserted']"
     },
     "subcategory_list": {
       "by": "XPATH",
@@ -220,7 +220,7 @@
     },
     "search_results_number": {
       "by": "XPATH",
-      "value": "//div[@class='search-results']/span[@class='roboto-400']"
+      "value": "//span[contains(text(),'Search results')]/following-sibling::span"
     },
     "popular_categories_label": {
       "by": "XPATH",
@@ -248,7 +248,7 @@
     },
     "show_all_brands_link": {
       "by": "XPATH",
-      "value": "//a[@href=\"#/catalog/brands\"]"
+      "value": "//a[@href='#/catalog/brands']"
     },
     "brands_images": {
       "by": "XPATH",
@@ -405,6 +405,10 @@
     "plp_title": {
       "by": "XPATH",
       "value": "//div[@class ='info o-text-primary']/span[1]"
+    },
+    "subcategory_title": {
+      "by": "XPATH",
+      "value": "(//div[@class='info']//span)[1]"
     },
     "loading_img": {
       "by": "XPATH",
@@ -927,7 +931,7 @@
       "by": "XPATH",
       "value": "//input[@formcontrolname='employeID']"
     },
-     "irm_employName": {
+    "irm_employName": {
       "by": "XPATH",
       "value": "//input[@formcontrolname='fullName']"
     },
@@ -1060,10 +1064,10 @@
       "value": "//div[@class='carousel-deals-text-card o-text-primary']/span[2]"
     },
     "span_nip_verified": {
-            "by": "XPATH",
+      "by": "XPATH",
       "value": "//span[contains(text(),'NIP verified')]"
     },
-     "input_nip": {
+    "input_nip": {
       "by": "XPATH",
       "value": "//*[@formcontrolname='nip']"
     },
@@ -1154,6 +1158,22 @@
     "popup_alert_x_button": {
       "by": "XPATH",
       "value": "//div[@role='alert']"
+    },
+    "search_history_tab_list": {
+      "by": "XPATH",
+      "value": "//section[@class='rs-large tabs-history-content ng-star-inserted']//li[@role='presentation']/a"
+    },
+    "search_history_title": {
+      "by": "XPATH",
+      "value": "//section[@class='bg-white history-search-title-box rs-large ng-star-inserted']//h3"
+    },
+    "last_searches_expand_btn": {
+      "by": "XPATH",
+      "value": "//p-sidebar//div[@aria-hidden='false']//button//button"
+    },
+    "last_searches_subtitle_span": {
+      "by": "XPATH",
+      "value": "//p-sidebar//div[@aria-hidden='false']//div[contains(@class,'sub-title')]/span"
     },
     "results_product_description": {
       "by": "XPATH",
