@@ -248,7 +248,7 @@
     },
     "show_all_brands_link": {
       "by": "XPATH",
-      "value": "//a[@href=\"#/catalog/brands\"]"
+      "value": "//a[@href='#/catalog/brands']"
     },
     "brands_images": {
       "by": "XPATH",
