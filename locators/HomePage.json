@@ -7,12 +7,12 @@
   "query_MXTEST-8263": "SELECT * FROM epc.application_vehicle_indexes avi INNER JOIN epc.vehicles v on v.a_vehicle_id = avi.vehicle_id WHERE avi.application_id='161096296'  AND avi.part_type_id = '02512' GROUP BY avi.application_id, avi.vehicle_id;",
   "query_MXTEST_8255": "hola mundo",
   "footer_href_links":{
-      "Delivery routes Jalisco": "http://intranet.oreillyauto.mx/files/administrativo/logistica/documento.php?d=Y2lyY3VpdG9fc3VjdXJzYWxlc19qYWxpc2NvLnBkZg==&n=Q2lyY3VpdG9zIGVudHJlIHN1Y3Vyc2FsZXMgSmFsaXNjbw==",
-      "Delivery routes Leon": "http://intranet.oreillyauto.mx/files/administrativo/almacen/documento.php?d=Y2lyY3VpdG9fbGVvbi5wZGY=&n=Q2lyY3VpdG8gZW50cmUgU3VjdXJzYWxlcyBMZcOzbg==",
-      "O'Reilly Stores": "https://www.oreillyauto.com.mx/sucursales",
-      "Product lines": "http://intranet.oreillyauto.mx/files/cat_prov_online.html",
-      "Help center": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/help-center"
-    },
+        "Rutas de entrega Jalisco": "http://intranet.oreillyauto.mx/files/administrativo/logistica/documento.php?d=Y2lyY3VpdG9fc3VjdXJzYWxlc19qYWxpc2NvLnBkZg==&n=Q2lyY3VpdG9zIGVudHJlIHN1Y3Vyc2FsZXMgSmFsaXNjbw==",
+        "Lineas de producto": "http://intranet.oreillyauto.mx/files/cat_prov_online.html",
+        "Rutas de entrega Leon": "http://intranet.oreillyauto.mx/files/administrativo/almacen/documento.php?d=Y2lyY3VpdG9fbGVvbi5wZGY=&n=Q2lyY3VpdG8gZW50cmUgU3VjdXJzYWxlcyBMZcOzbg==",
+        "Tiendas O'Reilly": "https://www.oreillyauto.com.mx/sucursales",
+        "Centro de ayuda": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/help-center"
+  },
   "locators": {
     "search_bar": {
       "by": "XPATH",
@@ -48,7 +48,7 @@
     },
     "vehicle_type_label": {
       "by": "XPATH",
-      "value": "//p[contains(text(),'Vehicle type*')]"
+      "value": "//p-autocomplete[@formcontrolname= 'typeVehicle']/preceding-sibling::p"
     },
     "vehicle_type_tbx": {
       "by": "XPATH",
@@ -60,7 +60,7 @@
     },
     "year_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@formcontrolname='year']//button"
+      "value": "//p-autocomplete[@formcontrolname='year']//button/span"
     },
     "year_input_tbx": {
       "by": "XPATH",
@@ -148,11 +148,11 @@
     },
     "general_category_list": {
       "by": "XPATH",
-      "value": "//div[@class='m-0 category-list-colums']/div/span"
+      "value": "//div[@id='categories']//button[@class='category-link category-link-button ng-star-inserted']"
     },
     "subcategory_list": {
       "by": "XPATH",
-      "value": "//div[@role='button']/span"
+      "value": "//div[@class='column-count']/a//span"
     },
     "subcategory_list_2": {
       "by": "XPATH",
@@ -176,11 +176,11 @@
     },
     "link_products_list": {
       "by": "XPATH",
-      "value": "//ol[@class='p-0 m-0']//a"
+      "value": "//o-products//span[contains(@class,'o-text-primary')]"
     },
     "link_products_list_2": {
       "by": "XPATH",
-      "value": "//div[@role='button']"
+      "value": "//p[contains(@class,'o-text-primary')]"
     },
     "additional_label": {
       "by": "XPATH",
@@ -248,7 +248,7 @@
     },
     "show_all_brands_link": {
       "by": "XPATH",
-      "value": "//span[contains(text(),' Show all brands ')]"
+      "value": "//a[@href='#/catalog/brands']"
     },
     "brands_images": {
       "by": "XPATH",
@@ -390,17 +390,9 @@
       "by": "XPATH",
       "value": "//span[normalize-space()='Turbocharger & Supercharger']"
     },
-    "elements_of_one_subcategory": {
+    "category_landing_elements_img": {
       "by": "XPATH",
-      "value": "//div[@class='container-text-margin']//p"
-    },
-    "element_first_subcategory_compatibility": {
-      "by": "XPATH",
-      "value": "//span[contains(text(),'Compatible')][1]"
-    },
-    "delete_vehicle": {
-      "by": "XPATH",
-      "value": "(//span[@class='p-button-label ng-star-inserted'])[1]"
+      "value": "//div[@role='button']//p"
     },
     "category_landing_title": {
       "by": "XPATH",
@@ -412,7 +404,7 @@
     },
     "plp_title": {
       "by": "XPATH",
-      "value": "//div[@class='category-nav-limiter']//h2"
+      "value": "//div[@class ='info o-text-primary']/span[1]"
     },
     "loading_img": {
       "by": "XPATH",
@@ -449,7 +441,7 @@
     },
     "additional_cat_names": {
       "by": "XPATH",
-      "value": "//div[@class='column-count-4']/a"
+      "value": "//div[contains(@class,'category-nav-button-text')]/span"
     },
     "img_cat_names": {
       "by": "XPATH",
@@ -457,7 +449,7 @@
     },
     "fits_element": {
       "by": "XPATH",
-      "value": "//div[@class ='vehicle-info-col']/span[2]"
+      "value": "//div[@role='badge']/p/span[contains(@class,'roboto-400')]"
     },
     "filter_option_selected": {
       "by": "XPATH",

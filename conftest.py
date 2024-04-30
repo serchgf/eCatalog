@@ -3,7 +3,7 @@ import os.path
 import pathlib
 import datetime
 import shutil
-from py.xml import html
+#from py.xml import html
 import allure
 import pytest
 from allure_commons.types import AttachmentType
@@ -128,7 +128,7 @@ def pytest_runtest_makereport(item, call):
 def pytest_html_report_title(report):
     report.title = f"eCatalog Report {_REPORT_DATETIME.replace('/','')}"
 
-def pytest_html_results_summary(prefix, summary, postfix):
-    prefix.extend(
-        [html.img(src="../../image_files_/logo_oreilly.png", style="right:8%; height:240px; top:0; position:fixed;")])
+#def pytest_html_results_summary(prefix, summary, postfix):
+#    prefix.extend(
+#        [html.img(src="../../image_files_/logo_oreilly.png", style="right:8%; height:240px; top:0; position:fixed;")])
 
