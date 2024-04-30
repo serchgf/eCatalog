@@ -48,7 +48,7 @@
     },
     "vehicle_type_label": {
       "by": "XPATH",
-      "value": "//div/p-autocomplete[@formcontrolname='typeVehicle']//parent::div/p"
+      "value": "//p[contains(text(),'Vehicle type*')]"
     },
     "vehicle_type_tbx": {
       "by": "XPATH",
@@ -56,7 +56,7 @@
     },
     "vehicle_type_dropdown": {
       "by": "XPATH",
-      "value": "//p-autocomplete[@field='vehicleTypeDescription']//button/span"
+      "value": "//p-autocomplete[@field='vehicleTypeDescription']//button"
     },
     "year_dropdown": {
       "by": "XPATH",
@@ -136,7 +136,7 @@
     },
     "delete_all_btn": {
       "by": "XPATH",
-      "value": "//button[@ng-reflect-label='DELETE ALL']"
+      "value": "//button[@id= 'delete-vehicle-list']"
     },
     "add_vehicle_info_label": {
       "by": "XPATH",
@@ -156,11 +156,7 @@
     },
     "subcategory_list_2": {
       "by": "XPATH",
-      "value": "//div[@class='m-0 category-list-colums column-fill-auto']/div"
-    },
-    "subcategory_list_3": {
-      "by": "XPATH",
-      "value": "//div[@class='m-0 category-list-colums']/div[@role='button']"
+      "value": "//div[@class='column-count']/a//span"
     },
     "label_subcategory_selected": {
       "by": "XPATH",
@@ -173,6 +169,10 @@
     "element_buttons_grid_category": {
       "by": "XPATH",
       "value": "//div[@role='button']//img"
+    },
+    "element_buttons_grid_category_2": {
+      "by": "XPATH",
+      "value": "//div[@class='container-image']//img"
     },
     "link_products_list": {
       "by": "XPATH",
@@ -204,11 +204,11 @@
     },
     "span_filter_by": {
       "by": "XPATH",
-      "value": "//div[@class='title']//span[contains(text(),'filter by')]"
+      "value": "//span[contains(text(),'filter_alt')]"
     },
     "tools_span": {
       "by": "XPATH",
-      "value": "//o-footer//span[contains(text(),'Tools')]"
+      "value": "//span[@class='title-column roboto-condensed-700 fs-20px o-text-primary']"
     },
     "footer_links": {
       "by": "XPATH",
@@ -216,7 +216,7 @@
     },
     "search_results_label": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Search results')]"
+      "value": "//div[@class='search-results']"
     },
     "search_results_number": {
       "by": "XPATH",
@@ -224,7 +224,7 @@
     },
     "popular_categories_label": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'POPULAR CATEGORIES')]"
+      "value": "//div[@id='top-categories']//span"
     },
     "close_categories_x_button": {
       "by": "XPATH",
@@ -236,7 +236,7 @@
     },
     "brands_dropdown": {
       "by": "XPATH",
-      "value": "//section[@class='submenu ps-5 ng-star-inserted']//span[contains(text(),'BRANDS')]"
+      "value": "//button[@aria-labelledby='brand-button-text']"
     },
     "brands_btn": {
       "by": "XPATH",
@@ -256,11 +256,11 @@
     },
     "explore_brands_label": {
       "by": "XPATH",
-      "value": "//div[contains(text(),' Explore Brands ')]"
+      "value": "//div[@class='explore-label roboto-condensed-700 fs-20px o-text-primary']"
     },
     "all_brands_link_list": {
       "by": "XPATH",
-      "value": "//span[@class='p-button-label ng-star-inserted']"
+      "value": "//a[@class='principal-brand ng-star-inserted']//span"
     },
     "no_results_message": {
       "by": "XPATH",
@@ -268,7 +268,7 @@
     },
     "go_back_btn": {
       "by": "XPATH",
-      "value": "//button[@ng-reflect-label='GO BACK']"
+      "value": "//button[@icon='pi pi-arrow-left']"
     },
     "general_categories_label": {
       "by": "XPATH",
@@ -304,7 +304,11 @@
     },
     "part_interchange_step_2_list": {
       "by": "XPATH",
-      "value": "//div[@class='fade-in-up ng-star-inserted']//li"
+      "value": "//div[@class='fade-in-up ng-star-inserted']//li//a"
+    },
+    "no_results_founf_icon": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'search_off')]"
     },
     "category_nav_limiter": {
       "by": "XPATH",
@@ -386,9 +390,17 @@
       "by": "XPATH",
       "value": "//span[normalize-space()='Turbocharger & Supercharger']"
     },
-    "category_landing_elements_img": {
+    "elements_of_one_subcategory": {
       "by": "XPATH",
-      "value": "//div[@role='button']//p"
+      "value": "//div[@class='container-text-margin']//p"
+    },
+    "element_first_subcategory_compatibility": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Compatible')][1]"
+    },
+    "delete_vehicle": {
+      "by": "XPATH",
+      "value": "(//span[@class='p-button-label ng-star-inserted'])[1]"
     },
     "category_landing_title": {
       "by": "XPATH",
@@ -400,7 +412,7 @@
     },
     "plp_title": {
       "by": "XPATH",
-      "value": "//div[@class ='info o-text-primary']/span[1]"
+      "value": "//div[@class='category-nav-limiter']//h2"
     },
     "loading_img": {
       "by": "XPATH",
@@ -437,7 +449,7 @@
     },
     "additional_cat_names": {
       "by": "XPATH",
-      "value": "//div[contains(@class,'category-nav-button-text')]/span"
+      "value": "//div[@class='column-count-4']/a"
     },
     "img_cat_names": {
       "by": "XPATH",
@@ -445,7 +457,7 @@
     },
     "fits_element": {
       "by": "XPATH",
-      "value": "//div[@role='badge']/p/span[contains(@class,'roboto-400')]"
+      "value": "//div[@class ='vehicle-info-col']/span[2]"
     },
     "filter_option_selected": {
       "by": "XPATH",
@@ -477,7 +489,7 @@
     },
     "search_history_link": {
       "by": "XPATH",
-      "value": "//button[@aria-labelledby='history-search-button-text']"
+      "value": "//span[contains(text(),'SEARCH HISTORY')]"
     },
     "search_history_last_searches": {
       "by": "XPATH",
@@ -507,17 +519,9 @@
       "by": "XPATH",
       "value": "//i[@class='pi pi-times remove-button-icon']"
     },
-    "searchbar_in_all_search": {
+    "searchbar_in_search_history": {
       "by": "XPATH",
-      "value": "//*[@id='p-tabpanel-4']//input"
-    },
-    "searchbar_in_vehicle_search": {
-      "by": "XPATH",
-      "value": "//*[@id='p-tabpanel-5']//input"
-    },
-    "searchbar_in_open_search": {
-      "by": "XPATH",
-      "value": "//*[@id='p-tabpanel-6']//input"
+      "value": "//div[@id='p-tabpanel-0']//input[@placeholder='Search']"
     },
     "Empty_Brand_Dupli_Color_MX": {
       "by": "XPATH",
@@ -1174,6 +1178,10 @@
     "last_searches_subtitle_span": {
       "by": "XPATH",
       "value": "//p-sidebar//div[@aria-hidden='false']//div[contains(@class,'sub-title')]/span"
+    },
+    "results_product_description": {
+      "by": "XPATH",
+      "value": "//ol//li//span[@class='roboto-condensed-500 fs-16px o-text-primary']"
     }
   }
 }

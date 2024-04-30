@@ -51,7 +51,6 @@ class WebElementWrapper:
         logging.info(f"Accept alert : ")
         return self.__driver.switchTo().alert().accept()
 
-
     def switch_to_iframe(self) -> WebElement:
         logging.info(f"switch_to_iframe: {self.__locator}")
 
