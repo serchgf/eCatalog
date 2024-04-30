@@ -1219,13 +1219,10 @@ class HomePage(BasePage):
         return year, make, model, submodel
 
     def validate_product_list_page(self, subcategory_selected):
-
         logging.info("Validate product list page")
-
         products_number = self.get_search_results_number()
-
         assert self.element(
-            "plp_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
+            "subcategory_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
         return products_number
 
     def validate_pagination(self):
@@ -1259,29 +1256,50 @@ class HomePage(BasePage):
     def select_brand_filter(self):
         logging.info("Select a brand from Brands filter")
         filter_buttons = self.element("filters_buttons").find_elements()
-        filter_buttons[2].click()
-        brand = filter_buttons[2].text
+        filter_buttons[0].click()
+        brand = filter_buttons[0].text   #Marcas
         attributes_list = self.element("filter_option_list").find_elements()
         index = random.randint(0, len(attributes_list) - 1)
         attribute_selected = attributes_list[index].text
         logging.info(f"Attribute Selected: {attribute_selected}")
         attributes_list[index].click()
-
+        time.sleep(.3)
+        print(brand)
+        print(attribute_selected)
         return brand
 
     def select_random_attribute(self):
-        logging.info("Select an attribute")
-
+        logging.info("Selecting an attribute")
         attribute_filter_list = self.element("filters_buttons").find_elements()
-        index = random.randint(0, len(attribute_filter_list))
+        index = random.randint(0, len(attribute_filter_list) - 1)
         attribute_selected = attribute_filter_list[index].text
-        logging.info(f"Attribute Selected: {attribute_selected}")
+        logging.info(f"Attribute Option Selected: {attribute_selected}")
+        print(attribute_selected)
         attribute_filter_list[index].click()
         time.sleep(1)
         attribute_option_list = self.element("filter_option_list").find_elements()
         index = random.randint(0, len(attribute_option_list) - 1)
         attribute_option_selected = attribute_option_list[index].text
         logging.info(f"Attribute Option Selected: {attribute_option_selected}")
+        print(attribute_option_selected)
+        attribute_option_list[index].click()
+        return attribute_option_selected
+
+    def select_random_attribute_del_zero_position(self):
+        logging.info("Selecting an attribute and delete zero position of the list")
+        attribute_filter_list = self.element("filters_buttons").find_elements()
+        index = random.randint(1, len(attribute_filter_list) - 1)
+        attribute_selected = attribute_filter_list[index].text
+        logging.info(f"Attribute Option Selected: {attribute_selected}")
+        print(attribute_selected)
+        attribute_filter_list[index].click()
+        #//div[@class='ng-star-inserted']//button
+        time.sleep(1)
+        attribute_option_list = self.element("filter_option_list").find_elements()
+        index = random.randint(0, len(attribute_option_list) - 1)
+        attribute_option_selected = attribute_option_list[index].text
+        logging.info(f"Attribute Option Selected: {attribute_option_selected}")
+        print(attribute_option_selected)
         attribute_option_list[index].click()
         return attribute_option_selected
 

@@ -414,6 +414,10 @@
       "by": "XPATH",
       "value": "//div[@class='category-nav-limiter']//h2"
     },
+    "subcategory_title": {
+      "by": "XPATH",
+      "value": "(//div[@class='info']//span)[1]"
+    },
     "loading_img": {
       "by": "XPATH",
       "value": "//div[@role='alert']//*[name()='svg']",
