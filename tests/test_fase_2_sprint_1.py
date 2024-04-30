@@ -50,7 +50,7 @@ def test_MXTEST_10419_PDP_With_No_video_Resource(web_drivers):
 
 
 # MXTEST-10420
-@pytest.mark.phase2_sp1
+@pytest.mark.inprocess
 #@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10420_FAQ_Top_Answer(web_drivers):
     home_page = HomePage(*web_drivers)

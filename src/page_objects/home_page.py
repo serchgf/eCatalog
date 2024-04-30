@@ -2,7 +2,7 @@ import json
 import logging
 import random
 import time
-import mysql.connector
+#import mysql.connector
 from selenium.common import JavascriptException, ElementClickInterceptedException, NoSuchElementException
 # from selenium.webdriver import ActionChains as AC
 from selenium.webdriver.common.action_chains import ActionChains as AC
@@ -125,7 +125,7 @@ class HomePage(BasePage):
         # self.clic_javacript(dropdown)
         # time.sleep(4)
         dropdown.click()
-        time.sleep(.5)
+        time.sleep(1.5)
         try:
             vehicle_type = self.select_index_list_element(index)
             return vehicle_type
@@ -389,14 +389,14 @@ class HomePage(BasePage):
     def click_new_client_continue_btn(self):
         logging.info(f"Click new client continue button")
         print(f"Click new client continue button")
-        self.element("new_client_label").wait_visible()
-        self.element("new_client_continue_btn").wait_clickable().click()
+        self.element("new_client_es_label").wait_visible()
+        self.element("new_client_continue_btn_es").wait_clickable().click()
 
     def click_new_client_cancel_btn(self):
         logging.info(f"Click new client cancel button")
         print(f"Click new client cancel button")
-        self.element("new_client_label").wait_visible()
-        self.element("new_client_cancel_btn").wait_clickable().click()
+        self.element("new_client_es_label").wait_visible()
+        self.element("new_client_cancel_btn_es").wait_clickable().click()
 
     def click_new_client_x_close_btn(self):
         logging.info(f"Click new client x close button")
@@ -405,10 +405,10 @@ class HomePage(BasePage):
         self.element("new_client_x_close_btn").wait_clickable().click()
 
     def shortcut_new_client(self):
-        logging.info("New client shortcut: 'SHIFT+C'")
-        print("New client shortcut: 'SHIFT+C'")
+        logging.info("New client shortcut: 'CTRL+ALT+N'")
+        print("New client shortcut: 'CTRL+ALT+N'")
         action = self.actionChain()
-        action.send_keys(Keys.SHIFT + 'C')
+        action.key_down(Keys.CONTROL).key_down(Keys.ALT).send_keys('n').key_up(Keys.ALT).key_up(Keys.CONTROL)
         action.perform()
         time.sleep(1)
 
@@ -643,7 +643,7 @@ class HomePage(BasePage):
     def click_on_add_new_vehicle_btn(self):
         logging.info(f"Click on add new Vehicle button")
         print(f"Click on add new Vehicle button")
-        self.element("add_new_vehicle_btn").wait_clickable().click()
+        self.element("add_new_vehicle_btn").find_element().click()
         time.sleep(.2)
 
     def click_on_edit_info_btn(self):
@@ -2036,6 +2036,12 @@ class HomePage(BasePage):
         self.element("language_btn").find_element().click()
         self.element("language_list").wait_visible()
         self.element("esp_option").find_element().click()
+
+    def enable_keyboard_shortcuts(self):
+        self.element("shortcut_menu_button_esp").find_element().click()
+        self.element("shortcut_menu_popup_window").wait_visible()
+        self.element("keyboard_shortcut_enable_slider").find_element().click()
+
 
     def get_menu_header_span(self):
         logging.info("Get spans of menu header")
