@@ -621,25 +621,25 @@ def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_driver
     # falta dato URL: https://testintranet.oreillyauto.mx/ecatalog/<<ID DEL ARTICULO >>
     page = HomePage(*web_drivers)
     home_page = page
-    #home_page.open()
-    # home_page.open_url_us()
-    #url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/valvoline-mx-synthetic-motor-oil-5w-20-1-quart-875238/m4l0/875238"
-    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates/mnv"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    #Change language to español
+    home_page.change_language_En_to_Es()
     home_page.click_on_Picker_vehicle_btn()
     time.sleep(2)
     home_page.wait_until_page_load_complete()
-    home_page.write_a_vehicle_type("Automotive Light Duty")
+    #Choosing specific vehicle
+    home_page.write_a_vehicle_type("Uso Liviano Automotriz")
     home_page.write_a_year("2023")
     home_page.write_a_make("Alfa Romeo")
     home_page.write_a_model("Giulia")
     home_page.write_a_submodel("Estrema")
     home_page.click_on_engine_and_select()
-    home_page.clickon_add_vehicle_submit_btn()
+    home_page.click_on_add_vehicle_submit_btn()
 
     home_page.wait_spinner_disappears()
-    expected_message = "Does NOT Fit"
+    expected_message = "No compatible"
 
     actual_message = home_page.get_compatibility_meessage()
 
