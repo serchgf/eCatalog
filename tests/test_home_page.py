@@ -556,12 +556,15 @@ def test_MXTEST_8283_Search_FromProductPage(web_drivers):
 # # # MXTEST-8275
 @pytest.mark.sprint1_regression# sprint1_regression
 @pytest.mark.pdp
+@pytest.mark.test8275
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
-    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/brands/accusharp-mx/mfe"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accusharp/mfe"
     #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accusharp/aus"
     home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.wait_spinner_disappears()
     # home_page.click_on_brands()
     # time.sleep(.5)
@@ -584,9 +587,9 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
     home_page.click_on_engine_and_select()
 
     home_page.click_on_add_vehicle_submit_btn()
-    expected_message = "Does NOT Fit"
-    expected_message_2 = "Non application"
-    expected_message_3 = "Fits"
+    expected_message = "No compatible"
+    expected_message_2 = "Sin aplicación"
+    expected_message_3 = "Compatible"
     actual_message = home_page.get_compatibility_meessage()
     assert expected_message in actual_message or expected_message_2 in actual_message, f"The message {actual_message} should be: {expected_message} or {expected_message_2}"
 
