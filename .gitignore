@@ -1,0 +1,6 @@
+Reports/**
+tests/Reports/**
+tests/logs/**
+.idea
+__pycache__
+
