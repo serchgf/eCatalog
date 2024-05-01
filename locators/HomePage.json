@@ -232,7 +232,7 @@
     },
     "search_results_number": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Search results')]/following-sibling::span"
+      "value": "//span[contains(text(),'Resultados')]/following-sibling::span"
     },
     "popular_categories_label": {
       "by": "XPATH",

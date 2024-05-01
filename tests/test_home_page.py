@@ -1049,25 +1049,11 @@ def test_MXTEST_8272_Pagination(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     #-----------------------------------
-    home_page.click_on_categories_button()
     time.sleep(1)
-    # obtener lista decategorias
-    category_list = home_page.get_general_categories_list()
-    if len(category_list) < 1:
-        category_list = home_page.get_general_categories_list()
-    # click en categoria
-    home_page.select_specific_category_of_list(category_list, 4)
-
-    # obtener lista de subcategorias
-    subcategory_list = home_page.get_subcategory_list()
-    if len(subcategory_list) < 1:
-        subcategory_list = home_page.get_subcategory_list()
-    # click en subcategoria
-    home_page.select_specific_category_of_list(subcategory_list, 0)
     home_page.wait_until_page_load_complete()
-
-    subcategory = home_page.select_first_subcategory()
-    home_page.validate_product_list_page(subcategory)
+    home_page.click_on_categories_button()
+    home_page.click_on_category_by_text("Pintura y Carroceria")
+    home_page.click_on_subcategory_by_text("Pintura en Aerosol")
     home_page.validate_pagination()
 
 # # # MXTEST-8270
