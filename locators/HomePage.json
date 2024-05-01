@@ -230,9 +230,29 @@
       "by": "XPATH",
       "value": "//div[@class='search-results']"
     },
+    "new_client_continue_btn_es": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'Continuar')]"
+    },
+    "new_client_cancel_btn_es": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'Cancelar')]"
+    },
     "search_results_number": {
       "by": "XPATH",
       "value": "//span[contains(text(),'Resultados')]/following-sibling::span"
+    },
+    "shortcut_menu_button_esp": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'de atajos del teclado')]"
+    },
+    "shortcut_menu_popup_window": {
+      "by": "XPATH",
+      "value": "//o-shortcut"
+    },
+    "keyboard_shortcut_enable_slider": {
+      "by": "XPATH",
+      "value": "//span[@class='p-inputswitch-slider']"
     },
     "popular_categories_label": {
       "by": "XPATH",
