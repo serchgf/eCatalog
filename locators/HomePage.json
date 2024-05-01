@@ -112,7 +112,7 @@
     },
     "add_new_vehicle_btn": {
       "by": "XPATH",
-      "value": "//span[@class='p-button-label ng-star-inserted']"
+      "value": "//span[@class='p-button-label ng-star-inserted']/parent::button"
     },
     "recent_vehicles": {
       "by": "XPATH",
@@ -137,6 +137,18 @@
     "delete_all_btn": {
       "by": "XPATH",
       "value": "//button[@id= 'delete-vehicle-list']"
+    },
+    "delete_single_vehicle_btn": {
+      "by": "XPATH",
+      "value": "//div[@id='div-garage']//button[contains(@class, 'p-button-icon-only')]"
+    },
+    "garage_div": {
+      "by": "XPATH",
+      "value": "//div[@id='div-garage']"
+    },
+    "clear_current_selection_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(text(), 'Borrar')]"
     },
     "add_vehicle_info_label": {
       "by": "XPATH",

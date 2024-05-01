@@ -146,7 +146,7 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 
 # MXTEST-8285
 @pytest.mark.sprint1_regression
-@pytest.mark.test_8285
+@pytest.mark.test8285
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
@@ -158,8 +158,11 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
     home_page.click_on_Picker_vehicle_btn()
     vehicles_list = []
     #home_page.wait_spinner_disappears()
-    for index in range(3):
+    number_vehicles = 3
+    for index in range(number_vehicles):
         logging.info(f"Iteration---------------------------------------------------------------- {index}")
+        time.sleep(2)
+        home_page.wait_until_page_load_complete()
         vehicle = home_page.click_on_vehicle_type_and_select(1)# tenia index
         home_page.click_on_year_and_select(1)# tenia index
         home_page.click_on_make_and_select()
@@ -173,16 +176,21 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
         assert vehicle_selected != default_message, f"The button name: {vehicle_selected} must be different of{default_message}"
         home_page.click_on_Picker_vehicle_btn()
         vehicles_list.append(vehicle)
-        home_page.click_on_add_new_vehicle_btn()
+        if index != number_vehicles - 1:
+            home_page.click_on_add_new_vehicle_btn()
         #home_page.wait_spinner_disappears()
-
+    time.sleep(.5)
     n_vehicles = home_page.get_recent_vehicles_list()
     logging.info(f"{vehicles_list}")
     #assert n_vehicles <= 4, "The number of vehicles listed must be Maximum '15'"
     logging.info(f"{n_vehicles}: are listed")
     # click en el boton de clear
+    home_page.click_on_clear_current_selection_btn()
+    home_page.click_on_Picker_vehicle_btn()
+    time.sleep(.5)
+    home_page.click_on_single_vehicle_delete_btn()
     home_page.click_on_deleteAll_btn()
-    assert not home_page.validate_vehicle_list_cleared(), "The vehicles are not cleared correctly, 'recent_vehicles' should not be Visible"
+    assert home_page.validate_vehicle_list_cleared(), "The vehicles are not cleared correctly, 'recent_vehicles' should not be Visible"
 
 #
 # # # MXTEST-8287
@@ -585,7 +593,6 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
 
 # # # MXTEST-8286
 @pytest.mark.sprint1_regression
-@pytest.mark.test8286
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
 def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
