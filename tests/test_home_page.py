@@ -585,16 +585,21 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
 
 # # # MXTEST-8286
 @pytest.mark.sprint1_regression
+@pytest.mark.test8286
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
 def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
     home_page = HomePage(*web_drivers)
-    url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/red-line-full-synthetic-motor-oil-0w-30-1-quart-11114/rl00/11114"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-full-synthetic/l/n2728/detail/valvoline-synthetic-motor-oil-5w-30-1-quart-884527/m4l0/884527"
     #url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/search?q=11114"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    # Change language to español
+    home_page.change_language_En_to_Es()
     home_page.click_check_vehicle_fit_btn_producction()
-    home_page.write_a_vehicle_type("Automotive Light Duty")
+    time.sleep(2)
+    home_page.wait_until_page_load_complete()
+    home_page.write_a_vehicle_type("Uso Liviano Automotriz")
     home_page.write_a_year("2024")
     home_page.write_a_make("Acura")
     home_page.write_a_model("Integra")
@@ -602,7 +607,7 @@ def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
 
-    expected_message = "Does NOT Fit"
+    expected_message = "No compatible"
     non_application_message = "Non application"
     actual_message = home_page.get_compatibility_meessage()
     if non_application_message == actual_message:

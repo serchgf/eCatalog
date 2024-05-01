@@ -324,7 +324,7 @@
     },
     "check_vehicle_fit_btn_produccion": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Check vehicle fit')]/parent::button"
+      "value": "//span[contains(text(),'ver compatibilidad')]/parent::button"
     },
     "compatibility_message_label": {
       "by": "XPATH",
