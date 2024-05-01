@@ -146,7 +146,6 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 
 # MXTEST-8285
 @pytest.mark.sprint1_regression
-@pytest.mark.test8285
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
@@ -1184,26 +1183,19 @@ def test_MXTEST_8261_Navigation_Categories(web_drivers):
 # # MXTEST-8279 - MXTEST-8278
 @pytest.mark.sprint1_regression
 @pytest.mark.clp
+@pytest.mark.test8279
 @pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/brakes/brake-hardware/c0064"
-    home_page.open_new_url(url)
-
-    #home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    #home_page.element("loading_img").wait_until_disappears()
-
-    # seleccionar vehiculo
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.click_on_Picker_vehicle_btn()
-    time.sleep(3)
-    vehicle = "Automotive Light Duty"
-    #
-    # home_page.send_text_vehicle_type(vehicle)
+    time.sleep(.5)
+    vehicle = "Uso Liviano Automotriz"
     home_page.write_a_vehicle_type(vehicle)
     home_page.write_a_year("2023")
     home_page.write_a_make("Alfa Romeo")
@@ -1211,47 +1203,16 @@ def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
     submodel = "Estrema"
     home_page.write_a_submodel(submodel)
     engine = home_page.click_on_engine_and_select()
-    # home_page.click_on_vehicle_type_and_select()
-    # home_page.click_on_year_and_select()
-    # home_page.click_on_make_and_select()
-    # home_page.click_on_model_and_select()
-    # home_page.click_on_submodel_and_select()
-    # home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
 
     home_page.wait_until_page_load_complete()
-     #time.sleep(1)
-     #home_page.click_on_categories_button()
-     #time.sleep(1)
-     # obtener lista decategorias
-    #category_list = home_page.get_general_categories_list()
-     #if len(category_list) < 1:
-         #category_list = home_page.get_general_categories_list()
-      #click en categoria random
-    # category_selected = home_page.select_random_element_of_list(category_list)
-     #logging.info(f"Category selected: {category_selected}")
-    #
-    # # obtener lista de subcategorias
-    #subcategory_list = home_page.get_subcategory_list()
-     #if len(subcategory_list) < 1:
-         #subcategory_list = home_page.get_subcategory_list()
-    # # click en subcategoria random
-     #subcategory_selected = home_page.select_random_element_of_list(subcategory_list)
-     #logging.info(f"Subcategory selected: {subcategory_selected}")
-    #home_page.wait_spinner_disappears()
-    #subcategory_selected = "BRAKE HARDWARE"
-    #if home_page.validate_category_landing_page(subcategory_selected):
-        #logging.info("The Category Landing Page is displayed")
-        #assert True
-    #elif home_page.validate_product_list_page(subcategory_selected):
-        #logging.info("The Product list page is displayed")
-        #assert True
-    #elif home_page.validate_no_products_found():
-        #logging.info("The subcategory has not items")
-        #assert True
-    #elif home_page.validate_no_results_were_found():
-        #logging.info("No Results Were Found")
-        #assert True
-    #else:
-        #logging.info("Error loading the page")
-        #assert False, "Error loading the page"
+    home_page.click_on_categories_button()
+    home_page.click_on_category_by_text("Filtros")
+    home_page.click_on_subcategory_by_text("Filtro de Aire")
+    assert not home_page.validate_no_result_found(), "No results shown for expected sub category"
+
+    home_page.wait_until_page_load_complete()
+    home_page.click_on_categories_button()
+    home_page.click_on_category_by_text("Escape")
+    home_page.click_on_subcategory_by_text("Convertidor Catalitico")
+    assert home_page.validate_no_result_found(), "Results should not be shown for this category"

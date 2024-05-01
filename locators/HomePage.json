@@ -1187,6 +1187,10 @@
       "by": "XPATH",
       "value": "//p-sidebar//div[@aria-hidden='false']//div[contains(@class,'sub-title')]/span"
     },
+    "no_results_span":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Lo sentimos, no se encontraron resultados')]"
+    },
     "results_product_description": {
       "by": "XPATH",
       "value": "//ol//li//span[@class='roboto-condensed-500 fs-16px o-text-primary']"

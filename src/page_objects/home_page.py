@@ -1260,6 +1260,12 @@ class HomePage(BasePage):
         category_filter[index].click()
         return category_selected
 
+    def validate_no_result_found(self):
+        try:
+            self.element("no_results_span").find_element()
+            return True
+        except:
+            return False
     def validate_page_filtered(self, category_selected, total, total_filtered):
         logging.info("Validate filtered")
         category = self.element("filter_option_selected").wait_visible().text
