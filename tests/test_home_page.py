@@ -16,7 +16,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-8263
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 #@pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
