@@ -112,7 +112,7 @@
     },
     "add_new_vehicle_btn": {
       "by": "XPATH",
-      "value": "//span[@class='p-button-label ng-star-inserted']"
+      "value": "//span[@class='p-button-label ng-star-inserted']/parent::button"
     },
     "recent_vehicles": {
       "by": "XPATH",
@@ -137,6 +137,18 @@
     "delete_all_btn": {
       "by": "XPATH",
       "value": "//button[@id= 'delete-vehicle-list']"
+    },
+    "delete_single_vehicle_btn": {
+      "by": "XPATH",
+      "value": "//div[@id='div-garage']//button[contains(@class, 'p-button-icon-only')]"
+    },
+    "garage_div": {
+      "by": "XPATH",
+      "value": "//div[@id='div-garage']"
+    },
+    "clear_current_selection_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(text(), 'Borrar')]"
     },
     "add_vehicle_info_label": {
       "by": "XPATH",
@@ -218,9 +230,29 @@
       "by": "XPATH",
       "value": "//div[@class='search-results']"
     },
+    "new_client_continue_btn_es": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'Continuar')]"
+    },
+    "new_client_cancel_btn_es": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'Cancelar')]"
+    },
     "search_results_number": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Search results')]/following-sibling::span"
+      "value": "//span[contains(text(),'Resultados')]/following-sibling::span"
+    },
+    "shortcut_menu_button_esp": {
+      "by": "XPATH",
+      "value": "//button[contains(text(),'de atajos del teclado')]"
+    },
+    "shortcut_menu_popup_window": {
+      "by": "XPATH",
+      "value": "//o-shortcut"
+    },
+    "keyboard_shortcut_enable_slider": {
+      "by": "XPATH",
+      "value": "//span[@class='p-inputswitch-slider']"
     },
     "popular_categories_label": {
       "by": "XPATH",
@@ -324,7 +356,7 @@
     },
     "check_vehicle_fit_btn_produccion": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Check vehicle fit')]/parent::button"
+      "value": "//span[contains(text(),'ver compatibilidad')]/parent::button"
     },
     "compatibility_message_label": {
       "by": "XPATH",
@@ -1174,6 +1206,10 @@
     "last_searches_subtitle_span": {
       "by": "XPATH",
       "value": "//p-sidebar//div[@aria-hidden='false']//div[contains(@class,'sub-title')]/span"
+    },
+    "no_results_span":{
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Lo sentimos, no se encontraron resultados')]"
     },
     "results_product_description": {
       "by": "XPATH",

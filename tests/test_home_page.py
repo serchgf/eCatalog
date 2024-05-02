@@ -146,7 +146,6 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 
 # MXTEST-8285
 @pytest.mark.sprint1_regression
-@pytest.mark.test_8285
 @pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
@@ -158,8 +157,11 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
     home_page.click_on_Picker_vehicle_btn()
     vehicles_list = []
     #home_page.wait_spinner_disappears()
-    for index in range(3):
+    number_vehicles = 3
+    for index in range(number_vehicles):
         logging.info(f"Iteration---------------------------------------------------------------- {index}")
+        time.sleep(2)
+        home_page.wait_until_page_load_complete()
         vehicle = home_page.click_on_vehicle_type_and_select(1)# tenia index
         home_page.click_on_year_and_select(1)# tenia index
         home_page.click_on_make_and_select()
@@ -173,16 +175,21 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
         assert vehicle_selected != default_message, f"The button name: {vehicle_selected} must be different of{default_message}"
         home_page.click_on_Picker_vehicle_btn()
         vehicles_list.append(vehicle)
-        home_page.click_on_add_new_vehicle_btn()
+        if index != number_vehicles - 1:
+            home_page.click_on_add_new_vehicle_btn()
         #home_page.wait_spinner_disappears()
-
+    time.sleep(.5)
     n_vehicles = home_page.get_recent_vehicles_list()
     logging.info(f"{vehicles_list}")
     #assert n_vehicles <= 4, "The number of vehicles listed must be Maximum '15'"
     logging.info(f"{n_vehicles}: are listed")
     # click en el boton de clear
+    home_page.click_on_clear_current_selection_btn()
+    home_page.click_on_Picker_vehicle_btn()
+    time.sleep(.5)
+    home_page.click_on_single_vehicle_delete_btn()
     home_page.click_on_deleteAll_btn()
-    assert not home_page.validate_vehicle_list_cleared(), "The vehicles are not cleared correctly, 'recent_vehicles' should not be Visible"
+    assert home_page.validate_vehicle_list_cleared(), "The vehicles are not cleared correctly, 'recent_vehicles' should not be Visible"
 
 #
 # # # MXTEST-8287
@@ -549,12 +556,15 @@ def test_MXTEST_8283_Search_FromProductPage(web_drivers):
 # # # MXTEST-8275
 @pytest.mark.sprint1_regression# sprint1_regression
 @pytest.mark.pdp
+@pytest.mark.test8275
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
-    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/brands/accusharp-mx/mfe"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accusharp/mfe"
     #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accusharp/aus"
     home_page.open_new_url(url)
+    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.wait_spinner_disappears()
     # home_page.click_on_brands()
     # time.sleep(.5)
@@ -577,9 +587,9 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
     home_page.click_on_engine_and_select()
 
     home_page.click_on_add_vehicle_submit_btn()
-    expected_message = "Does NOT Fit"
-    expected_message_2 = "Non application"
-    expected_message_3 = "Fits"
+    expected_message = "No compatible"
+    expected_message_2 = "Sin aplicación"
+    expected_message_3 = "Compatible"
     actual_message = home_page.get_compatibility_meessage()
     assert expected_message in actual_message or expected_message_2 in actual_message, f"The message {actual_message} should be: {expected_message} or {expected_message_2}"
 
@@ -589,12 +599,16 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
 #@pytest.mark.fallo
 def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
     home_page = HomePage(*web_drivers)
-    url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/red-line-full-synthetic-motor-oil-0w-30-1-quart-11114/rl00/11114"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-full-synthetic/l/n2728/detail/valvoline-synthetic-motor-oil-5w-30-1-quart-884527/m4l0/884527"
     #url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/search?q=11114"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    # Change language to español
+    home_page.change_language_En_to_Es()
     home_page.click_check_vehicle_fit_btn_producction()
-    home_page.write_a_vehicle_type("Automotive Light Duty")
+    time.sleep(2)
+    home_page.wait_until_page_load_complete()
+    home_page.write_a_vehicle_type("Uso Liviano Automotriz")
     home_page.write_a_year("2024")
     home_page.write_a_make("Acura")
     home_page.write_a_model("Integra")
@@ -602,7 +616,7 @@ def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
 
-    expected_message = "Does NOT Fit"
+    expected_message = "No compatible"
     non_application_message = "Non application"
     actual_message = home_page.get_compatibility_meessage()
     if non_application_message == actual_message:
@@ -621,25 +635,25 @@ def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_driver
     # falta dato URL: https://testintranet.oreillyauto.mx/ecatalog/<<ID DEL ARTICULO >>
     page = HomePage(*web_drivers)
     home_page = page
-    #home_page.open()
-    # home_page.open_url_us()
-    #url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/valvoline-mx-synthetic-motor-oil-5w-20-1-quart-875238/m4l0/875238"
-    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates/mnv"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    #Change language to español
+    home_page.change_language_En_to_Es()
     home_page.click_on_Picker_vehicle_btn()
     time.sleep(2)
     home_page.wait_until_page_load_complete()
-    home_page.write_a_vehicle_type("Automotive Light Duty")
+    #Choosing specific vehicle
+    home_page.write_a_vehicle_type("Uso Liviano Automotriz")
     home_page.write_a_year("2023")
     home_page.write_a_make("Alfa Romeo")
     home_page.write_a_model("Giulia")
     home_page.write_a_submodel("Estrema")
     home_page.click_on_engine_and_select()
-    home_page.clickon_add_vehicle_submit_btn()
+    home_page.click_on_add_vehicle_submit_btn()
 
     home_page.wait_spinner_disappears()
-    expected_message = "Does NOT Fit"
+    expected_message = "No compatible"
 
     actual_message = home_page.get_compatibility_meessage()
 
@@ -684,7 +698,6 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page.shortcut_new_client()
     home_page.click_new_client_continue_btn()
     time.sleep(2)
-    print("hola")
     home_page.click_on_categories_button()
     home_page.wait_until_page_load_complete()
     time.sleep(1)
@@ -1039,25 +1052,11 @@ def test_MXTEST_8272_Pagination(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     #-----------------------------------
-    home_page.click_on_categories_button()
     time.sleep(1)
-    # obtener lista decategorias
-    category_list = home_page.get_general_categories_list()
-    if len(category_list) < 1:
-        category_list = home_page.get_general_categories_list()
-    # click en categoria
-    home_page.select_specific_category_of_list(category_list, 4)
-
-    # obtener lista de subcategorias
-    subcategory_list = home_page.get_subcategory_list()
-    if len(subcategory_list) < 1:
-        subcategory_list = home_page.get_subcategory_list()
-    # click en subcategoria
-    home_page.select_specific_category_of_list(subcategory_list, 0)
     home_page.wait_until_page_load_complete()
-
-    subcategory = home_page.select_first_subcategory()
-    home_page.validate_product_list_page(subcategory)
+    home_page.click_on_categories_button()
+    home_page.click_on_category_by_text("Pintura y Carroceria")
+    home_page.click_on_subcategory_by_text("Pintura en Aerosol")
     home_page.validate_pagination()
 
 # # # MXTEST-8270
@@ -1173,26 +1172,19 @@ def test_MXTEST_8261_Navigation_Categories(web_drivers):
 # # MXTEST-8279 - MXTEST-8278
 @pytest.mark.sprint1_regression
 @pytest.mark.clp
+@pytest.mark.test8279
 @pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
 
     home_page = HomePage(*web_drivers)
-    url = "https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/brakes/brake-hardware/c0064"
-    home_page.open_new_url(url)
-
-    #home_page.open()
-    # home_page.open_url_us()
-
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    #home_page.element("loading_img").wait_until_disappears()
-
-    # seleccionar vehiculo
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.click_on_Picker_vehicle_btn()
-    time.sleep(3)
-    vehicle = "Automotive Light Duty"
-    #
-    # home_page.send_text_vehicle_type(vehicle)
+    time.sleep(.5)
+    vehicle = "Uso Liviano Automotriz"
     home_page.write_a_vehicle_type(vehicle)
     home_page.write_a_year("2023")
     home_page.write_a_make("Alfa Romeo")
@@ -1200,47 +1192,16 @@ def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
     submodel = "Estrema"
     home_page.write_a_submodel(submodel)
     engine = home_page.click_on_engine_and_select()
-    # home_page.click_on_vehicle_type_and_select()
-    # home_page.click_on_year_and_select()
-    # home_page.click_on_make_and_select()
-    # home_page.click_on_model_and_select()
-    # home_page.click_on_submodel_and_select()
-    # home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
 
     home_page.wait_until_page_load_complete()
-     #time.sleep(1)
-     #home_page.click_on_categories_button()
-     #time.sleep(1)
-     # obtener lista decategorias
-    #category_list = home_page.get_general_categories_list()
-     #if len(category_list) < 1:
-         #category_list = home_page.get_general_categories_list()
-      #click en categoria random
-    # category_selected = home_page.select_random_element_of_list(category_list)
-     #logging.info(f"Category selected: {category_selected}")
-    #
-    # # obtener lista de subcategorias
-    #subcategory_list = home_page.get_subcategory_list()
-     #if len(subcategory_list) < 1:
-         #subcategory_list = home_page.get_subcategory_list()
-    # # click en subcategoria random
-     #subcategory_selected = home_page.select_random_element_of_list(subcategory_list)
-     #logging.info(f"Subcategory selected: {subcategory_selected}")
-    #home_page.wait_spinner_disappears()
-    #subcategory_selected = "BRAKE HARDWARE"
-    #if home_page.validate_category_landing_page(subcategory_selected):
-        #logging.info("The Category Landing Page is displayed")
-        #assert True
-    #elif home_page.validate_product_list_page(subcategory_selected):
-        #logging.info("The Product list page is displayed")
-        #assert True
-    #elif home_page.validate_no_products_found():
-        #logging.info("The subcategory has not items")
-        #assert True
-    #elif home_page.validate_no_results_were_found():
-        #logging.info("No Results Were Found")
-        #assert True
-    #else:
-        #logging.info("Error loading the page")
-        #assert False, "Error loading the page"
+    home_page.click_on_categories_button()
+    home_page.click_on_category_by_text("Filtros")
+    home_page.click_on_subcategory_by_text("Filtro de Aire")
+    assert not home_page.validate_no_result_found(), "No results shown for expected sub category"
+
+    home_page.wait_until_page_load_complete()
+    home_page.click_on_categories_button()
+    home_page.click_on_category_by_text("Escape")
+    home_page.click_on_subcategory_by_text("Convertidor Catalitico")
+    assert home_page.validate_no_result_found(), "Results should not be shown for this category"

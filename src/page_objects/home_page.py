@@ -644,7 +644,8 @@ class HomePage(BasePage):
     def click_on_add_new_vehicle_btn(self):
         logging.info(f"Click on add new Vehicle button")
         print(f"Click on add new Vehicle button")
-        self.element("add_new_vehicle_btn").find_element().click()
+        time.sleep(.5)
+        self.element("add_new_vehicle_btn").wait_clickable().click()
         time.sleep(.2)
 
     def click_on_edit_info_btn(self):
@@ -659,10 +660,21 @@ class HomePage(BasePage):
         self.element("save_changes_btn_02").wait_visible()
         self.element("save_changes_btn_02").wait_clickable().click()
 
+    def click_on_clear_current_selection_btn(self):
+        logging.info("Click on clear current selection button ")
+        self.element("clear_current_selection_btn").wait_clickable().click()
+        time.sleep(.2)
+
+    def click_on_single_vehicle_delete_btn(self):
+        logging.info("Click single vehicle clear button")
+        self.element("delete_single_vehicle_btn").find_element().click()
+        time.sleep(.2)
+
     def click_on_deleteAll_btn(self):
         logging.info(f"Click on Delete All button")
         print(f"Click on Delete All button")
         self.element("delete_all_btn").wait_clickable().click()
+        time.sleep(.5)
 
     def click_on_goBack_btn(self):
         logging.info(f"Click on Go Back button")
@@ -734,8 +746,8 @@ class HomePage(BasePage):
     def validate_vehicle_list_cleared(self):
         logging.info(f"validate vehicle list cleared")
         print(f"validate vehicle list cleared")
-        if self.element("add_new_vehicle_btn").wait_visible():
-            return True
+        self.element("garage_div").wait_until_disappears()
+        return True
 
 
     def validate_parent_category_list_page(self):
@@ -1248,6 +1260,12 @@ class HomePage(BasePage):
         category_filter[index].click()
         return category_selected
 
+    def validate_no_result_found(self):
+        try:
+            self.element("no_results_span").find_element()
+            return True
+        except:
+            return False
     def validate_page_filtered(self, category_selected, total, total_filtered):
         logging.info("Validate filtered")
         category = self.element("filter_option_selected").wait_visible().text
