@@ -204,11 +204,11 @@
     },
     "lasted_products_viewed_list": {
       "by": "XPATH",
-      "value": "//p[@tooltipposition='top']"
+      "value": "//section[@class='carousel-product-card-image']//following::p[1]"
     },
     "last_viewed_products_label": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Latest Viewed Products')]"
+      "value": "//section[@class='home-products-section']//span[1]"
     },
     "spinner": {
       "by": "XPATH",
@@ -1213,7 +1213,19 @@
     },
     "results_product_description": {
       "by": "XPATH",
-      "value": "//ol//li//span[@class='roboto-condensed-500 fs-16px o-text-primary']"
+      "value": "//div[@class='description']/span[2]"
+    },
+    "subcategory_products_breadcrumb": {
+      "by": "XPATH",
+      "value": "(//section[@class='breadcrum-section']//span)[4]"
+    },
+    "results_product_part": {
+      "by": "XPATH",
+      "value": "//div[@appendto='target']"
+    },
+    "texto_copiado_mensaje": {
+      "by": "XPATH",
+      "value": "//p-toastitem"
     }
   }
 }

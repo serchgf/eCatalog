@@ -792,7 +792,15 @@ class HomePage(BasePage):
             return lista
         else:
             print("No hay resultados en la busqueda")
-
+    def get_search_results_part(self):
+        logging.info("Get search results")
+        print(f"Search results")
+        self.element("search_results_label").wait_visible()
+        lista = self.element("results_product_part").find_elements()
+        if len(lista) != 0:
+            return lista
+        else:
+            print("No hay resultados en la busqueda")
 
     def get_popular_category_list(self):
         self.wait_until_page_load_complete()
@@ -866,7 +874,9 @@ class HomePage(BasePage):
     def clean_product_selected(self, expected_product_selected: str):
         print(f"clean product selected")
         product_selected = expected_product_selected.split('#')
+        print(product_selected)
         product_selected = product_selected[0].split('\n')
+        print(product_selected[1])
         return product_selected[1]
 
     def get_footer_links_name_href_dict(self):
@@ -1125,13 +1135,14 @@ class HomePage(BasePage):
         try:
             element_selected = lista[index]
             element_text = element_selected.text
-
+            print(element_text)
             try:
                 self.javascript_clic(element_text)
             except:
                 element_selected.click()
 
             element_text = element_text.upper()
+
             return element_text
         except IndexError:
             index = random.randint(0, len(lista) - 1)
@@ -1236,6 +1247,8 @@ class HomePage(BasePage):
         products_number = self.get_search_results_number()
         assert self.element(
             "subcategory_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
+        print(products_number)
+        print(subcategory_selected)
         return products_number
 
     def validate_pagination(self):
@@ -1258,6 +1271,7 @@ class HomePage(BasePage):
         category_selected = category_filter[index].text
         logging.info(f"Category Selected: {category_selected}")
         category_filter[index].click()
+        print(category_selected)
         return category_selected
 
     def validate_no_result_found(self):

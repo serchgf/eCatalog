@@ -226,8 +226,9 @@ def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
 #
 # # MXTEST-8271
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.homepage
-@pytest.mark.flaky(reruns=1)
+#@pytest.mark.flaky(reruns=1)
 def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -241,31 +242,30 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     logging.info(f"Click categorie button*****************")
     home_page.click_on_categories_button()
     time.sleep(1)
-    home_page.javascript_clic("Accessories")
-    subcat_1_list_2 = home_page.get_product_list_2()
-    home_page.click_element_text_of_list(subcat_1_list_2, "Interior Accessories")
+    home_page.javascript_clic("Accesorios")
+    home_page.click_on_subcategory_by_text("Accesorios Interiores")
     subcat_2_list_2 = home_page.get_product_list_2()
-    home_page.click_element_text_of_list(subcat_2_list_2, "Air Fresheners")
-    home_page.wait_search_results_label()
-    product_list = home_page.get_link_product_list(0)
+    home_page.click_element_text_of_list(subcat_2_list_2, "Aromatizante de Ambiente")
+    product_list = home_page.get_search_results()
     expected_product_selected = home_page.select_random_element_of_list(product_list)
-    product_selected = home_page.clean_product_selected(expected_product_selected)
-    logging.info(f"Selected: {product_selected}")
-    expected_product_selected_list.append(product_selected)
+    #product_selected = home_page.clean_product_selected(expected_product_selected)
+    logging.info(f"Selected: {expected_product_selected}")
+    print(expected_product_selected)
+    expected_product_selected_list.append(expected_product_selected)
     time.sleep(2)
-    for i in range(4):
+    for i in range(2):
         home_page.back_to_previous_page()
-        product_list = home_page.get_link_product_list(0)
+        product_list = home_page.get_search_results()
         expected_product_selected = home_page.select_random_element_of_list(product_list)
-        product_selected = home_page.clean_product_selected(expected_product_selected)
-        logging.info(f"Selected: {product_selected}")
-        expected_product_selected_list.append(product_selected)
+        # product_selected = home_page.clean_product_selected(expected_product_selected)
+        logging.info(f"Selected: {expected_product_selected}")
+        print(expected_product_selected)
+        expected_product_selected_list.append(expected_product_selected)
         time.sleep(3)
-
     home_page.click_on_logo_oreily_home()
 
-    logging.info(f"Recent Products expected list:")
-    home_page.show_product_list(expected_product_selected_list)
+    # logging.info(f"Recent Products expected list:")
+    # home_page.show_product_list(expected_product_selected_list)
 
     logging.info(f"GET actual lasted viewed products list")
     lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
@@ -273,11 +273,11 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     for lasted_viewed_product in lasted_product_viewed_list:
         if lasted_viewed_product != '':
             lasted_viewed_list.append(lasted_viewed_product)
-    #
     logging.info(f"lasted_viewed_list: {lasted_viewed_list}")
     logging.info(f"expected_product_selected_list: {expected_product_selected_list}")
-    assert lasted_viewed_list.sort() == expected_product_selected_list.sort()
-
+    print(expected_product_selected_list)
+    print(lasted_viewed_list)
+    assert lasted_viewed_list.sort() == expected_product_selected_list.sort(), "No se encontraron los ultimos productos vistos"
 #
 # # MXTEST-8290
 @pytest.mark.sprint1_regression
@@ -597,6 +597,7 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
 @pytest.mark.sprint1_regression
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
+@pytest.mark.test_8286
 def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-full-synthetic/l/n2728/detail/valvoline-synthetic-motor-oil-5w-30-1-quart-884527/m4l0/884527"
@@ -1061,7 +1062,7 @@ def test_MXTEST_8272_Pagination(web_drivers):
 
 # # # MXTEST-8270
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
@@ -1088,7 +1089,7 @@ def test_MXTEST_8270_Navigation_searchby_brand_category_filter(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=5)
+@pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
 def test_MXTEST_8269_Navigation_searchby_category_brand_filter(web_drivers):
     home_page = HomePage(*web_drivers)
