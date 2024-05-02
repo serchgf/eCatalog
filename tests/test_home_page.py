@@ -147,7 +147,8 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 # MXTEST-8285
 @pytest.mark.sprint1_regression
 @pytest.mark.homepage
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.test8285
+#@pytest.mark.flaky(reruns=1)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -1174,7 +1175,7 @@ def test_MXTEST_8261_Navigation_Categories(web_drivers):
 @pytest.mark.sprint1_regression
 @pytest.mark.clp
 @pytest.mark.test8279
-@pytest.mark.flaky(reruns=3)
+#@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
 
