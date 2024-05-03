@@ -308,7 +308,7 @@
     },
     "part_number": {
       "by": "XPATH",
-      "value": "//div[@class='actions']//div/div"
+      "value": "//button[@appendto='target']"
     },
     "highlight_search_result": {
       "by": "XPATH",
@@ -438,6 +438,10 @@
       "by": "XPATH",
       "value": "//div[@class ='info o-text-primary']/span[1]"
     },
+    "plp_title_2": {
+      "by": "XPATH",
+      "value": "//div[@class='category-nav-limiter']//h2"
+    },
     "subcategory_title": {
       "by": "XPATH",
       "value": "(//div[@class='info']//span)[1]"
@@ -477,7 +481,7 @@
     },
     "additional_cat_names": {
       "by": "XPATH",
-      "value": "//div[contains(@class,'category-nav-button-text')]/span"
+      "value": "//div[@class='container-categories ng-star-inserted']//span"
     },
     "img_cat_names": {
       "by": "XPATH",
@@ -485,7 +489,7 @@
     },
     "fits_element": {
       "by": "XPATH",
-      "value": "//div[@role='badge']/p/span[contains(@class,'roboto-400')]"
+      "value": "//div[@class='vehicle-info-col']/span[2]"
     },
     "filter_option_selected": {
       "by": "XPATH",
@@ -1230,6 +1234,14 @@
     "vehicle_info_with_info": {
       "by": "XPATH",
       "value": "//div[@class='vehicle-info']"
+    },
+    "vehicle_compatible_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Compatible')]"
+    },
+    "delete_vehicle_button": {
+      "by": "XPATH",
+      "value": "(//span[@class='p-button-label ng-star-inserted'])[1]"
     }
   }
 }

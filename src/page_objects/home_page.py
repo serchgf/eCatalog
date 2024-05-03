@@ -2,6 +2,7 @@ import json
 import logging
 import random
 import time
+import pyperclip
 #import mysql.connector
 from selenium.common import JavascriptException, ElementClickInterceptedException, NoSuchElementException
 # from selenium.webdriver import ActionChains as AC
@@ -613,11 +614,12 @@ class HomePage(BasePage):
         except TimeoutError:
             part_number_text = self.element("part_number_mx").wait_visible().text
         logging.info(f"TEXTO ORIGINAL: {part_number_text}")
+        print(part_number_text)
         part_number_text = part_number_text.replace("\ncontent_copy", '')
         part_number_list = part_number_text.split("\n")
         # part_number_list = part_number_text.split("content_copy")
+        print(part_number_list[0])
         part_number = part_number_list[0].rstrip().lstrip()
-
         logging.info(f"Part Number: {part_number}")
         print(f"Part Number: {part_number}")
         return part_number_text
@@ -917,7 +919,8 @@ class HomePage(BasePage):
         logging.info(f"Get Text from Part Interchange input tbx")
         print(f"Get Text from Part Interchange input tbx")
         time.sleep(.2)
-        texto = self.element("part_interchange_input_tbx").wait_visible().get_attribute('ng-reflect-model')
+        texto = self.element("part_interchange_input_tbx").wait_visible().get_attribute('type')
+        print(texto)
         # logging.info(f"Text from Part Interchange input tbx: {texto}")
         return texto
 
@@ -1096,14 +1099,14 @@ class HomePage(BasePage):
             datos = json.load(archivo)
         return datos
 
-    def mysql_connection(self):
-        connection = mysql.connector.connect(
-            host="172.22.210.13",
-            user="epc_QA_RO",
-            password="{BcZJ3qhj]zU!z4%{CvJ",
-            db="epc"
-        )
-        return connection
+    # def mysql_connection(self):
+    #     connection = mysql.connector.connect(
+    #         host="172.22.210.13",
+    #         user="epc_QA_RO",
+    #         password="{BcZJ3qhj]zU!z4%{CvJ",
+    #         db="epc"
+    #     )
+    #     return connection
 
     def connect_and_consult(self):
         logging.info(f"Connect to DB")
@@ -1172,15 +1175,15 @@ class HomePage(BasePage):
 
     def select_first_subcategory(self):
         logging.info(f"Select the first subcategory")
-        lista = self.element("elements_of_one_subcategory").find_elements()
+        lista = self.element("element_buttons_grid_category_2").find_elements()
         element_selected = lista[0].text
         logging.info(f"select first element of the list: {element_selected}")
         print(element_selected)
         lista[0].click()
-        self.element("element_first_subcategory_compatibility").wait_visible()
-        element = self.element("delete_vehicle").find_element()
+        self.element("vehicle_compatible_span").wait_visible()
+        element = self.element("delete_vehicle_button").find_element()
         element.click()
-        time.sleep(.3)
+        time.sleep(2)
         print("Vehicle removed")
         logging.info(f"Vehicle removed")
         return element_selected
@@ -1200,11 +1203,10 @@ class HomePage(BasePage):
         #     self.element("span_filter_by").wait_visible()
         #     self.element("sort_by_dropdown").wait_visible()
         #
-        titulo = self.element("plp_title").find_element().text.lower()
-        print(titulo)
+        titulo = self.element("plp_title_2").find_element().text.lower()
+        print(titulo.lower())
         print(subcategory_selected.lower())
-        assert self.element(
-            "plp_title").find_element().text.lower() == subcategory_selected.lower(), f"The subcategory is not match"
+        assert titulo.lower() == subcategory_selected.lower(), f"The subcategory is not match"
         print("Paso subcategoria")
         assert self.element(
             "fits_element").find_element().text == f"{year} {make} {model} {submodel}", "The vehicle don't match"
@@ -1296,7 +1298,7 @@ class HomePage(BasePage):
         attribute_selected = attributes_list[index].text
         logging.info(f"Attribute Selected: {attribute_selected}")
         attributes_list[index].click()
-        time.sleep(.3)
+        time.sleep(1)
         print(brand)
         print(attribute_selected)
         return brand
@@ -1334,6 +1336,7 @@ class HomePage(BasePage):
         logging.info(f"Attribute Option Selected: {attribute_option_selected}")
         print(attribute_option_selected)
         attribute_option_list[index].click()
+        self.wait_spinner_disappears()
         return attribute_option_selected
 
     def validate_filtered_page(self, brand_selected, attribute, total, total_filtered):
@@ -1358,7 +1361,7 @@ class HomePage(BasePage):
 
     def clp_category_result(self):
         logging.info("Get the total of categories on page")
-        img_cat = self.element("elements_of_one_subcategory").find_elements()
+        img_cat = self.element("element_buttons_grid_category_2").find_elements()
         additional = self.element("additional_cat_names").find_elements()
         total = len(img_cat) + len(additional)
         return total
@@ -2371,3 +2374,23 @@ class HomePage(BasePage):
         print("click las searches expand button")
         self.element("last_searches_expand_btn").wait_clickable().click()
 
+    def copy_element_text_part_interchange_tbx(self):
+        logging.info(f"Get Text from element with double click")
+        texto = self.element("part_interchange_input_tbx")
+        print(texto)
+        # Encontrar el elemento en el que deseas hacer doble clic
+        elemento = self.element("part_interchange_input_tbx").find_element()
+        # Realizar doble clic en el elemento
+        elemento.click()
+        elemento.click()
+        time.sleep(2)
+        # Seleccionar y copiar el texto del elemento
+        elemento.send_keys(Keys.CONTROL, 'a')
+        elemento.send_keys(Keys.CONTROL, 'c')# Copiar el texto seleccionado
+        time.sleep(2)
+        # Obtener el texto copiado del portapapeles
+        texto_portapapeles = pyperclip.paste()
+
+        print("Texto copiado:", texto_portapapeles)
+        # logging.info(f"Text from Part Interchange input tbx: {texto}")
+        return texto_portapapeles

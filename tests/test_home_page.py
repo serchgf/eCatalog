@@ -526,6 +526,7 @@ def test_MXTEST_8280_Search_PopupClose_Button(web_drivers):
 #
 # # # MXTEST-8283
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8283_Search_FromProductPage(web_drivers):
@@ -535,6 +536,8 @@ def test_MXTEST_8283_Search_FromProductPage(web_drivers):
     #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accusharp/aus"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    home_page.wait_until_page_load_complete()
     # product = "Motor Oil"
     # home_page.search_product(product)
     # #get product list
@@ -547,7 +550,7 @@ def test_MXTEST_8283_Search_FromProductPage(web_drivers):
     part_number = home_page.get_part_number()
     home_page.click_on_part_interchange_btn()
     logging.info(f"Validate Part number: {part_number}")
-    actual_text = home_page.get_text_part_interchange_input()
+    actual_text = home_page.copy_element_text_part_interchange_tbx()
     logging.info(f"Validate ACTUAL Part number: {actual_text}")
     assert actual_text == part_number, f"The part number should be: {part_number} instead of {actual_text}"
 #
@@ -701,8 +704,7 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page.click_new_client_continue_btn()
     time.sleep(2)
     home_page.click_on_categories_button()
-    home_page.wait_until_page_load_complete()
-    time.sleep(1)
+    time.sleep(2)
     home_page.click_on_category_by_text("Aceite, Productos Quimicos y Liquidos")
     home_page.click_on_subcategory_by_text("aceite de motor")
     home_page.shortcut_new_client()
@@ -802,7 +804,7 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
     product_name = "Cartek"
     home_page.search_product(product_name)
     home_page.wait_spinner_disappears()
-    product_list = home_page.get_link_product_list(0)
+    product_list = home_page.get_search_results()
     for product in product_list:
         assert product_name.upper() in product.text.upper(), f"'{product_name.upper()}' must appears in description product, but has: {product.text.upper()}"
 
@@ -1024,7 +1026,6 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
     # seleccionar vehiculo
     vehicle = home_page.select_vehicle_specific()
     home_page.wait_until_page_load_complete()
-    time.sleep(1)
     home_page.click_on_categories_button()
     time.sleep(1)
     # obtener lista de categorias
@@ -1039,7 +1040,6 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
         subcategory_list = home_page.get_subcategory_list()
     # click en subcategoria
     subcategory = home_page.select_specific_category_of_list(subcategory_list, 0)
-    home_page.wait_until_page_load_complete()
     home_page.wait_spinner_disappears()
     home_page.validate_product_list_page_vehicle(subcategory, vehicle)
     home_page.select_first_subcategory()
@@ -1174,6 +1174,7 @@ def test_MXTEST_8261_Navigation_Categories(web_drivers):
 # # MXTEST-8279 - MXTEST-8278
 @pytest.mark.sprint1_regression
 @pytest.mark.clp
+@pytest.mark.ft
 @pytest.mark.test8279
 #@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
@@ -1201,9 +1202,7 @@ def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
     home_page.click_on_category_by_text("Filtros")
     home_page.click_on_subcategory_by_text("Filtro de Aire")
     assert not home_page.validate_no_result_found(), "No results shown for expected sub category"
-
-    home_page.wait_until_page_load_complete()
     home_page.click_on_categories_button()
-    home_page.click_on_category_by_text("Escape")
-    home_page.click_on_subcategory_by_text("Convertidor Catalitico")
+    home_page.click_on_category_by_text("Amortiguadores y Puntales")
+    home_page.click_on_subcategory_by_text("Botas de Amortiguador (Universal)")
     assert home_page.validate_no_result_found(), "Results should not be shown for this category"
