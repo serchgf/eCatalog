@@ -833,7 +833,7 @@ def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
 #
 # # # MXTEST-8264 mod1 without vehicle selected
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas
+#@pytest.mark.pruebitas #OK
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
@@ -843,37 +843,32 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.wait_until_page_load_complete()
-    product_name = "aceite"
+    product_name = "Sensor/Interruptor de Presion de Aceite de Motor"
     home_page.search_product(product_name)
     # obtener lista original
     product_list = home_page.get_link_product_list(0)
     product_list_text = []
     original_first_char = ''
     for product in product_list:
-        description = product.text.split('\n')
+        description = product.text.split(' ')
         print(description)
-        product_description = description[1].split("-")
-        print(product_description)
-        product_list_text.append(product_description[0])
+        product_list_text.append(description[0])
         print(product_list_text)
-        original_first_char = product_description[0][0]
-        print(original_first_char)
+        original_first_char = description[0][0]
         break
     print("Primer caracter original")
     print(original_first_char)
     # ordenar con filter by de a-z
     home_page.click_order_by_dropdown_and_select_option("A - Z")
-    time.sleep(2)
     home_page.wait_until_page_load_complete()
     # obtener lista ordenada de a-z
     az_product_list = home_page.get_link_product_list(0)
     az_product_list_text = []
     az_first_char=''
     for product in az_product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        az_product_list_text.append(product_description[0])
-        az_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        az_product_list_text.append(description[0])
+        az_first_char = description[0][0]
         break
     print("primer caracter obtenido")
     print(az_first_char)
@@ -882,7 +877,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
 
 # # MXTEST-8264 mod1 with vehicle selected
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
@@ -895,17 +890,31 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
     #url2 = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/grease-lube/hydraulic-fluid/l/n0419"
     #url ="https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/grease-lube/hydraulic-fluid/l/n0419"
     home_page.wait_until_page_load_complete()
-    product_name = "Frenos"
+    # -----------------------------------
+    home_page.click_on_Picker_vehicle_btn()
+    time.sleep(3)
+    vehicle_type_list = home_page.click_on_vehicle_type_dropdown()
+    vehicle_type = "Deportes Motorizados"
+    home_page.click_element_text_of_list(vehicle_type_list, vehicle_type)
+    home_page.click_on_year_and_select()
+    home_page.click_on_make_and_select()
+    home_page.click_on_model_and_select()
+    home_page.click_on_submodel_and_select()
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    # -----------------------------------
+    product_name = "cinta"
     home_page.search_product(product_name)
     # obtener lista original
     product_list = home_page.get_link_product_list(0)
     product_list_text = []
     original_first_char = ''
     for product in product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        product_list_text.append(product_description[0])
-        original_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        print(description)
+        product_list_text.append(description[0])
+        print(product_list_text)
+        original_first_char = description[0][0]
         break
     print("Primer caracter original")
     print(original_first_char)
@@ -918,19 +927,20 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
     az_product_list_text = []
     az_first_char=''
     for product in az_product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        az_product_list_text.append(product_description[0])
-        az_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        az_product_list_text.append(description[0])
+        az_first_char = description[0][0]
         break
     print("primer caracter obtenido")
     print(az_first_char)
-    assert az_first_char <= original_first_char, f"{az_first_char} should be <= {original_first_char}"
+    assert home_page.element("vehicle_info_with_info").wait_visible() , "There isn't selected vehicle"
+    assert az_first_char <= original_first_char , f"{az_first_char} should be <= {original_first_char}"
     home_page.take_screenshot("test_PLP_Sort_by_option_az")
 
 #
 # # # MXTEST-8264 mod2
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas #OK
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
@@ -940,42 +950,39 @@ def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.wait_until_page_load_complete()
-    product_name = "Skid Plate"
+    product_name = "Sensor/Interruptor de Presion de Aceite de Motor"
     home_page.search_product(product_name)
     # obtener lista original
     product_list = home_page.get_link_product_list(0)
     product_list_text = []
     original_first_char = ''
     for product in product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        product_list_text.append(product_description[0])
-        original_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        product_list_text.append(description[0])
+        original_first_char = description[0][0]
         break
     print("Primer caracter original")
     print(original_first_char)
-
     # ordenar con filter by de a-z
     home_page.click_order_by_dropdown_and_select_option("Z - A")
     home_page.wait_until_page_load_complete()
-    time.sleep(2)
     # obtener lista ordenada de a-z
     za_product_list = home_page.get_link_product_list(0)
     za_product_list_text = []
     za_first_char = ''
     for product in za_product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        za_product_list_text.append(product_description[0])
-        za_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        za_product_list_text.append(description[0])
+        za_first_char = description[0][0]
         break
     print("primer caracter obtenido")
     print(za_first_char)
-    assert za_first_char >= original_first_char, f"{za_first_char} should be <= {original_first_char}"
+    assert za_first_char >= original_first_char, f"{za_first_char} should be >= {original_first_char}"
     home_page.take_screenshot("test_PLP_Sort_by_option_za")
 
 # # # MXTEST-8264 mod3
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas #ok
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
@@ -986,25 +993,18 @@ def test_MXTEST_8264_PLP_Sort_by_option_relevance(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.wait_until_page_load_complete()
-    product_name = "Battery chargers"
+    product_name = "Sensor/Interruptor de Presion de Aceite de Motor"
     home_page.search_product(product_name)
     original_part_number_list = home_page.get_part_number_list()
     # ordenar con filter by relevance
-    home_page.click_order_by_dropdown_and_select_option("Relevance")
+    home_page.click_order_by_dropdown_and_select_option("Relevancia")
     home_page.wait_spinner_disappears()
     home_page.wait_until_page_load_complete()
-
     # obtener lista ordenada por relevance
-
     home_page.take_screenshot("before of order by relevance")
     part_number_list_relevance = home_page.get_part_number_list()
-
-
     assert part_number_list_relevance == original_part_number_list, f"part number in ascending order: {original_part_number_list} \nshould be: {part_number_list_relevance}"
-
     home_page.take_screenshot("after of order by relevance")
-
-
 
 #
 # # # MXTEST-8288

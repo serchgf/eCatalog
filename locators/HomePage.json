@@ -400,7 +400,7 @@
     },
     "sort_by_label": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Sort by: ')]"
+      "value": "//div[@class='sort-container']//span[1]"
     },
     "no_part_copy_to_clipboard": {
       "by": "XPATH",
@@ -1226,6 +1226,10 @@
     "texto_copiado_mensaje": {
       "by": "XPATH",
       "value": "//p-toastitem"
+    },
+    "vehicle_info_with_info": {
+      "by": "XPATH",
+      "value": "//div[@class='vehicle-info']"
     }
   }
 }
