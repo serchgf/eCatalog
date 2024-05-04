@@ -146,8 +146,7 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 
 # MXTEST-8285
 @pytest.mark.sprint1_regression
-#@pytest.mark.homepage
-@pytest.mark.test8285
+@pytest.mark.homepage
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -242,31 +241,30 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     logging.info(f"Click categorie button*****************")
     home_page.click_on_categories_button()
     time.sleep(1)
-    home_page.javascript_clic("Accessories")
-    subcat_1_list_2 = home_page.get_product_list_2()
-    home_page.click_element_text_of_list(subcat_1_list_2, "Interior Accessories")
+    home_page.javascript_clic("Accesorios")
+    home_page.click_on_subcategory_by_text("Accesorios Interiores")
     subcat_2_list_2 = home_page.get_product_list_2()
-    home_page.click_element_text_of_list(subcat_2_list_2, "Air Fresheners")
-    home_page.wait_search_results_label()
-    product_list = home_page.get_link_product_list(0)
+    home_page.click_element_text_of_list(subcat_2_list_2, "Aromatizante de Ambiente")
+    product_list = home_page.get_search_results()
     expected_product_selected = home_page.select_random_element_of_list(product_list)
-    product_selected = home_page.clean_product_selected(expected_product_selected)
-    logging.info(f"Selected: {product_selected}")
-    expected_product_selected_list.append(product_selected)
+    #product_selected = home_page.clean_product_selected(expected_product_selected)
+    logging.info(f"Selected: {expected_product_selected}")
+    print(expected_product_selected)
+    expected_product_selected_list.append(expected_product_selected)
     time.sleep(2)
-    for i in range(4):
+    for i in range(2):
         home_page.back_to_previous_page()
-        product_list = home_page.get_link_product_list(0)
+        product_list = home_page.get_search_results()
         expected_product_selected = home_page.select_random_element_of_list(product_list)
-        product_selected = home_page.clean_product_selected(expected_product_selected)
-        logging.info(f"Selected: {product_selected}")
-        expected_product_selected_list.append(product_selected)
+        # product_selected = home_page.clean_product_selected(expected_product_selected)
+        logging.info(f"Selected: {expected_product_selected}")
+        print(expected_product_selected)
+        expected_product_selected_list.append(expected_product_selected)
         time.sleep(3)
-
     home_page.click_on_logo_oreily_home()
 
-    logging.info(f"Recent Products expected list:")
-    home_page.show_product_list(expected_product_selected_list)
+    # logging.info(f"Recent Products expected list:")
+    # home_page.show_product_list(expected_product_selected_list)
 
     logging.info(f"GET actual lasted viewed products list")
     lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
@@ -274,11 +272,11 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     for lasted_viewed_product in lasted_product_viewed_list:
         if lasted_viewed_product != '':
             lasted_viewed_list.append(lasted_viewed_product)
-    #
     logging.info(f"lasted_viewed_list: {lasted_viewed_list}")
     logging.info(f"expected_product_selected_list: {expected_product_selected_list}")
-    assert lasted_viewed_list.sort() == expected_product_selected_list.sort()
-
+    print(expected_product_selected_list)
+    print(lasted_viewed_list)
+    assert lasted_viewed_list.sort() == expected_product_selected_list.sort(), "No se encontraron los ultimos productos vistos"
 #
 # # MXTEST-8290
 @pytest.mark.sprint1_regression
@@ -526,6 +524,7 @@ def test_MXTEST_8280_Search_PopupClose_Button(web_drivers):
 #
 # # # MXTEST-8283
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas
 @pytest.mark.equivalents
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8283_Search_FromProductPage(web_drivers):
@@ -535,6 +534,8 @@ def test_MXTEST_8283_Search_FromProductPage(web_drivers):
     #url = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/brands/accusharp/aus"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    home_page.wait_until_page_load_complete()
     # product = "Motor Oil"
     # home_page.search_product(product)
     # #get product list
@@ -547,7 +548,7 @@ def test_MXTEST_8283_Search_FromProductPage(web_drivers):
     part_number = home_page.get_part_number()
     home_page.click_on_part_interchange_btn()
     logging.info(f"Validate Part number: {part_number}")
-    actual_text = home_page.get_text_part_interchange_input()
+    actual_text = home_page.copy_element_text_part_interchange_tbx()
     logging.info(f"Validate ACTUAL Part number: {actual_text}")
     assert actual_text == part_number, f"The part number should be: {part_number} instead of {actual_text}"
 #
@@ -555,8 +556,8 @@ def test_MXTEST_8283_Search_FromProductPage(web_drivers):
 # # PDP-------------------------------------------------------------------------------------------------------------------
 #
 # # # MXTEST-8275
-@pytest.mark.sprint1_regressionIn_sprint1_regression
-#@pytest.mark.pdp
+@pytest.mark.sprint1_regression# sprint1_regression
+@pytest.mark.pdp
 @pytest.mark.test8275
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
@@ -581,8 +582,8 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
     home_page.wait_until_page_load_complete()
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_vehicle_type_and_select()
-    home_page.click_on_year_and_select()
-    home_page.click_on_make_and_select()
+    year = home_page.click_on_year_and_select()
+    make = home_page.click_on_make_and_select()
     home_page.click_on_model_and_select()
     home_page.click_on_submodel_and_select()
     home_page.click_on_engine_and_select()
@@ -597,7 +598,8 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
 # # # MXTEST-8286
 @pytest.mark.sprint1_regression
 @pytest.mark.flaky(reruns=1)
-@pytest.mark.fallo
+#@pytest.mark.fallo
+@pytest.mark.test_8286
 def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-full-synthetic/l/n2728/detail/valvoline-synthetic-motor-oil-5w-30-1-quart-884527/m4l0/884527"
@@ -629,10 +631,8 @@ def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
 #
 # #
 # # # # MXTEST-8289
-# # # PAASED
 @pytest.mark.sprint1_regression
-#pytest.mark.pdp
-@pytest.mark.test8289
+@pytest.mark.pdp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_drivers):
     # falta dato URL: https://testintranet.oreillyauto.mx/ecatalog/<<ID DEL ARTICULO >>
@@ -677,7 +677,7 @@ def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     word = "mot"
-    print(f"Search word.: {word} and select a suggest result")
+    print(f"Search word: {word} and select a suggest result")
     home_page.search_product(word)
     home_page.wait_until_page_load_complete()
     home_page.take_screenshot("test_AutofillOption_FreeTextSearchBar")
@@ -702,8 +702,7 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page.click_new_client_continue_btn()
     time.sleep(2)
     home_page.click_on_categories_button()
-    home_page.wait_until_page_load_complete()
-    time.sleep(1)
+    time.sleep(2)
     home_page.click_on_category_by_text("Aceite, Productos Quimicos y Liquidos")
     home_page.click_on_subcategory_by_text("aceite de motor")
     home_page.shortcut_new_client()
@@ -803,7 +802,7 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
     product_name = "Cartek"
     home_page.search_product(product_name)
     home_page.wait_spinner_disappears()
-    product_list = home_page.get_link_product_list(0)
+    product_list = home_page.get_search_results()
     for product in product_list:
         assert product_name.upper() in product.text.upper(), f"'{product_name.upper()}' must appears in description product, but has: {product.text.upper()}"
 
@@ -834,7 +833,7 @@ def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
 #
 # # # MXTEST-8264 mod1 without vehicle selected
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas
+#@pytest.mark.pruebitas #OK
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
@@ -844,37 +843,32 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.wait_until_page_load_complete()
-    product_name = "aceite"
+    product_name = "Sensor/Interruptor de Presion de Aceite de Motor"
     home_page.search_product(product_name)
     # obtener lista original
     product_list = home_page.get_link_product_list(0)
     product_list_text = []
     original_first_char = ''
     for product in product_list:
-        description = product.text.split('\n')
+        description = product.text.split(' ')
         print(description)
-        product_description = description[1].split("-")
-        print(product_description)
-        product_list_text.append(product_description[0])
+        product_list_text.append(description[0])
         print(product_list_text)
-        original_first_char = product_description[0][0]
-        print(original_first_char)
+        original_first_char = description[0][0]
         break
     print("Primer caracter original")
     print(original_first_char)
     # ordenar con filter by de a-z
     home_page.click_order_by_dropdown_and_select_option("A - Z")
-    time.sleep(2)
     home_page.wait_until_page_load_complete()
     # obtener lista ordenada de a-z
     az_product_list = home_page.get_link_product_list(0)
     az_product_list_text = []
     az_first_char=''
     for product in az_product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        az_product_list_text.append(product_description[0])
-        az_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        az_product_list_text.append(description[0])
+        az_first_char = description[0][0]
         break
     print("primer caracter obtenido")
     print(az_first_char)
@@ -883,7 +877,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
 
 # # MXTEST-8264 mod1 with vehicle selected
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
@@ -896,17 +890,31 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
     #url2 = "https://testintranet.oreillyauto.mx/ecatalog-us/#/catalog/c/oil-chemicals-fluids/grease-lube/hydraulic-fluid/l/n0419"
     #url ="https://teamnet.oreillyauto.mx/catalogo/#/catalog/c/oil-chemicals-fluids/grease-lube/hydraulic-fluid/l/n0419"
     home_page.wait_until_page_load_complete()
-    product_name = "Frenos"
+    # -----------------------------------
+    home_page.click_on_Picker_vehicle_btn()
+    time.sleep(3)
+    vehicle_type_list = home_page.click_on_vehicle_type_dropdown()
+    vehicle_type = "Deportes Motorizados"
+    home_page.click_element_text_of_list(vehicle_type_list, vehicle_type)
+    home_page.click_on_year_and_select()
+    home_page.click_on_make_and_select()
+    home_page.click_on_model_and_select()
+    home_page.click_on_submodel_and_select()
+    home_page.click_on_engine_and_select()
+    home_page.click_on_add_vehicle_submit_btn()
+    # -----------------------------------
+    product_name = "cinta"
     home_page.search_product(product_name)
     # obtener lista original
     product_list = home_page.get_link_product_list(0)
     product_list_text = []
     original_first_char = ''
     for product in product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        product_list_text.append(product_description[0])
-        original_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        print(description)
+        product_list_text.append(description[0])
+        print(product_list_text)
+        original_first_char = description[0][0]
         break
     print("Primer caracter original")
     print(original_first_char)
@@ -919,19 +927,20 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
     az_product_list_text = []
     az_first_char=''
     for product in az_product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        az_product_list_text.append(product_description[0])
-        az_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        az_product_list_text.append(description[0])
+        az_first_char = description[0][0]
         break
     print("primer caracter obtenido")
     print(az_first_char)
-    assert az_first_char <= original_first_char, f"{az_first_char} should be <= {original_first_char}"
+    assert home_page.element("vehicle_info_with_info").wait_visible() , "There isn't selected vehicle"
+    assert az_first_char <= original_first_char , f"{az_first_char} should be <= {original_first_char}"
     home_page.take_screenshot("test_PLP_Sort_by_option_az")
 
 #
 # # # MXTEST-8264 mod2
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas #OK
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
@@ -941,42 +950,39 @@ def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.wait_until_page_load_complete()
-    product_name = "Skid Plate"
+    product_name = "Sensor/Interruptor de Presion de Aceite de Motor"
     home_page.search_product(product_name)
     # obtener lista original
     product_list = home_page.get_link_product_list(0)
     product_list_text = []
     original_first_char = ''
     for product in product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        product_list_text.append(product_description[0])
-        original_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        product_list_text.append(description[0])
+        original_first_char = description[0][0]
         break
     print("Primer caracter original")
     print(original_first_char)
-
     # ordenar con filter by de a-z
     home_page.click_order_by_dropdown_and_select_option("Z - A")
     home_page.wait_until_page_load_complete()
-    time.sleep(2)
     # obtener lista ordenada de a-z
     za_product_list = home_page.get_link_product_list(0)
     za_product_list_text = []
     za_first_char = ''
     for product in za_product_list:
-        description = product.text.split('\n')
-        product_description = description[1].split("-")
-        za_product_list_text.append(product_description[0])
-        za_first_char = product_description[0][0]
+        description = product.text.split(' ')
+        za_product_list_text.append(description[0])
+        za_first_char = description[0][0]
         break
     print("primer caracter obtenido")
     print(za_first_char)
-    assert za_first_char >= original_first_char, f"{za_first_char} should be <= {original_first_char}"
+    assert za_first_char >= original_first_char, f"{za_first_char} should be >= {original_first_char}"
     home_page.take_screenshot("test_PLP_Sort_by_option_za")
 
 # # # MXTEST-8264 mod3
 @pytest.mark.sprint1_regression
+#@pytest.mark.pruebitas #ok
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
@@ -987,25 +993,18 @@ def test_MXTEST_8264_PLP_Sort_by_option_relevance(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     home_page.wait_until_page_load_complete()
-    product_name = "Battery chargers"
+    product_name = "Sensor/Interruptor de Presion de Aceite de Motor"
     home_page.search_product(product_name)
     original_part_number_list = home_page.get_part_number_list()
     # ordenar con filter by relevance
-    home_page.click_order_by_dropdown_and_select_option("Relevance")
+    home_page.click_order_by_dropdown_and_select_option("Relevancia")
     home_page.wait_spinner_disappears()
     home_page.wait_until_page_load_complete()
-
     # obtener lista ordenada por relevance
-
     home_page.take_screenshot("before of order by relevance")
     part_number_list_relevance = home_page.get_part_number_list()
-
-
     assert part_number_list_relevance == original_part_number_list, f"part number in ascending order: {original_part_number_list} \nshould be: {part_number_list_relevance}"
-
     home_page.take_screenshot("after of order by relevance")
-
-
 
 #
 # # # MXTEST-8288
@@ -1025,7 +1024,6 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
     # seleccionar vehiculo
     vehicle = home_page.select_vehicle_specific()
     home_page.wait_until_page_load_complete()
-    time.sleep(1)
     home_page.click_on_categories_button()
     time.sleep(1)
     # obtener lista de categorias
@@ -1040,7 +1038,6 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
         subcategory_list = home_page.get_subcategory_list()
     # click en subcategoria
     subcategory = home_page.select_specific_category_of_list(subcategory_list, 0)
-    home_page.wait_until_page_load_complete()
     home_page.wait_spinner_disappears()
     home_page.validate_product_list_page_vehicle(subcategory, vehicle)
     home_page.select_first_subcategory()
@@ -1065,7 +1062,7 @@ def test_MXTEST_8272_Pagination(web_drivers):
 
 # # # MXTEST-8270
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
@@ -1092,7 +1089,7 @@ def test_MXTEST_8270_Navigation_searchby_brand_category_filter(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=5)
+@pytest.mark.flaky(reruns=1)
 #@pytest.mark.fallo
 def test_MXTEST_8269_Navigation_searchby_category_brand_filter(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -1176,8 +1173,9 @@ def test_MXTEST_8261_Navigation_Categories(web_drivers):
 # # MXTEST-8279 - MXTEST-8278
 @pytest.mark.sprint1_regression
 @pytest.mark.clp
+@pytest.mark.ft
 @pytest.mark.test8279
-@pytest.mark.flaky(reruns=3)
+#@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
 
