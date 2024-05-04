@@ -146,7 +146,8 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
 
 # MXTEST-8285
 @pytest.mark.sprint1_regression
-@pytest.mark.homepage
+#@pytest.mark.homepage
+@pytest.mark.test8285
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -554,8 +555,8 @@ def test_MXTEST_8283_Search_FromProductPage(web_drivers):
 # # PDP-------------------------------------------------------------------------------------------------------------------
 #
 # # # MXTEST-8275
-@pytest.mark.sprint1_regression# sprint1_regression
-@pytest.mark.pdp
+@pytest.mark.sprint1_regressionIn_sprint1_regression
+#@pytest.mark.pdp
 @pytest.mark.test8275
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
@@ -580,8 +581,8 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
     home_page.wait_until_page_load_complete()
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_vehicle_type_and_select()
-    year = home_page.click_on_year_and_select()
-    make = home_page.click_on_make_and_select()
+    home_page.click_on_year_and_select()
+    home_page.click_on_make_and_select()
     home_page.click_on_model_and_select()
     home_page.click_on_submodel_and_select()
     home_page.click_on_engine_and_select()
@@ -596,7 +597,7 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
 # # # MXTEST-8286
 @pytest.mark.sprint1_regression
 @pytest.mark.flaky(reruns=1)
-#@pytest.mark.fallo
+@pytest.mark.fallo
 def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-full-synthetic/l/n2728/detail/valvoline-synthetic-motor-oil-5w-30-1-quart-884527/m4l0/884527"
@@ -628,8 +629,10 @@ def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
 #
 # #
 # # # # MXTEST-8289
+# # # PAASED
 @pytest.mark.sprint1_regression
-@pytest.mark.pdp
+#pytest.mark.pdp
+@pytest.mark.test8289
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_drivers):
     # falta dato URL: https://testintranet.oreillyauto.mx/ecatalog/<<ID DEL ARTICULO >>
@@ -674,7 +677,7 @@ def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
     home_page.change_language_En_to_Es()
     #-----------------------------------
     word = "mot"
-    print(f"Search word: {word} and select a suggest result")
+    print(f"Search word.: {word} and select a suggest result")
     home_page.search_product(word)
     home_page.wait_until_page_load_complete()
     home_page.take_screenshot("test_AutofillOption_FreeTextSearchBar")
@@ -1044,7 +1047,8 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
 # #
 # # # MXTEST-8272
 @pytest.mark.sprint1_regression
-@pytest.mark.plp
+#@pytest.mark.plp
+@pytest.mark.pagination
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_8272_Pagination(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -1202,6 +1206,6 @@ def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
 
     home_page.wait_until_page_load_complete()
     home_page.click_on_categories_button()
-    home_page.click_on_category_by_text("Escape")
-    home_page.click_on_subcategory_by_text("Convertidor Catalitico")
+    home_page.click_on_category_by_text("Encendido y Afinacion")
+    home_page.click_on_subcategory_by_text("Bujias")
     assert home_page.validate_no_result_found(), "Results should not be shown for this category"
