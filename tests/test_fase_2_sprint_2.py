@@ -289,6 +289,7 @@ def test_MXTEST_10925_Spanish_Parts_interchange(web_drivers):
 
 
 @pytest.mark.flaky(reruns=3)
+@pytest.mark.sri
 def test_MXTEST_10926_Spanish_Shortcut(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
