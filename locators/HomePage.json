@@ -132,7 +132,7 @@
     },
     "labels_vehicle_selected": {
       "by": "XPATH",
-      "value": "//div[@class='div-chips']/p"
+      "value": "//div[@class= 'div-chips']//p"
     },
     "delete_all_btn": {
       "by": "XPATH",
@@ -194,7 +194,11 @@
       "by": "XPATH",
       "value": "//p[contains(@class,'o-text-primary')]"
     },
-    "additional_label": {
+    "link_products_list_3": {
+    "by": "XPATH",
+    "value": "//div[@class='description']/span[2]"
+    },
+  "additional_label": {
       "by": "XPATH",
       "value": "//h2[contains(text(),'Additional')]"
     },
@@ -220,7 +224,7 @@
     },
     "tools_span": {
       "by": "XPATH",
-      "value": "//span[@class='title-column roboto-condensed-700 fs-20px o-text-primary']"
+      "value": "//div[@class='glossary-link-column glossary-link-tools']"
     },
     "footer_links": {
       "by": "XPATH",
@@ -288,11 +292,11 @@
     },
     "explore_brands_label": {
       "by": "XPATH",
-      "value": "//div[@class='explore-label roboto-condensed-700 fs-20px o-text-primary']"
+      "value": "//div[@class='top-brand-container']//div[1]"
     },
     "all_brands_link_list": {
       "by": "XPATH",
-      "value": "//a[@class='principal-brand ng-star-inserted']//span"
+      "value": "//a[@class='principal-brand ng-star-inserted']"
     },
     "no_results_message": {
       "by": "XPATH",
@@ -505,7 +509,11 @@
     },
     "vehicle_selected": {
       "by": "XPATH",
-      "value": "//span[contains(@class,'vehicle-selected notranslate')]"
+      "value": "(//p-button[@class= 'p-element search-button']//span)[1]"
+    },
+    "vehicle_selected_button": {
+      "by": "XPATH",
+      "value": "(//p-button[@class= 'p-element search-button']//span)[1]"
     },
     "MEX_span": {
       "by": "XPATH",

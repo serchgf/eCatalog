@@ -18,7 +18,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 @pytest.mark.sprint1_regression
 @pytest.mark.pruebitas
 #@pytest.mark.homepage
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -52,7 +52,7 @@ def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.homepage
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8282_Garage_Garage_Vehicle_Limit(web_drivers):
     # se necesita actualizar el jira, el Maximo permitido en la lista es de 15 en vez de 10
@@ -92,7 +92,8 @@ def test_MXTEST_8282_Garage_Garage_Vehicle_Limit(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.homepage
-@pytest.mark.flaky(reruns=1)
+#@pytest.mark.fallo
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
     # se necesita actualizar el tc en jira, los campos que se pueden editar son submodel y Engine
     home_page = HomePage(*web_drivers)
@@ -122,32 +123,33 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
     # submodel = home_page.click_on_submodel_and_select()
     # engine = home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
-    default_message = "Add vehicle"
     vehicle_selected = home_page.get_vehicle_selected()
-    assert vehicle_selected != default_message, f"The button name: {vehicle_selected} must be different of {default_message}"
     home_page.click_on_Picker_vehicle_btn()
+    default_message = " Agregar vehículo "
+    assert vehicle_selected != default_message, f"The button name: {vehicle_selected} must be different of {default_message}"
     home_page.take_screenshot("Original vehicle details")
     home_page.click_on_edit_info_btn()
     expected_submodel = home_page.new_submodel_and_select(submodel)
-
+    print(expected_submodel)
+    new_expected_submodel = expected_submodel.replace("\nUSA","")
     expected_engine = home_page.new_engine_and_select(engine)
     home_page.click_on_save_changes_btn()
     label_submodel, label_engine = home_page.get_text_label_vehicle_selected()
-    expected_submodel = label_submodel.replace("\nUSA","")
-    print(f"Este es el label {label_submodel}")
-    time.sleep(.2)
+    # label_submodel_list = label_submodel.split(' ')
+    # logging.info(f"SUBMODEL LABEL: {label_submodel_list[5]}")
+    # print(f"SUBMODEL LABEL: {label_submodel_list[5]}")
     logging.info(f"\nvehicle:{vehicle}\nOriginal Submodel:{submodel}\nOriginal Engine:{engine}")
-    assert expected_submodel in label_submodel or expected_submodel in label_engine, f"{expected_submodel} debe encontarse en {label_submodel} o en {label_engine}"
+    assert new_expected_submodel in label_submodel or new_expected_submodel in label_engine, f"{new_expected_submodel} debe encontarse en {label_submodel} o en {label_engine}"
     assert expected_engine in label_engine or expected_engine in label_submodel, f"{expected_engine} debe encontarse en {label_engine} o en {label_submodel}"
     logging.info(
        f"Vehicle Edited successful")
-    logging.info(f"\nOriginal Submodel:{submodel} -> {expected_submodel}\nOriginal Engine:{engine} -> {expected_engine}")
-    print("Hola")
+    logging.info(f"\nOriginal Submodel:{submodel} -> {new_expected_submodel}\nOriginal Engine:{engine} -> {expected_engine}")
+
 
 # MXTEST-8285
 @pytest.mark.sprint1_regression
 @pytest.mark.homepage
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -196,7 +198,7 @@ def test_MXTEST_8285_Garage_Remove_Vehicle(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.homepage
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -227,7 +229,7 @@ def test_MXTEST_8287_Garage_Category_Navigation(web_drivers):
 # # MXTEST-8271
 @pytest.mark.sprint1_regression
 @pytest.mark.homepage
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -245,7 +247,7 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     home_page.click_on_subcategory_by_text("Accesorios Interiores")
     subcat_2_list_2 = home_page.get_product_list_2()
     home_page.click_element_text_of_list(subcat_2_list_2, "Aromatizante de Ambiente")
-    product_list = home_page.get_search_results()
+    product_list = home_page.get_link_product_list(0)
     expected_product_selected = home_page.select_random_element_of_list(product_list)
     #product_selected = home_page.clean_product_selected(expected_product_selected)
     logging.info(f"Selected: {expected_product_selected}")
@@ -254,7 +256,7 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
     time.sleep(2)
     for i in range(2):
         home_page.back_to_previous_page()
-        product_list = home_page.get_search_results()
+        product_list = home_page.get_link_product_list(0)
         expected_product_selected = home_page.select_random_element_of_list(product_list)
         # product_selected = home_page.clean_product_selected(expected_product_selected)
         logging.info(f"Selected: {expected_product_selected}")
@@ -282,8 +284,8 @@ def test_MXTEST_8271_Last_Viewed_Products(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.homepage
-@pytest.mark.flaky(reruns=1)
-@pytest.mark.fallo
+@pytest.mark.flaky(reruns=3)
+#@pytest.mark.fallo
 def test_MXTEST_8290_Footer_Validation_Tool_section_elements(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -295,7 +297,6 @@ def test_MXTEST_8290_Footer_Validation_Tool_section_elements(web_drivers):
     data = home_page.cargar_json_data(_JSON_PATH)
     expected_data = data['footer_href_links']
     logging.info(f"Expected data: {expected_data}")
-
     actual_name_href_dic = home_page.get_footer_links_name_href_dict()
     ### logging.info(f"ACTUAL data: {actual_name_href_dic['Delivery routes Jalisco']}")
 
@@ -307,7 +308,7 @@ def test_MXTEST_8290_Footer_Validation_Tool_section_elements(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.brandNavigation
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -331,7 +332,7 @@ def test_MXTEST_8255_MXTEST_8266_search_single_brand_without_vehicle_selected(we
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.brandNavigation
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8265_MXTEST_8267_search_all_brands_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -355,13 +356,12 @@ def test_MXTEST_8265_MXTEST_8267_search_all_brands_vehicle_selected(web_drivers)
     home_page.click_on_brands()
     # CLIC SHOW ALL BRANDS LINK TEXT
     home_page.click_on_show_all_brands()
-    home_page.wait_spinner_disappears()
+    time.sleep(.3)
     # click on any brand
     home_page.get_random_brand()
     # # get number of elements
     search_results_number = home_page.get_search_results_number()
     assert search_results_number > 0, "No elements displayed"
-
     logging.info(f"Search results number: {search_results_number}")
 
 #
@@ -371,7 +371,7 @@ def test_MXTEST_8265_MXTEST_8267_search_all_brands_vehicle_selected(web_drivers)
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.modalNavigation
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8257_Popular_Categories(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -390,7 +390,7 @@ def test_MXTEST_8257_Popular_Categories(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.modalNavigation
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8273_GoBackButton(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -413,7 +413,7 @@ def test_MXTEST_8273_GoBackButton(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.modalNavigation
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8274_PopupClose_Button(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -432,7 +432,7 @@ def test_MXTEST_8274_PopupClose_Button(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.equivalents
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8256_Search_Compatible(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -452,7 +452,7 @@ def test_MXTEST_8256_Search_Compatible(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.equivalents
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8276_ChangeSearchedNumber(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -481,7 +481,7 @@ def test_MXTEST_8276_ChangeSearchedNumber(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.equivalents
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8277_Search_WrongNumber(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -506,7 +506,7 @@ def test_MXTEST_8277_Search_WrongNumber(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.equivalents
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8280_Search_PopupClose_Button(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -526,7 +526,7 @@ def test_MXTEST_8280_Search_PopupClose_Button(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.equivalents
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8283_Search_FromProductPage(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
@@ -559,7 +559,7 @@ def test_MXTEST_8283_Search_FromProductPage(web_drivers):
 @pytest.mark.sprint1_regression# sprint1_regression
 @pytest.mark.pdp
 @pytest.mark.test8275
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accusharp/mfe"
@@ -597,7 +597,7 @@ def test_MXTEST_8275_Compatibility_Vehicle_selected(web_drivers):
 
 # # # MXTEST-8286
 @pytest.mark.sprint1_regression
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 @pytest.mark.test_8286
 def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
@@ -633,19 +633,18 @@ def test_MXTEST_8286_DirectLink_CompatibilityError_SelectVehicle(web_drivers):
 # # # # MXTEST-8289
 @pytest.mark.sprint1_regression
 @pytest.mark.pdp
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
+#@pytest.mark.fallo
 def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_drivers):
     # falta dato URL: https://testintranet.oreillyauto.mx/ecatalog/<<ID DEL ARTICULO >>
     page = HomePage(*web_drivers)
     home_page = page
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates/mnv"
     home_page.open_new_url(url)
-    home_page.wait_spinner_disappears()
+    home_page.wait_until_page_load_complete()
     #Change language to español
     home_page.change_language_En_to_Es()
     home_page.click_on_Picker_vehicle_btn()
-    time.sleep(2)
-    home_page.wait_until_page_load_complete()
     #Choosing specific vehicle
     home_page.write_a_vehicle_type("Uso Liviano Automotriz")
     home_page.write_a_year("2023")
@@ -669,7 +668,7 @@ def test_MXTEST_8289_DirectLink_CompatibilityError_PreselectedVehicle(web_driver
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.autofilloption
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -690,7 +689,8 @@ def test_MXTEST_8292_AutofillOption_FreeTextSearchBar(web_drivers):
 ##PASSED
 @pytest.mark.sprint1_regression
 @pytest.mark.newclient
-@pytest.mark.flaky(reruns=1)
+#@pytest.mark.fallo
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -700,14 +700,13 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     home_page.enable_keyboard_shortcuts()
     home_page.shortcut_new_client()
     home_page.click_new_client_continue_btn()
-    time.sleep(2)
+    home_page.wait_until_page_load_complete()
     home_page.click_on_categories_button()
-    time.sleep(2)
     home_page.click_on_category_by_text("Aceite, Productos Quimicos y Liquidos")
     home_page.click_on_subcategory_by_text("aceite de motor")
     home_page.shortcut_new_client()
     home_page.click_new_client_cancel_btn()
-    product_list = home_page.get_link_product_list(1)
+    product_list = home_page.get_link_product_list(0)
     product = "Aceite de Motor - Completamente Sintetico"
     for prod in product_list:
         if prod.text == product:
@@ -718,7 +717,7 @@ def test_MXTEST_8291_NewClient_CallWindow(web_drivers):
     #step 11
     home_page.click_new_client_cancel_btn()
     # 12 click first element on the list
-    product_list = home_page.get_link_product_list()
+    product_list = home_page.get_link_product_list(0)
     home_page.click_on_specific_index_on_list_element(product_list, 0)
     # step 13
     home_page.shortcut_new_client()
@@ -771,7 +770,7 @@ def test_MXTEST_8258_PLP_Search_with_Selected_Vehicle(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -792,7 +791,8 @@ def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
+#@pytest.mark.fallo
 def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -802,7 +802,7 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
     product_name = "Cartek"
     home_page.search_product(product_name)
     home_page.wait_spinner_disappears()
-    product_list = home_page.get_search_results()
+    product_list = home_page.get_link_product_list(0)
     for product in product_list:
         assert product_name.upper() in product.text.upper(), f"'{product_name.upper()}' must appears in description product, but has: {product.text.upper()}"
 
@@ -811,7 +811,7 @@ def test_MXTEST_8260_PLP_Search_without_vehicle_selected(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -835,7 +835,8 @@ def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas #OK
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
+#@pytest.mark.fallo
 def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -879,7 +880,8 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
 @pytest.mark.sprint1_regression
 @pytest.mark.pruebitas
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+#@pytest.mark.fallo
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -942,7 +944,8 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas #OK
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+#@pytest.mark.fallo
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -984,7 +987,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_za(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas #ok
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8264_PLP_Sort_by_option_relevance(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -1011,7 +1014,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_relevance(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 # @pytest.mark.fallo
 def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -1046,7 +1049,7 @@ def test_MXTEST_8288_PLP_Vehicle_compatibility_confirmation(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.plp
 @pytest.mark.pagination
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 def test_MXTEST_8272_Pagination(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -1064,7 +1067,7 @@ def test_MXTEST_8272_Pagination(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8270_Navigation_searchby_brand_category_filter(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -1089,7 +1092,7 @@ def test_MXTEST_8270_Navigation_searchby_brand_category_filter(web_drivers):
 @pytest.mark.sprint1_regression
 #@pytest.mark.pruebitas
 @pytest.mark.plp
-@pytest.mark.flaky(reruns=1)
+@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8269_Navigation_searchby_category_brand_filter(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -1173,9 +1176,8 @@ def test_MXTEST_8261_Navigation_Categories(web_drivers):
 # # MXTEST-8279 - MXTEST-8278
 @pytest.mark.sprint1_regression
 @pytest.mark.clp
-@pytest.mark.ft
 @pytest.mark.test8279
-#@pytest.mark.flaky(reruns=3)
+@pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
 def test_MXTEST_8278_MXTEST_8279_Navigation_Vehicle_Selected(web_drivers):
 

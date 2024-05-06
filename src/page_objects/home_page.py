@@ -766,34 +766,23 @@ class HomePage(BasePage):
         print(f"Get Products list")
         self.wait_until_page_load_complete()
         if type_of_label == 1:
-            # self.element("additional_label").wait_visible()
+            time.sleep(1)
+            lista = self.element("additional_cat_names").find_elements()
+            if len(lista) != 0:
+                return lista
+            else:
+                time.sleep(1)
+                lista = self.element("additional_cat_names").find_elements()
+                return lista
+        if type_of_label == 0:
             time.sleep(1)
             lista = self.element("link_products_list_2").find_elements()
             if len(lista) != 0:
                 return lista
             else:
-                self.element("link_products_list_2").wait_visible()
-                time.sleep(1)
-                lista = self.element("link_products_list_2").find_elements()
+                lista = self.element("link_products_list_3").find_elements()
                 return lista
-        if type_of_label == 0:
-            self.element("search_results_label").wait_visible()
-            time.sleep(1)
-            lista = self.element("link_products_list").find_elements()
-            if len(lista) != 0:
-                return lista
-            else:
-                lista = self.element("link_products_list").find_elements()
-                return lista
-    def get_search_results(self):
-        logging.info("Get search results")
-        print(f"Search results")
-        self.element("search_results_label").wait_visible()
-        lista = self.element("results_product_description").find_elements()
-        if len(lista) != 0:
-            return lista
-        else:
-            print("No hay resultados en la busqueda")
+
     def get_search_results_part(self):
         logging.info("Get search results")
         print(f"Search results")
@@ -1048,7 +1037,6 @@ class HomePage(BasePage):
         print(f"Brand Selected: {brand_selected}")
         try:
             brands_list[index].click()
-            print("Prueba")
         except ElementClickInterceptedException:
             print(f"No se selecciono la marca: {brand_selected}")
         return brand_selected
