@@ -127,6 +127,10 @@
       "by": "XPATH",
       "value": "//button[@ng-reflect-label='DELETE ALL']"
     },
+    "clear_current_selection_btn": {
+      "by": "XPATH",
+      "value": "//span[contains(text(), 'Borrar selección actual')]"
+    },
     "add_vehicle_info_label": {
       "by": "XPATH",
       "value": "//span[contains(text(),'Add vehicle info')]"
