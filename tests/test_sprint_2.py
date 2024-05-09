@@ -1345,17 +1345,17 @@ def test_MXTEST_9039_searchBar_autocomplete_select_category(web_drivers):
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9037_searchBar_autosuggestions(web_drivers):
     # MXTEST-9037 SearchBar_Autosuggestions
+    #Verify that the system provides autosuggestions as the user types in the search bar, making it easier to find relevant results.
     home_page = HomePage(*web_drivers)
-    search_criteria = "bra"
-    # url= "www.google.com"
-    # home_page.open_new_url(url)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    search_criteria = "Balat"
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     suggestion_list = home_page.get_suggestion_list()
-    assert len(suggestion_list) > 0, "No se mostraron sugerencias"
-    for element in suggestion_list:
-        print(element)
+    assert len(suggestion_list) > 0 and home_page.element("highlight_search_result").wait_visible(), f"The search {search_criteria} didn't have results or there were no highlighted elements visible"
+
 
 #@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
@@ -1378,7 +1378,7 @@ def test_MXTEST_9035_searchBar_invalid_search_term(web_drivers):
 
 
 @pytest.mark.sprint2_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9031_searchBar_keywords_search(web_drivers):
     #Verify that the system returns relevant search results when keywords are used in the search bar
