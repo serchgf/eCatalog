@@ -1250,6 +1250,10 @@
     "delete_vehicle_button": {
       "by": "XPATH",
       "value": "(//span[@class='p-button-label ng-star-inserted'])[1]"
+    },
+    "text_brand_search": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Brands') or contains(text(),'Marcas')] "
     }
   }
 }
