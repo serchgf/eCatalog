@@ -104,27 +104,28 @@ def test_MXTEST_9058_OrderList_Modal_Individual_Deletion(web_drivers):
     home_page.validate_product_list_page('Cartek')
 
     # Add multiple products to order list
+    print("Add to List")
     ol_products = home_page.add_multiple_products_to_order_list(2)
-
-
+    print("Add to List complete")
+    logging.info(f"list_products{ol_products}")
     # Delete product from order list
-    #product = home_page.delete_product_from_order_list()
-
+    product = home_page.delete_product_from_order_list()
+    logging.info(f"list_products{product}")
 
     # Check if product is deleted or order list is empty
-    #if product == "You haven't added items on your order list.":
-        #logging.info("Order list is empty")
-        #assert True
+    if product == "You haven't added items on your order list.":
+        logging.info("Order list is empty")
+        assert True
 
-   # elif isinstance(product, list):
-        #deleted_product = list(set(ol_products) - set(product))[0]
-        #logging.info(f"Product {deleted_product} was deleted from list")
-        #assert True
-       #time.sleep(10)
-    #else:
-        #logging.error("Unknown error occurred during product deletion")
-        #assert False, "Unknown error occurred during product deletion"
-        #time.sleep(10)
+    elif isinstance(product, list):
+        deleted_product = list(set(ol_products) - set(product))[0]
+        logging.info(f"Product {deleted_product} was deleted from list")
+        assert True
+
+    else:
+        logging.error("Unknown error occurred during product deletion")
+        assert False, "Unknown error occurred during product deletion"
+
 
 
 
@@ -977,6 +978,7 @@ def test_MXTEST_9059_PDP_Report_Discrepancies(web_drivers):
 # MXTEST-9057
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
+@pytest.mark.test9057
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9057_PDP_Add_to_List(web_drivers):
     home_page = HomePage(*web_drivers)

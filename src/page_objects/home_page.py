@@ -1568,15 +1568,16 @@ class HomePage(BasePage):
         return title.text, product.text
 
     def add_multiple_products_to_order_list(self, qty):
-        time.sleep(50)
+        time.sleep(5)
         logging.info("Add multiple products to order list")
         print("Add multiple products to order list")
-        for i in range(3):
+        for i in range(qty):
             self.click_on_first_add_to_list_available()
             self.element("close_modal").find_element().click()
         self.element("order_list_button").wait_visible().click()
         products = self.element("product_name_ol").find_elements()
         product_name = [product.text for product in products]
+        logging.info(f"Add multiple products to order list added multiple elements{product_name}")
         return product_name
 
     def delete_product_from_order_list(self):

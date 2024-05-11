@@ -785,7 +785,7 @@
     },
     "add_to_list_btn": {
       "by": "XPATH",
-      "value": "//button/span[text()='add to list']"
+      "value": "//button/span[text()='agregar a lista']"
     },
     "product_name": {
       "by": "XPATH",
@@ -793,7 +793,7 @@
     },
     "product_name_ol": {
       "by": "XPATH",
-      "value": "//div[contains(@class,'col justify-content-center')]/div/p"
+      "value": "//div[contains(@class,'product-info-container')]/div/p"
     },
     "order_list_label": {
       "by": "XPATH",
@@ -805,11 +805,11 @@
     },
     "close_modal": {
       "by": "XPATH",
-      "value": "//span[contains(@class,'p-sidebar-close')]"
+      "value": "//span[contains(@class,'p-button-icon pi pi-times')]"
     },
     "delete_button": {
       "by": "XPATH",
-      "value": "//span[text()='Delete']"
+      "value": "//span[text()='Eliminar']"
     },
     "no_added_label": {
       "by": "XPATH",
@@ -817,7 +817,7 @@
     },
     "order_list_button": {
       "by": "XPATH",
-      "value": "//span[contains(.,'ORDER LIST')]"
+      "value": "//span[contains(.,'LISTA DE PRODUCTOS')]"
     },
     "delete_all_button": {
       "by": "XPATH",
