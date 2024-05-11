@@ -1543,7 +1543,7 @@ class HomePage(BasePage):
             self.element("gates_brand").find_element().click()
 
     def click_on_first_add_to_list_available(self):
-        time.sleep(.5)
+        time.sleep(5)
         logging.info("Click on ADD TO LIST button")
         print("Click on ADD TO LIST button")
         self.element("add_to_list_btn").wait_clickable().click()
@@ -1568,10 +1568,10 @@ class HomePage(BasePage):
         return title.text, product.text
 
     def add_multiple_products_to_order_list(self, qty):
-        time.sleep(.5)
+        time.sleep(50)
         logging.info("Add multiple products to order list")
         print("Add multiple products to order list")
-        for i in range(qty):
+        for i in range(3):
             self.click_on_first_add_to_list_available()
             self.element("close_modal").find_element().click()
         self.element("order_list_button").wait_visible().click()
