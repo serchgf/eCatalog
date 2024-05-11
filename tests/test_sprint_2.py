@@ -455,10 +455,12 @@ def test_MXTEST_9025_Select_entry_records_history(web_drivers):
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    search_criteria1 = 'detailing'
-    search_criteria2 = 'oil'
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
+    search_criteria1 = 'detallado'
+    search_criteria2 = 'aceite'
     #time.sleep(2)
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_vehicle_type_and_select()
@@ -1221,60 +1223,72 @@ def test_MXTEST_9045_searchBar_valid_part_number_vehicle_selected(web_drivers):
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9044_searchBar_valid_category_vehicle_selected(web_drivers):
     # MXTEST-9044 SearchBar_Valid_Category_Vehicle_Selected
+    # Verify that the system displays the result when a search is made by typing a valid category in the search bar field with the vehicle selected
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.click_on_Picker_vehicle_btn()
-    year = "2021"
-    make = "Alfa Romeo"
-    model = "Giulia"
-    submodel = "Lusso"
-    home_page.write_a_vehicle_type("Automotive Light Duty")
+    year = "2023"
+    make = "Aprilia"
+    model = "RS 660"
+    submodel = "Base"
+    home_page.write_a_vehicle_type("Deportes Motorizados")
     home_page.write_a_year(year)
     home_page.write_a_make(make)
     home_page.write_a_model(model)
     home_page.write_a_submodel(submodel)
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
-    search_criteria = "Brake Pads"
-    home_page.search_product(search_criteria)
-    home_page.wait_spinner_disappears()
-    product_list = home_page.get_link_product_list(1)
-    assert len(product_list) > 0, f"No mostro resultados la categoria: {search_criteria}"
-
-@pytest.mark.pruebitas
-@pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=3)
-def test_MXTEST_9018_searchBar_partial_search_term(web_drivers):
-    # MXTEST-9018 SearchBar_Partial_Search_Term
-    home_page = HomePage(*web_drivers)
-    home_page.open()
-    search_criteria = "Brak"
-    home_page.wait_spinner_disappears()
+    search_criteria = "Brake"
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
-    time.sleep(10)
     home_page.wait_spinner_disappears()
     lista_productos = home_page.get_description_product()
     for producto in lista_productos:
         assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+    assert len(lista_productos) > 0, f"The category {search_criteria} didn't have results"
 
+#@pytest.mark.pruebitas
+@pytest.mark.sprint2_regression
+@pytest.mark.flaky(reruns=3)
+def test_MXTEST_9018_searchBar_partial_search_term(web_drivers):
+    #erify that the system displays results when a search is made with a partial <<search term>> in the search bar field.
+    # MXTEST-9018 SearchBar_Partial_Search_Term
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    search_criteria = "Brak"
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+    assert len(lista_productos) > 0, f"The partial search term {search_criteria} didn't have results"
 
 #@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9016_searchBar_valid_item_name(web_drivers):
 # MXTEST-9016 SearchBar_Valid_Item Name
+#Verify that the system displays the result when a search is made by typing a valid item name in the search bar field.
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    search_criteria = "strut mount"
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    search_criteria = "Oil"
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
     lista_productos = home_page.get_description_product()
     for producto in lista_productos:
         assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+    assert len(lista_productos) > 0, f"The item name {search_criteria} didn't have results"
     #Go to the database and run the following <query>.
 
 #@pytest.mark.pruebitas
@@ -1282,34 +1296,40 @@ def test_MXTEST_9016_searchBar_valid_item_name(web_drivers):
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9015_searchBar_valid_part_number(web_drivers):
 # MXTEST-9015 SearchBar_Valid_Part Number
+#Verify that the system displays the result when a search is made by typing a valid part number in the search bar field.
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    part_number = "33849"
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    part_number = "33849"
     home_page.element("search_bar").wait_clickable().send_keys(part_number)
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
     part_number_list = home_page.element("part_number_button").find_elements()
-    #logging.info(f"El tamaño de la lista es: {len(part_number_list)}")
-    #for part in part_number_list:
-    #    logging.info(part.text)
-    assert part_number in part_number_list[0].text, f"No se encontro el numero de parte:{part_number} en la busqueda:{part_number_list[0].text}"
+    assert part_number in part_number_list[0].text, f"Part number:{part_number} was not found in:{part_number_list[0].text}"
     # Go to the database and run the following <query>.
 
 #@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=2)
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 def test_MXTEST_9014_searchBar_valid_category(web_drivers):
-# MXTEST-9014 SearchBar_Valid_Category
+    #Verify that the system displays the result when a search is made by typing a valid category in the search bar field
+    # MXTEST-9014 SearchBar_Valid_Category
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    search_criteria = "Brake Pads"
-    home_page.search_product(search_criteria)
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    search_criteria = "Brake"
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
     home_page.wait_spinner_disappears()
-    product_list = home_page.get_link_product_list(1)
-    assert len(product_list) > 0, f"No mostro resultados la categoria: {search_criteria}"
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+    assert len(lista_productos) > 0, f"The category {search_criteria} didn't have results"
 
 
 #@pytest.mark.pruebitas
@@ -1317,20 +1337,28 @@ def test_MXTEST_9014_searchBar_valid_category(web_drivers):
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9040_searchBar_autocomplete_select_brand(web_drivers):
     #MXTEST-9040 SearchBar_Autocomplete_Select_Brand
+    #Verify that the system displays relevant search results when a brand is selected from the autocomplete suggestions
     home_page = HomePage(*web_drivers)
-    # url= "www.google.com"
-    # home_page.open_new_url(url)
-    home_page.open()
-    search_criteria = "bos"
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    #home_page.search_product("Motor Oil") #Busqueda por valor
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    #BRAND CARTE
+    search_criteria = "Carte"
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
-    bosch_brand = home_page.element("highlight_search_result").find_element()
-    home_page.clic_javacript(bosch_brand)
-    lista_productos = home_page.get_description_product()
-    for producto in lista_productos:
-        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto.upper()}"
-
+    home_page.element("text_brand_search").wait_visible()
+    category = home_page.element("highlight_search_result").find_element()
+    home_page.clic_javacript(category)
+    home_page.wait_spinner_disappears()
+    lista_principal = home_page.get_description_product()
+    palabra_buscada = "CARTEK"
+    # Verificar si la palabra está en la lista
+    encontrada = False
+    for lista in lista_principal:
+        if palabra_buscada in lista:
+            encontrada = True
+            break
+    assert encontrada == True, f"The brand '{palabra_buscada}' is not in the list"
     #Go to the database and run the following <query>.
 
 #@pytest.mark.pruebitas
@@ -1338,68 +1366,84 @@ def test_MXTEST_9040_searchBar_autocomplete_select_brand(web_drivers):
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9039_searchBar_autocomplete_select_category(web_drivers):
     # MXTEST-9039 SearchBar_Autocomplete_Select_Category
+    #Verify that the system displays the category landing page CLP for the category selected from the autocomplete suggestions.
     home_page = HomePage(*web_drivers)
-    # url= "www.google.com"
-    # home_page.open_new_url(url)
-    home_page.open()
-    search_criteria = "pad"
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    #CATEGORY FILTERS
+    search_criteria = "Fil"
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
-    bosch_brand = home_page.element("highlight_search_result").find_element()
-    home_page.clic_javacript(bosch_brand)
-    lista_productos = home_page.get_description_product()
-    for producto in lista_productos:
-        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto.upper()}"
-
+    category = home_page.element("highlight_search_result").find_element()
+    home_page.clic_javacript(category)
+    home_page.wait_spinner_disappears()
+    lista_principal = home_page.get_description_product()
+    palabra_buscada = "Filter"
+    # Verificar si la palabra está en la lista
+    encontrada = False
+    for lista in lista_principal:
+        if palabra_buscada in lista:
+            encontrada = True
+            break
+    assert encontrada == True, f"The part type '{palabra_buscada}' is not in the list"
 
 #@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9037_searchBar_autosuggestions(web_drivers):
     # MXTEST-9037 SearchBar_Autosuggestions
+    #Verify that the system provides autosuggestions as the user types in the search bar, making it easier to find relevant results.
     home_page = HomePage(*web_drivers)
-    search_criteria = "bra"
-    # url= "www.google.com"
-    # home_page.open_new_url(url)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    search_criteria = "Balat"
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     suggestion_list = home_page.get_suggestion_list()
-    assert len(suggestion_list) > 0, "No se mostraron sugerencias"
-    for element in suggestion_list:
-        print(element)
+    assert len(suggestion_list) > 0 and home_page.element("highlight_search_result").wait_visible(), f"The search {search_criteria} didn't have results or there were no highlighted elements visible"
+
 
 #@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9035_searchBar_invalid_search_term(web_drivers):
     # MXTEST-9035 SearchBar_Invalid_Search Term
+    #Verify that the system handles and displays no results when an invalid search term is entered in the search bar field.
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    search_criteria = "#$$$$"
-    expected_message = "We're sorry, no results were found"
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    search_criteria = "#$$$$"
+    expected_message = "Lo sentimos, no se encontraron resultados."
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
     actual_message = home_page.get_no_results_message()
     assert actual_message == expected_message, f"El mensaje actual deberia ser: {expected_message}, en vez de {actual_message}"
 
-#@pytest.mark.pruebitas
+
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
-def test_MXTEST_9035_searchBar_keywords_search(web_drivers):
+def test_MXTEST_9031_searchBar_keywords_search(web_drivers):
+    #Verify that the system returns relevant search results when keywords are used in the search bar
     # MXTEST-9031 SearchBar_Keywords_search
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    search_criteria = "oil"
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    #-----------------------------------
+    search_criteria = "Air"
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
     lista_productos = home_page.get_description_product()
     for producto in lista_productos:
-        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+        assert search_criteria.upper() in producto.upper(), f"Relevant search: {search_criteria.upper()} was not found in {producto}"
+    assert len(lista_productos) > 0, f"The relevant search {search_criteria} didn't have results"
 
 
 

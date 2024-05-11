@@ -16,7 +16,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 # HOME PAGE-------------------------------------------------------------------------------------------------------------
 # MXTEST-8263
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 #@pytest.mark.homepage
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_8263_Vehicle_Filtering_Functionality_Validation(web_drivers):
@@ -878,7 +878,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
 
 # # MXTEST-8264 mod1 with vehicle selected
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 #@pytest.mark.fallo
 @pytest.mark.flaky(reruns=3)
