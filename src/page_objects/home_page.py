@@ -1926,8 +1926,8 @@ class HomePage(BasePage):
         search_bar = self.element("search_bar").wait_clickable()
         search_bar.send_keys(keyword)
         time.sleep(1)
-        self.element("first_suggestion_brand_highlight").wait_visible()
-        self.element("first_suggestion_brand_highlight").wait_clickable().click()
+        self.element("first_suggestion_brand_highlight_2").wait_visible()
+        self.element("first_suggestion_brand_highlight_2").wait_clickable().click()
 
     def validate_keyword_in_p_text_of_results_list(self, keyword: str):
         logging.info("Get 'p' text of results list")

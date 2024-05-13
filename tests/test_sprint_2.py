@@ -1068,148 +1068,167 @@ def test_MXTEST_9036_PDP_ResourcesDisplay(web_drivers):
 
 # MXTEST-9026
 #@pytest.mark.haha
+#@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9026_PDP_Product_image_with_available_images_Selected_Brand(web_drivers):
-    #falta producto que contenga imagen en 360
+    #Verify that the available images are being shown in the PDP.
     home_page = HomePage(*web_drivers)
-    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates-mx/mnv/detail/gates-mx-g-force-carbon-cord-cvt-belt-11c3218/mnv0/11c3218"
+    #home_page.open_url_mx()
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/battery-accessories/battery-boxes-trays/l/n0357/detail/super-start-battery-tray-01339/ss01/01339"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    # home_page.click_on_brands()
+    # home_page.click_on_brand('Body Glove')
+    # home_page.wait_spinner_disappears()
+    # product_list = home_page.get_description_product()
+    # brand_selected = home_page.select_random_element_of_list(product_list)
+    # logging.info(f"Selected: {brand_selected}")
+    #Click en imagen anterior e imagen siguiente
+    #Se omite seleccion de marca para utilizar un producto con numero de parte "01339" que tiene todas las opciones de imagen
     home_page.click_img_arrow_back_button()
+    time.sleep(.2)
     home_page.click_img_arrow_forward_button()
+    time.sleep(.2)
+    #Habilitar la vision 360
+    home_page.element("img_button_360").wait_clickable().click()
+    time.sleep(.2)
+    #Disable the 360 degree
+    home_page.element("img_button").wait_clickable().click()
+    #Click para abrir la imagen
     home_page.click_main_product_img()
+    #Click en imagen anterior e imagen siguiente
+    home_page.element("img_arrow_forward_button_2").wait_clickable().click()
+    time.sleep(.2)
+    home_page.element("img_arrow_back_button_2").wait_clickable().click()
+    time.sleep(.2)
+    #Cerrar la imagen
+    home_page.element("close_modal_btn").wait_clickable().click()
+    #Habilitar la vision 360
+    home_page.element("img_button_360").wait_clickable().click()
+    time.sleep(.2)
+    #Acercar y alejar con zoom
+    home_page.element("zoom_in").wait_clickable().click()
+    time.sleep(.2)
+    home_page.element("zoom_out").wait_clickable().click()
+    time.sleep(.2)
+    #Boton play para habilitar la vision 360
+    home_page.element("play_360_button").wait_clickable().click()
+    time.sleep(.2)
+    #Pausar la vision 360
+    home_page.element("pause_360_button").wait_clickable().click()
+    time.sleep(.2)
+    # Disable the 360 degree
+    home_page.element("img_button").wait_clickable().click()
+    home_page.element("zoom_in").wait_until_disappears()
+
 
 # SEARCH BAR-------------------------------------------------------------------------------------------------------------
 # MXTEST-9050
-
+#@pytest.mark.pruebitas
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9050_SearchBar_Autocomplete_Select_Brand_Vehicle_selected(web_drivers):
+    #Verify that the system displays relevant search results when a brand is selected from the autocomplete suggestions with vehicle selected
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    home_page.click_on_Picker_vehicle_btn()
-    year = "2021"
-    make = "Alfa Romeo"
-    model = "Giulia"
-    submodel = "Lusso"
-    home_page.write_a_vehicle_type("Automotive Light Duty")
-    home_page.write_a_year(year)
-    home_page.write_a_make(make)
-    home_page.write_a_model(model)
-    home_page.write_a_submodel(submodel)
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
-    search_criteria = "acc"
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    home_page.select_vehicle_specific()
+    search_criteria = "Gat"
     home_page.select_first_suggestion_brand(search_criteria)
-
+    home_page.wait_spinner_disappears()
+    #BRAND GATES
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto.upper(), f"The brand: {search_criteria.upper()} no se encontro en {producto.upper()}"
+    #Go to the database and run the following <query>.
 
 # MXTEST-9049
 #@pytest.mark.haha
+#@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9049_SearchBar_Autocomplete_Select_Category_Vehicle_Selected(web_drivers):
+    #Verify that the system displays the category landing page CLP for the category selected from the autocomplete suggestions with a vehicle selected
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    home_page.click_on_Picker_vehicle_btn()
-    year = "2021"
-    make = "Chevrolet"
-    model = "Aveo"
-    submodel = "LT"
-    home_page.write_a_vehicle_type("Automotive Light Duty")
-    home_page.write_a_year(year)
-    home_page.write_a_make(make)
-    home_page.write_a_model(model)
-    home_page.write_a_submodel(submodel)
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
-    search_criteria = "oil"
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    home_page.select_vehicle_specific()
+    search_criteria = "Oil"
     home_page.search_product(search_criteria)
-    product_list = home_page.get_link_product_list(1)
-    home_page.scroll_down()
-    home_page.select_random_element_of_list(product_list)
-    home_page.wait_spinner_disappears()
+    #CATEGORY OIL
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto.upper(), f"The category: {search_criteria.upper()} no se encontro en {producto.upper()}"
+    #Go to the database and run the following <query>.
 
 # MXTEST-9048
 #@pytest.mark.haha
+#@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9048_SearchBar_Partial_Search_Term_Vehicle_selected(web_drivers):
+    #Verify that the system displays results when a search is made with a partial <<search term>> in the search bar field with the vehicle selected
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    home_page.click_on_Picker_vehicle_btn()
-    year = "2021"
-    make = "Chevrolet"
-    model = "Aveo"
-    submodel = "LT"
-    home_page.write_a_vehicle_type("Automotive Light Duty")
-    home_page.write_a_year(year)
-    home_page.write_a_make(make)
-    home_page.write_a_model(model)
-    home_page.write_a_submodel(submodel)
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
-    search_criteria = "oil"
-    home_page.search_product(search_criteria)
-    home_page.wait_spinner_disappears()
-    home_page.validate_keyword_in_p_text_of_results_list(search_criteria)
-
-
-# ---------------------------------------------GRECIA LOPEZ-------------------------------------------------------------
-# SEARCH BAR-------------------------------------------------------------------------------------------------------------
-
-# MXTEST-9046 SearchBar_Valid_Item Name_Vehicle_Selected
-#@pytest.mark.pruebitas
-@pytest.mark.sprint2_regression
-@pytest.mark.flaky(reruns=2)
-#@pytest.mark.pruebitas
-def test_MXTEST_9046_SearchBar_Valid_Item_Name_Vehicle_Selected(web_drivers):
-    home_page = HomePage(*web_drivers)
-    home_page.open()
-    search_criteria = "strut mount"
-    home_page.wait_spinner_disappears()
-    home_page.click_on_Picker_vehicle_btn()
-    year = "2019"
-    make = "Acura"
-    model = "ILX"
-    submodel = "A-Spec"
-    home_page.write_a_vehicle_type("Automotive Light Duty")
-    home_page.write_a_year(year)
-    home_page.write_a_make(make)
-    time.sleep(1)
-    home_page.write_a_model(model)
-    home_page.write_a_submodel(submodel)
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    home_page.select_vehicle_specific()
+    search_criteria = "Brak"
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
     lista_productos = home_page.get_description_product()
     for producto in lista_productos:
-        assert search_criteria.upper() in producto, f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto}"
+    assert len(lista_productos) > 0, f"The partial search term {search_criteria} didn't have results"
+
+# ---------------------------------------------GRECIA LOPEZ-------------------------------------------------------------
+# SEARCH BAR-------------------------------------------------------------------------------------------------------------
+
+#@pytest.mark.pruebitas
+@pytest.mark.sprint2_regression
+@pytest.mark.flaky(reruns=2)
+#@pytest.mark.pruebitas
+def test_MXTEST_9046_SearchBar_Valid_Item_Name_Vehicle_Selected(web_drivers):
+    #Verify that the system displays the result when a search is made by typing a valid item name in the search bar field with the vehicle selected
+    # MXTEST-9046 SearchBar_Valid_Item Name_Vehicle_Selected
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    home_page.select_vehicle_specific()
+    search_criteria = "Battery"
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    lista_productos = home_page.get_description_product()
+    for producto in lista_productos:
+        assert search_criteria.upper() in producto.upper(), f"El nombre de producto: {search_criteria.upper()} no se encontro en {producto.upper()}"
     #Go to the database and run the following <query>.
 
 #@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9045_searchBar_valid_part_number_vehicle_selected(web_drivers):
-# MXTEST-9045 SearchBar_Valid_Part Number_Vehicle_Selected
+    #Verify that the system displays the result when a search is made by typing a valid part number in the search bar field with the vehicle selected
+    # MXTEST-9045 SearchBar_Valid_Part Number_Vehicle_Selected
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    part_number = "33849"
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    home_page.click_on_Picker_vehicle_btn()
-    home_page.click_on_vehicle_type_and_select()
-    year = home_page.click_on_year_and_select()
-    make = home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    part_number = "33849"
+    home_page.select_vehicle_specific()
     home_page.element("search_bar").wait_clickable().send_keys(part_number)
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
@@ -1231,18 +1250,7 @@ def test_MXTEST_9044_searchBar_valid_category_vehicle_selected(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     # -----------------------------------
-    home_page.click_on_Picker_vehicle_btn()
-    year = "2023"
-    make = "Aprilia"
-    model = "RS 660"
-    submodel = "Base"
-    home_page.write_a_vehicle_type("Deportes Motorizados")
-    home_page.write_a_year(year)
-    home_page.write_a_make(make)
-    home_page.write_a_model(model)
-    home_page.write_a_submodel(submodel)
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.select_vehicle_specific()
     search_criteria = "Brake"
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
