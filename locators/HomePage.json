@@ -737,7 +737,7 @@
     },
     "first_suggestion_brand_highlight": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Brands')]/parent::div/parent::li/following::li[1]"
+      "value": "//span[contains(text(),'Marcas')]/parent::div/parent::li/following::li[1]"
     },
     "p_text_results": {
       "by": "XPATH",
@@ -1254,6 +1254,42 @@
     "text_brand_search": {
       "by": "XPATH",
       "value": "//span[contains(text(),'Brands') or contains(text(),'Marcas')] "
+    },
+    "first_suggestion_brand_highlight_2": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Brands') or contains(text(),'Marcas')]/following::span[3]"
+    },
+    "zoom_in": {
+      "by": "XPATH",
+      "value": "//span[text()='zoom_in']"
+    },
+    "zoom_out": {
+      "by": "XPATH",
+      "value": "//span[text()='zoom_out']"
+    },
+    "img_button_360": {
+      "by": "XPATH",
+      "value": "//div[@class='galleria-actions ng-star-inserted']//div[@aria-labelledby='image360']"
+    },
+    "img_button": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),' filter ')]"
+    },
+    "img_arrow_forward_button_2": {
+      "by": "XPATH",
+      "value": "(//span[contains(text(),'arrow_forward')]/parent::button)[2]"
+    },
+    "img_arrow_back_button_2": {
+      "by": "XPATH",
+      "value": "(//span[contains(text(),'arrow_back')]/parent::button)[2]"
+    },
+    "play_360_button": {
+      "by": "XPATH",
+      "value": "//i[text()='play_arrow']"
+    },
+    "pause_360_button": {
+      "by": "XPATH",
+      "value": "//i[text()='pause']"
     }
   }
 }
