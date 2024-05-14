@@ -721,7 +721,7 @@
     },
     "resources_tab": {
       "by": "XPATH",
-      "value": "//a[@role='tab']/span[contains(text(),'Resources')]"
+      "value": "//a[@aria-controls='p-tabpanel-15']/span[@class='ng-star-inserted']"
     },
     "img_arrow_forward_button": {
       "by": "XPATH",
@@ -1290,6 +1290,10 @@
     "pause_360_button": {
       "by": "XPATH",
       "value": "//i[text()='pause']"
+    },
+    "general_info_resources": {
+      "by": "XPATH",
+      "value": "//span[text()='General Information']"
     }
   }
 }

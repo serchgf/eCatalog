@@ -1056,15 +1056,22 @@ def test_MXTEST_9028_PDP_Generic_images_from_Selected_Brand(web_drivers):
 
 # MXTEST-9036
 #@pytest.mark.haha
+@pytest.mark.pruebitas
 #@pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9036_PDP_ResourcesDisplay(web_drivers):
     # encontrar un producto que contenga la tab "resources"
     home_page = HomePage(*web_drivers)
-    url = "pagina con resources tab"
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/dupli-color/mlu/detail/dupli-color-perfect-match-8-ounce-charcoal-gray-metallic-touch-up-paint-bcc0331/dpl1/bcc0331"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
-    home_page.click_resources_tab()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    home_page.scroll_to_element("resources_tab")
+    # home_page.click_resources_tab()
+    # assert home_page.element("general_info_resources").wait_visible(), "Resources is not visible"
+    # assert home_page.element("general_info_resources").wait_clickable(), "Resources is not clickable"
+
 
 # MXTEST-9026
 #@pytest.mark.haha

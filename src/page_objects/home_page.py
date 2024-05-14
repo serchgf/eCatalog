@@ -1898,7 +1898,6 @@ class HomePage(BasePage):
         logging.info("Click 'Resources' tab")
         print("Click Resources tab")
         self.element("resources_tab").wait_visible()
-        time.sleep(1)
         self.element("resources_tab").wait_clickable().click()
 
     def click_main_product_img(self):
