@@ -685,7 +685,7 @@
     },
     "modal_order_list_subtitle": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'Order list')]"
+      "value": "//h3[contains(text(),'Lista de productos')]"
     },
     "modal_order_list_items_number": {
       "by": "XPATH",
@@ -797,7 +797,7 @@
     },
     "order_list_label": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'Order list')]"
+      "value": "//h3[contains(text(),'Lista de productos')]"
     },
     "panel_title": {
       "by": "XPATH",
@@ -813,7 +813,7 @@
     },
     "no_added_label": {
       "by": "XPATH",
-      "value": "//span[contains(.,'You haven')]"
+      "value": "//span[contains(.,'No has')]"
     },
     "order_list_button": {
       "by": "XPATH",
@@ -821,27 +821,27 @@
     },
     "delete_all_button": {
       "by": "XPATH",
-      "value": "//span[text()='DELETE ALL']"
+      "value": "//span[text()='Eliminar Todos']"
     },
     "yes_remove_button": {
       "by": "XPATH",
-      "value": "//button[text()='yes, remove all']"
+      "value": "//button[text()='si, eliminar todo']"
     },
     "clear_label": {
       "by": "XPATH",
-      "value": "//p[text()='Clear item list']"
+      "value": "//p[text()='Borrar lista de elementos']"
     },
     "cancel_btn": {
       "by": "XPATH",
-      "value": "//button[normalize-space()='cancel']"
+      "value": "//button[normalize-space()='cancelar']"
     },
     "img_thumbnail": {
       "by": "XPATH",
-      "value": "//img[contains(@class,'rounded-2')]"
+      "value": "//img[contains(@class,'o-img-list ng-star-inserted')]"
     },
     "pdp_title": {
       "by": "XPATH",
-      "value": "//div[@class='product-detail-tile header']/div/div/span"
+      "value": "//div[@class='product-detail-title header']/div/div/span"
     },
     "plp_images": {
       "by": "XPATH",
@@ -869,7 +869,7 @@
     },
     "explore_brand_text": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'EXPLORE')]"
+      "value": "//h3[contains(text(),'EXPLORAR MARCAS')]"
     },
     "video_resources_span": {
       "by": "XPATH",

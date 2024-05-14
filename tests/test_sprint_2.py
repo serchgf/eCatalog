@@ -144,6 +144,7 @@ def test_MXTEST_9056_OrderList_Modal_Product_Navigation(web_drivers):
     home_page.open()
     time.sleep(4)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.click_on_brands()
     home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
@@ -182,7 +183,8 @@ def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
 
 # MXTEST-9054
 @pytest.mark.sprint2_regression
-@pytest.mark.homepages2
+#@pytest.mark.homepages2
+@pytest.mark.test9054
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -194,6 +196,7 @@ def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
     #home_page.click_on_brands()
     #home_page.click_on_brand('Cartek')
     #home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.validate_product_list_page('Cartek')
     home_page.add_multiple_products_to_order_list(5)
     order_list = home_page.delete_all_products()
