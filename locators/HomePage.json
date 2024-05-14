@@ -685,7 +685,7 @@
     },
     "modal_order_list_subtitle": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'Order list')]"
+      "value": "//h3[contains(text(),'Lista de productos')]"
     },
     "modal_order_list_items_number": {
       "by": "XPATH",
@@ -797,7 +797,7 @@
     },
     "order_list_label": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'Order list')]"
+      "value": "//h3[contains(text(),'Lista de productos')]"
     },
     "panel_title": {
       "by": "XPATH",
@@ -837,11 +837,11 @@
     },
     "img_thumbnail": {
       "by": "XPATH",
-      "value": "//img[contains(@class,'rounded-2')]"
+      "value": "//img[contains(@class,'o-img-list ng-star-inserted')]"
     },
     "pdp_title": {
       "by": "XPATH",
-      "value": "//div[@class='product-detail-tile header']/div/div/span"
+      "value": "//div[@class='product-detail-title header']/div/div/span"
     },
     "plp_images": {
       "by": "XPATH",
@@ -869,7 +869,7 @@
     },
     "explore_brand_text": {
       "by": "XPATH",
-      "value": "//h3[contains(text(),'EXPLORE')]"
+      "value": "//h3[contains(text(),'EXPLORAR MARCAS')]"
     },
     "video_resources_span": {
       "by": "XPATH",
