@@ -25,6 +25,7 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
     home_page.open()
     time.sleep(4)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_year_dropdown(1)
     home_page.click_on_make_and_select(1)
@@ -40,7 +41,8 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
 
 # MXTEST-9074
 @pytest.mark.sprint2_regression
-@pytest.mark.homepages2
+#@pytest.mark.homepages2
+@pytest.mark.test9074
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -60,6 +62,7 @@ def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_dr
     span_country = home_page.get_country_chips()
     logging.info(span_country)
     assert "CAN" or "USA" in span_country, f"USA or CAN should be in: {span_country} message"
+
 
 # MXTEST-9073
 @pytest.mark.sprint2_regression
@@ -141,6 +144,7 @@ def test_MXTEST_9056_OrderList_Modal_Product_Navigation(web_drivers):
     home_page.open()
     time.sleep(4)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.click_on_brands()
     home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
@@ -159,7 +163,8 @@ def test_MXTEST_9056_OrderList_Modal_Product_Navigation(web_drivers):
 
 # MXTEST-9055
 @pytest.mark.sprint2_regression
-@pytest.mark.homepages2
+#@pytest.mark.homepages2
+@pytest.mark.test9055
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -168,6 +173,8 @@ def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
     home_page.open_new_url(url)
     time.sleep(4)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+
     #home_page.click_on_brands()
     #home_page.click_on_brand('Cartek')
     #home_page.wait_spinner_disappears()
@@ -178,7 +185,8 @@ def test_MXTEST_9055_OrderList_Modal_Cancel_Clear_List(web_drivers):
 
 # MXTEST-9054
 @pytest.mark.sprint2_regression
-@pytest.mark.homepages2
+#@pytest.mark.homepages2
+@pytest.mark.test9054
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -190,6 +198,7 @@ def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
     #home_page.click_on_brands()
     #home_page.click_on_brand('Cartek')
     #home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.validate_product_list_page('Cartek')
     home_page.add_multiple_products_to_order_list(5)
     order_list = home_page.delete_all_products()
@@ -978,7 +987,7 @@ def test_MXTEST_9059_PDP_Report_Discrepancies(web_drivers):
 # MXTEST-9057
 #@pytest.mark.haha
 @pytest.mark.sprint2_regression
-@pytest.mark.test9057
+#@pytest.mark.test9057
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9057_PDP_Add_to_List(web_drivers):
     home_page = HomePage(*web_drivers)
