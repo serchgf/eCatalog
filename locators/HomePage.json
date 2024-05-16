@@ -28,7 +28,7 @@
     },
     "add_vehicle_btn": {
       "by": "XPATH",
-      "value": "//span[contains(@class,'vehicle-selected notranslate')]"
+      "value": "//div[@class='search-vehicle-button ng-star-inserted'][1]"
     },
     "vehicle_country_checkbox_icons": {
       "by": "XPATH",
@@ -641,7 +641,7 @@
     },
     "product_info_report_label": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Product info report')]"
+      "value": "//span[contains(text(),'Product info report') or contains(text(),'Reportar error')]"
     },
     "input_fullName_tbx": {
       "by": "XPATH",
@@ -665,7 +665,7 @@
     },
     "about_the_issue_span": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'About the issue')]"
+      "value": "//span[contains(text(),'About the issue') or contains(text(),'Acerca del error')]"
     },
     "textarea_description_error": {
       "by": "XPATH",
@@ -673,11 +673,11 @@
     },
     "send_report_btn_product_info_report": {
       "by": "XPATH",
-      "value": "//p-button[@ng-reflect-label='Send Report']"
+      "value": "//button[@type='submit']"
     },
     "report_created_confirmation": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Report created')]"
+      "value": "//span[contains(text(),'Report created') or contains(text(),'Reporte realizado')]"
     },
     "report_ticket_number": {
       "by": "XPATH",
@@ -691,9 +691,13 @@
       "by": "XPATH",
       "value": "//span[contains(text(),'ITEM')]"
     },
+    "modal_order_list_1_item": {
+      "by": "XPATH",
+      "value": "(//span[contains(text(),'1 PRODUCTO') or contains(text(),'ITEM')])"
+    },
     "modal_order_list_deleteAll_btn": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'DELETE ALL')]/parent::button"
+      "value": "//span[contains(text(),'DELETE ALL') or contains(text(),'Eliminar Todos')]/parent::button"
     },
     "modal_order_list_vehicle_information": {
       "by": "XPATH",
@@ -705,15 +709,15 @@
     },
     "modal_order_list_delete_btn": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Delete')]/parent::button"
+      "value": "//span[contains(text(),'Par')]/following::button[1]"
     },
     "modal_order_list_part_number": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Part #:')]/parent::div/a"
+      "value": "//span[contains(text(),'Part #:') or contains(text(),'Parte #:')]/parent::div/a"
     },
     "nonApplication_message": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Non application')]"
+      "value": "//span[contains(text(),'Sin aplicaci') or contains(text(),'Non application')][1]"
     },
     "default_img_product": {
       "by": "XPATH",
@@ -721,7 +725,7 @@
     },
     "resources_tab": {
       "by": "XPATH",
-      "value": "//a[@aria-controls='p-tabpanel-15']/span[@class='ng-star-inserted']"
+      "value": "//a[@aria-controls='p-tabpanel-7']"
     },
     "img_arrow_forward_button": {
       "by": "XPATH",
@@ -1294,6 +1298,22 @@
     "general_info_resources": {
       "by": "XPATH",
       "value": "//span[text()='General Information']"
+    },
+    "check_vehicle_fit_button": {
+      "by": "XPATH",
+      "value":  "//span[contains(text(),'ver compatibilidad') or contains(text(),'Check vehicle fit')]"
+    },
+    "input_nip_tbx": {
+      "by": "XPATH",
+      "value": "//input[@id='nip']"
+    },
+    "nip_verified": {
+      "by": "XPATH",
+      "value": "//span[text()=' check_circle ']"
+    },
+    "privacy_notice_check": {
+      "by": "XPATH",
+      "value": "//div[@class='p-checkbox-box']"
     }
   }
 }

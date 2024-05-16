@@ -1752,11 +1752,12 @@ class HomePage(BasePage):
         try:
             self.clic_javacript(send_a_report_btn)
         except ElementClickInterceptedException:
-            self.javascript_clic('Send a report')
+            self.javascript_clic('Send a report') or self.javascript_clic('Repórtalo aquí')
 
-    def fill_product_info_report(self, name: str, email: str, phone: str, store: str, issue_type: str,
+    def fill_product_info_report(self, nip: str, phone: str, store: str, issue_type: str,
                                  description_error_text: str):
         """
+        :param nip: str
         :param name: str
         :param email: str
         :param phone: str
@@ -1768,8 +1769,11 @@ class HomePage(BasePage):
         logging.info("Fill Product Info Report")
         time.sleep(1)
         self.element("product_info_report_label").wait_visible()
-        self.write_fullName(name)
-        self.write_email(email)
+        self.write_nip(nip)
+        self.element("input_nip_tbx").wait_clickable().send_keys(Keys.ENTER)
+        self.element("nip_verified").wait_visible()
+        # self.write_fullName(name)
+        # self.write_email(email)
         self.write_phoneNumber(phone)
         self.click_store_dropdown()
         self.select_a_store(store)
@@ -1778,6 +1782,11 @@ class HomePage(BasePage):
         self.click_issue_type_dropdown()
         self.select_a_issue_type(issue_type)
         self.write_describe_the_issue(description_error_text)
+        self.element("privacy_notice_check").wait_clickable().click()
+
+    def write_nip(self, nip: str):
+        logging.info(f"Write NIP: {nip}")
+        self.element("input_nip_tbx").wait_clickable().send_keys(nip)
 
     def write_fullName(self, fullname: str):
         logging.info(f"Write Full Name: {fullname}")
@@ -1840,8 +1849,8 @@ class HomePage(BasePage):
             "modal_order_list_subtitle").find_element().is_displayed(), f"Order list subtitle is not displayed"
         logging.info("Validate presence of Quantity of items in the list")
         assert self.element(
-            "modal_order_list_items_number").find_element().is_displayed(), f"Quantity of items is not displayed"
-        items_span = self.element("modal_order_list_items_number").find_element().text.lstrip().rstrip().split(" ")
+            "modal_order_list_1_item").find_element().is_displayed(), f"Quantity of items is not displayed"
+        items_span = self.element("modal_order_list_1_item").find_element().text.lstrip().rstrip().split(" ")
         items = items_span[0]
         logging.info(f"number of items: {items}")
         print(f"number of items: {items}")
@@ -1861,7 +1870,7 @@ class HomePage(BasePage):
     def validate_nonAplication_product_label(self):
         logging.info("Validate universal product message:'Non Application'")
         assert self.element(
-            "nonApplication_message").find_element().is_displayed(), "'Non Applicatioon' messages is not displayed as expected"
+            "nonApplication_message").find_element().is_displayed(), "'Non Application' messages is not displayed as expected"
         logging.info("universal product message:'Non Application' is displayed correctly")
 
     def get_number_of_nonApplication_product_label_in_PLP(self):
@@ -2382,3 +2391,12 @@ class HomePage(BasePage):
         print("Texto copiado:", texto_portapapeles)
         # logging.info(f"Text from Part Interchange input tbx: {texto}")
         return texto_portapapeles
+
+    def validate_compatibility_button_is_not_displayed(self):
+        logging.info("validate Compatibility button is not displayed")
+        try:
+            self.element("check_vehicle_fit_button").find_element().is_displayed()
+            assert False, f"Compatibility button should not be displayed"
+        except NoSuchElementException:
+            logging.info("OK, compatibility button is not displayed")
+            assert True
