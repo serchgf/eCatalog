@@ -263,7 +263,8 @@ def test_MXTEST_9052_OrderList_Modal_Contents_Display_Vehicle_Selected(web_drive
 
 # MXTEST-9051
 @pytest.mark.sprint2_regression
-@pytest.mark.homepages2
+#@pytest.mark.homepages2
+@pytest.mark.test9051
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -272,6 +273,7 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
     #home_page.open()
     time.sleep(4)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     #home_page.click_on_brands()
     #home_page.click_on_brand('Cartek')
     #home_page.wait_spinner_disappears()
@@ -279,7 +281,7 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
     products_name = home_page.get_products_names()
     home_page.click_on_first_add_to_list_available()
     title, product = home_page.validate_orderList_display()
-    assert title == "UNSPECIFIED VEHICLE", "The title of the panel should be 'UNSPECIFIED VEHICLE'"
+    assert title == "VEHÍCULO NO ESPECIFICADO", "The title of the panel should be 'UNSPECIFIED VEHICLE'"
     assert product in products_name, "The product wasn't added to the order list"
 
 
