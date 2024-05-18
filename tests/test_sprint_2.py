@@ -211,14 +211,16 @@ def test_MXTEST_9054_OrderList_Modal_Clear_List(web_drivers):
 
 # MXTEST-9053
 @pytest.mark.sprint2_regression
-@pytest.mark.homepages2
+#@pytest.mark.homepages2
+@pytest.mark.test9053
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9053_OrderList_Modal_Contents_Display_Non_Application_Product(web_drivers):
     home_page = HomePage(*web_drivers)
-    url = 'https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/body-glove-mx/mhg'
+    url = 'https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/body-glove/mhg'
     home_page.open_new_url(url)
     time.sleep(4)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     #home_page.click_on_brands()
     #home_page.click_on_brand('Body Glove - MX')
     #home_page.wait_spinner_disappears()
@@ -226,7 +228,7 @@ def test_MXTEST_9053_OrderList_Modal_Contents_Display_Non_Application_Product(we
     products_name = home_page.get_products_names()
     home_page.click_on_first_add_to_list_available()
     title, product = home_page.validate_orderList_display()
-    assert title == "NON VEHICLE SPECIFIC", "The title of the panel should be 'NON VEHICLE SPECIFIC'"
+    assert title == "SIN VEHÍCULO ESPECÍFICO", "The title of the panel should be 'NON VEHICLE SPECIFIC'"
     assert product in products_name, "The product wasn't added to the order list"
 
 # MXTEST-9052
