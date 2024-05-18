@@ -325,6 +325,7 @@ def test_MXTEST_9030_PLP_Product_images_Selected_Brand(web_drivers):
     home_page.open()
     time.sleep(4)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.click_on_brands()
     home_page.click_on_brand('Body Glove')
     home_page.wait_spinner_disappears()
