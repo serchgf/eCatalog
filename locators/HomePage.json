@@ -166,6 +166,10 @@
       "by": "XPATH",
       "value": "//div[@class='column-count']/a//span"
     },
+     "subcategory_list_nm": {
+      "by": "XPATH",
+      "value": "//div[@class='container-text-margin']//p"
+    },
     "subcategory_list_2": {
       "by": "XPATH",
       "value": "//div[@class='column-count']/a//span"
@@ -1249,7 +1253,7 @@
     },
     "vehicle_compatible_span": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'Compatible')]"
+      "value": "//span[contains(text(),'ver compatibilidad')]"
     },
     "delete_vehicle_button": {
       "by": "XPATH",

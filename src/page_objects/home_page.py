@@ -1163,7 +1163,7 @@ class HomePage(BasePage):
 
     def select_first_subcategory(self):
         logging.info(f"Select the first subcategory")
-        lista = self.element("element_buttons_grid_category_2").find_elements()
+        lista = self.element("subcategory_list_nm").find_elements()
         element_selected = lista[0].text
         logging.info(f"select first element of the list: {element_selected}")
         print(element_selected)
@@ -1236,7 +1236,7 @@ class HomePage(BasePage):
         logging.info("Validate product list page")
         products_number = self.get_search_results_number()
         assert self.element(
-            "subcategory_title").find_element().text.lower() == subcategory_selected.lower(), "The subcategory is not match"
+            "subcategory_title").find_element().text.lower() == subcategory_selected.lower(), f"The subcategory is not match{subcategory_selected}"
         print(products_number)
         print(subcategory_selected)
         return products_number

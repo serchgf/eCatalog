@@ -361,13 +361,15 @@ def test_MXTEST_9030_PLP_Product_images_Selected_Brand(web_drivers):
 
 # MXTEST-9024
 @pytest.mark.sprint2_regression
-@pytest.mark.homepages2
+#@pytest.mark.homepages2
+@pytest.mark.test9024
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9024_PLP_Product_images_Selected_Category(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open()
     time.sleep(4)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.click_on_categories_button()
     category_list = home_page.get_general_categories_list()
     if len(category_list) < 1:
