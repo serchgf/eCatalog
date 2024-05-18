@@ -425,6 +425,7 @@ def test_MXTEST_9027_PLP_Generic_images_from_Selected_Brand(web_drivers):
     # step_1_2 Enter to the URL.
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     #step_3_Click on any Brand logo.
     home_page.click_on_first_product()
     #step_4_Check if the product has a default generic image no matter what.

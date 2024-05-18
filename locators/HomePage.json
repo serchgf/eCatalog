@@ -541,7 +541,7 @@
     },
     "img_of_product": {
       "by": "XPATH",
-      "value": "//img[@class='p-1']"
+      "value": "//div[@class='plp-image-wrapper']/img"
     },
     "backward_button_latest": {
       "by": "XPATH",
