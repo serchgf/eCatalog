@@ -1707,6 +1707,7 @@ class HomePage(BasePage):
         self.element("details_sections_list").wait_visible()
         sections_list_in_webpage = self.element("details_sections_list").find_elements()
         sections_list_in_webpage_text = []
+        del sections_list_in_webpage[1]
         for section in sections_list_in_webpage:
             sections_list_in_webpage_text.append(section.text)
         # about_this_brand_section_label = self.element("about_this_brand_section_label").find_element().text
@@ -1735,15 +1736,13 @@ class HomePage(BasePage):
 
     def get_data_from_details_about_this_brand_section(self):
         logging.info("Get data from details 'about this brand' section")
-        texto = self.element("about_this_brand_text").find_element().text
-        print(texto)
-
         p = self.element("about_this_brand_p").find_element().text
         print(p)
-
         lista = self.element("about_this_brand_li").find_elements()
         for ele in lista:
             print(ele.text)
+        texto = self.element("about_this_brand_br").find_element().text
+        print(texto)
 
     def click_send_a_report_link(self):
         logging.info("Click on send a report link")

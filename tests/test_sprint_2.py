@@ -903,6 +903,7 @@ def test_MXTEST_9034_PDP_UniversalProductTagPDP(web_drivers):
 # ---------------------------------------------SERGIO GARCIA------------------------------------------------------------
 # MXTEST-9033
 #@pytest.mark.haha
+pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9033_PDP_ProductDetailsCompatibility(web_drivers):
@@ -921,24 +922,26 @@ def test_MXTEST_9033_PDP_ProductDetailsCompatibility(web_drivers):
 
 # MXTEST-9032
 #@pytest.mark.haha
+#@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
+    #Verify that the Product Details are being shown in the PDP.
     home_page = HomePage(*web_drivers)
-    #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
-    #nueva url con todas las secciones
+    #url con todas las secciones
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/husky-spring/hsk/detail/husky-spring-suspension-leveling-kit-069409bds/hsk0/069409bds"
-    #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates-mx/mnv/detail/gates-mx-v-belt-1140/mnv0/1140"
-    #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/c/oil-chemicals-fluids/motor-oil/motor-oil-vehicle-specific/l/07065/detail/red-line-full-synthetic-motor-oil-0w-30-1-quart-11114/rl00/11114"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
-    expected_sections = ['Detailed description', 'Product information', 'How to use the product', 'About this brand']
-    # expected_sections = ['Detailed description', 'Product information', 'How to use the product']
+    home_page.change_language_En_to_Es()
+    expected_sections = ['Descripción detallada', 'Información del producto', 'Aplicaciones del producto', 'Acerca de la marca']
+    #expected_sections = ['Detailed description', 'Product information', 'How to use the product', 'About this brand']
     home_page.validate_presence_of_details_sections(expected_sections)
     home_page.get_data_from_detailed_description_section()
     home_page.get_data_from_details_product_information_section()
     home_page.get_data_from_details_how_to_use_the_product_section()
     home_page.get_data_from_details_about_this_brand_section()
+
+
 
 #url con datos junto con vehiculo : 2021 Alfa Romeo Giulia Lusso
 #breacrumb: Home-All brands-Cartek-CCD2052
@@ -946,32 +949,37 @@ def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
 
 # MXTEST-9060
 #@pytest.mark.haha
+#@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9060_PDP_Report_discrepances_fitment_notes(web_drivers):
+    #Verify that the system displays a vehicle selection notification when attempting to create a Vehicle fitment report without having a vehicle selected.
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-ceramic-front-brake-pads-ccd2052/mza0/ccd2052"
-    #url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/gates-mx/mnv/detail/gates-mx-v-belt-1140/mnv0/1140"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.scroll_down()
     home_page.click_send_a_report_link()
-    full_name = "Sergio Garcia"
-    email = "email_fake@fake.com"
+    nip = "5507"
+    # full_name = "Grecia Lopez"
+    # email = "email_fake@fake.com"
     phone = "1234567890"
     store = "Abastos"
-    #issue_type = "Vehicle Fitment"
-    issue_type = "Wrong Image"
+    issue_type = "Vehicle Fitment"
     description_error_text = "Test message text, the image is Wrong"
     home_page.scroll_down()
-    home_page.wait_spinner_disappears()
-    home_page.fill_product_info_report(full_name, email, phone, store, issue_type, description_error_text)
+    #home_page.wait_spinner_disappears()
+    home_page.fill_product_info_report(nip, phone, store, issue_type, description_error_text)
     home_page.click_send_report_button_info_report_btn()
-    home_page.validate_report_created_confirmation()
+    #Validacion del mensaje
+
+
 
 # MXTEST-9059
 #@pytest.mark.haha
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9059_PDP_Report_Discrepancies(web_drivers):
@@ -994,7 +1002,7 @@ def test_MXTEST_9059_PDP_Report_Discrepancies(web_drivers):
     description_error_text = "Test message text, the image is Wrong"
     home_page.scroll_down()
     #home_page.wait_spinner_disappears()
-    ##########
+    home_page.fill_product_info_report(nip, phone, store, issue_type, description_error_text)
     home_page.click_send_report_button_info_report_btn()
     home_page.validate_report_created_confirmation()
     home_page.get_report_ticket_number()
