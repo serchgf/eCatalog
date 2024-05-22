@@ -605,23 +605,23 @@
     },
     "details_sections_list": {
       "by": "XPATH",
-      "value": "//div[@role='tabpanel']//span[contains(@class,' tabs-section-title')]"
+      "value": "//p-tabpanel[@class='p-element pdp-tab-panel']//div//span[1]"
     },
     "about_this_brand_section_label": {
       "by": "XPATH",
       "value": "//span[contains(text(),'About this brand')]"
     },
-    "about_this_brand_text": {
+    "about_this_brand_br": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'About this brand')]/parent::div/span[2]"
+      "value": "//span/br"
     },
     "about_this_brand_p": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'About this brand')]/parent::div/span[2]/p"
+      "value": "//span[@class='selected-vehicle-text ng-star-inserted']//following::span[2]//p"
     },
     "about_this_brand_li": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'About this brand')]/parent::div/span[2]//li"
+      "value": "//span[@class='selected-vehicle-text ng-star-inserted']//following::span[2]//li"
     },
     "detailed_description_product_name": {
       "by": "XPATH",
@@ -629,7 +629,7 @@
     },
     "detailed_description_product_list": {
       "by": "XPATH",
-      "value": "//div[@class='ng-star-inserted']//li"
+      "value": "//div[@class='ng-star-inserted']//span"
     },
     "product_information_section_list": {
       "by": "XPATH",
@@ -641,7 +641,7 @@
     },
     "how_to_use_the_product_description_list": {
       "by": "XPATH",
-      "value": "//div[@id='applications']/div//li"
+      "value": "//div[@id='applications']//span[2]"
     },
     "product_info_report_label": {
       "by": "XPATH",
