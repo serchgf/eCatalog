@@ -372,7 +372,7 @@
     },
     "compatibility_tab": {
       "by": "XPATH",
-      "value": "//a[@role='tab']/span[contains(text(),'Compatibility')]"
+      "value": "//span[contains(text(),'extension')]//following::span[1]"
     },
     "compatibility_list_span": {
       "by": "XPATH",
@@ -869,7 +869,7 @@
     },
     "fitment_notes": {
       "by": "XPATH",
-      "value": "//a[@fragment='applications']"
+      "value": "//ul[@class='compatible-vehicle-footnote ng-star-inserted']"
     },
     "gates_brand": {
       "by": "XPATH",
@@ -1318,6 +1318,10 @@
     "privacy_notice_check": {
       "by": "XPATH",
       "value": "//div[@class='p-checkbox-box']"
+    },
+    "footnote_ash": {
+      "by": "XPATH",
+      "value": "//span[text()=' workspaces ']"
     }
   }
 }

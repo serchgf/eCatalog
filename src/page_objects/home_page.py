@@ -1980,7 +1980,7 @@ class HomePage(BasePage):
 
     def validate_hidden_video_resource(self):
         logging.info("Validate hidden video resource")
-        print("Validate ihidden video resource")
+        print("Validate hidden video resource")
 
         try:
             self.element("video_resources_span").wait_visible()
@@ -2399,3 +2399,12 @@ class HomePage(BasePage):
         except NoSuchElementException:
             logging.info("OK, compatibility button is not displayed")
             assert True
+
+    def validate_element_is_not_visible(self,element):
+        logging.info("Validate element is not visible")
+        print("Validate element is not visible")
+        try:
+            self.element(element).wait_visible()
+        except:
+            print(f"{element} does not visible as expected")
+            return True

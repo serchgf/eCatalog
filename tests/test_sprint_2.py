@@ -287,33 +287,44 @@ def test_MXTEST_9051_OrderList_Modal_Contents_Display(web_drivers):
     assert title == "VEHÍCULO NO ESPECIFICADO", "The title of the panel should be 'UNSPECIFIED VEHICLE'"
     assert product in products_name, "The product wasn't added to the order list"
 
-
-# MXTEST-9076
 # MXTEST-9038
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.homepages2
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9038_Vehicle_Fitment_notes_PLP(web_drivers):
+    #"Validate that the fitment notes can be displayed correctly ONLY when you have a vehicle selected."
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    time.sleep(4)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    search_criteria = "C12475485"
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    home_page.validate_element_is_not_visible("footnote_ash")
+    #----------------------------------------
+    #Seleccion de vehículo
     home_page.click_on_Picker_vehicle_btn()
-    home_page.select_mex_country()
-    #home_page.write_a_vehicle_type("Automotive Light Duty")
-    home_page.write_a_year("2020")
-    home_page.write_a_make("Chevrolet")
-    home_page.write_a_model("Aveo")
-    home_page.write_a_submodel("LT")
+    year = "2002"
+    make = "Chevrolet"
+    model = "Avalanche 1500"
+    submodel = "Base"
+    home_page.write_a_vehicle_type("Uso Liviano Automotriz")
+    home_page.write_a_year(year)
+    home_page.write_a_make(make)
+    home_page.write_a_model(model)
+    home_page.write_a_submodel(submodel)
     home_page.click_on_engine_and_select()
     home_page.click_on_add_vehicle_submit_btn()
-    home_page.click_on_brands()
-    home_page.click_on_brand('Cartek')
+    #-----------------------------------------
+    home_page.element("footnote_ash").wait_visible()
+    product_list = home_page.get_link_product_list(0)
+    home_page.select_random_element_of_list(product_list)
     home_page.wait_spinner_disappears()
     fit_notes = home_page.get_plp_fit_notes()
     assert len(fit_notes) > 0, "The products shown in page has not fitment notes"
-
-
 
 # MXTEST-9030
 @pytest.mark.sprint2_regression
@@ -778,7 +789,6 @@ def test_MXTEST_9078_Analytics_Empty_Brands_Search_with_vehicle_selected(web_dri
 
 
 # MXTEST-9077
-# *********************************YA QUEDO*********************************
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=2)
@@ -830,7 +840,6 @@ def test_MXTEST_9069_Analytics_Empty_Category_Search_without_vehicle(web_drivers
 
 
 # MXTEST-9068
-# *********************************YA QUEDO*********************************
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=2)
@@ -860,8 +869,6 @@ def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):
 
 
 # MXTEST-9067
-
-# *********************************YA QUEDO*********************************
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=2)
@@ -882,9 +889,9 @@ def test_MXTEST_9067_Analytics_No_Results_Free_Text_Search_without_vehicle(web_d
 
 
 # MXTEST-9034
-# *********************************YA QUEDO*********************************
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9034_PDP_UniversalProductTagPDP(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -903,22 +910,21 @@ def test_MXTEST_9034_PDP_UniversalProductTagPDP(web_drivers):
 # ---------------------------------------------SERGIO GARCIA------------------------------------------------------------
 # MXTEST-9033
 #@pytest.mark.haha
-pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9033_PDP_ProductDetailsCompatibility(web_drivers):
+    #Verify that the Vehicle Compatibility is being shown when clicking the Compatibility tab in the PDP.
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/cartek/mih/detail/cartek-brake-master-cylinder-new-05019401aa/mkg0/05019401aa"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
-    home_page.press_PageDown_key()
-    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
     home_page.click_compatibility_tab()
     home_page.press_PageDown_key()
-    home_page.wait_until_page_load_complete()
-    #compatibility_list = home_page.get_compatibility_list()
+    home_page.wait_spinner_disappears()
     home_page.show_compatibility_vehicle_list_tab()
-    # todo Verify the information given in COMPATIBILITY tab in the database using the following query: <QUERY>.
+    #Verify the information given in COMPATIBILITY tab in the database using the following query: <QUERY>.
 
 # MXTEST-9032
 #@pytest.mark.haha
