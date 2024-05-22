@@ -781,7 +781,7 @@
     },
     "chip_elements": {
       "by": "XPATH",
-      "value": "//div[@class='ng-star-inserted']//p-chip"
+      "value": "//div[contains(@class,'ng-star-inserted')]//p-chip//span"
     },
     "cartek_brand": {
       "by": "XPATH",

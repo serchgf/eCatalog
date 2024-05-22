@@ -27,17 +27,22 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     home_page.click_on_Picker_vehicle_btn()
-    home_page.click_on_year_dropdown(1)
-    home_page.click_on_make_and_select(1)
-    home_page.click_on_model_and_select(1)
-    home_page.click_on_submodel_and_select()
+    #home_page.click_on_year_dropdown(1)
+    #home_page.click_on_make_and_select(1)
+    #home_page.click_on_model_and_select(1)
+    #home_page.click_on_submodel_and_select()
+    vehicle = "Uso Liviano Automotriz"
+    home_page.write_a_vehicle_type(vehicle)
+    home_page.write_a_year("2023")
+    home_page.write_a_make("Alfa Romeo")
+    home_page.write_a_model("Giulia")
     home_page.click_on_engine_and_select()
     home_page.take_screenshot("'USA'-'MEX'-'CAN' selected")
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_Picker_vehicle_btn()
     span_country = home_page.get_country_chips()
     logging.info(span_country)
-    assert "MEX" or "CAN" or "USA" in span_country, f"MEX, USA or CAN should be in: {span_country} message"
+    assert "MEX" and "CAN" and "USA" in span_country, f"MEX, USA and CAN should be in: {span_country} message"
 
 # MXTEST-9074
 @pytest.mark.sprint2_regression
