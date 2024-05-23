@@ -2408,3 +2408,31 @@ class HomePage(BasePage):
         except:
             print(f"{element} does not visible as expected")
             return True
+    def click_last_searches_expand_first_btn(self):
+        logging.info("Click last searches expand button")
+        # self.element("last_searches_subtitle_span").wait_visible()
+        print("click las searches expand button")
+        self.element("last_searches_expand_1_btn").wait_clickable().click()
+
+    def click_last_searches_expand_second_btn(self):
+        logging.info("Click last searches expand button")
+        # self.element("last_searches_subtitle_span").wait_visible()
+        print("click las searches expand button")
+        self.element("last_searches_expand_2_btn").wait_clickable().click()
+
+    def validate_presence_of_last_searches_vehicle(self):
+        logging.info("validate presence of two vehicles with last searches(")
+        assert self.element(
+            "default_img_product").find_element().is_displayed(), f"x should be displayed"
+
+        assert self.element(
+            "default_img_product").find_element().is_displayed(), f"x should be displayed"
+
+    def validate_last_searches_two_vehicles(self, expected_searches: list):
+        logging.info("Validate presence of last searches with two vehicles")
+        searches_list_in_webpage = self.element("last_searches_vehicle").find_elements()
+        searches_list_in_webpage_text = []
+        for search in searches_list_in_webpage:
+            searches_list_in_webpage_text.append(search.text)
+            print(searches_list_in_webpage_text)
+        assert searches_list_in_webpage_text == expected_searches, f"sections in webpage: {searches_list_in_webpage_text} should be:: {expected_searches}"

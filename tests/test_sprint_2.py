@@ -451,44 +451,42 @@ def test_MXTEST_9027_PLP_Generic_images_from_Selected_Brand(web_drivers):
     home_page.validate_presence_of_default_image_src()
 
 # MXTEST-9025
-# YA QUEDO
 @pytest.mark.luisao
 #@pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.test9025
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9025_Select_entry_records_history(web_drivers):
-    home_page = HomePage(*web_drivers)
+    #"Validate that when selecting any search history record the system navigates to said result"
     #step_1 Enter to the URL.
-    home_page.open()
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    #step_2-11 add vehicle
-    home_page.click_on_Picker_vehicle_btn()
-    home_page.click_on_vehicle_type_and_select(2)
-    year = home_page.click_on_year_and_select()
-    make = home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.change_language_En_to_Es()
+    #step_2-11 add vehicle --------------------
+    home_page.select_vehicle_specific()
+    #------------------------------------------
     #step_12 Select "SEARCH HISTORY" button
     home_page.click_on_search_history()
-    home_page.press_esc_key()
+    home_page.element("search_history_title").wait_visible()
+    #home_page.press_esc_key()
     #step_13 select a free text search entry
     home_page.search_specific_product('oil')
     home_page.press_enter_key()
     #step_14 Select "SEARCH HISTORY" button
     home_page.click_on_search_history()
-    home_page.click_on_last_searches()
+    home_page.click_last_searches_expand_btn()
+    home_page.element("last_searches_vehicle").wait_clickable().click()
+    home_page.wait_spinner_disappears()
     home_page.validate_presence_of_oil_product()
 
-
-
 # MXTEST-9019
-# YA JALO
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
+    #Validate that the system saves searches made by text, with a selected vehicle
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
@@ -496,43 +494,38 @@ def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
     #-----------------------------------
     search_criteria1 = 'detallado'
     search_criteria2 = 'aceite'
+    search_criteria3 = 'baterias'
     #time.sleep(2)
-    home_page.click_on_Picker_vehicle_btn()
-    home_page.click_on_vehicle_type_and_select()
-    year = home_page.click_on_year_and_select()
-    make = home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.select_vehicle_specific()
+    #-------------------------------------------
     home_page.click_on_search_history()
-    home_page.press_esc_key()
+    home_page.close_search_history_modal()
+    #----------------------------------------------
     home_page.search_specific_product(search_criteria1)
     home_page.press_enter_key()
+    home_page.element("detallado_title").wait_visible()
+    home_page.wait_spinner_disappears()
     home_page.clean_search()
-    home_page.click_on_search_history()
-    home_page.click_on_last_searches()
-    home_page.press_esc_key()
+    home_page.search_specific_product(search_criteria2)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    home_page.clean_search()
+
+    #------------------------------------
     # ADD ANOTHER VEHICLE
     home_page.click_on_Picker_vehicle_btn()
     home_page.click_on_add_new_vehicle_btn()
-    home_page.click_on_vehicle_type_and_select(3)
-    year = home_page.click_on_year_and_select(1)
-    make = home_page.click_on_make_and_select(1)
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
-    home_page.click_on_search_history()
-    home_page.press_esc_key()
-    home_page.search_specific_product(search_criteria2)
+
+    #------------------------------------
+    home_page.search_specific_product(search_criteria3)
     home_page.press_enter_key()
-    home_page.clean_search()
+    home_page.wait_spinner_disappears()
+    #home_page.clean_search()
     home_page.click_on_search_history()
-    home_page.click_on_last_searches()
-    home_page.validate_presence_of_oil_product()
-
-
+    home_page.click_last_searches_expand_first_btn()
+    home_page.click_last_searches_expand_second_btn()
+    expected_searches = ['baterias', 'aceite', 'detallado']
+    home_page.validate_last_searches_two_vehicles(expected_searches)
 
 # MXTEST-9023
 @pytest.mark.luisao

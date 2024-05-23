@@ -533,7 +533,7 @@
     },
     "search_history_link": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'SEARCH HISTORY')]"
+      "value": "//button[@aria-labelledby='history-search-button-text']"
     },
     "search_history_last_searches": {
       "by": "XPATH",
@@ -1322,6 +1322,26 @@
     "footnote_ash": {
       "by": "XPATH",
       "value": "//span[text()=' workspaces ']"
+    },
+    "search_history_title": {
+      "by": "XPATH",
+      "value": "//section[@class='bg-white history-search-title-box rs-large ng-star-inserted']//h3"
+    },
+    "last_searches_vehicle": {
+      "by": "XPATH",
+      "value": "//button[@class='text-search']//span"
+    },
+    "last_searches_expand_1_btn": {
+      "by": "XPATH",
+      "value": "(//p-sidebar//div[@aria-hidden='false']//button//button)[1]"
+    },
+    "last_searches_expand_2_btn": {
+      "by": "XPATH",
+      "value": "(//p-sidebar//div[@aria-hidden='false']//button//button)[2]"
+    },
+    "detallado_title": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'DETALLADO')]"
     }
   }
 }
