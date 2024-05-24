@@ -540,8 +540,8 @@
       "value": "//button[@class='p-ripple p-element p-treetable-toggler p-link']"
     },
     "open_search": {
-      "by": "ID",
-      "value": "p-tabpanel-2-label"
+      "by": "XPATH",
+      "value": "//div[@role='complementary']//a[./span[contains(text(),'SQUEDA LIBRE')]]"
     },
     "img_of_product": {
       "by": "XPATH",
@@ -565,7 +565,7 @@
     },
     "searchbar_in_search_history": {
       "by": "XPATH",
-      "value": "//div[@id='p-tabpanel-0']//input[@placeholder='Search']"
+      "value": "//section[@class='bg-white history-search-title-box rs-large ng-star-inserted']//following::input[1]"
     },
     "Empty_Brand_Dupli_Color_MX": {
       "by": "XPATH",
@@ -1342,6 +1342,10 @@
     "detallado_title": {
       "by": "XPATH",
       "value": "//span[contains(text(),'DETALLADO')]"
+    },
+    "description_vehicle_last_searches": {
+      "by": "XPATH",
+      "value": "//div[@id='p-tabpanel-11']//span[@tooltipposition='top']"
     }
   }
 }

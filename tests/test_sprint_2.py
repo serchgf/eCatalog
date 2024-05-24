@@ -483,7 +483,7 @@ def test_MXTEST_9025_Select_entry_records_history(web_drivers):
 # MXTEST-9019
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
     #Validate that the system saves searches made by text, with a selected vehicle
@@ -510,13 +510,12 @@ def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
     home_page.clean_search()
-
     #------------------------------------
     # ADD ANOTHER VEHICLE
     home_page.click_on_Picker_vehicle_btn()
-    home_page.click_on_add_new_vehicle_btn()
-
-    #------------------------------------
+    time.sleep(5)
+    home_page.new_vehicle_specific()
+    #--------------------------------------
     home_page.search_specific_product(search_criteria3)
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
@@ -530,57 +529,66 @@ def test_MXTEST_9019_Search_History_Selected_Vehicle(web_drivers):
 # MXTEST-9023
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
-# *********************************YA QUEDO*********************************
 def test_MXTEST_9023_Search_in_search_history_finder(web_drivers):
+    #"Validate that a search can be performed within the search history record"
+    ## step_1 Enter to the URL.
+    search_criteria = "Aurora 850 Responder-R 8x8"
     home_page = HomePage(*web_drivers)
-    # step_1
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     # step_2_3
     home_page.search_specific_product('oil')
     # step_4
     home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
     home_page.clean_search()
     # step_5-14 Click on the "ADD VEHICLE"
-    home_page.click_on_Picker_vehicle_btn()
-    home_page.write_a_vehicle_type("Automotive Light Duty")
-    home_page.write_a_year("2024")
-    home_page.write_a_make("Acura")
-    home_page.write_a_model("Integra")
-    home_page.write_a_submodel("A-Spec")
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.select_vehicle_specific()
     # step_16
-    home_page.search_specific_product('Brakes')
+    home_page.search_specific_product('brakes')
     # step_17
     home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
     # step_18
     home_page.click_on_search_history()
-    # step_19-20 Enable the search bar within that modal.
-    home_page.search_into_search_history('integra')
+    # step_19-20 Enable the search bar within that model.
+    home_page.search_into_search_history(search_criteria)
     home_page.press_enter_key()
+    # VALIDACION VEHICLE MODEL
+    lista_vehicle_description = home_page.get_text_list_description_vehicles_last_searches()
+    for vehicle_description in lista_vehicle_description:
+        assert search_criteria.upper() in vehicle_description.upper(), f"The model: {search_criteria.upper()} no se encontro en {lista_vehicle_description.upper()}"
     # step_21 Delete search
     home_page.clean_searchbar_in_search_history()
     # step_22 Now enter the search performed in step 16
+    # home_page.element("last_searches_expand_btn").wait_clickable().click()
+    # home_page.search_into_search_history('brakes')
+    # home_page.press_enter_key()
+    #VALIDACION BRAKES
+    #EN LA BUSQUEDA NO ENCUENTRA BRAKES SOLO EL VEHICULO, ASI QUEDO EL FUNCIONAMIENTO----------------------------------
+    # step_24
     home_page.search_into_search_history('oil')
-    home_page.press_enter_key()
-    # step_23 Delete search
-    home_page.clean_searchbar_in_search_history()
 
 
 # MXTEST-9021
-# *********************************YA QUEDO*********************************
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
-    home_page = HomePage(*web_drivers)
+    #"Validate that the system saves the searches carried out by text, WITHOUT a vehicle selected"
     # step_1
-    home_page.open()
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     search_criteria1 ='Battery'
-    search_criteria2 = 'Energizer - MX'
+    search_criteria2 = 'Energizer'
     # step_2
     home_page.click_on_search_history()
     # step_3
@@ -600,11 +608,10 @@ def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
     # step_10
     home_page.click_on_open_search()
 
-
-
 # MXTEST-9022
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     # STEP_1 ENTER TO URL AND OPEN PAGE
@@ -634,7 +641,7 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     # STEP_12 Select "SEARCH HISTORY" button
     home_page.click_on_search_history()
     # STEP_13_Then select the "FREE SEARCH" tab
-    home_page.click_on_open_search()
+    home_page.click_on_open_search() #--------------------------
     # STEP_14 Select the X displayed in the selected lane
     home_page.delete_element_from_open_search()
     #STEP_15 Select the "CLEAR HISTORY" button
@@ -657,15 +664,10 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     print(carousel_val)
     assert carousel_val is True, "Carousel is not displayed"
 
-
-
-
-
 # MXTEST-9020
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=2)
-# ************************* YA QUEDO ***********************************
 def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
     home_page = HomePage(*web_drivers)
     # step_1
@@ -715,58 +717,46 @@ def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
     assert " " != part_number, f" part number is not present in the page"
 
 # MXTEST-9079
-# *********************************YA QUEDO*********************************
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9079_Analytics_Empty_Category_Search_with_vehicle_selected(web_drivers):
-    home_page = HomePage(*web_drivers)
     # step_1 Enter to the URL.
-    home_page.open()
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    #time.sleep(3)
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     # Precondition "ADD VEHICLE"
-    home_page.click_on_Picker_vehicle_btn()
-    home_page.write_a_vehicle_type("Automotive Light Duty")
-    home_page.write_a_year("2024")
-    home_page.write_a_make("Ford")
-    home_page.write_a_model("Mustang")
-    home_page.write_a_submodel("EcoBoost")
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
-    time.sleep(2)
+    home_page.select_vehicle_specific()
     # step_2 Click on "Categories" button
     home_page.click_on_categories_button()
     # step_3 Pick a Category and click on it.
-    home_page.javascript_clic("Accessories")
-    subcat_1_list_2 = home_page.get_product_list_2()
-    home_page.click_element_text_of_list(subcat_1_list_2, "Electronics - MX")
+    home_page.javascript_clic("Cesped y Jardin")
+    subcat_1_list_2 = home_page.get_subcategory_list()
+    home_page.click_element_text_of_list(subcat_1_list_2, "Cuchillas de Podadora de Cesped")
     # step_5 to doGo to the database and run the query with the boolean flag.
     # step_6 to do Validate the URL in the database.
     # step_7 to do Validate the word in the database.
     # step_8 to do Validate that the value is false in the other boolean/flags columns.
     # step_9 to do Verify that the information of vehicle is empty/null
 
-
 # MXTEST-9078
-# *********************************YA QUEDO*********************************
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9078_Analytics_Empty_Brands_Search_with_vehicle_selected(web_drivers):
-    home_page = HomePage(*web_drivers)
+    #ESTE TC YA NO APLICA.
     # step_1 Enter to the URL.
-    home_page.open()
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     # Precondition "ADD VEHICLE"
-    home_page.click_on_Picker_vehicle_btn()
-    home_page.write_a_vehicle_type("Automotive Light Duty")
-    home_page.write_a_year("2024")
-    home_page.write_a_make("Ford")
-    home_page.write_a_model("Mustang")
-    home_page.write_a_submodel("EcoBoost")
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.select_vehicle_specific()
     # step_2 Click on brands button
     home_page.click_on_brands()
     # step_3 click_on_"Show all brands" button
@@ -785,67 +775,71 @@ def test_MXTEST_9078_Analytics_Empty_Brands_Search_with_vehicle_selected(web_dri
     # step_8 to do Validate that the value is false in the other boolean/flags columns.
     # step_9 to do Verify that the information of vehicle is empty/null
 
-
 # MXTEST-9077
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9077_Analytics_No_Results_Free_Text_Search_with_vehicle_selected(web_drivers):
-    home_page = HomePage(*web_drivers)
+    #Verify that the system saves a log in the database for searches without results in the 'free search' module,
+    # ensuring that it saves the URL, the word, the boolean flag, and save the results for the vehicle data.
     # step_1 Enter to the URL.
-    home_page.open()
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     # Precondition "ADD VEHICLE"
-    home_page.click_on_Picker_vehicle_btn()
-    home_page.write_a_vehicle_type("Automotive Light Duty")
-    home_page.write_a_year("2024")
-    home_page.write_a_make("Ford")
-    home_page.write_a_model("Mustang")
-    home_page.write_a_submodel("EcoBoost")
-    home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.select_vehicle_specific()
     # step_2_3_4 Click in the search bar field
     home_page.search_specific_product("qwerty1335")
     home_page.press_enter_key()
-
     # step_5 to do Go to the database and run the query with the boolean flag.
     # step_6 to do Validate the URL in the database.
     # step_7 to do Validate the word in the database.
     # step_8 to do Validate that the value is false in the other boolean/flags columns.
     # step_9 to do Verify that the information of vehicle is saved.
 
-
 # MXTEST-9069
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9069_Analytics_Empty_Category_Search_without_vehicle(web_drivers):
-    home_page = HomePage(*web_drivers)
+    #Verify that the system saves a log in the database for searches without results in the 'Categories' module,
+    #ensuring that it saves the URL, the word, the boolean flag, nd doesnt save results for the vehicle data.
     # step_1
-    home_page.open()
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     # step_2 click on brands button
     home_page.click_on_categories_button()
     # step_3 Pick a Category and click on it.
-    home_page.javascript_clic("Accessories")
-    subcat_1_list_2 = home_page.get_product_list_2()
-    home_page.click_element_text_of_list(subcat_1_list_2, "Electronics - MX")
+    home_page.javascript_clic("Cesped y Jardin")
+    subcat_1_list_2 = home_page.get_subcategory_list()
+    home_page.click_element_text_of_list(subcat_1_list_2, "Cuchillas de Podadora de Cesped")
     # step_5 to doGo to the database and run the query with the boolean flag.
     # step_6 to do Validate the URL in the database.
     # step_7 to do Validate the word in the database.
     # step_8 to do Validate that the value is false in the other boolean/flags columns.
     # step_9 to do Verify that the information of vehicle is empty/null
 
-
 # MXTEST-9068
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):
+    #ESTE TC YA NO APLICA.
+    #Verify that the system saves a log in the database for searches without results in the 'brands' module,
+    #ensuring that it saves the URL, the word, the boolean flag, nd doesnt save results for the vehicle data.
     home_page = HomePage(*web_drivers)
-    # step_1
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     # step_2 click on brands button
     home_page.click_on_brands()
     # step_3 click_on_"Show all brands" button
@@ -857,8 +851,6 @@ def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):
     """
     home_page.search_specific_product("Dupli-color - MX")
     home_page.press_enter_key()
-
-
     # step_5 to doGo to the database and run the query with the boolean flag.
     # step_6 to do Validate the URL in the database.
     # step_7 to do Validate the word in the database.
@@ -869,13 +861,17 @@ def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):
 # MXTEST-9067
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9067_Analytics_No_Results_Free_Text_Search_without_vehicle(web_drivers):
-    home_page = HomePage(*web_drivers)
+    #Verify that the system saves a log in the database for searches without results in the 'free search' module,
+    #ensuring that it saves the URL, the word, the boolean flag, and doesnt save results for the vehicle data.
     # step_1
-    home_page.open()
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    home_page.wait_until_page_load_complete()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     # step_2_3_4
     # home_page.search_wrong_product_name("☻☻☻")
     home_page.search_wrong_product_name("ae42sdñl")
@@ -885,13 +881,13 @@ def test_MXTEST_9067_Analytics_No_Results_Free_Text_Search_without_vehicle(web_d
     # step_8 Validate that the value is false in the other boolean/flags columns.
     # step_9 Verify that the information of vehicle is empty/null
 
-
 # MXTEST-9034
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
 #@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9034_PDP_UniversalProductTagPDP(web_drivers):
+    #Verify that the universal product tag is being shown in the PDP.
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/brands/accel/acc/detail/accel-ignition-condenser-111131/acc0/111131"
     home_page.open_new_url(url)
@@ -899,11 +895,6 @@ def test_MXTEST_9034_PDP_UniversalProductTagPDP(web_drivers):
     home_page.validate_nonAplication_product_label()
     # step_5
     # to do Verify the universal compatibility of the product using the following query: <QUERY>.
-
-# PDP ------------------------------------------------------------------------------------------------------------------
-# MXTEST-9034
-
-
 
 # ---------------------------------------------SERGIO GARCIA------------------------------------------------------------
 # MXTEST-9033

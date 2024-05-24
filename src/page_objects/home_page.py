@@ -2436,3 +2436,33 @@ class HomePage(BasePage):
             searches_list_in_webpage_text.append(search.text)
             print(searches_list_in_webpage_text)
         assert searches_list_in_webpage_text == expected_searches, f"sections in webpage: {searches_list_in_webpage_text} should be:: {expected_searches}"
+
+    def get_text_list_description_vehicles_last_searches(self):
+        logging.info(f"Get description text of vehicle last searches")
+        print(f"Get description text of vehicle last searches")
+        last_searches_list = self.element("description_vehicle_last_searches").find_elements()
+        last_searches_list_text = []
+        for last_search in last_searches_list:
+            last_searches_list_text.append(last_search.text)
+        return last_searches_list_text
+
+    def new_vehicle_specific(self):
+        self.element("add_new_vehicle_btn").wait_clickable().click()
+        time.sleep(0.5)
+        year = "1986"
+        make = "Acura"
+        model = "Integra"
+        submodel = "LS"
+        try:
+            self.write_a_vehicle_type("Uso Liviano Automotriz")
+        except:
+            self.write_a_vehicle_type("Uso Liviano Automotriz")
+        finally:
+            self.write_a_year(year)
+            self.write_a_make(make)
+            self.write_a_model(model)
+            self.write_a_submodel(submodel)
+            self.click_on_engine_and_select()
+            time.sleep(.5)
+            self.click_on_add_vehicle_submit_btn()
+            return year, make, model, submodel
