@@ -32,7 +32,7 @@
     },
     "vehicle_country_checkbox_icons": {
       "by": "XPATH",
-      "value": "//p-checkbox[@inputid='c.id']"
+      "value": "//p-checkbox[@inputid='country.id']"
     },
     "part_interchange_linktext": {
       "by": "XPATH",
@@ -212,11 +212,11 @@
     },
     "lasted_products_viewed_list": {
       "by": "XPATH",
-      "value": "//section[@class='carousel-product-card-image']//following::p[1]"
+      "value": "//section[@class='carousel-product-card-label']//p[1]"
     },
     "last_viewed_products_label": {
       "by": "XPATH",
-      "value": "//section[@class='home-products-section']//span[1]"
+      "value": "//span[contains(text(),'Viewed') or contains(text(),'vistos')]"
     },
     "spinner": {
       "by": "XPATH",
@@ -571,9 +571,9 @@
       "by": "XPATH",
       "value": "//span[contains(text(),'Dupli-Color')]"
     },
-    "button_remove_from_search_history": {
+    "button_remove_history": {
       "by": "XPATH",
-      "value": "//*[@id='p-tabpanel-2']//div[2]//i"
+      "value": "//div[@role='complementary']//i[text()='delete']//following::span[1]"
     },
     "search_history_criteria": {
       "by": "XPATH",
@@ -761,7 +761,7 @@
     },
     "clear_search_history_btn": {
       "by": "XPATH",
-      "value": "//button[contains(text(),'Yes, Remove All')]"
+      "value": "//button[text()='Yes, Remove All' or text()='Si, Eliminar todo']"
     },
     "oil_product_label": {
       "by": "XPATH",
@@ -769,15 +769,15 @@
     },
     "MEX_check": {
       "by": "XPATH",
-      "value": "//p-checkbox[@ng-reflect-value='2']"
+      "value": "//span[text()='MEX']//parent::div//child::div[1]"
     },
     "CAN_check": {
       "by": "XPATH",
-      "value": "//p-checkbox[@ng-reflect-value='1']"
+      "value": "//span[text()='CAN']//parent::div//child::div[1]"
     },
     "USA_check": {
       "by": "XPATH",
-      "value": "//p-checkbox[@ng-reflect-value='3']"
+      "value": "//span[text()='USA']//parent::div//child::div[1]"
     },
     "chip_elements": {
       "by": "XPATH",
@@ -1046,10 +1046,6 @@
     "esp_option": {
       "by": "XPATH",
       "value": "//div[contains(text(),'Espa')]"
-    },
-    "nip_verified": {
-      "by": "XPATH",
-      "value": "//span[contains(text(),'NIP verified')]"
     },
     "header_menu_section_span": {
       "by": "XPATH",
@@ -1323,10 +1319,6 @@
       "by": "XPATH",
       "value": "//span[text()=' workspaces ']"
     },
-    "search_history_title": {
-      "by": "XPATH",
-      "value": "//section[@class='bg-white history-search-title-box rs-large ng-star-inserted']//h3"
-    },
     "last_searches_vehicle": {
       "by": "XPATH",
       "value": "//button[@class='text-search']//span"
@@ -1346,6 +1338,10 @@
     "description_vehicle_last_searches": {
       "by": "XPATH",
       "value": "//div[@id='p-tabpanel-11']//span[@tooltipposition='top']"
+    },
+    "history_empty": {
+      "by": "XPATH",
+      "value": "(//div[@role='complementary']//p[contains(text(),'vac') or contains(text(),'empty')])[1]"
     }
   }
 }

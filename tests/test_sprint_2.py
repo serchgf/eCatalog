@@ -19,24 +19,24 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 @pytest.mark.sprint2_regression
 #@pytest.mark.homepages2
 @pytest.mark.test9075
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_drivers):
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    time.sleep(4)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
+    # -----------------------------------
+    #Seleccion de vehiculo y pais
+    #Añadir datos del vehiculo
     home_page.click_on_Picker_vehicle_btn()
-    #home_page.click_on_year_dropdown(1)
-    #home_page.click_on_make_and_select(1)
-    #home_page.click_on_model_and_select(1)
-    #home_page.click_on_submodel_and_select()
-    vehicle = "Uso Liviano Automotriz"
-    home_page.write_a_vehicle_type(vehicle)
-    home_page.write_a_year("2023")
-    home_page.write_a_make("Alfa Romeo")
-    home_page.write_a_model("Giulia")
+    home_page.click_on_vehicle_type_and_select()
+    home_page.click_on_year_and_select()
+    home_page.click_on_make_and_select()
+    home_page.click_on_model_and_select()
+    home_page.click_on_submodel_and_select()
     home_page.click_on_engine_and_select()
+    #Tomar captura
     home_page.take_screenshot("'USA'-'MEX'-'CAN' selected")
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_Picker_vehicle_btn()
@@ -46,21 +46,28 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
 
 # MXTEST-9074
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 #@pytest.mark.homepages2
 @pytest.mark.test9074
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_drivers):
+    #"Validate that the user can choose a vehicle by type, make, model, year and engine type
+    #to filter the appropriate vehicles in the search by 2 countries."
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    time.sleep(4)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    #Seleccion de vehiculo y pais
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_usa_can_country()
-    home_page.click_on_year_and_select(1)
-    home_page.click_on_make_and_select(1)
-    home_page.click_on_model_and_select(1)
+    #Añadir datos del vehiculo
+    home_page.click_on_year_and_select()
+    home_page.click_on_make_and_select()
+    home_page.click_on_model_and_select()
     home_page.click_on_submodel_and_select()
     home_page.click_on_engine_and_select()
+    #Tomar captura
     home_page.take_screenshot("'USA'-'CAN' selected")
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_Picker_vehicle_btn()
@@ -71,20 +78,27 @@ def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_dr
 
 # MXTEST-9073
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.homepages2
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
+    #"Validate that the user can choose a vehicle by type, make, model, year and engine type
+    #to filter the appropriate vehicles in the search by SINGLE country."
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    time.sleep(4)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    #Seleccion de vehiculo y pais
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_mex_country()
-    home_page.click_on_year_and_select(1)
-    home_page.click_on_make_and_select(1)
-    home_page.click_on_model_and_select(1)
+    #Añadir datos del vehiculo
+    home_page.click_on_year_and_select()
+    home_page.click_on_make_and_select()
+    home_page.click_on_model_and_select()
     home_page.click_on_submodel_and_select()
     home_page.click_on_engine_and_select()
+    #Tomar captura
     home_page.take_screenshot("'MEX' selected")
     home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_Picker_vehicle_btn()
@@ -133,11 +147,6 @@ def test_MXTEST_9058_OrderList_Modal_Individual_Deletion(web_drivers):
     else:
         logging.error("Unknown error occurred during product deletion")
         assert False, "Unknown error occurred during product deletion"
-
-
-
-
-
 
 # MXTEST-9056
 @pytest.mark.sprint2_regression
@@ -614,10 +623,13 @@ def test_MXTEST_9021_Search_History_WITHOUT_vehicle(web_drivers):
 #@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
+    #"Validate that the user can delete one or all search history records."
     # STEP_1 ENTER TO URL AND OPEN PAGE
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     # STEP_2 SELECT "SEARCH HISTORY BUTTON"
     home_page.click_on_search_history()
     # STEP_3 Then close modal "Search history" and Select the "Search bar"
@@ -626,25 +638,28 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     home_page.search_specific_product('F-100A13')
     # STEP_5 ENTER
     home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
     # STEP_6 Clean the text entered in the search engine
     home_page.clean_search()
     # STEP_7 Enter the name of a brand for search
-    home_page.search_specific_product('Energizer - MX')
+    home_page.search_specific_product('Energizer')
     # STEP_8 ENTER
     home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
     # STEP_9 Clean the text entered in the search engine
     home_page.clean_search()
     # STEP_10 Enter a text for search
     home_page.search_specific_product('17738')
     # STEP_11 ENTER
     home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
     # STEP_12 Select "SEARCH HISTORY" button
     home_page.click_on_search_history()
     # STEP_13_Then select the "FREE SEARCH" tab
-    home_page.click_on_open_search() #--------------------------
+    home_page.click_on_open_search()
     # STEP_14 Select the X displayed in the selected lane
-    home_page.delete_element_from_open_search()
     #STEP_15 Select the "CLEAR HISTORY" button
+    home_page.delete_history_btn()
     # STEP_16 Select the "Yes, Remove All" button
     home_page.click_clear_search_history_btn()
     home_page.press_esc_key()
@@ -655,66 +670,61 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
     home_page.press_enter_key()
     # STEP_20 Select "SEARCH HISTORY" button
     home_page.click_on_search_history()
+    home_page.press_esc_key()
     # STEP_21 Teclear shiftkey + C
+    home_page.enable_keyboard_shortcuts()
     home_page.shortcut_new_client()
     # STEP_22 Select the "CONTINUE" button
     home_page.click_new_client_continue_btn()
-    home_page.click_on_logo_oreily_home()
-    carousel_val = home_page.validate_carousel_is_visible()
-    print(carousel_val)
-    assert carousel_val is True, "Carousel is not displayed"
+    home_page.click_on_search_history()
+    assert home_page.element("history_empty").wait_visible()
 
 # MXTEST-9020
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
-    home_page = HomePage(*web_drivers)
+    #Verify the user is able to view the product images in higher resolution on PDP screen
+    #when he/she clicks on the Latest viewed products in mainpage.
     # step_1
-    home_page.open()
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    # step_2
-    home_page.click_on_logo_oreily_home()
-    # step_3
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
+    # CICLO DE MIN 6 - MAX 8 ( Este es el numero maximo de ultimos productos vistos que aparecen en el carrucel )
     expected_product_selected_list = []
-    lasted_viewed_list = []
-    # CICLO DE 3 O 5 VECES
-    home_page.wait_until_page_load_complete()
-    logging.info(f"Click categorie button*****************")
-    home_page.click_on_categories_button()
-    home_page.javascript_clic("Oil, Chemicals & Fluids")
-    subcat_1_list_2 = home_page.get_product_list_2()
-    home_page.click_element_text_of_list(subcat_1_list_2, "Motor Oil")
-    subcat_2_list_2 = home_page.get_product_list_2()
-    home_page.click_element_text_of_list(subcat_2_list_2, "Motor Oil - Full Synthetic")
-    home_page.wait_search_results_label()
-    product_list = home_page.get_link_product_list(0)
-    expected_product_selected = home_page.select_random_element_of_list(product_list)
-    product_selected = home_page.clean_product_selected(expected_product_selected)
-    logging.info(f"Selected: {product_selected}")
-    expected_product_selected_list.append(product_selected)
-    time.sleep(2)
-    for i in range(6):
-        home_page.back_to_previous_page()
+    for i in range(7):
+        home_page.click_on_brands()
+        time.sleep(.5)
+        # CLIC SHOW ALL BRANDS LINK TEXT
+        home_page.click_on_show_all_brands()
+        home_page.wait_spinner_disappears()
+        # click on any brand
+        home_page.get_random_brand()
         product_list = home_page.get_link_product_list(0)
         expected_product_selected = home_page.select_random_element_of_list(product_list)
-        product_selected = home_page.clean_product_selected(expected_product_selected)
-        logging.info(f"Selected: {product_selected}")
-        expected_product_selected_list.append(product_selected)
-        time.sleep(1)
-
-    home_page.click_on_logo_oreily_home()
-    logging.info(f"Recent Products expected list:")
-    home_page.show_product_list(expected_product_selected_list)
+        home_page.element("no_part_copy_to_clipboard").wait_visible()
+        expected_product_selected_list.append(expected_product_selected)
+        home_page.click_on_logo_oreily_home()
+        home_page.clean_search()
+    # step_2
+    # En este paso ya no es necesario dar clic en el logo nuevamente en el script # home_page.click_on_logo_oreily_home()
+    # # step_3
     logging.info(f"GET actual lasted viewed products list")
-    lasted_product_viewed_list = home_page.get_lasted_viewed_products_list2()
-    time.sleep(2)
-    # to do HACER  EL CLICK SOBRE EL PRIMER PRODUCTO DE LATEST VIEWED PRODUCTS
+    lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
+    assert expected_product_selected in lasted_product_viewed_list, f"No se encontraron los resultados {expected_product_selected} en {lasted_product_viewed_list}"
+    #CLICK ANTERIOR Y SIGUIENTE EN LATEST VIEWED PRODUCTS
     home_page.clicks_carousel_last_viewed_products()
-    home_page.clic_javacript(lasted_product_viewed_list[4])
-    part_number = home_page.get_part_number()
-    print(part_number)
-    assert " " != part_number, f" part number is not present in the page"
+    #HACER  EL CLICK SOBRE EL CUALQUIER PRODUCTO DE LATEST VIEWED PRODUCTS
+    lasted_products_elements_list = home_page.get_lasted_viewed_products_list2()
+    home_page.select_random_element_of_list(lasted_products_elements_list)
+    home_page.wait_spinner_disappears()
+    #Validacion
+    #The product image should be displayed in higher resolution on the PDP screen
+    #La resolucion de la imagen no se puede validar en el script
+    assert home_page.element("main_product_img").wait_visible()
 
 # MXTEST-9079
 @pytest.mark.luisao
@@ -744,7 +754,7 @@ def test_MXTEST_9079_Analytics_Empty_Category_Search_with_vehicle_selected(web_d
 
 # MXTEST-9078
 @pytest.mark.luisao
-@pytest.mark.sprint2_regression
+#@pytest.mark.sprint2_regression
 #@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9078_Analytics_Empty_Brands_Search_with_vehicle_selected(web_drivers):
@@ -828,7 +838,7 @@ def test_MXTEST_9069_Analytics_Empty_Category_Search_without_vehicle(web_drivers
 
 # MXTEST-9068
 @pytest.mark.luisao
-@pytest.mark.sprint2_regression
+#@pytest.mark.sprint2_regression
 #@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9068_Analytics_Empty_Brands_Search_without_vehicle(web_drivers):

@@ -847,11 +847,8 @@ class HomePage(BasePage):
         self.element('last_viewed_products_label').wait_visible()
         # self.scroll_to_element(self.element('last_viewed_products_label'))
         self.scroll_down()
-        lista = []
-        # self.element("last_viewed_products_label").scroll_down_to_element()
-        lista_0 = self.element("lasted_products_viewed_list").find_elements()
-        return lista_0
-
+        lista = self.element("lasted_products_viewed_list").find_elements()
+        return lista
     def get_last_research_product_list(self):
         """
         regresa la lista obtenida del search history
@@ -1412,7 +1409,6 @@ class HomePage(BasePage):
         self.accept_alert_message()
 
     def click_on_open_search(self):
-        time.sleep(1)
         logging.info(f"Click on search history btn")
         print(f"Click on search history btn")
         self.element("open_search").wait_clickable().click()
@@ -1426,33 +1422,15 @@ class HomePage(BasePage):
     def clicks_carousel_last_viewed_products(self):
         logging.info(f"show_last_viewed_products_label")
         print(f"show_last_viewed_products_label")
-        self.element("carousel").wait_clickable().click()
-        time.sleep(2)
         self.press_page_down()
-        time.sleep(2)
+        self.element("last_viewed_products_label").wait_visible()
         self.element("backward_button_latest").wait_clickable().click()
-        self.element("backward_button_latest").wait_clickable().click()
-        self.element("backward_button_latest").wait_clickable().click()
-        self.element("backward_button_latest").wait_clickable().click()
-        time.sleep(4)
         self.element("forward_button_latest").wait_clickable().click()
-        self.element("forward_button_latest").wait_clickable().click()
-        self.element("forward_button_latest").wait_clickable().click()
-        self.element("forward_button_latest").wait_clickable().click()
-        time.sleep(3)
 
-    def delete_element_from_open_search(self):
-        logging.info(f"delete element from open search")
-        print(f"delete element from open search")
-        self.element("search_history_criteria").wait_visible()
-        # lista = self.element("search_history_criteria").find_elements()
-        elemento = self.element("search_history_criteria").wait_clickable()
-        # elemento = lista[2]
-
-        self.move_to_element(elemento)
-        self.element('button_remove_from_search_history').wait_clickable().click()
-
-        # self.javascript_clic("remove_from_search_history")
+    def delete_history_btn(self):
+        logging.info(f"delete history")
+        print(f"delete history")
+        self.element('button_remove_history').wait_clickable().click()
         time.sleep(2)
 
     def search_into_search_history(self, value: str):
@@ -1466,10 +1444,8 @@ class HomePage(BasePage):
         self.element("searchbar_in_search_history").clean_element()
 
     def click_clear_search_history_btn(self):
-        logging.info(f"click_new_clear_search_history_btn")
-        print(f"click_new_clear_search_history_btn")
-        self.element("clear_history_btn").wait_clickable().click()
-        self.element("clear_search_history_label").wait_visible()
+        logging.info(f"clear search history")
+        print(f"clear search history")
         self.element("clear_search_history_btn").wait_clickable().click()
 
     def validate_carousel_is_visible(self):
