@@ -19,7 +19,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 @pytest.mark.sprint2_regression
 #@pytest.mark.homepages2
 @pytest.mark.test9075
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_drivers):
     home_page = HomePage(*web_drivers)
@@ -30,19 +30,24 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
     #Seleccion de vehiculo y pais
     #Añadir datos del vehiculo
     home_page.click_on_Picker_vehicle_btn()
-    home_page.click_on_vehicle_type_and_select()
-    home_page.click_on_year_and_select()
-    home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
-    #Tomar captura
-    home_page.take_screenshot("'USA'-'MEX'-'CAN' selected")
-    home_page.click_on_add_vehicle_submit_btn()
-    home_page.click_on_Picker_vehicle_btn()
-    span_country = home_page.get_country_chips()
-    logging.info(span_country)
-    assert "MEX" and "CAN" and "USA" in span_country, f"MEX, USA and CAN should be in: {span_country} message"
+    try:
+        home_page.click_on_vehicle_type_and_select()
+        home_page.click_on_year_and_select()
+    except:
+        home_page.click_on_vehicle_type_and_select()
+        home_page.click_on_year_and_select()
+    finally:
+        home_page.click_on_make_and_select()
+        home_page.click_on_model_and_select()
+        home_page.click_on_submodel_and_select()
+        home_page.click_on_engine_and_select()
+        #Tomar captura
+        home_page.take_screenshot("'USA'-'MEX'-'CAN' selected")
+        home_page.click_on_add_vehicle_submit_btn()
+        home_page.click_on_Picker_vehicle_btn()
+        span_country = home_page.get_country_chips()
+        logging.info(span_country)
+        assert "MEX" and "CAN" and "USA" in span_country, f"MEX, USA and CAN should be in: {span_country} message"
 
 # MXTEST-9074
 @pytest.mark.sprint2_regression
