@@ -19,7 +19,7 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 @pytest.mark.sprint2_regression
 #@pytest.mark.homepages2
 @pytest.mark.test9075
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_drivers):
     home_page = HomePage(*web_drivers)

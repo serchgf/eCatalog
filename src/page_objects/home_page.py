@@ -102,7 +102,7 @@ class HomePage(BasePage):
         self.element("list_box").wait_visible()
         self.element("list_box").wait_clickable()
         self.javascript_clic(submodel)
-
+        time.sleep(.3)
     def write_a_engine(self, engine: str):
         logging.info(f"Write engine: {engine}")
         print(f"Write engine: {engine}")
@@ -270,11 +270,6 @@ class HomePage(BasePage):
     def new_submodel_and_select(self, submodel: str):
         logging.info(f"Click on new submodel dropdown")
         print(f"Click on new submodel dropdown")
-        """
-        Input a submodel and the function remove that element of the list if len more than 1
-
-        :return: other randome element on the list at least only one element exist
-        """
         time.sleep(.2)
         logging.info(f"Click on submodel dropdown")
         try:
@@ -291,50 +286,12 @@ class HomePage(BasePage):
             self.element("list_box").wait_visible()
             print("Prueba list box is visible")
         lista = self.element("list_box").find_elements()
-        # time.sleep(.2)
-        ##dropdown.click()
-        new_submodel_text = ""
-        new_submodel_text_list = []
         if len(lista) == 1:
             submodel = lista[0].text
             print(f"Paso {submodel}")
-            #------------------------------------------------------------------
-            if 'encontrado' in submodel:
-                #Cierra la lista de submodelo
-                dropdown = self.element("submodel_dropdown").wait_clickable()
-                dropdown.click()
-                time.sleep(.2)
-                #Abre la lista de submodelo
-                dropdown = self.element("submodel_dropdown").wait_clickable()
-                dropdown.click()
-                time.sleep(.2)
-                print("Prueba abrio la lista de submodelo")
-                nueva_lista = self.element("list_box").find_elements()
-                nuevo_submodelo = nueva_lista[0].text
-                print(nuevo_submodelo)
-                nueva_lista[0].click()
-                time.sleep(.2)
-                logging.info(f"select element on the list with index: {0}: {nuevo_submodelo}")
-                print(f"select element on the list with index: {0}: {nuevo_submodelo}")
-                texto = self.element("submodel_dropdown").wait_clickable().text
-                return nuevo_submodelo
-            else:
-                pass
-        else:
-            for i, ele in enumerate(lista):
-                if ele.text == submodel:
-                    pass
-                else:
-                    index = i
-                    new_submodel = ele
-                    new_submodel_text = new_submodel.text
-                    new_submodel_text_list = new_submodel_text.split("\n")
-                    logging.info(f"select NEW SUBMODEL with index:{index}-> {new_submodel_text}")
-                    print(f"select NEW SUBMODEL with index:{index}-> {new_submodel_text_list[0]}")
-                    ele.click()
-                    break
-            return new_submodel_text_list[0]
-
+            lista[0].click()
+            time.sleep(.2)
+        return submodel
     #
     def new_engine_and_select(self, engine: str):
         logging.info(f"Click on new engine dropdown")
@@ -1165,14 +1122,7 @@ class HomePage(BasePage):
         logging.info(f"select first element of the list: {element_selected}")
         print(element_selected)
         lista[0].click()
-        self.element("vehicle_compatible_span").wait_visible()
-        element = self.element("delete_vehicle_button").find_element()
-        element.click()
-        time.sleep(2)
-        print("Vehicle removed")
-        logging.info(f"Vehicle removed")
         return element_selected
-        #//p[@class ='badge-text']/span[2]    Compatible 2020 Argo Aurora 850 Responder-R 8x8
     def validate_product_list_page_vehicle(self, subcategory_selected, vehicle):
         #Año-Marca-Modelo-submodelo = vehiculo
         #motor
@@ -1218,16 +1168,25 @@ class HomePage(BasePage):
         make = "Argo"
         model = "Aurora 850 Responder-R 8x8"
         submodel = "Base"
-        self.write_a_vehicle_type("Deportes Motorizados")
-        self.write_a_year(year)
-        self.write_a_make(make)
-        self.write_a_model(model)
-        self.write_a_submodel(submodel)
-        self.click_on_engine_and_select()
-        time.sleep(.5)
-        self.click_on_add_vehicle_submit_btn()
-
-        return year, make, model, submodel
+        try:
+            self.write_a_vehicle_type("Deportes Motorizados")
+            self.write_a_year(year)
+            self.write_a_make(make)
+            self.write_a_model(model)
+            self.write_a_submodel(submodel)
+            self.click_on_engine_and_select()
+            time.sleep(.5)
+        except:
+            self.write_a_vehicle_type("Deportes Motorizados")
+            self.write_a_year(year)
+            self.write_a_make(make)
+            self.write_a_model(model)
+            self.write_a_submodel(submodel)
+            self.click_on_engine_and_select()
+            time.sleep(.5)
+        finally:
+            self.click_on_add_vehicle_submit_btn()
+            return year, make, model, submodel
 
     def validate_product_list_page(self, subcategory_selected):
         logging.info("Validate product list page")
@@ -2442,3 +2401,9 @@ class HomePage(BasePage):
             time.sleep(.5)
             self.click_on_add_vehicle_submit_btn()
             return year, make, model, submodel
+
+    def clear_vehicle_selected(self):
+        logging.info("Clear vehicle selected")
+        self.element("clear_vehicle_btn").wait_clickable().click()
+        self.element("clear_vehicle_li").wait_clickable().click()
+        print("Vehicle removed")

@@ -11,7 +11,11 @@
         "Lineas de producto": "http://intranet.oreillyauto.mx/files/cat_prov_online.html",
         "Rutas de entrega Leon": "http://intranet.oreillyauto.mx/files/administrativo/almacen/documento.php?d=Y2lyY3VpdG9fbGVvbi5wZGY=&n=Q2lyY3VpdG8gZW50cmUgU3VjdXJzYWxlcyBMZcOzbg==",
         "Tiendas O'Reilly": "https://www.oreillyauto.com.mx/sucursales",
-        "Centro de ayuda": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/help-center"
+        "Centro de ayuda": "https://testintranet.oreillyauto.mx/ecatalog-mx/#/help-center",
+        "Boletines": "https://www.cartek.com.mx/boletines.php",
+        "Garant\u00edas": "https://www.cartek.com.mx/garantias.php",
+        "Distribuidores": "https://www.cartek.com.mx/distribuidores-auto-partes.php",
+        "Descargas": "https://www.cartek.com.mx/descargas.php"
   },
   "locators": {
     "search_bar": {
@@ -108,7 +112,7 @@
     },
     "list_box": {
       "by": "XPATH",
-      "value": "//ul[@role='listbox']/li"
+      "value": "//ul[@role='listbox']/li//div//span[1]"
     },
     "add_new_vehicle_btn": {
       "by": "XPATH",
@@ -136,11 +140,11 @@
     },
     "delete_all_btn": {
       "by": "XPATH",
-      "value": "//button[@id= 'delete-vehicle-list']"
+      "value": "//button//i[text()='delete_forever']"
     },
     "delete_single_vehicle_btn": {
       "by": "XPATH",
-      "value": "//div[@id='div-garage']//button[contains(@class, 'p-button-icon-only')]"
+      "value": "//div[@class='vehicle-row-text']//button[contains(@class, 'p-button-icon-only')]"
     },
     "garage_div": {
       "by": "XPATH",
@@ -148,7 +152,7 @@
     },
     "clear_current_selection_btn": {
       "by": "XPATH",
-      "value": "//span[contains(text(), 'Borrar')]"
+      "value": "//span[contains(text(),'actual') or contains(text(),'current')]"
     },
     "add_vehicle_info_label": {
       "by": "XPATH",
@@ -497,7 +501,7 @@
     },
     "fits_element": {
       "by": "XPATH",
-      "value": "//div[@class='vehicle-info-col']/span[2]"
+      "value": "//div[@class='vehicle-info-completed']/span[1]"
     },
     "filter_option_selected": {
       "by": "XPATH",
@@ -1249,11 +1253,7 @@
     },
     "vehicle_compatible_span": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'ver compatibilidad')]"
-    },
-    "delete_vehicle_button": {
-      "by": "XPATH",
-      "value": "(//span[@class='p-button-label ng-star-inserted'])[1]"
+      "value": "//span[contains(text(),'Compatible')]"
     },
     "text_brand_search": {
       "by": "XPATH",
@@ -1342,6 +1342,14 @@
     "history_empty": {
       "by": "XPATH",
       "value": "(//div[@role='complementary']//p[contains(text(),'vac') or contains(text(),'empty')])[1]"
+    },
+    "clear_vehicle_btn": {
+      "by": "XPATH",
+      "value": "//div[@class='button-vehicle']"
+    },
+    "clear_vehicle_li": {
+      "by": "XPATH",
+      "value": "//li[@class='p-ripple p-element p-listbox-item ng-star-inserted']//span[contains(.,'Clear') or contains(.,'Limpiar')]"
     }
   }
 }
