@@ -90,7 +90,7 @@ def test_MXTEST_8282_Garage_Garage_Vehicle_Limit(web_drivers):
 #
 # MXTEST-8284
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.homepage
 #@pytest.mark.fallo
 @pytest.mark.flaky(reruns=3)
@@ -133,16 +133,16 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
     expected_engine = home_page.new_engine_and_select(engine)
     home_page.click_on_save_changes_btn()
     label_submodel, label_engine = home_page.get_text_label_vehicle_selected()
-    print(label_submodel,label_engine)
-    # label_submodel_list = label_submodel.split(' ')
-    # logging.info(f"SUBMODEL LABEL: {label_submodel_list[5]}")
-    # print(f"SUBMODEL LABEL: {label_submodel_list[5]}")
-    #logging.info(f"\nvehicle:{vehicle}\nOriginal Submodel:{submodel}\nOriginal Engine:{engine}")
-    #assert expected_submodel in label_submodel or expected_submodel in label_engine, f"{expected_submodel} debe encontarse en {label_submodel} o en {label_engine}"
-    #assert expected_engine in label_engine or expected_engine in label_submodel, f"{expected_engine} debe encontarse en {label_engine} o en {label_submodel}"
-    #logging.info(
-    #   f"Vehicle Edited successful")
-    #logging.info(f"\nOriginal Submodel:{submodel} -> {expected_submodel}\nOriginal Engine:{engine} -> {expected_engine}")
+    #print(label_submodel,label_engine)
+    label_submodel_list = label_submodel.split(' ')
+    logging.info(f"SUBMODEL LABEL: {label_submodel_list[5]}")
+    print(f"SUBMODEL LABEL: {label_submodel_list[5]}")
+    logging.info(f"\nvehicle:{vehicle}\nOriginal Submodel:{submodel}\nOriginal Engine:{engine}")
+    assert expected_submodel in label_submodel or expected_submodel in label_engine, f"{expected_submodel} debe encontarse en {label_submodel} o en {label_engine}"
+    assert expected_engine in label_engine or expected_engine in label_submodel, f"{expected_engine} debe encontarse en {label_engine} o en {label_submodel}"
+    logging.info(
+      f"Vehicle Edited successful")
+    logging.info(f"\nOriginal Submodel:{submodel} -> {expected_submodel}\nOriginal Engine:{engine} -> {expected_engine}")
 
 
 # MXTEST-8285
@@ -831,7 +831,7 @@ def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
 #
 # # # MXTEST-8264 mod1 without vehicle selected
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas #OK
+@pytest.mark.pruebitas #OK
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
@@ -841,9 +841,9 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     #-----------------------------------
-    home_page.wait_until_page_load_complete()
     product_name = "Sensor/Interruptor de Presion de Aceite de Motor"
     home_page.search_product(product_name)
+    home_page.wait_spinner_disappears()
     # obtener lista original
     product_list = home_page.get_link_product_list(0)
     product_list_text = []
@@ -859,7 +859,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_az(web_drivers):
     print(original_first_char)
     # ordenar con filter by de a-z
     home_page.click_order_by_dropdown_and_select_option("A - Z")
-    home_page.wait_until_page_load_complete()
+    home_page.wait_spinner_disappears()
     # obtener lista ordenada de a-z
     az_product_list = home_page.get_link_product_list(0)
     az_product_list_text = []

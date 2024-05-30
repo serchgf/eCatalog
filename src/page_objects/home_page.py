@@ -286,12 +286,28 @@ class HomePage(BasePage):
             self.element("list_box").wait_visible()
             print("Prueba list box is visible")
         lista = self.element("list_box").find_elements()
+        new_submodel_text_list = []
         if len(lista) == 1:
             submodel = lista[0].text
             print(f"Paso {submodel}")
             lista[0].click()
             time.sleep(.2)
-        return submodel
+            return submodel
+        if len(lista) > 1:
+            for i, ele in enumerate(lista):
+                if ele.text == submodel:
+                    pass
+                else:
+                    index = i
+                    new_submodel = ele
+                    new_submodel_text = new_submodel.text
+                    new_submodel_text_list = new_submodel_text.split("\n")
+                    logging.info(f"select NEW SUBMODEL with index:{index}-> {new_submodel_text}")
+                    print(f"select NEW SUBMODEL with index:{index}-> {new_submodel_text_list[0]}")
+                    ele.click()
+                    break
+            return new_submodel_text_list[0]
+
     #
     def new_engine_and_select(self, engine: str):
         logging.info(f"Click on new engine dropdown")

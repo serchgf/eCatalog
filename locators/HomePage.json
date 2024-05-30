@@ -136,7 +136,7 @@
     },
     "labels_vehicle_selected": {
       "by": "XPATH",
-      "value": "//div[@class= 'div-chips']//p"
+      "value": "//div[@class= 'vehicle-chips']//p"
     },
     "delete_all_btn": {
       "by": "XPATH",
