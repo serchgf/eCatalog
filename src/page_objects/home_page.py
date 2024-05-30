@@ -2423,3 +2423,5 @@ class HomePage(BasePage):
         self.element("clear_vehicle_btn").wait_clickable().click()
         self.element("clear_vehicle_li").wait_clickable().click()
         print("Vehicle removed")
+
+    #prueba

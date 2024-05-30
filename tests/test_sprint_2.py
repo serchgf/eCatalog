@@ -1519,6 +1519,9 @@ def test_MXTEST_9031_searchBar_keywords_search(web_drivers):
     assert len(lista_productos) > 0, f"The relevant search {search_criteria} didn't have results"
 
 
+    #prueba
+
+
 
 
 
