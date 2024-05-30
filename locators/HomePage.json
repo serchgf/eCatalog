@@ -1351,5 +1351,6 @@
       "by": "XPATH",
       "value": "//li[@class='p-ripple p-element p-listbox-item ng-star-inserted']//span[contains(.,'Clear') or contains(.,'Limpiar')]"
     }
+
   }
 }

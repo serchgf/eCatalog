@@ -130,7 +130,6 @@ def test_MXTEST_8284_Garage_Edit_Vehicle(web_drivers):
     home_page.click_on_edit_info_btn()
     expected_submodel = home_page.new_submodel_and_select(submodel)
     print(expected_submodel)
-    #new_expected_submodel = expected_submodel.replace("\nUSA","")
     expected_engine = home_page.new_engine_and_select(engine)
     home_page.click_on_save_changes_btn()
     label_submodel, label_engine = home_page.get_text_label_vehicle_selected()
