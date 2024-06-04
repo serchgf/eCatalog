@@ -831,7 +831,7 @@ def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
 #
 # # # MXTEST-8264 mod1 without vehicle selected
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas #OK
+#@pytest.mark.pruebitas #OK
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo

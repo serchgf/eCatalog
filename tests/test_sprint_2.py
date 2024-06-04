@@ -30,17 +30,28 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
     #Seleccion de vehiculo y pais
     #Añadir datos del vehiculo
     home_page.click_on_Picker_vehicle_btn()
+    #Se tiene que utilizar un vehiculo que este disponible en los tres paises
+    #------------------------------------------------------------------------
+    type = "Uso Liviano Automotriz"
+    year = "2023"
+    make = "Acura"
+    model = "Integra"
+    submodel = "A-Spec"
+    # -----------------------------------------------------------------------
+    # Se agrega la seleccion de año dos veces por intercepcion al hacer click
     try:
-        home_page.click_on_vehicle_type_and_select()
-        home_page.click_on_year_and_select()
+        home_page.write_a_year(year)
     except:
-        home_page.click_on_vehicle_type_and_select()
-        home_page.click_on_year_and_select()
+        home_page.write_a_year(year)
     finally:
-        home_page.click_on_make_and_select()
-        home_page.click_on_model_and_select()
-        home_page.click_on_submodel_and_select()
+        # -----------------------------------------------------------------------
+        home_page.write_a_vehicle_type(type)
+        home_page.write_a_year(year)
+        home_page.write_a_make(make)
+        home_page.write_a_model(model)
+        home_page.write_a_submodel(submodel)
         home_page.click_on_engine_and_select()
+        #------------------------------------------------------------------------
         #Tomar captura
         home_page.take_screenshot("'USA'-'MEX'-'CAN' selected")
         home_page.click_on_add_vehicle_submit_btn()
@@ -63,22 +74,41 @@ def test_MXTEST_9074_HomePage_Vehicle_Filtering_Functionality_2_countries(web_dr
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     # -----------------------------------
+    #Se tiene que utilizar un vehiculo que este disponible en los dos paises
+    #------------------------------------------------------------------------
+    type = "Uso Liviano Automotriz"
+    year = "2025"
+    make = "Acura"
+    model = "Integra"
+    submodel = "A-Spec"
+    # -----------------------------------
     #Seleccion de vehiculo y pais
+    #Añadir datos del vehiculo
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_usa_can_country()
-    #Añadir datos del vehiculo
-    home_page.click_on_year_and_select()
-    home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
-    #Tomar captura
-    home_page.take_screenshot("'USA'-'CAN' selected")
-    home_page.click_on_add_vehicle_submit_btn()
-    home_page.click_on_Picker_vehicle_btn()
-    span_country = home_page.get_country_chips()
-    logging.info(span_country)
-    assert "CAN" or "USA" in span_country, f"USA or CAN should be in: {span_country} message"
+    time.sleep(.3)
+    # -----------------------------------------------------------------------
+    # Se agrega la seleccion de año dos veces por intercepcion al hacer click
+    try:
+        home_page.write_a_year(year)
+    except:
+        home_page.write_a_year(year)
+    finally:
+        # -----------------------------------------------------------------------
+        home_page.write_a_vehicle_type(type)
+        home_page.write_a_year(year)
+        home_page.write_a_make(make)
+        home_page.write_a_model(model)
+        home_page.write_a_submodel(submodel)
+        home_page.click_on_engine_and_select()
+        #------------------------------------------------------------------------
+        #Tomar captura
+        home_page.take_screenshot("'USA'-'CAN' selected")
+        home_page.click_on_add_vehicle_submit_btn()
+        home_page.click_on_Picker_vehicle_btn()
+        span_country = home_page.get_country_chips()
+        logging.info(span_country)
+        assert "USA" and "CAN" in span_country, f"USA and CAN should be in: {span_country} message"
 
 
 # MXTEST-9073
@@ -93,16 +123,35 @@ def test_MXTEST_9073_HomePage_Vehicle_Filtering_One_country(web_drivers):
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
+    #Se tiene que utilizar un vehiculo que este disponible en el pais esperado MEX
+    #------------------------------------------------------------------------
+    type = "Uso Liviano Automotriz"
+    year = "2020"
+    make = "Astra"
+    model = "Dumper Articulado"
+    submodel = "ADT 25"
     # -----------------------------------
     #Seleccion de vehiculo y pais
+    #Añadir datos del vehiculo
     home_page.click_on_Picker_vehicle_btn()
     home_page.select_mex_country()
-    #Añadir datos del vehiculo
-    home_page.click_on_year_and_select()
-    home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
+    time.sleep(.3)
+    # -----------------------------------------------------------------------
+    # Se agrega la seleccion de año dos veces por intercepcion al hacer click
+    try:
+        home_page.write_a_year(year)
+    except:
+        home_page.write_a_year(year)
+    finally:
+        # -----------------------------------------------------------------------
+        home_page.write_a_vehicle_type(type)
+        home_page.write_a_year(year)
+        home_page.write_a_make(make)
+        home_page.write_a_model(model)
+        home_page.write_a_submodel(submodel)
+        home_page.click_on_engine_and_select()
+        #------------------------------------------------------------------------
+        #Tomar captura
     #Tomar captura
     home_page.take_screenshot("'MEX' selected")
     home_page.click_on_add_vehicle_submit_btn()
@@ -959,7 +1008,7 @@ def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
 
 # MXTEST-9060
 #@pytest.mark.haha
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9060_PDP_Report_discrepances_fitment_notes(web_drivers):
@@ -977,7 +1026,7 @@ def test_MXTEST_9060_PDP_Report_discrepances_fitment_notes(web_drivers):
     # email = "email_fake@fake.com"
     phone = "1234567890"
     store = "Abastos"
-    issue_type = "Vehicle Fitment"
+    issue_type = "Imagen Incorrecta"
     description_error_text = "Test message text, the image is Wrong"
     home_page.scroll_down()
     #home_page.wait_spinner_disappears()

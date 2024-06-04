@@ -1179,28 +1179,24 @@ class HomePage(BasePage):
 
     def select_vehicle_specific(self):
         self.click_on_Picker_vehicle_btn()
-        time.sleep(0.5)
+        type = "Deportes Motorizados"
         year = "2020"
-        make = "Argo"
-        model = "Aurora 850 Responder-R 8x8"
+        make = "Arctic Cat"
+        model = "Alterra 300"
         submodel = "Base"
         try:
-            self.write_a_vehicle_type("Deportes Motorizados")
             self.write_a_year(year)
-            self.write_a_make(make)
-            self.write_a_model(model)
-            self.write_a_submodel(submodel)
-            self.click_on_engine_and_select()
-            time.sleep(.5)
         except:
-            self.write_a_vehicle_type("Deportes Motorizados")
+            self.write_a_year(year)
+        finally:
+            # -----------------------------------------------------------------------
+            self.write_a_vehicle_type(type)
             self.write_a_year(year)
             self.write_a_make(make)
-            self.write_a_model(model)
-            self.write_a_submodel(submodel)
+            self.write_a_make(model)
+            self.write_a_make(submodel)
             self.click_on_engine_and_select()
-            time.sleep(.5)
-        finally:
+
             self.click_on_add_vehicle_submit_btn()
             return year, make, model, submodel
 
@@ -1721,6 +1717,7 @@ class HomePage(BasePage):
         self.element("product_info_report_label").wait_visible()
         self.write_nip(nip)
         self.element("input_nip_tbx").wait_clickable().send_keys(Keys.ENTER)
+        time.sleep(1)
         self.element("nip_verified").wait_visible()
         # self.write_fullName(name)
         # self.write_email(email)
@@ -2424,4 +2421,3 @@ class HomePage(BasePage):
         self.element("clear_vehicle_li").wait_clickable().click()
         print("Vehicle removed")
 
-    #prueba
