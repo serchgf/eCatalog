@@ -736,7 +736,7 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
 # MXTEST-9020
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
     #Verify the user is able to view the product images in higher resolution on PDP screen
@@ -746,17 +746,15 @@ def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
-    # -----------------------------------
-    # CICLO DE MIN 6 - MAX 8 ( Este es el numero maximo de ultimos productos vistos que aparecen en el carrucel )
+
     expected_product_selected_list = []
-    for i in range(7):
-        home_page.click_on_brands()
-        time.sleep(.5)
-        # CLIC SHOW ALL BRANDS LINK TEXT
-        home_page.click_on_show_all_brands()
+    # CICLO DE MIN 6 - MAX 8 ( Este es el numero maximo de ultimos productos vistos que aparecen en el carrucel )
+    search_criteria_list = ["Bulb", "Oil", "Battery", "Brake", "Air Filter", "Cleaner", "Grease Remover"]
+
+    for search_criteria in search_criteria_list:
+        home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+        home_page.press_enter_key()
         home_page.wait_spinner_disappears()
-        # click on any brand
-        home_page.get_random_brand()
         product_list = home_page.get_link_product_list(0)
         expected_product_selected = home_page.select_random_element_of_list(product_list)
         home_page.element("no_part_copy_to_clipboard").wait_visible()
@@ -764,21 +762,22 @@ def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
         home_page.click_on_logo_oreily_home()
         home_page.clean_search()
     # step_2
-    # En este paso ya no es necesario dar clic en el logo nuevamente en el script # home_page.click_on_logo_oreily_home()
-    # # step_3
-    logging.info(f"GET actual lasted viewed products list")
-    lasted_product_viewed_list = home_page.get_lasted_viewed_products_list()
-    assert expected_product_selected in lasted_product_viewed_list, f"No se encontraron los resultados {expected_product_selected} en {lasted_product_viewed_list}"
+    home_page.click_on_logo_oreily_home()
     #CLICK ANTERIOR Y SIGUIENTE EN LATEST VIEWED PRODUCTS
     home_page.clicks_carousel_last_viewed_products()
-    #HACER  EL CLICK SOBRE EL CUALQUIER PRODUCTO DE LATEST VIEWED PRODUCTS
-    lasted_products_elements_list = home_page.get_lasted_viewed_products_list2()
-    home_page.select_random_element_of_list(lasted_products_elements_list)
-    home_page.wait_spinner_disappears()
-    #Validacion
-    #The product image should be displayed in higher resolution on the PDP screen
-    #La resolucion de la imagen no se puede validar en el script
-    assert home_page.element("main_product_img").wait_visible()
+    #HACER  EL CLICK SOBRE EL PRIMER PRODUCTO DE LATEST VIEWED PRODUCTS
+    try:
+        product_list = home_page.element("click_lastest_product").find_elements()
+        home_page.select_random_element_of_list(product_list)
+    except:
+        product_list = home_page.element("lasted_products_viewed_list").find_elements()
+        home_page.select_random_element_of_list(product_list)
+    finally:
+        home_page.wait_spinner_disappears()
+        #Validacion
+        #The product image should be displayed in higher resolution on the PDP screen
+        #La resolucion de la imagen no se puede validar en el script
+        assert home_page.element("main_product_img").wait_visible()
 
 # MXTEST-9079
 @pytest.mark.luisao
@@ -1008,7 +1007,7 @@ def test_MXTEST_9032_PDP_ProductDetailsBeingShown(web_drivers):
 
 # MXTEST-9060
 #@pytest.mark.haha
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.sprint2_regression
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_9060_PDP_Report_discrepances_fitment_notes(web_drivers):

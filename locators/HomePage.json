@@ -559,9 +559,9 @@
       "by": "XPATH",
       "value": "//span[@class='p-carousel-prev-icon pi pi-chevron-right']"
     },
-    "click_firts_lastest_product": {
+    "click_lastest_product": {
       "by": "XPATH",
-      "value": "//div[@class='o-products-carousel p-carousel p-component p-carousel-horizontal']"
+      "value": "//div[@class='p-carousel-item p-carousel-item-active ng-star-inserted']//img"
     },
     "delete_element_open_search": {
       "by": "XPATH",
