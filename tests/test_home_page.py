@@ -8,6 +8,7 @@ import pytest
 from selenium.common.exceptions import NoSuchElementException
 
 
+
 from src.page_objects.home_page import HomePage
 
 
@@ -787,7 +788,7 @@ def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
 
 # # # MXTEST-8260
 @pytest.mark.sprint1_regression
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo

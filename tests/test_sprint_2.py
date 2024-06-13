@@ -736,7 +736,7 @@ def test_MXTEST_9022_Deleting_record_Search_History(web_drivers):
 # MXTEST-9020
 @pytest.mark.luisao
 @pytest.mark.sprint2_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=2)
 def test_MXTEST_9020_Main_page_Latest_viewed_products_PDP(web_drivers):
     #Verify the user is able to view the product images in higher resolution on PDP screen
