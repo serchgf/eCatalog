@@ -1251,6 +1251,10 @@
       "by": "XPATH",
       "value": "//div[@class='vehicle-info']"
     },
+    "vehicle_info_with_info_2": {
+      "by": "XPATH",
+      "value": "//div[@class='vehicle-selected']"
+    },
     "vehicle_compatible_span": {
       "by": "XPATH",
       "value": "//span[contains(text(),'Compatible')]"

@@ -788,7 +788,7 @@ def test_MXTEST_8259_PLP_Search_filter_No_results_found(web_drivers):
 
 # # # MXTEST-8260
 @pytest.mark.sprint1_regression
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.plp
 @pytest.mark.flaky(reruns=3)
 #@pytest.mark.fallo
@@ -816,6 +816,7 @@ def test_MXTEST_8262_PLP_Navigation_Categories(web_drivers):
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
+    home_page.wait_spinner_disappears()
     #-----------------------------------
     home_page.click_on_categories_button()
     time.sleep(2)
@@ -894,14 +895,26 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
     # -----------------------------------
     home_page.click_on_Picker_vehicle_btn()
     time.sleep(3)
-    vehicle_type_list = home_page.click_on_vehicle_type_dropdown()
-    vehicle_type = "Deportes Motorizados"
-    home_page.click_element_text_of_list(vehicle_type_list, vehicle_type)
-    home_page.click_on_year_and_select()
-    home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    home_page.click_on_engine_and_select()
+    # vehicle_type_list = home_page.click_on_vehicle_type_dropdown()
+    # vehicle_type = "Deportes Motorizados"
+    # home_page.click_element_text_of_list(vehicle_type_list, vehicle_type)
+    # home_page.click_on_vehicle_type_and_select()
+    # home_page.click_on_year_and_select()
+    # home_page.click_on_make_and_select()
+    # home_page.click_on_model_and_select()
+    # home_page.click_on_submodel_and_select()
+    # home_page.click_on_engine_and_select()
+    # home_page.click_on_add_vehicle_submit_btn()
+    vehicle = "Deportes Motorizados"
+    # home_page.send_text_vehicle_type(vehicle)
+    home_page.write_a_vehicle_type(vehicle)
+    home_page.write_a_year("2020")
+    home_page.write_a_make("Arctic Cat")
+    home_page.write_a_model("Alterra 300")
+    submodel = "Base"
+    home_page.write_a_submodel(submodel)
+    home_page.write_a_engine("270cc")
+    time.sleep(.2)
     home_page.click_on_add_vehicle_submit_btn()
     # -----------------------------------
     product_name = "cinta"
@@ -934,7 +947,7 @@ def test_MXTEST_8264_PLP_Sort_by_option_az_vehicle_selected(web_drivers):
         break
     print("primer caracter obtenido")
     print(az_first_char)
-    assert home_page.element("vehicle_info_with_info").wait_visible() , "There isn't selected vehicle"
+    assert home_page.element("vehicle_info_with_info_2").wait_visible() , "There isn't selected vehicle"
     assert az_first_char <= original_first_char , f"{az_first_char} should be <= {original_first_char}"
     home_page.take_screenshot("test_PLP_Sort_by_option_az")
 
