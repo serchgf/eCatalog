@@ -733,7 +733,7 @@
     },
     "resources_tab": {
       "by": "XPATH",
-      "value": "//a[@aria-controls='p-tabpanel-7']"
+      "value": "//li//span[text()='download']//following-sibling::span[1]"
     },
     "img_arrow_forward_button": {
       "by": "XPATH",
@@ -885,11 +885,11 @@
     },
     "video_resources_span": {
       "by": "XPATH",
-      "value": "//span[contains(text(),' Video resources ')]"
+      "value": "//section//span[contains(text(),'ideo')]"
     },
     "internal_video_player_resource": {
       "by": "XPATH",
-      "value": "//div[@class='videos-container row']//img[1]"
+      "value": "//div[@class='videos-container']//img[1]"
     },
     "video_player_iframe": {
       "by": "ID",
@@ -917,7 +917,7 @@
     },
     "help_center_btn": {
       "by": "XPATH",
-      "value": "//a[text()='Help center ']"
+      "value": "//a[text()='Centro de ayuda 'or text()='Help center ']"
     },
     "centro_ayuda_btn": {
       "by": "XPATH",
@@ -1033,7 +1033,7 @@
     },
     "hcp_faq_answer": {
       "by": "XPATH",
-      "value": "//div[@aria-hidden='false']//p"
+      "value": "//p-accordiontab//div[@aria-hidden='false']//div//p"
     },
     "hcp_paginator": {
       "by": "XPATH",

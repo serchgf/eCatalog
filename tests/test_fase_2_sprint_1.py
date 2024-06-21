@@ -19,52 +19,62 @@ _JSON_PATH = os.path.join(pathlib.Path(__file__).parent.parent, "locators", "Hom
 
 # MXTEST-10418
 #@pytest.mark.phase2_sp1
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10418_PDP_Video_Preview(web_drivers):
+    #Validate that the system allows video playback in the parts detail.
+    # -----------------------------------
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/search/detail/moog-suspension-control-arm-and-ball-joint-assembly-ck620054/mym0/ck620054?q=ck620054"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.press_PageDown_key()
     home_page.click_resources_tab()
     home_page.wait_spinner_disappears()
-    home_page.click_on_video()
     home_page.take_screenshot("reproducing video")
-
+    home_page.click_on_video()
 
 # MXTEST-10419
 #@pytest.mark.phase2_sp1
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=1)
 def test_MXTEST_10419_PDP_With_No_video_Resource(web_drivers):
+    #Validate that the system hides the video resources section if none are available.
     home_page = HomePage(*web_drivers)
     url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/search/detail/dupli-color-scratch-fix-all-in-1-0.5-ounce-metallic-steel-blue-touch-up-paint-acc0408/dpli/acc0408?q=acc0408"
     home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
-    home_page.click_resources_tab()
-    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.press_PageDown_key()
+    home_page.click_resources_tab()
     home_page.wait_spinner_disappears()
     # CREAR FUNCION QUE VALIDE QUE NO ES VISIBLE EL VIDEO
     assert home_page.validate_hidden_video_resource(), "This video resource should not be visible"
     home_page.take_screenshot("video no exists as expected")
 
-
 # MXTEST-10420
-@pytest.mark.inprocess
+#@pytest.mark.pruebitas
 #@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10420_FAQ_Top_Answer(web_drivers):
+    #Validate that the top frequently asked questions are displayed.
     home_page = HomePage(*web_drivers)
-    home_page.open()
-    #home_page.wait_spinner_disappears()
-    home_page.wait_fonts_loaded()
+    home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.click_help_center()
     home_page.validate_help_center_page()
     home_page.scroll_to_element("hcp_all_faq_btn")
     faq_titles = home_page.element("hcp_faq_titles").find_elements()
     assert len(faq_titles) == 5, "The page should display 5 frequently asked questions"
-    faq_titles[1].click()
+    faq_titles[0].click()
     home_page.element("hcp_faq_answer").wait_visible()
-    faq_titles[2].click()
+    faq_titles[0].click()
+    home_page.element("hcp_faq_answer").wait_until_disappears()
+    faq_titles[1].click()
     home_page.element("hcp_faq_answer").wait_visible()
 
 # MXTEST-10421

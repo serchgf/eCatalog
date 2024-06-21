@@ -1924,7 +1924,7 @@ class HomePage(BasePage):
         print("switch to iframe")
         self.element("video_player_iframe").switch_to_iframe()
         self.element("youtube_play_button").wait_clickable().click()
-        time.sleep(2)
+
 
     def validate_hidden_video_resource(self):
         logging.info("Validate hidden video resource")
@@ -1977,10 +1977,15 @@ class HomePage(BasePage):
     def validate_help_center_page(self):
         time.sleep(1)
         logging.info("Validate that Help Center page is loaded")
-        assert self.element("hcp_title").find_element().text == "Help center", "The title should be 'Help center'"
-        assert self.element("hcp_faq_title").find_element().text == "Frequently asked questions", "The FAQ´s title should be 'Frequently asked questions'"
-        assert self.element("hcp_videos_section").find_element().text == "Assistance videos", "The videos section title should be 'Assistance videos'"
-        assert self.element("hcp_issue_report").find_element().text == "REPORT AN ISSUE", "The issue report button title should be 'REPORT AN ISSUE'"
+        # assert self.element("hcp_title").find_element().text == "Help center", "The title should be 'Help center'"
+        assert self.element("hcp_title").find_element().text == "Centro de ayuda", "The title should be 'Centro de ayuda'"
+        # assert self.element("hcp_faq_title").find_element().text == "Frequently asked questions", "The FAQ´s title should be 'Frequently asked questions'"
+        assert self.element("hcp_faq_title").find_element().text == "Preguntas frecuentes", "The FAQ´s title should be 'Preguntas frecuentes'"
+        # assert self.element("hcp_videos_section").find_element().text == "Assistance videos", "The videos section title should be 'Assistance videos'"
+        assert self.element("hcp_videos_section").find_element().text == "Videos de apoyo", "The videos section title should be 'Videos de apoyo'"
+        # assert self.element("hcp_issue_report").find_element().text == "REPORT AN ISSUE", "The issue report button title should be 'REPORT AN ISSUE'"
+        assert self.element("hcp_issue_report").find_element().text == "REPORTAR INCIDENTE", "The issue report button title should be 'REPORTAR INCIDENTE'"
+
 
     def validate_issue_report_modal(self):
         logging.info("Validate that the issue report modal is displayed in page")
