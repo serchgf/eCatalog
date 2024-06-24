@@ -79,11 +79,15 @@ def test_MXTEST_10420_FAQ_Top_Answer(web_drivers):
 
 # MXTEST-10421
 @pytest.mark.phase2_sp1
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10421_FAQ_All_Answer(web_drivers):
+    #Validate that all frequently asked questions are displayed.
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.click_help_center()
     home_page.validate_help_center_page()
     home_page.scroll_to_element("hcp_all_faq_btn")
@@ -95,9 +99,10 @@ def test_MXTEST_10421_FAQ_All_Answer(web_drivers):
 
 # MXTEST-10422
 @pytest.mark.phase2_sp1
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10422_HelpCenter_ReportIncident(web_drivers):
-
+    #"Validate that the user can report an incident correctly."
     text = """Lorem ipsum dolor sit amet consectetur adipiscing elit, 
 semper pulvinar ad cubilia turpis porta, varius leo nisi hendrerit hac 
 morbi. Tortor nostra senectus molestie malesuada conubia commodo ultricies 
@@ -113,13 +118,15 @@ feugiat natoque pretium cras taciti quisque vitae consequat. Mollis potenti nasc
 habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 """
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.click_help_center()
     home_page.validate_help_center_page()
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
-    home_page.element("irm_employId").wait_visible().send_keys("3805", Keys.ENTER)  #
+    home_page.element("irm_employId").wait_visible().send_keys("5507", Keys.ENTER)  #
     home_page.select_incident_type()
     home_page.select_frequency()
     home_page.scroll_to_element("irm_submit_btn")
@@ -130,8 +137,10 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 
 # MXTEST-10423
 @pytest.mark.phase2_sp1
+#@pytest.mark.pruebitas
 #@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10423_HelpCenter_InvalidEmail(web_drivers):
+    #
     text = """Lorem ipsum dolor sit amet consectetur adipiscing elit, 
 semper pulvinar ad cubilia turpis porta, varius leo nisi hendrerit hac 
 morbi. Tortor nostra senectus molestie malesuada conubia commodo ultricies 
@@ -147,14 +156,16 @@ feugiat natoque pretium cras taciti quisque vitae consequat. Mollis potenti nasc
 habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 """
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.click_help_center()
     #home_page.wait_spinner_disappears()
     home_page.validate_help_center_page()
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
-    home_page.element("irm_employId").wait_visible().send_keys("4050", Keys.ENTER)
+    home_page.element("irm_employId").wait_visible().send_keys("56", Keys.ENTER)
     home_page.element("irm_employEmail").wait_clickable().send_keys("a@b", Keys.ENTER)
     home_page.select_incident_type()
     home_page.select_frequency()
@@ -163,7 +174,8 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.element("irm_add_file").find_element().send_keys(os.path.abspath(images.pic3))
     home_page.element("irm_form").find_element().submit()
     email_error = home_page.element("irm_error_msg").wait_visible().text
-    assert email_error == "Enter a valid e-mail address.", "The invalid email message is not displayed in page"
+    #assert email_error == "Enter a valid e-mail address.", "The invalid email message is not displayed in page"
+    assert email_error == "Ingrese un e-mail válido", "The invalid email message is not displayed in page"
     home_page.element("irm_employEmail").wait_visible().clear()
     home_page.element("irm_employEmail").wait_visible().send_keys("juan.larios@oreillyauto.mx")
     messages = [message.text for message in home_page.element("irm_error_msg").find_elements()]

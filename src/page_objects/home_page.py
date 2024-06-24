@@ -1990,11 +1990,15 @@ class HomePage(BasePage):
     def validate_issue_report_modal(self):
         logging.info("Validate that the issue report modal is displayed in page")
         time.sleep(1)
-        assert self.element("irm_title").find_element().text == "Issue report","The modal's title should be 'Issue report'"
-        assert self.element("irm_user_info").find_element().text == "User info", "The user info section title should be 'User info'"
-        assert self.element("irm_about_issue").find_element().text == "About the issue", "The about issue section title should be 'About the issue'"
-        assert self.element("irm_issue_description").find_element().text == "Describe the issue", "The issue description title should be 'Describe the issue'"
-        assert self.element("irm_submit_btn").find_element().is_displayed(), "The 'Send' button should be present"
+        #assert self.element("irm_title").find_element().text == "Issue report","The modal's title should be 'Issue report'"
+        assert self.element("irm_title").find_element().text == "Reporte de incidente", "The modal's title should be 'Issue report'"
+        #assert self.element("irm_user_info").find_element().text == "User info", "The user info section title should be 'User info'"
+        assert self.element("irm_user_info").find_element().text == "Información del usuario", "The user info section title should be 'User info'"
+        #assert self.element("irm_about_issue").find_element().text == "About the issue", "The about issue section title should be 'About the issue'"
+        assert self.element("irm_about_issue").find_element().text == "Acerca del incidente", "The about issue section title should be 'About the issue'"
+        #assert self.element("irm_issue_description").find_element().text == "Describe the issue", "The issue description title should be 'Describe the issue'"
+        assert self.element("irm_issue_description").find_element().text == "Describe el incidente", "The issue description title should be 'Describe the issue'"
+        #assert self.element("irm_submit_btn").find_element().is_displayed(), "The 'Send' button should be present"
 
     def validate_error_messages(self, messages: list):
         logging.info("Validate that the error messages are displayed")

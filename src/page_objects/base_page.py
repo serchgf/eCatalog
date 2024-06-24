@@ -21,9 +21,9 @@ _LOCATOR_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "l
 _SCREENSHOTS_DIR_PATH = os.path.join(pathlib.Path(__file__).parent.parent.parent, "screenshots")
 
 class images:
-    pic1 = "../image_files_/pic1.jpg"
-    pic2 = "../image_files_/pic2.jpg"
-    pic3 = "../image_files_/blue-nature.jpg"
+    pic1 = "../eCatalog/image_files_/pic1.jpg"
+    pic2 = "../eCatalog/image_files_/pic2.jpg"
+    pic3 = "../eCatalog/image_files_/blue-nature.jpg"
 class BasePage:
     def __init__(self, driver: WebDriver, wait_driver: WebDriverWait):
         self.__driver = driver
