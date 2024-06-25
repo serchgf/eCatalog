@@ -1117,7 +1117,7 @@
     },
     "span_nip_verified": {
       "by": "XPATH",
-      "value": "//span[contains(text(),'NIP verified')]"
+      "value": "//span[contains(text(),'NIP v')]"
     },
     "input_nip": {
       "by": "XPATH",
@@ -1311,10 +1311,6 @@
       "by": "XPATH",
       "value": "//input[@id='nip']"
     },
-    "nip_verified": {
-      "by": "XPATH",
-      "value": "//span[text()=' check_circle ']"
-    },
     "privacy_notice_check": {
       "by": "XPATH",
       "value": "//div[@class='p-checkbox-box']"
@@ -1354,6 +1350,10 @@
     "clear_vehicle_li": {
       "by": "XPATH",
       "value": "//li[@class='p-ripple p-element p-listbox-item ng-star-inserted']//span[contains(.,'Clear') or contains(.,'Limpiar')]"
+    },
+    "alert_message": {
+      "by": "XPATH",
+      "value": "//p-toast[@id='center-toast']//p-toastitem"
     }
 
   }

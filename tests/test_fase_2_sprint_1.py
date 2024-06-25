@@ -183,12 +183,15 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 
 # MXTEST-10424
 @pytest.mark.phase2_sp1
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
-
+    #
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.click_help_center()
     #home_page.wait_spinner_disappears()
     home_page.validate_help_center_page()
@@ -196,19 +199,22 @@ def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
     home_page.validate_issue_report_modal()
     home_page.scroll_to_element("irm_submit_btn")
     home_page.element("irm_submit_btn").find_element().click()
+    home_page.wait_spinner_disappears()
     messages = home_page.element("irm_error_msg").find_elements()
     #messages = [message.text for message in home_page.element("irm_error_msg").find_elements()]
     assert len(messages) > 0, "The modal should display at least one error message"
-    home_page.element("irm_employId").wait_visible().send_keys("3805", Keys.ENTER)  #
-    home_page.element("nip_verified").wait_visible()
+    #home_page.element("alert_message").wait_until_disappears()
+    home_page.element("irm_employId").wait_visible().send_keys("5507", Keys.ENTER)  #
+    home_page.element("span_nip_verified").wait_visible()
     home_page.select_incident_type()
     home_page.select_frequency()
     home_page.element("irm_description").find_element().send_keys(" ")
     home_page.scroll_to_element("irm_submit_btn")
     home_page.element("irm_add_file").find_element().send_keys(os.path.abspath(images.pic1))
-    assert home_page.element("irm_upload_error_msg").wait_visible().text == "Max file size is up to 2 MB.", "The upload size error message does not appear on the page"
+    assert home_page.element("irm_upload_error_msg").wait_visible().text == "Solo se permiten archivos de hasta 2 MB.", "The upload size error message does not appear on the page"
+    # #assert home_page.element("irm_upload_error_msg").wait_visible().text == "Max file size is up to 2 MB.", "The upload size error message does not appear on the page"
     home_page.element("irm_upload_error_msg").wait_until_disappears()
-    home_page.clear_img_input()
+    #home_page.clear_img_input() // La imagen anterior no se carga porque excede los MB y esta vacío el drop area
     home_page.element("irm_add_file").find_element().send_keys(os.path.abspath(images.pic2))
     home_page.element("irm_submit_btn").find_element().click()
     messages = home_page.element("irm_error_msg").find_elements()
