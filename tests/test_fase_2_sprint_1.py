@@ -186,7 +186,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
 #@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
-    #
+    #Validate errors when reporting an issue.
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
@@ -228,15 +228,16 @@ def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
 
 # MXTEST-10425
 @pytest.mark.phase2_sp1
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10425_HelpCenter_Video_assistance(web_drivers):
+    #Verify that the videos can be viewed correctly in the support section.
     home_page = HomePage(*web_drivers)
-    home_page.open()
+    home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     home_page.click_help_center()
-    #home_page.wait_spinner_disappears()
-    home_page.validate_help_center_page()
-    home_page.change_lenguage()
     home_page.scroll_to_element("hcp_video_title")
     title_txt = home_page.get_video_titles()
     window_title = home_page.select_random_video()
@@ -244,6 +245,7 @@ def test_MXTEST_10425_HelpCenter_Video_assistance(web_drivers):
     #home_page.close()
     home_page.back_to_previous_page()
     home_page.wait_spinner_disappears()
+    home_page.scroll_to_element("footer_glossary_section")
     home_page.element("hcp_all_videos_btn").find_element().click()
     title_txt = home_page.get_video_titles()
     window_title = home_page.select_random_video()
@@ -252,84 +254,88 @@ def test_MXTEST_10425_HelpCenter_Video_assistance(web_drivers):
 
 # MXTEST-10426
 @pytest.mark.phase2_sp1
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10426_RelatedCarrousel_Product(web_drivers):
+    #Validate that the system displays a carousel with relevant articles within the article detail (PDP).
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     search_criteria = "8199"
     home_page.search_and_enter(search_criteria)
     home_page.wait_spinner_disappears()
-    product_list = home_page.get_link_product_list()
+    product_list = home_page.get_link_product_list(0)
     home_page.clic_javacript(product_list[0])
-    home_page.wait_spinner_disappears()
-    home_page.press_PageDown_key()
-    home_page.wait_spinner_disappears()
-    home_page.click_details_tab()
-    home_page.press_PageDown_key()
-    home_page.press_PageDown_key()
-    home_page.press_PageDown_key()
-    home_page.wait_spinner_disappears()
+    time.sleep(3)
+    home_page.switch_to_window()
+    home_page.scroll_to_element("related_products_span")
     home_page.click_random_related_product()
     home_page.wait_spinner_disappears()
 
 
+
 # MXTEST-10427
 @pytest.mark.phase2_sp1
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10427_RelatedCarrousel_Category(web_drivers):
+    #Validate that the system displays a carousel with relevant categories within the article detail (PDP).
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     search_criteria = "8199"
     home_page.search_and_enter(search_criteria)
     home_page.wait_spinner_disappears()
-    product_list = home_page.get_link_product_list()
+    product_list = home_page.get_link_product_list(0)
     home_page.clic_javacript(product_list[0])
-    home_page.wait_spinner_disappears()
-    home_page.click_details_tab()
-    home_page.press_PageDown_key()
-    home_page.press_PageDown_key()
-    home_page.press_PageDown_key()
-    home_page.press_PageDown_key()
-    home_page.wait_spinner_disappears()
+    time.sleep(3)
+    home_page.switch_to_window()
+    home_page.scroll_to_element("related_products_span")
     home_page.click_random_related_Category()
     home_page.wait_spinner_disappears()
 
 # MXTEST-10428
 @pytest.mark.phase2_sp1
+@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10428_PDP_Article_WITHOUT_Related_Categories(web_drivers):
+    #Verify that the related categories are NOT displayed if the article does not have them
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     search_criteria = "dr1040"
     home_page.search_and_enter(search_criteria)
     home_page.wait_spinner_disappears()
-    product_list = home_page.get_link_product_list()
+    product_list = home_page.get_link_product_list(0)
     home_page.clic_javacript(product_list[0])
-    home_page.wait_spinner_disappears()
-    home_page.click_details_tab()
-    home_page.press_PageDown_key()
-    home_page.press_PageDown_key()
+    time.sleep(3)
+    home_page.switch_to_window()
+    home_page.scroll_to_element("send_report_btn")
     home_page.validate_hidden_related_cateogory()
 
 # MXTEST-10429
 @pytest.mark.phase2_sp1
+@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10429_PDP_Article_WITHOUT_Related_products(web_drivers):
+    #Verify that the related products are NOT displayed if the article does not have them
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    # -----------------------------------
     search_criteria = "dr1040"
     home_page.search_and_enter(search_criteria)
     home_page.wait_spinner_disappears()
-    product_list = home_page.get_link_product_list()
+    product_list = home_page.get_link_product_list(0)
     home_page.clic_javacript(product_list[0])
-    home_page.wait_spinner_disappears()
-    home_page.click_details_tab()
-    home_page.press_PageDown_key()
-    home_page.press_PageDown_key()
-    home_page.wait_spinner_disappears()
-    home_page.press_PageDown_key()
+    time.sleep(3)
+    home_page.switch_to_window()
+    home_page.scroll_to_element("send_report_btn")
     home_page.validate_hidden_related_product()
