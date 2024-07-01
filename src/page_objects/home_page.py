@@ -2202,7 +2202,7 @@ class HomePage(BasePage):
         self.element("shortcuts_menu_btn").find_element().click()
         self.element("switch_btn").wait_visible().click()
         self.element("switch_alert").wait_visible()
-        self.element("close_alert_btn").wait_clickable().click()
+        self.element("close_alert_btn").wait_until_disappears()
         self.element("close_modal_btn").wait_clickable().click()
 
     def click_shortcuts_menu_btn(self):

@@ -300,7 +300,7 @@ def test_MXTEST_10427_RelatedCarrousel_Category(web_drivers):
 
 # MXTEST-10428
 @pytest.mark.phase2_sp1
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10428_PDP_Article_WITHOUT_Related_Categories(web_drivers):
     #Verify that the related categories are NOT displayed if the article does not have them
@@ -321,7 +321,7 @@ def test_MXTEST_10428_PDP_Article_WITHOUT_Related_Categories(web_drivers):
 
 # MXTEST-10429
 @pytest.mark.phase2_sp1
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10429_PDP_Article_WITHOUT_Related_products(web_drivers):
     #Verify that the related products are NOT displayed if the article does not have them
