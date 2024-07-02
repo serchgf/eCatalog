@@ -2246,7 +2246,7 @@ class HomePage(BasePage):
         logging.info("Close shortcuts modal")
         print("Close shortcuts modal")
         print("Close alert popup")
-        self.element("close_alert_btn").wait_clickable().click()
+        self.element("close_alert_btn").wait_until_disappears()
         print("Close shortcuts modal")
         self.element("close_modal_btn").wait_clickable().click()
 

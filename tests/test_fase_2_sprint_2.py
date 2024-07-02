@@ -102,7 +102,6 @@ def test_MXTEST_10920_Spanish_Dashboard(web_drivers):
     # BODY
     home_page.validate_ultimos_productos_vistos_section()
 
-
 @pytest.mark.flaky(reruns=3)
 #@pytest.mark.pruebitas
 def test_MXTEST_10921_Spanish_Categories(web_drivers):
@@ -132,10 +131,15 @@ def test_MXTEST_10921_Spanish_Categories(web_drivers):
     print(f"Spanish tipos de parte populares: {spanish_popular_category_list_text}")
 
 @pytest.mark.flaky(reruns=3)
+#@pytest.mark.pruebitas
 def test_MXTEST_10922_Spanish_Sub_Categories(web_drivers):
+    #------------------------------------------
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
+    home_page.wait_spinner_disappears()
+    #------------------------------------------
     home_page.click_on_categories_button()
     category = "Bateria y Accesorios"
     home_page.click_on_category_by_text(category)
@@ -146,7 +150,8 @@ def test_MXTEST_10922_Spanish_Sub_Categories(web_drivers):
     assert expected_header_nav == actual_header_nav
     # FOOTER SECTION
     expected_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
-                               "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
+                               "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado",
+                               "CARTEK", "Boletines", "Garantías", "Distribuidores", "Descargas"]
     actual_footer_section = home_page.footer_section()
     for footer in expected_footer_section:
         assert footer in actual_footer_section
@@ -156,13 +161,16 @@ def test_MXTEST_10922_Spanish_Sub_Categories(web_drivers):
     home_page.validate_logo_footer_section()
     home_page.validate_catalog_version_footer_section()
 
-
 @pytest.mark.flaky(reruns=3)
+#@pytest.mark.pruebitas
 def test_MXTEST_10923_Spanish_Brands(web_drivers):
+    #------------------------------------------
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
     home_page.click_brands_btn()
     home_page.click_on_show_all_brands()
+    home_page.wait_spinner_disappears()
     letter_selected = home_page.click_random_letter_brand_menu()
     # GET BRANDS LIST IN ENGLISH
     english_brand_list = home_page.get_list_of_brands_from_letter_selected(letter_selected)
@@ -176,8 +184,8 @@ def test_MXTEST_10923_Spanish_Brands(web_drivers):
     print(f"Spanish brand list: {spanish_brand_list}")
     assert english_brand_list == spanish_brand_list or len(english_brand_list) == len(spanish_brand_list)
 
-
 @pytest.mark.flaky(reruns=3)
+#@pytest.mark.pruebitas PTE
 def test_MXTEST_10924_Spanish_Deals(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -255,6 +263,7 @@ def test_MXTEST_10924_Spanish_Deals(web_drivers):
 
 
 @pytest.mark.flaky(reruns=3)
+
 def test_MXTEST_10925_Spanish_Parts_interchange(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -280,8 +289,6 @@ def test_MXTEST_10925_Spanish_Parts_interchange(web_drivers):
     expected_spanish_label_search_results = "Resultados de búsqueda"
     assert actual_search_result_text == expected_spanish_label_search_results
 
-
-
     expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
                                "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
     actual_footer_section = home_page.footer_section()
@@ -293,9 +300,9 @@ def test_MXTEST_10925_Spanish_Parts_interchange(web_drivers):
     home_page.validate_logo_footer_section()
     home_page.validate_catalog_version_footer_section()
 
-
 @pytest.mark.flaky(reruns=3)
 @pytest.mark.sri
+#@pytest.mark.pruebitas
 def test_MXTEST_10926_Spanish_Shortcut(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -319,7 +326,14 @@ def test_MXTEST_10926_Spanish_Shortcut(web_drivers):
     assert actual_navigation_span == expected_navigation_span_spanish.upper()
 
     # Get description and shortcuts list
-    expected_description_and_shortcut_list = ['Nuevo Cliente Ctrl Alt N', 'Barra de búsqueda Alt B', 'Agregar / Cambiar vehículo Alt V', 'Eliminar Vehículo Alt D', 'Agregar a la Lista Alt A', 'Limpiar Filtros Alt J', 'Copiar Número de Parte Alt C', 'Ir a la Equivalencia de parte Shift P', 'Ir a Tipos de Parte Shift C', 'Ir a Ofertas Shift D', 'Ir a Marcas Shift B', 'Ir al Historial de Búsqueda Shift H', 'Ir a la Lista de la Orden Shift L', 'Ir a la Página de Inicio Shift Space', 'Regresar Shift Delete', 'Navegar Tab', 'Aceptar / Click CTA Enter', 'Cancelar / Cerrar / Salir Esc', 'Abrir lista de atajos Alt O']
+    expected_description_and_shortcut_list = ['Nuevo Cliente Ctrl Alt N', 'Barra de búsqueda Alt B',
+                                              'Agregar / Cambiar vehículo Alt V', 'Eliminar Vehículo Alt D',
+                                              'Agregar a la Lista Alt A', 'Limpiar Filtros Alt J',
+                                              'Copiar Número de Parte Alt C', 'Ir a la Equivalencia de parte Shift P',
+                                              'Ir a Tipos de Parte Shift C', 'Ir a Ofertas Shift D', 'Ir a Marcas Shift B',
+                                              'Ir al Historial de Búsqueda Shift H', 'Ir a la Lista de la Orden Shift L',
+                                              'Ir a la Página de Inicio Shift Space', 'Regresar Shift Delete', 'Navegar Tab',
+                                              'Aceptar / Click CTA Enter', 'Cancelar / Cerrar / Salir Esc', 'Abrir lista de atajos Alt O']
     actual_description_and_shortcut_list = home_page.get_description_and_shortcuts_list()
     assert actual_description_and_shortcut_list == expected_description_and_shortcut_list
 
@@ -335,9 +349,8 @@ def test_MXTEST_10926_Spanish_Shortcut(web_drivers):
     visibility = home_page.validate_new_client_popup_visibility()
     assert visibility is False, "The PopUp client should bo visible"
 
-
-
 @pytest.mark.flaky(reruns=3)
+#@pytest.mark.pruebitas PTE
 def test_MXTEST_10927_Spanish_Search_History(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -399,8 +412,6 @@ def test_MXTEST_10927_Spanish_Search_History(web_drivers):
     actual_spanish_search_history_tab_list = home_page.get_search_history_tabs()
     print(f"Actual tabs: {actual_spanish_search_history_tab_list}")
     assert actual_spanish_search_history_tab_list == expected_spanish_search_history_tab_list
-
-
 
 @pytest.mark.inprocess
 #@pytest.mark.flaky(reruns=3)
