@@ -1354,7 +1354,18 @@
     "alert_message": {
       "by": "XPATH",
       "value": "//p-toast[@id='center-toast']//p-toastitem"
+    },
+    "searchbar_in_all_searches": {
+      "by": "XPATH",
+      "value": "(//p-sidebar//span[@class='p-input-icon-right tree-table-width'])[1]"
+    },
+    "searchbar_in_vehicle_search": {
+      "by": "XPATH",
+      "value": "(//p-sidebar//span[@class='p-input-icon-right tree-table-width'])[2]"
+    },
+    "searchbar_in_open_search": {
+      "by": "XPATH",
+      "value": "(//p-sidebar//span[@class='p-input-icon-right tree-table-width'])[3]"
     }
-
   }
 }

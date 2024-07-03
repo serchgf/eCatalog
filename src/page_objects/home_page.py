@@ -2303,19 +2303,22 @@ class HomePage(BasePage):
     def validate_searchbar_in_all_search(self):
         logging.info("Validate searchbar presence into search history modal")
         print("Validate searchbar presence into search history modal")
-        displayed = self.element("searchbar_in_all_search").element_is_displayed()
+        displayed = self.element("searchbar_in_all_searches").element_is_displayed()
         return displayed
+
 
     def validate_searchbar_in_vehicle_search(self):
         logging.info("Validate searchbar presence into search history modal")
         print("Validate searchbar presence into search history modal")
         displayed = self.element("searchbar_in_vehicle_search").element_is_displayed()
         return displayed
+
     def validate_searchbar_in_open_search(self):
         logging.info("Validate searchbar presence into search history modal")
         print("Validate searchbar presence into search history modal")
         displayed = self.element("searchbar_in_open_search").element_is_displayed()
         return displayed
+
     def close_search_history_modal(self):
         logging.info("close search history modal")
         print("Close search history modal")

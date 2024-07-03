@@ -350,68 +350,91 @@ def test_MXTEST_10926_Spanish_Shortcut(web_drivers):
     assert visibility is False, "The PopUp client should bo visible"
 
 @pytest.mark.flaky(reruns=3)
-#@pytest.mark.pruebitas PTE
+@pytest.mark.pruebitas
 def test_MXTEST_10927_Spanish_Search_History(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
+    # -----------------------------------
+    #Seleccion de vehiculo y pais
+    #Añadir datos del vehiculo
     home_page.click_on_Picker_vehicle_btn()
-    vehicle = "Automotive Light Duty"
-    home_page.write_a_vehicle_type(vehicle)
-    home_page.click_on_year_and_select()
-    home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    engine = home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
-    home_page.click_on_search_history()
-    # validate title
-    expected_english_search_history_title_span = 'Search history'
-    actual_english_search_history_title_span = home_page.get_search_history_title()
-    assert actual_english_search_history_title_span == expected_english_search_history_title_span
-    # validate 3 tabs
-    expected_english_search_history_tab_list = ["ALL SEARCHES", "VEHICLE SEARCH", "OPEN SEARCH"]
-    actual_english_search_history_tab_list = home_page.get_search_history_tabs()
-    print(f"Actual tabs: {actual_english_search_history_tab_list}")
-    assert actual_english_search_history_tab_list == expected_english_search_history_tab_list
-    # validate search bar in the three tabs
-    # click on each tab an validate the searchbar
-    home_page.click_all_searches_tab()
-    assert home_page.validate_searchbar_in_all_search(), "A search bar should be displayed"
-    home_page.click_vehicle_search_tab()
-    assert home_page.validate_searchbar_in_vehicle_search(), "A search bar should be displayed"
-    home_page.click_open_search_tab()
-    assert home_page.validate_searchbar_in_open_search(), "A search bar should be displayed"
-    # close the search history modal
-    home_page.close_search_history_modal()
-    # input some item to search in the search bar on top
-    search_criteria = "Oil"
-    home_page.search_and_enter(search_criteria)
-    # 16 clean the text of searchbar
-    home_page.clean_search()
-    # 17 enter a brand for search
-    # 18 press enter
-    search_criteria = "cartek"
-    home_page.search_and_enter(search_criteria)
-    # click on search history button
-    home_page.click_on_search_history()
-    # 20 click to expand the information
-    home_page.click_last_searches_expand_btn()
-    # close the search history modal
-    home_page.close_search_history_modal()
-    # click on language selector and select spanish option
-    home_page.change_language_En_to_Es()
-    # click on historial de busqueda button
-    home_page.click_on_search_history()
-    # validate title in spanish
-    expected_spanish_search_history_title_span = 'Historial de búsqueda'
-    actual_spanish_search_history_title_span = home_page.get_search_history_title()
-    assert actual_spanish_search_history_title_span == expected_spanish_search_history_title_span
-    # validate tabs in spanish
-    expected_spanish_search_history_tab_list = ["TODAS LAS BÚSQUEDAS", "BÚSQUEDA POR VEHÍCULO", "BÚSQUEDA LIBRE"]
-    actual_spanish_search_history_tab_list = home_page.get_search_history_tabs()
-    print(f"Actual tabs: {actual_spanish_search_history_tab_list}")
-    assert actual_spanish_search_history_tab_list == expected_spanish_search_history_tab_list
+    #Se tiene que utilizar un vehiculo que este disponible en los tres paises
+    #------------------------------------------------------------------------
+    type = "Automotive Light Duty"
+    year = "2023"
+    make = "Acura"
+    model = "Integra"
+    submodel = "A-Spec"
+    # -----------------------------------------------------------------------
+    # Se agrega la seleccion de año dos veces por intercepcion al hacer click
+    try:
+        home_page.write_a_year(year)
+    except:
+        home_page.write_a_year(year)
+    finally:
+        # -----------------------------------------------------------------------
+        home_page.write_a_vehicle_type(type)
+        home_page.write_a_year(year)
+        home_page.write_a_make(make)
+        home_page.write_a_model(model)
+        home_page.write_a_submodel(submodel)
+        home_page.click_on_engine_and_select()
+        #------------------------------------------------------------------------
+        home_page.click_on_add_vehicle_submit_btn()
+        home_page.click_on_search_history()
+        # validate title
+        expected_english_search_history_title_span = 'Search history'
+        actual_english_search_history_title_span = home_page.get_search_history_title()
+        assert actual_english_search_history_title_span == expected_english_search_history_title_span
+        # validate 3 tabs
+        expected_english_search_history_tab_list = ["ALL SEARCHES", "VEHICLE SEARCH", "OPEN SEARCH"]
+        actual_english_search_history_tab_list = home_page.get_search_history_tabs()
+        print(f"Actual tabs: {actual_english_search_history_tab_list}")
+        assert actual_english_search_history_tab_list == expected_english_search_history_tab_list
+        # validate search bar in the three tabs
+        # click on each tab an validate the searchbar
+        home_page.click_all_searches_tab()
+        home_page.validate_searchbar_in_all_search()
+        home_page.click_vehicle_search_tab()
+        assert home_page.validate_searchbar_in_vehicle_search(), "A search bar should be displayed"
+        home_page.click_open_search_tab()
+        assert home_page.validate_searchbar_in_open_search(), "A search bar should be displayed"
+        # close the search history modal
+        home_page.close_search_history_modal()
+        # input some item to search in the search bar on top
+        search_criteria = "Oil"
+        home_page.search_and_enter(search_criteria)
+        # 16 clean the text of searchbar
+        home_page.clean_search()
+        # 17 enter a brand for search
+        # 18 press enter
+        search_criteria = "cartek"
+        home_page.search_and_enter(search_criteria)
+        # click on search history button
+        home_page.click_on_search_history()
+        # 20 click to expand the information
+        home_page.click_last_searches_expand_btn()
+        # close the search history modal
+        home_page.close_search_history_modal()
+        time.sleep(.3)
+        # click on language selector and select spanish option
+        home_page.change_language_En_to_Es()
+        try:
+            home_page.wait_spinner_disappears()
+        except:
+            pass
+        finally:
+            home_page.click_on_search_history()
+            # validate title in spanish
+            expected_spanish_search_history_title_span = 'Historial de búsqueda'
+            actual_spanish_search_history_title_span = home_page.get_search_history_title()
+            assert actual_spanish_search_history_title_span == expected_spanish_search_history_title_span
+            # validate tabs in spanish
+            expected_spanish_search_history_tab_list = ["TODAS LAS BÚSQUEDAS", "BÚSQUEDA POR VEHÍCULO", "BÚSQUEDA LIBRE"]
+            actual_spanish_search_history_tab_list = home_page.get_search_history_tabs()
+            print(f"Actual tabs: {actual_spanish_search_history_tab_list}")
+            assert actual_spanish_search_history_tab_list == expected_spanish_search_history_tab_list
 
 @pytest.mark.inprocess
 #@pytest.mark.flaky(reruns=3)
