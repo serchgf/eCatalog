@@ -27,38 +27,14 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     # -----------------------------------
-    #Seleccion de vehiculo y pais
-    #Añadir datos del vehiculo
+    home_page.select_vehicle_without_engine()
+    #Tomar captura
+    home_page.take_screenshot("'USA'-'MEX'-'CAN' selected")
+    home_page.click_on_add_vehicle_submit_btn()
     home_page.click_on_Picker_vehicle_btn()
-    #Se tiene que utilizar un vehiculo que este disponible en los tres paises
-    #------------------------------------------------------------------------
-    type = "Uso Liviano Automotriz"
-    year = "2023"
-    make = "Acura"
-    model = "Integra"
-    submodel = "A-Spec"
-    # -----------------------------------------------------------------------
-    # Se agrega la seleccion de año dos veces por intercepcion al hacer click
-    try:
-        home_page.write_a_year(year)
-    except:
-        home_page.write_a_year(year)
-    finally:
-        # -----------------------------------------------------------------------
-        home_page.write_a_vehicle_type(type)
-        home_page.write_a_year(year)
-        home_page.write_a_make(make)
-        home_page.write_a_model(model)
-        home_page.write_a_submodel(submodel)
-        home_page.click_on_engine_and_select()
-        #------------------------------------------------------------------------
-        #Tomar captura
-        home_page.take_screenshot("'USA'-'MEX'-'CAN' selected")
-        home_page.click_on_add_vehicle_submit_btn()
-        home_page.click_on_Picker_vehicle_btn()
-        span_country = home_page.get_country_chips()
-        logging.info(span_country)
-        assert "MEX" and "CAN" and "USA" in span_country, f"MEX, USA and CAN should be in: {span_country} message"
+    span_country = home_page.get_country_chips()
+    logging.info(span_country)
+    assert "MEX" and "CAN" and "USA" in span_country, f"MEX, USA and CAN should be in: {span_country} message"
 
 # MXTEST-9074
 @pytest.mark.sprint2_regression

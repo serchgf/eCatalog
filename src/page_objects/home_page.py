@@ -2433,3 +2433,37 @@ class HomePage(BasePage):
         self.element("clear_vehicle_li").wait_clickable().click()
         print("Vehicle removed")
 
+    def select_vehicle_without_engine(self):
+        # -----------------------------------
+        # Seleccion de vehiculo y pais
+        # Añadir datos del vehiculo
+        self.click_on_Picker_vehicle_btn()
+        # Se tiene que utilizar un vehiculo que este disponible en los tres paises
+        # ------------------------------------------------------------------------
+        type = "Automotive Light Duty"
+        year = "2023"
+        make = "Acura"
+        model = "Integra"
+        submodel = "A-Spec"
+        # -----------------------------------------------------------------------
+        # Se agrega la seleccion de año dos veces por intercepcion al hacer click
+        try:
+            self.write_a_year(year)
+        except:
+            self.write_a_year(year)
+        finally:
+            # -----------------------------------------------------------------------
+            self.write_a_vehicle_type(type)
+            self.write_a_year(year)
+            self.write_a_make(make)
+            self.write_a_model(model)
+            self.write_a_submodel(submodel)
+            self.click_on_engine_and_select()
+            # ------------------------------------------------------------------------
+            self.click_on_add_vehicle_submit_btn()
+            return type, year, make, model, submodel
+
+    def get_search_results_span_es(self):
+        logging.info("Validate search results ES text")
+        text = self.element("resultados_de_busqueda_span").wait_visible().text
+        return text

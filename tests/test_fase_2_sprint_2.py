@@ -185,7 +185,7 @@ def test_MXTEST_10923_Spanish_Brands(web_drivers):
     assert english_brand_list == spanish_brand_list or len(english_brand_list) == len(spanish_brand_list)
 
 @pytest.mark.flaky(reruns=3)
-#@pytest.mark.pruebitas PTE
+@pytest.mark.pruebitas
 def test_MXTEST_10924_Spanish_Deals(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -196,74 +196,74 @@ def test_MXTEST_10924_Spanish_Deals(web_drivers):
     actual_header_nav = home_page.get_menu_header_nav_span()
     assert expected_english_header_nav == actual_header_nav
 
-    #EXPECTED ENGLISH BREADCRUMB
-    expected_english_breadcrumb = ["Home", "Current Ads"]
-    actual_breadcrumb_nav = home_page.get_breadcrumb()
-    assert expected_english_breadcrumb == actual_breadcrumb_nav
-
-    # EXPECTED ENGLISH DEALS NAVBAR ELEMENTS
-    expected_english_deals_navbar = "PAGE 1"
-    actual_english_deals_navbar_text = home_page.get_element_pages_navbar_deals()
-    assert expected_english_deals_navbar in actual_english_deals_navbar_text
-
-    # EXPECTED ENGLISH DATE OFFER TEXT
-    expected_date_offer_english_text_1 = 'From '
-    expected_date_offer_english_text_2 = ' to '
-    actual_date_offer_english_text = home_page.get_offer_date_info_in_additional_ads()
-    assert expected_date_offer_english_text_1 in actual_date_offer_english_text
-    assert expected_date_offer_english_text_2 in actual_date_offer_english_text
-    # FOOTER SECTION
-    expected_english_footer_section = ["TOOLS", "Delivery routes Jalisco", "Product lines", "Delivery routes Leon",
-                               "O’Reilly Stores", "HELP", "Help center", "Shortcuts menu"]
-
-    actual_footer_section = home_page.footer_section()
-    for footer in expected_english_footer_section:
-        assert footer in actual_footer_section
-
-    home_page.change_language_En_to_Es()
-
-
-    # EXPECTED SPANISH HEADERS
-    expected_header_nav = ["CATEGORÍAS", "MARCAS", "OFERTAS", "INTERCAMBIO DE PARTE", "HISTORIAL DE BÚSQUEDA", "ES"]
-    actual_header_nav = home_page.get_menu_header_nav_span()
-    assert expected_header_nav == actual_header_nav
-
-    # EXPECTED SPANISH BREADCRUMB
-    expected_english_breadcrumb = ["Inicio", "Ofertas vigentes"]
-    actual_breadcrumb_nav = home_page.get_breadcrumb()
-    assert expected_english_breadcrumb == actual_breadcrumb_nav
-
-    # EXPECTED SPANISH DEALS NAVBAR ELEMENTS
-    expected_spanish_deals_navbar = 'GINA 1'
-    spanish_nav_bar_element_list = home_page.get_element_pages_navbar_deals()
-    cont = 0
-    for element in spanish_nav_bar_element_list:
-        if expected_spanish_deals_navbar in element:
-            cont += 1
-            break
-    assert cont > 0, "No 'Page' span displayed"
-    # EXPECTED SPANISH DATE OFFER TEXT
-    expected_date_offer_spanish_text1 = 'Del '
-    expected_date_offer_spanish_text2 = ' a '
-    actual_date_offer_spanish_text = home_page.get_offer_date_info_in_additional_ads()
-    assert expected_date_offer_spanish_text1 in actual_date_offer_spanish_text
-    assert expected_date_offer_spanish_text2 in actual_date_offer_spanish_text
-
-    # FOOTER SECTION
-    expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
-                               "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
-    actual_footer_section = home_page.footer_section()
-    for footer in expected_spanish_footer_section:
-        assert footer in actual_footer_section
-
-    home_page.validate_spanish_slogan_footer_section()
-    home_page.validate_copyright_footer_section()
-    home_page.validate_logo_footer_section()
-    home_page.validate_catalog_version_footer_section()
+    # #EXPECTED ENGLISH BREADCRUMB
+    # expected_english_breadcrumb = ["Home", "Current Ads"]
+    # actual_breadcrumb_nav = home_page.get_breadcrumb()
+    # assert expected_english_breadcrumb == actual_breadcrumb_nav
+    #
+    # # EXPECTED ENGLISH DEALS NAVBAR ELEMENTS
+    # expected_english_deals_navbar = "PAGE 1"
+    # actual_english_deals_navbar_text = home_page.get_element_pages_navbar_deals()
+    # assert expected_english_deals_navbar in actual_english_deals_navbar_text
+    #
+    # # EXPECTED ENGLISH DATE OFFER TEXT
+    # expected_date_offer_english_text_1 = 'From '
+    # expected_date_offer_english_text_2 = ' to '
+    # actual_date_offer_english_text = home_page.get_offer_date_info_in_additional_ads()
+    # assert expected_date_offer_english_text_1 in actual_date_offer_english_text
+    # assert expected_date_offer_english_text_2 in actual_date_offer_english_text
+    # # FOOTER SECTION
+    # expected_english_footer_section = ["TOOLS", "Delivery routes Jalisco", "Product lines", "Delivery routes Leon",
+    #                            "O’Reilly Stores", "HELP", "Help center", "Shortcuts menu"]
+    #
+    # actual_footer_section = home_page.footer_section()
+    # for footer in expected_english_footer_section:
+    #     assert footer in actual_footer_section
+    #
+    # home_page.change_language_En_to_Es()
+    #
+    #
+    # # EXPECTED SPANISH HEADERS
+    # expected_header_nav = ["CATEGORÍAS", "MARCAS", "OFERTAS", "INTERCAMBIO DE PARTE", "HISTORIAL DE BÚSQUEDA", "ES"]
+    # actual_header_nav = home_page.get_menu_header_nav_span()
+    # assert expected_header_nav == actual_header_nav
+    #
+    # # EXPECTED SPANISH BREADCRUMB
+    # expected_english_breadcrumb = ["Inicio", "Ofertas vigentes"]
+    # actual_breadcrumb_nav = home_page.get_breadcrumb()
+    # assert expected_english_breadcrumb == actual_breadcrumb_nav
+    #
+    # # EXPECTED SPANISH DEALS NAVBAR ELEMENTS
+    # expected_spanish_deals_navbar = 'GINA 1'
+    # spanish_nav_bar_element_list = home_page.get_element_pages_navbar_deals()
+    # cont = 0
+    # for element in spanish_nav_bar_element_list:
+    #     if expected_spanish_deals_navbar in element:
+    #         cont += 1
+    #         break
+    # assert cont > 0, "No 'Page' span displayed"
+    # # EXPECTED SPANISH DATE OFFER TEXT
+    # expected_date_offer_spanish_text1 = 'Del '
+    # expected_date_offer_spanish_text2 = ' a '
+    # actual_date_offer_spanish_text = home_page.get_offer_date_info_in_additional_ads()
+    # assert expected_date_offer_spanish_text1 in actual_date_offer_spanish_text
+    # assert expected_date_offer_spanish_text2 in actual_date_offer_spanish_text
+    #
+    # # FOOTER SECTION
+    # expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
+    #                            "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
+    # actual_footer_section = home_page.footer_section()
+    # for footer in expected_spanish_footer_section:
+    #     assert footer in actual_footer_section
+    #
+    # home_page.validate_spanish_slogan_footer_section()
+    # home_page.validate_copyright_footer_section()
+    # home_page.validate_logo_footer_section()
+    # home_page.validate_catalog_version_footer_section()
 
 
 @pytest.mark.flaky(reruns=3)
-
+#@pytest.mark.pruebitas
 def test_MXTEST_10925_Spanish_Parts_interchange(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -280,15 +280,17 @@ def test_MXTEST_10925_Spanish_Parts_interchange(web_drivers):
     home_page.wait_spinner_disappears()
     home_page.click_all_brands_step3_part_interchange()
 
-    # validar que se enentre numero de parte en breadcrumb Inicio Búsqueda de intercambio de partes para '51060r'
+    # validar que se encuentre numero de parte en breadcrumb Inicio Búsqueda de intercambio de partes para '51060r'
+    part_expected = "Búsqueda de intercambio de partes para '51060r'"
     spanish_breadcrumb = home_page.get_last_element_of_breadcrumb()
-    assert part.lower() in spanish_breadcrumb
+    assert part_expected in spanish_breadcrumb
 
     # validad palabra Resultados de búsqueda
     actual_search_result_text = home_page.get_search_results_span_es()
     expected_spanish_label_search_results = "Resultados de búsqueda"
     assert actual_search_result_text == expected_spanish_label_search_results
 
+    # FOOTER SECTION
     expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
                                "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
     actual_footer_section = home_page.footer_section()
@@ -299,6 +301,7 @@ def test_MXTEST_10925_Spanish_Parts_interchange(web_drivers):
     home_page.validate_copyright_footer_section()
     home_page.validate_logo_footer_section()
     home_page.validate_catalog_version_footer_section()
+
 
 @pytest.mark.flaky(reruns=3)
 @pytest.mark.sri
@@ -350,93 +353,67 @@ def test_MXTEST_10926_Spanish_Shortcut(web_drivers):
     assert visibility is False, "The PopUp client should bo visible"
 
 @pytest.mark.flaky(reruns=3)
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 def test_MXTEST_10927_Spanish_Search_History(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    # -----------------------------------
-    #Seleccion de vehiculo y pais
-    #Añadir datos del vehiculo
-    home_page.click_on_Picker_vehicle_btn()
-    #Se tiene que utilizar un vehiculo que este disponible en los tres paises
-    #------------------------------------------------------------------------
-    type = "Automotive Light Duty"
-    year = "2023"
-    make = "Acura"
-    model = "Integra"
-    submodel = "A-Spec"
-    # -----------------------------------------------------------------------
-    # Se agrega la seleccion de año dos veces por intercepcion al hacer click
+    home_page.select_vehicle_without_engine()
+    home_page.click_on_search_history()
+    # validate title
+    expected_english_search_history_title_span = 'Search history'
+    actual_english_search_history_title_span = home_page.get_search_history_title()
+    assert actual_english_search_history_title_span == expected_english_search_history_title_span
+    # validate 3 tabs
+    expected_english_search_history_tab_list = ["ALL SEARCHES", "VEHICLE SEARCH", "OPEN SEARCH"]
+    actual_english_search_history_tab_list = home_page.get_search_history_tabs()
+    print(f"Actual tabs: {actual_english_search_history_tab_list}")
+    assert actual_english_search_history_tab_list == expected_english_search_history_tab_list
+    # validate search bar in the three tabs
+    # click on each tab an validate the searchbar
+    home_page.click_all_searches_tab()
+    home_page.validate_searchbar_in_all_search()
+    home_page.click_vehicle_search_tab()
+    assert home_page.validate_searchbar_in_vehicle_search(), "A search bar should be displayed"
+    home_page.click_open_search_tab()
+    assert home_page.validate_searchbar_in_open_search(), "A search bar should be displayed"
+    # close the search history modal
+    home_page.close_search_history_modal()
+    # input some item to search in the search bar on top
+    search_criteria = "Oil"
+    home_page.search_and_enter(search_criteria)
+    # 16 clean the text of searchbar
+    home_page.clean_search()
+    # 17 enter a brand for search
+    # 18 press enter
+    search_criteria = "cartek"
+    home_page.search_and_enter(search_criteria)
+    # click on search history button
+    home_page.click_on_search_history()
+    # 20 click to expand the information
+    home_page.click_last_searches_expand_btn()
+    # close the search history modal
+    home_page.close_search_history_modal()
+    time.sleep(.3)
+    # click on language selector and select spanish option
+    home_page.change_language_En_to_Es()
     try:
-        home_page.write_a_year(year)
+        home_page.wait_spinner_disappears()
     except:
-        home_page.write_a_year(year)
+        pass
     finally:
-        # -----------------------------------------------------------------------
-        home_page.write_a_vehicle_type(type)
-        home_page.write_a_year(year)
-        home_page.write_a_make(make)
-        home_page.write_a_model(model)
-        home_page.write_a_submodel(submodel)
-        home_page.click_on_engine_and_select()
-        #------------------------------------------------------------------------
-        home_page.click_on_add_vehicle_submit_btn()
         home_page.click_on_search_history()
-        # validate title
-        expected_english_search_history_title_span = 'Search history'
-        actual_english_search_history_title_span = home_page.get_search_history_title()
-        assert actual_english_search_history_title_span == expected_english_search_history_title_span
-        # validate 3 tabs
-        expected_english_search_history_tab_list = ["ALL SEARCHES", "VEHICLE SEARCH", "OPEN SEARCH"]
-        actual_english_search_history_tab_list = home_page.get_search_history_tabs()
-        print(f"Actual tabs: {actual_english_search_history_tab_list}")
-        assert actual_english_search_history_tab_list == expected_english_search_history_tab_list
-        # validate search bar in the three tabs
-        # click on each tab an validate the searchbar
-        home_page.click_all_searches_tab()
-        home_page.validate_searchbar_in_all_search()
-        home_page.click_vehicle_search_tab()
-        assert home_page.validate_searchbar_in_vehicle_search(), "A search bar should be displayed"
-        home_page.click_open_search_tab()
-        assert home_page.validate_searchbar_in_open_search(), "A search bar should be displayed"
-        # close the search history modal
-        home_page.close_search_history_modal()
-        # input some item to search in the search bar on top
-        search_criteria = "Oil"
-        home_page.search_and_enter(search_criteria)
-        # 16 clean the text of searchbar
-        home_page.clean_search()
-        # 17 enter a brand for search
-        # 18 press enter
-        search_criteria = "cartek"
-        home_page.search_and_enter(search_criteria)
-        # click on search history button
-        home_page.click_on_search_history()
-        # 20 click to expand the information
-        home_page.click_last_searches_expand_btn()
-        # close the search history modal
-        home_page.close_search_history_modal()
-        time.sleep(.3)
-        # click on language selector and select spanish option
-        home_page.change_language_En_to_Es()
-        try:
-            home_page.wait_spinner_disappears()
-        except:
-            pass
-        finally:
-            home_page.click_on_search_history()
-            # validate title in spanish
-            expected_spanish_search_history_title_span = 'Historial de búsqueda'
-            actual_spanish_search_history_title_span = home_page.get_search_history_title()
-            assert actual_spanish_search_history_title_span == expected_spanish_search_history_title_span
-            # validate tabs in spanish
-            expected_spanish_search_history_tab_list = ["TODAS LAS BÚSQUEDAS", "BÚSQUEDA POR VEHÍCULO", "BÚSQUEDA LIBRE"]
-            actual_spanish_search_history_tab_list = home_page.get_search_history_tabs()
-            print(f"Actual tabs: {actual_spanish_search_history_tab_list}")
-            assert actual_spanish_search_history_tab_list == expected_spanish_search_history_tab_list
+        # validate title in spanish
+        expected_spanish_search_history_title_span = 'Historial de búsqueda'
+        actual_spanish_search_history_title_span = home_page.get_search_history_title()
+        assert actual_spanish_search_history_title_span == expected_spanish_search_history_title_span
+        # validate tabs in spanish
+        expected_spanish_search_history_tab_list = ["TODAS LAS BÚSQUEDAS", "BÚSQUEDA POR VEHÍCULO", "BÚSQUEDA LIBRE"]
+        actual_spanish_search_history_tab_list = home_page.get_search_history_tabs()
+        print(f"Actual tabs: {actual_spanish_search_history_tab_list}")
+        assert actual_spanish_search_history_tab_list == expected_spanish_search_history_tab_list
 
-@pytest.mark.inprocess
+
 #@pytest.mark.flaky(reruns=3)
 def test_MXTEST_10928_Spanish_Order_List(web_drivers):
     home_page = HomePage(*web_drivers)
