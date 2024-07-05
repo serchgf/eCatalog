@@ -1184,6 +1184,7 @@ class HomePage(BasePage):
         make = "Arctic Cat"
         model = "Alterra 300"
         submodel = "Base"
+
         try:
             self.write_a_year(year)
         except:
@@ -2433,7 +2434,7 @@ class HomePage(BasePage):
         self.element("clear_vehicle_li").wait_clickable().click()
         print("Vehicle removed")
 
-    def select_vehicle_without_engine(self):
+    def select_vehicle_without_engine_english(self):
         # -----------------------------------
         # Seleccion de vehiculo y pais
         # Añadir datos del vehiculo
@@ -2467,3 +2468,8 @@ class HomePage(BasePage):
         logging.info("Validate search results ES text")
         text = self.element("resultados_de_busqueda_span").wait_visible().text
         return text
+
+    def get_complete_breadcrumb(self):
+        logging.info("Get breadcrum complete text")
+        self.element("breadcrum_section_link_list").wait_visible()
+        return [element.text for element in self.element("breadcrum_section_link_list").find_elements()]

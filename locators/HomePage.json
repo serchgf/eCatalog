@@ -138,7 +138,7 @@
       "by": "XPATH",
       "value": "//div[@class= 'vehicle-chips']//p"
     },
-    "delete_all_btn": {
+    "delete_forever_btn": {
       "by": "XPATH",
       "value": "//button//i[text()='delete_forever']"
     },
@@ -304,7 +304,7 @@
     },
     "all_brands_link_list": {
       "by": "XPATH",
-      "value": "//a[@class='principal-brand ng-star-inserted']"
+      "value": "//a[@class='principal-brand ng-star-inserted']//span"
     },
     "no_results_message": {
       "by": "XPATH",
@@ -833,7 +833,7 @@
     },
     "delete_all_button": {
       "by": "XPATH",
-      "value": "//span[text()='Eliminar Todos']"
+      "value": "//section[@class='header-container']//div//button//span"
     },
     "yes_remove_button": {
       "by": "XPATH",
@@ -1366,6 +1366,10 @@
     "searchbar_in_open_search": {
       "by": "XPATH",
       "value": "(//p-sidebar//span[@class='p-input-icon-right tree-table-width'])[3]"
+    },
+    "product_list_title": {
+      "by": "XPATH",
+      "value": "//section[@class='header-container']//h3"
     }
   }
 }

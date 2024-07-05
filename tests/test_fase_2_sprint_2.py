@@ -185,7 +185,7 @@ def test_MXTEST_10923_Spanish_Brands(web_drivers):
     assert english_brand_list == spanish_brand_list or len(english_brand_list) == len(spanish_brand_list)
 
 @pytest.mark.flaky(reruns=3)
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 def test_MXTEST_10924_Spanish_Deals(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -196,45 +196,48 @@ def test_MXTEST_10924_Spanish_Deals(web_drivers):
     actual_header_nav = home_page.get_menu_header_nav_span()
     assert expected_english_header_nav == actual_header_nav
 
-    # #EXPECTED ENGLISH BREADCRUMB
-    # expected_english_breadcrumb = ["Home", "Current Ads"]
-    # actual_breadcrumb_nav = home_page.get_breadcrumb()
-    # assert expected_english_breadcrumb == actual_breadcrumb_nav
-    #
-    # # EXPECTED ENGLISH DEALS NAVBAR ELEMENTS
-    # expected_english_deals_navbar = "PAGE 1"
-    # actual_english_deals_navbar_text = home_page.get_element_pages_navbar_deals()
-    # assert expected_english_deals_navbar in actual_english_deals_navbar_text
-    #
-    # # EXPECTED ENGLISH DATE OFFER TEXT
-    # expected_date_offer_english_text_1 = 'From '
-    # expected_date_offer_english_text_2 = ' to '
-    # actual_date_offer_english_text = home_page.get_offer_date_info_in_additional_ads()
-    # assert expected_date_offer_english_text_1 in actual_date_offer_english_text
-    # assert expected_date_offer_english_text_2 in actual_date_offer_english_text
-    # # FOOTER SECTION
-    # expected_english_footer_section = ["TOOLS", "Delivery routes Jalisco", "Product lines", "Delivery routes Leon",
-    #                            "O’Reilly Stores", "HELP", "Help center", "Shortcuts menu"]
-    #
-    # actual_footer_section = home_page.footer_section()
-    # for footer in expected_english_footer_section:
-    #     assert footer in actual_footer_section
-    #
-    # home_page.change_language_En_to_Es()
-    #
-    #
-    # # EXPECTED SPANISH HEADERS
-    # expected_header_nav = ["CATEGORÍAS", "MARCAS", "OFERTAS", "INTERCAMBIO DE PARTE", "HISTORIAL DE BÚSQUEDA", "ES"]
-    # actual_header_nav = home_page.get_menu_header_nav_span()
-    # assert expected_header_nav == actual_header_nav
-    #
-    # # EXPECTED SPANISH BREADCRUMB
-    # expected_english_breadcrumb = ["Inicio", "Ofertas vigentes"]
-    # actual_breadcrumb_nav = home_page.get_breadcrumb()
-    # assert expected_english_breadcrumb == actual_breadcrumb_nav
-    #
-    # # EXPECTED SPANISH DEALS NAVBAR ELEMENTS
-    # expected_spanish_deals_navbar = 'GINA 1'
+    #EXPECTED ENGLISH BREADCRUMB
+    expected_english_breadcrumb = ["Home", "Current Ads"]
+    actual_breadcrumb_nav = home_page.get_complete_breadcrumb()
+    assert expected_english_breadcrumb == actual_breadcrumb_nav
+
+    # EXPECTED ENGLISH DEALS NAVBAR ELEMENTS
+    expected_english_deals_navbar = "PAGE 1"
+    actual_english_deals_navbar_text = home_page.get_element_pages_navbar_deals()
+    assert expected_english_deals_navbar in actual_english_deals_navbar_text
+
+    # EXPECTED ENGLISH DATE OFFER TEXT
+    expected_date_offer_english_text_1 = 'From '
+    expected_date_offer_english_text_2 = ' to '
+    expected_date_offer_english_text_3 = 'Never expired'
+    actual_date_offer_english_text = home_page.get_offer_date_info_in_additional_ads()
+    assert expected_date_offer_english_text_1 and expected_date_offer_english_text_2 \
+           or expected_date_offer_english_text_3 in actual_date_offer_english_text
+    # FOOTER SECTION
+    expected_english_footer_section = ["TOOLS", "Delivery routes Jalisco", "Product lines", "Delivery routes Leon",
+                               "O’Reilly Stores", "HELP", "Help center", "Shortcuts menu"]
+
+    actual_footer_section = home_page.footer_section()
+    for footer in expected_english_footer_section:
+        assert footer in actual_footer_section
+
+    home_page.change_language_En_to_Es()
+
+
+    # EXPECTED SPANISH HEADERS
+    expected_header_nav = ["CATEGORÍAS", "MARCAS", "OFERTAS", "INTERCAMBIO DE PARTE", "HISTORIAL DE BÚSQUEDA", "ES"]
+    actual_header_nav = home_page.get_menu_header_nav_span()
+    assert expected_header_nav == actual_header_nav
+
+    # EXPECTED SPANISH BREADCRUMB
+    expected_english_breadcrumb = ["Inicio", "Ofertas vigentes"]
+    actual_breadcrumb_nav = home_page.get_complete_breadcrumb()
+    assert expected_english_breadcrumb == actual_breadcrumb_nav
+
+    # EXPECTED SPANISH DEALS NAVBAR ELEMENTS
+    expected_spanish_deals_navbar = 'PÁGINA 1'
+    actual_english_deals_navbar_text = home_page.get_element_pages_navbar_deals()
+    assert expected_spanish_deals_navbar in actual_english_deals_navbar_text
     # spanish_nav_bar_element_list = home_page.get_element_pages_navbar_deals()
     # cont = 0
     # for element in spanish_nav_bar_element_list:
@@ -242,24 +245,26 @@ def test_MXTEST_10924_Spanish_Deals(web_drivers):
     #         cont += 1
     #         break
     # assert cont > 0, "No 'Page' span displayed"
+
     # # EXPECTED SPANISH DATE OFFER TEXT
-    # expected_date_offer_spanish_text1 = 'Del '
-    # expected_date_offer_spanish_text2 = ' a '
-    # actual_date_offer_spanish_text = home_page.get_offer_date_info_in_additional_ads()
-    # assert expected_date_offer_spanish_text1 in actual_date_offer_spanish_text
-    # assert expected_date_offer_spanish_text2 in actual_date_offer_spanish_text
-    #
-    # # FOOTER SECTION
-    # expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
-    #                            "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
-    # actual_footer_section = home_page.footer_section()
-    # for footer in expected_spanish_footer_section:
-    #     assert footer in actual_footer_section
-    #
-    # home_page.validate_spanish_slogan_footer_section()
-    # home_page.validate_copyright_footer_section()
-    # home_page.validate_logo_footer_section()
-    # home_page.validate_catalog_version_footer_section()
+    expected_date_offer_spanish_text1 = 'Del '
+    expected_date_offer_spanish_text2 = ' a '
+    expected_date_offer_english_text_3 = 'Sin vigencia'
+    actual_date_offer_spanish_text = home_page.get_offer_date_info_in_additional_ads()
+    assert expected_date_offer_spanish_text1 and expected_date_offer_spanish_text2 \
+           or expected_date_offer_english_text_3 in actual_date_offer_spanish_text
+
+    # FOOTER SECTION
+    expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
+                               "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
+    actual_footer_section = home_page.footer_section()
+    for footer in expected_spanish_footer_section:
+        assert footer in actual_footer_section
+
+    home_page.validate_spanish_slogan_footer_section()
+    home_page.validate_copyright_footer_section()
+    home_page.validate_logo_footer_section()
+    home_page.validate_catalog_version_footer_section()
 
 
 @pytest.mark.flaky(reruns=3)
@@ -358,7 +363,7 @@ def test_MXTEST_10927_Spanish_Search_History(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    home_page.select_vehicle_without_engine()
+    home_page.select_vehicle_without_engine_english()
     home_page.click_on_search_history()
     # validate title
     expected_english_search_history_title_span = 'Search history'
@@ -413,27 +418,45 @@ def test_MXTEST_10927_Spanish_Search_History(web_drivers):
         print(f"Actual tabs: {actual_spanish_search_history_tab_list}")
         assert actual_spanish_search_history_tab_list == expected_spanish_search_history_tab_list
 
-
-#@pytest.mark.flaky(reruns=3)
+@pytest.mark.pruebitas
+# @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10928_Spanish_Order_List(web_drivers):
+    # Verify that it correctly displays the order list information when changing the language from English to Spanish
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.change_language_En_to_Es()
     # HEADER
     expected_header = ["AGREGAR VEHÍCULO", "LISTA DE PRODUCTOS"]
-    expected_header_nav = ["CATEGORÍAS", "MARCAS", "OFERTAS", "INTERCAMBIO DE PARTE", "HISTORIAL DE BÚSQUEDA", "ES"]
     actual_header = home_page.get_menu_header_span()
     assert expected_header == actual_header
 
+    expected_header_nav = ["CATEGORÍAS", "MARCAS", "OFERTAS", "INTERCAMBIO DE PARTE", "HISTORIAL DE BÚSQUEDA", "ES"]
+    actual_header_nav = home_page.get_menu_header_nav_span()
+    assert expected_header_nav == actual_header_nav
+
+    home_page.select_vehicle_specific()
+    time.sleep(.3)
+    home_page.click_brands_btn()
+    home_page.click_on_show_all_brands()
+    home_page.wait_spinner_disappears()
+    home_page.get_random_brand()
+    list = home_page.get_link_product_list(0)
+    home_page.select_random_element_of_list(list)
+    home_page.wait_spinner_disappears()
+    home_page.click_on_first_add_to_list_available()
+    home_page.element("product_list_title").wait_visible()
+    home_page.close_shortcut_modal()
     home_page.click_on_Picker_vehicle_btn()
-    vehicle = "Automotive Light Duty"
-    home_page.write_a_vehicle_type(vehicle)
-    home_page.click_on_year_and_select()
-    home_page.click_on_make_and_select()
-    home_page.click_on_model_and_select()
-    home_page.click_on_submodel_and_select()
-    engine = home_page.click_on_engine_and_select()
-    home_page.click_on_add_vehicle_submit_btn()
+    home_page.click_on_clear_current_selection_btn()
+    search_criteria = "901391"
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    home_page.click_on_first_add_to_list_available()
+    home_page.element("product_list_title").wait_visible()
+    home_page.delete_all_products()
+
+
 @pytest.mark.phase2_sp2
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10929_Spanish_Add_Vehicle_and_Garage(web_drivers):
