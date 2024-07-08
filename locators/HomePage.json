@@ -1370,6 +1370,82 @@
     "product_list_title": {
       "by": "XPATH",
       "value": "//section[@class='header-container']//h3"
+    },
+    "agregar_vehiculo_descripcion": {
+      "by": "XPATH",
+      "value": "//p[contains(text(),'Neces')]"
+    },
+    "agregar_vehiculo_titulo": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Agregar')]"
+    },
+    "informacion_vehiculo_tab": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Informaci\u00f3n del veh\u00edculo')]"
+    },
+    "pais_vehiculo_label": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Pa\u00eds del veh\u00edculo')]"
+    },
+    "campos_requeridos_label": {
+      "by": "XPATH",
+      "value": "//p[contains(text(),'*Campos')]"
+    },
+    "agregar_vehiculo_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'agregar veh\u00edculo')]"
+    },
+    "vehiculo_seleccionado_title": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Veh\u00edculo seleccionado')]"
+    },
+    "busqueda_actual_span": {
+      "by": "XPATH",
+      "value": "//p[contains(text(),'squeda actual')]"
+    },
+    "nuevo_vehiculo_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'nuevo veh\u00edculo')]"
+    },
+    "borrar_seleccion_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'actual')]"
+    },
+    "complete_your_info": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Complete la info')]"
+    },
+    "guardar_cambios_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Guardar cambios')]"
+    },
+    "agregar_vehiculo_info_container": {
+      "by": "XPATH",
+      "value": "//app-vehicle-bar//p-button//button//span[contains(text(),'AGREGAR')]"
+    },
+    "agregar_vehiculo_search_bar": {
+      "by": "XPATH",
+      "value": "//search-bar//p-button//button//span[contains(text(),'AGREGAR')]"
+    },
+    "header_list": {
+      "by": "XPATH",
+      "value": "//div[@class='header-list']//span"
+    },
+    "filtra_para_encontrar_vehiculo": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Filtra tus resultados con el')]"
+    },
+    "column_left": {
+      "by": "XPATH",
+      "value": "//o-filters//section//span"
+    },
+    "categorias_populares": {
+      "by": "XPATH",
+      "value": "//div[@id='top-categories']//span[contains(text(),'TIPOS DE PARTE POPULARES')]"
+    },
+    "categorias_spanish_label": {
+      "by": "XPATH",
+      "value": "//div[@id='categories']//span[contains(text(),'CATEGOR')]"
     }
   }
 }

@@ -2473,3 +2473,43 @@ class HomePage(BasePage):
         logging.info("Get breadcrum complete text")
         self.element("breadcrum_section_link_list").wait_visible()
         return [element.text for element in self.element("breadcrum_section_link_list").find_elements()]
+
+    def validate_add_vehicle_section(self):
+        logging.info("Validate add vehicle section")
+        assert self.element("agregar_vehiculo_titulo").element_is_displayed(), f"Agregar vehiculo should be displayed"
+        assert self.element("agregar_vehiculo_descripcion").element_is_displayed(), f"El texto de la descripción should be displayed"
+        assert self.element("campos_requeridos_label").element_is_displayed(), f"Campos requeridos should be displayed"
+        assert self.element("pais_vehiculo_label").element_is_displayed(), f"Pais del vehiculo should be displayed"
+        assert self.element("informacion_vehiculo_tab").element_is_displayed(), f"Informacion del vehiculo should be displayed"
+        assert self.element("agregar_vehiculo_span").wait_visible(), f"Agregar vehiculo should be visible"
+    def validate_selected_vehicle_section(self):
+        logging.info("Validate selected vehicle section")
+        assert self.element("vehiculo_seleccionado_title").wait_visible(), f"Vehículo seleccionado  should be visible"
+        assert self.element("busqueda_actual_span").wait_visible(), f"Busqueda actual should be visible"
+        assert self.element("borrar_seleccion_span").wait_visible(), f"Borrar seleccion should be visible"
+        assert self.element("nuevo_vehiculo_span").element_is_displayed(), f"Nuevo vehiculo should be displayed"
+
+    def validate_edit_vehicle_section(self):
+        logging.info("Validate edit vehicle section")
+        assert self.element("vehiculo_seleccionado_title").wait_visible(), f"Vehículo seleccionado  should be visible"
+        assert self.element("busqueda_actual_span").wait_visible(), f"x should be visible"
+        assert self.element("campos_requeridos_label").element_is_displayed(), f"Campos requeridos should be displayed"
+        assert self.element("pais_vehiculo_label").element_is_displayed(), f"Pais del vehiculo should be displayed"
+        assert self.element("informacion_vehiculo_tab").element_is_displayed(), f"Informacion del vehiculo should be displayed"
+        assert self.element("guardar_cambios_span").wait_visible(), f"Guardar cambios should be visible"
+
+    def get_header_list(self):
+        logging.info("Get text elements of header list")
+        span_header_list = self.element("header_list").find_elements()
+        last_header_list_text = []
+        for element in span_header_list:
+            last_header_list_text.append(element.text)
+        return last_header_list_text
+
+    def get_column_left_span(self):
+        logging.info("Get text elements of column left")
+        span_list = self.element("column_left").find_elements()
+        list_text = []
+        for element in span_list:
+            list_text.append(element.text)
+        return list_text
