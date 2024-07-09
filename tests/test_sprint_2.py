@@ -27,7 +27,7 @@ def test_MXTEST_9075_HomePage_Vehicle_Filtering_Functionality_All_countries(web_
     home_page.wait_spinner_disappears()
     home_page.change_language_En_to_Es()
     # -----------------------------------
-    home_page.select_vehicle_without_engine()
+    home_page.select_vehicle_without_engine_english()
     #Tomar captura
     home_page.take_screenshot("'USA'-'MEX'-'CAN' selected")
     home_page.click_on_add_vehicle_submit_btn()

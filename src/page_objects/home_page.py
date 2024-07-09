@@ -1907,6 +1907,7 @@ class HomePage(BasePage):
         lista = self.element("suggestion_list").find_elements()
         for suggestion in lista:
             suggestion_text_list.append(suggestion.text)
+        print(suggestion_text_list)
         return suggestion_text_list
 
     def click_help_center(self):
@@ -2408,6 +2409,7 @@ class HomePage(BasePage):
         return last_searches_list_text
 
     def new_vehicle_specific(self):
+        logging.info("Add new vehicle and return information about it ")
         self.element("add_new_vehicle_btn").wait_clickable().click()
         time.sleep(0.5)
         year = "1986"
@@ -2435,6 +2437,7 @@ class HomePage(BasePage):
         print("Vehicle removed")
 
     def select_vehicle_without_engine_english(self):
+        logging.info("Select vehicle with data in English, if we have information select engine otherwise it will be empty.")
         # -----------------------------------
         # Seleccion de vehiculo y pais
         # Añadir datos del vehiculo
@@ -2513,3 +2516,84 @@ class HomePage(BasePage):
         for element in span_list:
             list_text.append(element.text)
         return list_text
+
+    def select_random_suggestion(self, keyword: str):
+        logging.info("Select random suggestion brand")
+
+        print(f"Search product: {keyword}")
+        search_bar = self.element("search_bar").wait_clickable()
+        search_bar.send_keys(keyword)
+        time.sleep(1)
+        suggestion_list = self.element("highlighted_suggestion_list").find_elements()
+
+        logging.info(f"El numero de sugerencias son: {len(suggestion_list)}")
+        print(f"El numero de sugerencias son: {len(suggestion_list)}")
+        index = random.randint(0, len(suggestion_list))
+        suggestion_selected = suggestion_list[index].text
+        logging.info(f"Brand Selected: {suggestion_selected}")
+        print(f"Brand Selected: {suggestion_selected}")
+        try:
+            suggestion_list[index].click()
+        except ElementClickInterceptedException:
+            print(f"No se selecciono la marca: {suggestion_selected}")
+        return suggestion_selected
+
+    def validate_elements_header_spanish(self):
+        logging.info("Validate the presence of elements in Spanish header section")
+        # HEADER
+        expected_header = ["AGREGAR VEHÍCULO", "LISTA DE PRODUCTOS"]
+        actual_header = self.get_menu_header_span()
+        assert expected_header == actual_header
+        expected_header_nav = ["CATEGORÍAS", "MARCAS", "OFERTAS", "INTERCAMBIO DE PARTE", "HISTORIAL DE BÚSQUEDA", "ES"]
+        actual_header_nav = self.get_menu_header_nav_span()
+        assert expected_header_nav == actual_header_nav
+
+    def validate_breadcrumb_expected(self,breadcrumb: list):
+        logging.info("Validate expected breadcrumbs")
+        actual_breadcrumb_nav = self.get_complete_breadcrumb()
+        assert breadcrumb == actual_breadcrumb_nav
+    def validate_elements_search_results_spanish(self,header_results_expected: list, column_left_results_expected: list):
+        logging.info("Validate the presence of elements in Spanish search results page")
+        actual_spanish_header_list = self.get_header_list()
+        for element in header_results_expected:
+            assert element in actual_spanish_header_list, f"{element} isn't visible"
+        #Validar que el filtro por vehiculo este visible
+        self.element("filtra_para_encontrar_vehiculo").wait_visible()
+        #Validar elementos parte izquierda en la pagina de resultados de busqueda en español
+        actual_spanish_column_left_list = self.get_column_left_span()
+        for element in column_left_results_expected:
+            assert element in actual_spanish_column_left_list, f"{element} isn't visible"
+        self.element("check_vehicle_fit_btn_produccion").wait_visible()
+        self.element("add_to_list_btn").wait_visible()
+
+    def validate_elements_footer_spanish(self):
+        logging.info("Validate the presence of elements in Spanish footer section")
+        # FOOTER SECTION
+        expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto",
+                                           "Rutas de entrega Leon",
+                                           "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
+        actual_footer_section = self.footer_section()
+        for footer in expected_spanish_footer_section:
+            assert footer in actual_footer_section
+        self.validate_spanish_slogan_footer_section()
+        self.validate_copyright_footer_section()
+        self.validate_logo_footer_section()
+        self.validate_catalog_version_footer_section()
+
+
+    def validate_elements_categories_spanish(self):
+        logging.info("Validate the presence of elements in Spanish categories section")
+        self.click_on_categories_button()
+        time.sleep(.3)
+        self.element("categorias_populares").wait_visible()
+        self.element("categorias_spanish_label").wait_visible()
+
+    def search_elements_in_suggestions_list(self, keyword: str, elements_list):
+        logging.info("search for elements in suggestions")
+        print(f"Search product: {keyword}")
+        search_bar = self.element("search_bar").wait_clickable()
+        search_bar.send_keys(keyword)
+        time.sleep(1)
+        actual_suggestion_list = self.get_suggestion_list()
+        for element in elements_list:
+            assert element in actual_suggestion_list, f"{element} isn't visible"

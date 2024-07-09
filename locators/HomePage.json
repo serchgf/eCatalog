@@ -300,7 +300,7 @@
     },
     "explore_brands_label": {
       "by": "XPATH",
-      "value": "//div[@class='top-brand-container']//div[1]"
+      "value": "//o-brand-menu//div//h3"
     },
     "all_brands_link_list": {
       "by": "XPATH",
@@ -1446,6 +1446,30 @@
     "categorias_spanish_label": {
       "by": "XPATH",
       "value": "//div[@id='categories']//span[contains(text(),'CATEGOR')]"
+    },
+    "highlighted_suggestion_list": {
+      "by": "XPATH",
+      "value": "//p-overlay//div//ul/li//span//span"
+    },
+    "title_suggestions_list": {
+      "by": "XPATH",
+      "value": "//p-overlay//div//ul/li//div//span"
+    },
+    "part_types_suggestions_spanish_list": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Tipos')]"
+    },
+    "brands_suggestions_spanish_list": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Marcas')]"
+    },
+    "selected_brand_filter": {
+      "by": "XPATH",
+      "value": "//p[contains(text(),'Has seleccionado:')]"
+    },
+    "close_filter": {
+      "by": "XPATH",
+      "value": "//i[text()='close']"
     }
   }
 }

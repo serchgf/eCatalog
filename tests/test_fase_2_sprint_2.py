@@ -3,7 +3,6 @@ import os
 import pathlib
 import time
 import json
-
 import pytest
 from selenium.common import TimeoutException
 from selenium.webdriver.common.keys import Keys
@@ -515,81 +514,31 @@ def test_MXTEST_10930_Spanish_PLP(web_drivers):
     home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
     home_page.press_enter_key()
     home_page.wait_spinner_disappears()
-
-    # HEADER
-    expected_header = ["AGREGAR VEHÍCULO", "LISTA DE PRODUCTOS"]
-    actual_header = home_page.get_menu_header_span()
-    assert expected_header == actual_header
-
-    expected_header_nav = ["CATEGORÍAS", "MARCAS", "OFERTAS", "INTERCAMBIO DE PARTE", "HISTORIAL DE BÚSQUEDA", "ES"]
-    actual_header_nav = home_page.get_menu_header_nav_span()
-    assert expected_header_nav == actual_header_nav
-
-    #EXPECTED SPANISH BREADCRUMB
+    home_page.validate_elements_header_spanish()
     expected_english_breadcrumb = ["Inicio", "Buscar para: aceite motor"]
-    actual_breadcrumb_nav = home_page.get_complete_breadcrumb()
-    assert expected_english_breadcrumb == actual_breadcrumb_nav
-
-
-    #EXPECTED
-    expected_spanish_header_list = ['"ACEITE MOTOR"', 'Resultados de búsqueda', 'Ordenar por:', 'Relevancia']
-    actual_spanish_header_list = home_page.get_header_list()
-    for element in expected_spanish_header_list:
-        assert element in actual_spanish_header_list, f"{element} isn't visible"
-
-    home_page.element("filtra_para_encontrar_vehiculo").wait_visible()
-
+    home_page.validate_breadcrumb_expected(expected_english_breadcrumb)
     # EXPECTED
-    expected_spanish_column_left_list = ['TIPOS DE PARTE RELACIONADAS', 'FILTRAR POR']
-    actual_spanish_column_left_list = home_page.get_column_left_span()
-    for element in expected_spanish_column_left_list:
-        assert element in actual_spanish_column_left_list, f"{element} isn't visible"
-
-    home_page.element("check_vehicle_fit_btn_produccion").wait_visible()
-    home_page.element("add_to_list_btn").wait_visible()
-
-    # FOOTER SECTION
-    expected_spanish_footer_section = ["HERRAMIENTAS", "Rutas de entrega Jalisco", "Lineas de producto", "Rutas de entrega Leon",
-                               "Tiendas O’Reilly", "AYUDA", "Centro de ayuda", "Menú de atajos del teclado"]
-    actual_footer_section = home_page.footer_section()
-    for footer in expected_spanish_footer_section:
-        assert footer in actual_footer_section
-
-    home_page.validate_spanish_slogan_footer_section()
-    home_page.validate_copyright_footer_section()
-    home_page.validate_logo_footer_section()
-    home_page.validate_catalog_version_footer_section()
-
-    home_page.click_on_categories_button()
-    time.sleep(.3)
-    home_page.element("categorias_populares").wait_visible()
-    home_page.element("categorias_spanish_label").wait_visible()
+    header_results_expected = ['"ACEITE MOTOR"', 'Resultados de búsqueda', 'Ordenar por:', 'Relevancia']
+    column_left_results_expected = ['TIPOS DE PARTE RELACIONADAS', 'FILTRAR POR']
+    home_page.validate_elements_search_results_spanish(header_results_expected,column_left_results_expected)
+    home_page.validate_elements_footer_spanish()
+    home_page.validate_elements_categories_spanish()
     home_page.close_categories()
     home_page.click_brands_btn()
-
     home_page.click_on_show_all_brands()
     home_page.wait_spinner_disappears()
     home_page.get_random_brand()
     home_page.wait_spinner_disappears()
     #EXPECTED
-    expected_spanish_header_list = ['Resultados de búsqueda', 'Ordenar por:', 'Relevancia']
-    actual_spanish_header_list = home_page.get_header_list()
-    for element in expected_spanish_header_list:
-        assert element in actual_spanish_header_list, f"{element} isn't visible"
-
-    home_page.element("filtra_para_encontrar_vehiculo").wait_visible()
-
-    # EXPECTED
-    expected_spanish_column_left_list = ['FILTRAR POR']
-    actual_spanish_column_left_list = home_page.get_column_left_span()
-    for element in expected_spanish_column_left_list:
-        assert element in actual_spanish_column_left_list, f"{element} isn't visible"
-
+    header_results_expected_2 = ['Resultados de búsqueda', 'Ordenar por:', 'Relevancia']
+    column_left_results_expected_2 = ['FILTRAR POR']
+    home_page.validate_elements_search_results_spanish(header_results_expected_2,column_left_results_expected_2)
 
 @pytest.mark.phase2_sp2
-#@pytest.mark.pruebitas
+#pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10931_Spanish_PLP_Filters(web_drivers):
+    #Verify that it correctly displays information in the PLP FILTERS when changing the language from English to Spanish
     #------------------------------------------
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -597,11 +546,35 @@ def test_MXTEST_10931_Spanish_PLP_Filters(web_drivers):
     home_page.change_language_En_to_Es()
     home_page.wait_spinner_disappears()
     #------------------------------------------
+    search_criteria = "cart"
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    # # EXPECTED
+    # expected_suggestion_list = ['TIPOS DE PARTE', 'MARCAS']
+    # title_text_list = []
+    # list = home_page.element("title_suggestions_list").find_elements()
+    # for title in list:
+    #     title_text_list.append(title.text)
+    # assert expected_suggestion_list == title_text_list
+    home_page.element("part_types_suggestions_spanish_list").wait_visible()
+    home_page.element("brands_suggestions_spanish_list").wait_visible()
+    suggestion_list = home_page.element("highlighted_suggestion_list").find_elements()
+    home_page.select_random_element_of_list(suggestion_list)
+    home_page.validate_elements_header_spanish()
+    #EXPECTED
+    header_results_expected = ['Resultados de búsqueda', 'Ordenar por:', 'Relevancia']
+    column_left_results_expected = ['FILTRAR POR']
+    home_page.validate_elements_search_results_spanish(header_results_expected,column_left_results_expected)
+    home_page.validate_elements_footer_spanish()
+    home_page.select_brand_filter()
+    home_page.element("selected_brand_filter").wait_visible()
+    home_page.element("close_filter").wait_clickable().click()
+
 
 @pytest.mark.phase2_sp2
 #@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10932_Spanish_PDP(web_drivers):
+    #Verify that it correctly displays information in the PLP FILTERS when changing the language from English to Spanish
     #------------------------------------------
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -609,11 +582,18 @@ def test_MXTEST_10932_Spanish_PDP(web_drivers):
     home_page.change_language_En_to_Es()
     home_page.wait_spinner_disappears()
     #------------------------------------------
+    home_page.validate_elements_categories_spanish()
+    popular_category_list = home_page.get_popular_category_list()
+    home_page.select_random_element_of_list(popular_category_list)
+    home_page.validate_elements_header_spanish()
+    home_page.element("filtra_para_encontrar_vehiculo").wait_visible()
+    home_page.validate_elements_footer_spanish()
 
 @pytest.mark.phase2_sp2
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10933_Spanish_PDP_report_issue(web_drivers):
+    #Verify that it correctly displays information in the report issue when changing the language from English to Spanish
     #------------------------------------------
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -621,6 +601,15 @@ def test_MXTEST_10933_Spanish_PDP_report_issue(web_drivers):
     home_page.change_language_En_to_Es()
     home_page.wait_spinner_disappears()
     #------------------------------------------
+    home_page.click_on_brands()
+    home_page.click_on_brand('Cartek')
+    home_page.wait_spinner_disappears()
+    list = home_page.get_link_product_list(0)
+    home_page.select_random_element_of_list(list)
+
+
+
+
 
 @pytest.mark.phase2_sp2
 #@pytest.mark.pruebitas
