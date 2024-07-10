@@ -15,6 +15,7 @@ from selenium.webdriver.support.select import Select
 import locators
 
 
+
 class HomePage(BasePage):
     # sprint 1------------------------------------------------------------------------------------------------------------
     #
@@ -1480,7 +1481,7 @@ class HomePage(BasePage):
         time.sleep(.5)
         logging.info(f"Click on {brand} brand ")
         print(f"Click on {brand} brand ")
-        self.element("explore_brand_text").wait_visible()
+        self.element("explore_brands_label").wait_visible()
         if brand == 'Body Glove':
             self.element("bodyglove_brand").find_element().click()
         if brand == 'Cartek':
@@ -1719,7 +1720,7 @@ class HomePage(BasePage):
         self.write_nip(nip)
         self.element("input_nip_tbx").wait_clickable().send_keys(Keys.ENTER)
         time.sleep(1)
-        self.element("nip_verified").wait_visible()
+        self.element("span_nip_verified").wait_visible()
         # self.write_fullName(name)
         # self.write_email(email)
         self.write_phoneNumber(phone)
@@ -2597,3 +2598,4 @@ class HomePage(BasePage):
         actual_suggestion_list = self.get_suggestion_list()
         for element in elements_list:
             assert element in actual_suggestion_list, f"{element} isn't visible"
+

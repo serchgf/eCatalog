@@ -590,7 +590,7 @@ def test_MXTEST_10932_Spanish_PDP(web_drivers):
     home_page.validate_elements_footer_spanish()
 
 @pytest.mark.phase2_sp2
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10933_Spanish_PDP_report_issue(web_drivers):
     #Verify that it correctly displays information in the report issue when changing the language from English to Spanish
@@ -598,21 +598,32 @@ def test_MXTEST_10933_Spanish_PDP_report_issue(web_drivers):
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
     home_page.wait_spinner_disappears()
-    home_page.change_language_En_to_Es()
-    home_page.wait_spinner_disappears()
     #------------------------------------------
     home_page.click_on_brands()
     home_page.click_on_brand('Cartek')
     home_page.wait_spinner_disappears()
     list = home_page.get_link_product_list(0)
     home_page.select_random_element_of_list(list)
-
-
-
-
+    home_page.click_send_a_report_link()
+    #Validar elementos en ingles
+    home_page.element("user_info_english_span").wait_clickable().click()
+    nip = "5507"
+    # full_name = "Grecia Lopez"
+    # email = "email_fake@fake.com"
+    phone = "1234567890"
+    store = "Abastos"
+    issue_type ="Wrong Image"
+    description_error_text = "Test message text, the image is Wrong"
+    home_page.fill_product_info_report(nip, phone, store, issue_type, description_error_text)
+    home_page.element("close_modal_btn").wait_clickable().click()
+    home_page.change_language_En_to_Es()
+    home_page.wait_spinner_disappears()
+    home_page.click_send_a_report_link()
+    #Validar elementos en español
+    home_page.element("user_info_spanish_span").wait_clickable().click()
 
 @pytest.mark.phase2_sp2
-#@pytest.mark.pruebitas
+@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10934_PDP_Report_an_incident_search_store(web_drivers):
     #------------------------------------------
@@ -622,6 +633,31 @@ def test_MXTEST_10934_PDP_Report_an_incident_search_store(web_drivers):
     home_page.change_language_En_to_Es()
     home_page.wait_spinner_disappears()
     #------------------------------------------
+    search_criteria = "8199"
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.click_on_first_product()
+    home_page.wait_spinner_disappears()
+    home_page.click_send_a_report_link()
+    time.sleep(.2)
+    home_page.click_store_dropdown()
+    home_page.element("stores_search_input").element_is_enable()
+    my_store = "Punto Oriente"
+    home_page.element("stores_search_input").wait_clickable().send_keys(my_store)
+    list =home_page.element("stores_elements_list").find_elements()
+    list_text = []
+    for element in list:
+        element = element.text
+        list_text.append(element)
+    for text in list_text:
+        assert my_store in list_text, "P"
+
+    home_page.press_PageDown_key()
+    home_page.element("policy_privacy_issue_report").wait_visible()
+    home_page.take_screenshot("Policy privacy")
+    home_page.element("policy_privacy_issue_report").wait_clickable().click()
+
+
 
 @pytest.mark.phase2_sp2
 #@pytest.mark.pruebitas

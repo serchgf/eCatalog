@@ -1470,6 +1470,30 @@
     "close_filter": {
       "by": "XPATH",
       "value": "//i[text()='close']"
+    },
+    "user_info_spanish_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'Informaci\u00f3n del usuario')]"
+    },
+    "user_info_english_span": {
+      "by": "XPATH",
+      "value": "//span[contains(text(),'User info')]"
+    },
+    "stores_search_input": {
+      "by": "XPATH",
+      "value": "//p-overlay//input"
+    },
+    "stores_elements_list": {
+      "by": "XPATH",
+      "value": "//ul[@role='listbox']//p-dropdownitem"
+    },
+    "policy_privacy_issue_report": {
+      "by": "XPATH",
+      "value": "//a[@href='#/resources/notice-privacy']"
+    },
+    "policy_privacy_strong_text": {
+      "by": "XPATH",
+      "value": "//div[@class='privacy-policy-paragraph']//strong[contains(text(),'Mayoreo de')]"
     }
   }
 }
