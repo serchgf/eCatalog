@@ -66,7 +66,7 @@ def test_MXTEST_10420_FAQ_Top_Answer(web_drivers):
     home_page.change_language_En_to_Es()
     # -----------------------------------
     home_page.click_help_center()
-    home_page.validate_help_center_page()
+    home_page.validate_help_center_page_spanish()
     home_page.scroll_to_element("hcp_all_faq_btn")
     faq_titles = home_page.element("hcp_faq_titles").find_elements()
     assert len(faq_titles) == 5, "The page should display 5 frequently asked questions"
@@ -89,7 +89,7 @@ def test_MXTEST_10421_FAQ_All_Answer(web_drivers):
     home_page.change_language_En_to_Es()
     # -----------------------------------
     home_page.click_help_center()
-    home_page.validate_help_center_page()
+    home_page.validate_help_center_page_spanish()
     home_page.scroll_to_element("hcp_all_faq_btn")
     faq_5_titles = home_page.element("hcp_faq_titles").find_elements()
     assert len(faq_5_titles) == 5, "The page should display 5 frequently asked questions"
@@ -123,7 +123,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     home_page.change_language_En_to_Es()
     # -----------------------------------
     home_page.click_help_center()
-    home_page.validate_help_center_page()
+    home_page.validate_help_center_page_spanish()
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
     home_page.element("irm_employId").wait_visible().send_keys("5507", Keys.ENTER)  #
@@ -162,7 +162,7 @@ habitant natoque fringilla feugiat hac etiam commodo, conubia nunc eu.
     # -----------------------------------
     home_page.click_help_center()
     #home_page.wait_spinner_disappears()
-    home_page.validate_help_center_page()
+    home_page.validate_help_center_page_spanish()
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
     home_page.element("irm_employId").wait_visible().send_keys("56", Keys.ENTER)
@@ -194,7 +194,7 @@ def test_MXTEST_10424_HelpCenter_ErrorWhenReporting(web_drivers):
     # -----------------------------------
     home_page.click_help_center()
     #home_page.wait_spinner_disappears()
-    home_page.validate_help_center_page()
+    home_page.validate_help_center_page_spanish()
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
     home_page.scroll_to_element("irm_submit_btn")

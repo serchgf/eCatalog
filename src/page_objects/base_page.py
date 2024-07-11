@@ -13,6 +13,7 @@ from src.web_elements.common import WebElementWrapper
 from selenium.webdriver.common.action_chains import ActionChains as AC
 from selenium.webdriver.support import expected_conditions as EC
 import allure
+import webbrowser
 from allure_commons.types import AttachmentType
 
 
@@ -66,7 +67,6 @@ class BasePage:
         time.sleep(1)
         logging.info("SCROLL DOWN TO HEIGHT")
         self.__driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
-
 
     def back_to_previous_page(self):
         logging.info("BACK TO PREVIOUS PAGE")
@@ -312,3 +312,16 @@ class BasePage:
             actions.key_up(Keys.SHIFT).perform()
             logging.info(f"Press keys Shift + {key[1]}")
 
+    # def new_tab(self, url):
+    #     time.sleep(1)
+    #     logging.info("New tab")
+    #     webbrowser.open_new(url)
+
+    def new_tab(self,url):
+        time.sleep(1)
+        logging.info("TEST")
+        self.__driver.execute_script(f"window.open('{url}', '_blank');")
+
+    def close_browser(self):
+        if self.__driver:
+            self.__driver.quit()

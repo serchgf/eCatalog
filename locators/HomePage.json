@@ -1489,11 +1489,19 @@
     },
     "policy_privacy_issue_report": {
       "by": "XPATH",
-      "value": "//a[@href='#/resources/notice-privacy']"
+      "value": "//label[@for='policy-privacy']//a"
     },
     "policy_privacy_strong_text": {
       "by": "XPATH",
       "value": "//div[@class='privacy-policy-paragraph']//strong[contains(text(),'Mayoreo de')]"
+    },
+    "filter_option_brand_list": {
+      "by": "XPATH",
+      "value": "//button[text()=' Marcas ' or text()=' Brands ']//following::div[@class='option ng-star-inserted']/a"
+    },
+    "shortcut_menu_alert_esp": {
+      "by": "XPATH",
+      "value": "//p-toastitem//div//span[text()='Los atajos de teclas han sido habilitados']"
     }
   }
 }

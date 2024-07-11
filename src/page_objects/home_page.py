@@ -1251,7 +1251,7 @@ class HomePage(BasePage):
         filter_buttons = self.element("filters_buttons").find_elements()
         filter_buttons[0].click()
         brand = filter_buttons[0].text   #Marcas
-        attributes_list = self.element("filter_option_list").find_elements()
+        attributes_list = self.element("filter_option_brand_list").find_elements()
         index = random.randint(0, len(attributes_list) - 1)
         attribute_selected = attributes_list[index].text
         logging.info(f"Attribute Selected: {attribute_selected}")
@@ -1977,18 +1977,21 @@ class HomePage(BasePage):
             print("related category does not visible as expected")
             return True
 
-    def validate_help_center_page(self):
+    def validate_help_center_page_spanish(self):
         time.sleep(1)
         logging.info("Validate that Help Center page is loaded")
-        # assert self.element("hcp_title").find_element().text == "Help center", "The title should be 'Help center'"
         assert self.element("hcp_title").find_element().text == "Centro de ayuda", "The title should be 'Centro de ayuda'"
-        # assert self.element("hcp_faq_title").find_element().text == "Frequently asked questions", "The FAQ´s title should be 'Frequently asked questions'"
         assert self.element("hcp_faq_title").find_element().text == "Preguntas frecuentes", "The FAQ´s title should be 'Preguntas frecuentes'"
-        # assert self.element("hcp_videos_section").find_element().text == "Assistance videos", "The videos section title should be 'Assistance videos'"
         assert self.element("hcp_videos_section").find_element().text == "Videos de apoyo", "The videos section title should be 'Videos de apoyo'"
-        # assert self.element("hcp_issue_report").find_element().text == "REPORT AN ISSUE", "The issue report button title should be 'REPORT AN ISSUE'"
         assert self.element("hcp_issue_report").find_element().text == "REPORTAR INCIDENTE", "The issue report button title should be 'REPORTAR INCIDENTE'"
 
+    def validate_help_center_page_english(self):
+        time.sleep(1)
+        logging.info("Validate that Help Center page is loaded")
+        assert self.element("hcp_title").find_element().text == "Help center", "The title should be 'Help center'"
+        assert self.element("hcp_faq_title").find_element().text == "Frequently asked questions", "The FAQ´s title should be 'Frequently asked questions'"
+        assert self.element("hcp_videos_section").find_element().text == "Assistance videos", "The videos section title should be 'Assistance videos'"
+        assert self.element("hcp_issue_report").find_element().text == "REPORT AN ISSUE", "The issue report button title should be 'REPORT AN ISSUE'"
 
     def validate_issue_report_modal(self):
         logging.info("Validate that the issue report modal is displayed in page")
@@ -2598,4 +2601,25 @@ class HomePage(BasePage):
         actual_suggestion_list = self.get_suggestion_list()
         for element in elements_list:
             assert element in actual_suggestion_list, f"{element} isn't visible"
+    def click_on_policy_privacy_report(self):
+        logging.info("Click")
+        print("Click")
+        self.element("policy_privacy_issue_report").element_is_displayed()
+        self.element("policy_privacy_issue_report").wait_clickable()
 
+    def shortcut_open_shortcuts_list(self):
+        logging.info("New client shortcut: 'ALT+O'")
+        print("New client shortcut: 'ALT+O'")
+        action = self.actionChain()
+        action.key_down(Keys.ALT).send_keys('O').key_up(Keys.ALT)
+        action.perform()
+        time.sleep(1)
+
+    def disable_keyboard_shortcuts(self):
+        self.element("keyboard_shortcut_enable_slider").find_element().click()
+        try:
+            self.element("switch_alert").wait_until_disappears()
+        except:
+            pass
+        finally:
+            self.close_shortcut_modal()

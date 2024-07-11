@@ -26,7 +26,7 @@ def test_MXTEST_11023_Shortcuts_NIPEnterSearch(web_drivers):
     home_page.change_language_En_to_Es()
     # -----------------------------------
     home_page.click_help_center()
-    home_page.validate_help_center_page()
+    home_page.validate_help_center_page_spanish()
     home_page.element("hcp_issue_report").find_element().click()
     home_page.validate_issue_report_modal()
     home_page.element("irm_employId").wait_visible().send_keys("5507", Keys.ENTER)
@@ -623,9 +623,10 @@ def test_MXTEST_10933_Spanish_PDP_report_issue(web_drivers):
     home_page.element("user_info_spanish_span").wait_clickable().click()
 
 @pytest.mark.phase2_sp2
-@pytest.mark.pruebitas
+#@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10934_PDP_Report_an_incident_search_store(web_drivers):
+    #Validate that the system allows searching for any store in the 'product info report' module.
     #------------------------------------------
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -651,30 +652,34 @@ def test_MXTEST_10934_PDP_Report_an_incident_search_store(web_drivers):
         list_text.append(element)
     for text in list_text:
         assert my_store in list_text, "P"
-
-    home_page.press_PageDown_key()
-    home_page.element("policy_privacy_issue_report").wait_visible()
-    home_page.take_screenshot("Policy privacy")
-    home_page.element("policy_privacy_issue_report").wait_clickable().click()
-
+    home_page.click_store_dropdown()
+    time.sleep(.3)
+    home_page.click_on_policy_privacy_report()
 
 
 @pytest.mark.phase2_sp2
 #@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10935_Spanish_Help_Center(web_drivers):
+    #Verify that it correctly information in the section of Help Center when changing the language from English to Spanish
     #------------------------------------------
     home_page = HomePage(*web_drivers)
-    home_page.open_url_mx()
-    home_page.wait_spinner_disappears()
-    home_page.change_language_En_to_Es()
+    #home_page.open_url_mx()
+    url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/catalog/search/detail/cartek-105-amp-alternator-new-8199n/mke0/8199n?q=8199"
+    home_page.open_new_url(url)
     home_page.wait_spinner_disappears()
     #------------------------------------------
+    home_page.click_help_center()
+    home_page.validate_help_center_page_english()
+    home_page.change_language_En_to_Es()
+    home_page.wait_spinner_disappears()
+    home_page.validate_help_center_page_spanish()
 
 @pytest.mark.phase2_sp2
 #@pytest.mark.pruebitas
 @pytest.mark.flaky(reruns=3)
 def test_MXTEST_10936_Spanish_SearchBar(web_drivers):
+    #Validate the correct functioning of the search engine when using text in Spanish.
     #------------------------------------------
     home_page = HomePage(*web_drivers)
     home_page.open_url_mx()
@@ -682,8 +687,68 @@ def test_MXTEST_10936_Spanish_SearchBar(web_drivers):
     home_page.change_language_En_to_Es()
     home_page.wait_spinner_disappears()
     #------------------------------------------
+    search_criteria = "aceite"
+    home_page.element("search_bar").wait_clickable().send_keys(search_criteria)
+    home_page.press_enter_key()
+    home_page.wait_spinner_disappears()
+    home_page.validate_elements_header_spanish()
+    home_page.select_brand_filter()
+    home_page.wait_spinner_disappears()
+    assert home_page.element("selected_brand_filter").element_is_displayed()
+
+@pytest.mark.phase2_sp2
+#@pytest.mark.pruebitas
+@pytest.mark.flaky(reruns=3)
+def test_MXTEST_10937_shortcuts_enable_disable(web_drivers):
+    #Validate that the system allows shortcuts to be enabled and disabled.
+    #------------------------------------------
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    home_page.wait_spinner_disappears()
+    #------------------------------------------
+    home_page.shortcut_new_client()
+    assert not home_page.validate_new_client_popup_visibility(), "New client popup shouldn't be visible"
+    home_page.enable_keyboard_shortcuts()
+    home_page.close_shortcut_modal()
+    home_page.shortcut_open_shortcuts_list()
+    assert home_page.element("shortcut_menu_popup_window").element_is_displayed(), "Shortcut menu should be visible"
+    home_page.disable_keyboard_shortcuts()
+    home_page.shortcut_new_client()
+    assert not home_page.validate_new_client_popup_visibility(), "New client popup shouldn't be visible"
+@pytest.mark.phase2_sp2
+@pytest.mark.pruebitas
+@pytest.mark.flaky(reruns=3)
+def test_MXTEST_10938_shortcuts_disabledByDefault(web_drivers):
+    #Validate that the system has the shortcuts disabled by default.
+    #------------------------------------------
+    home_page = HomePage(*web_drivers)
+    home_page.open_url_mx()
+    home_page.wait_spinner_disappears()
+    home_page.change_language_En_to_Es()
+    home_page.wait_spinner_disappears()
+    #------------------------------------------
+    home_page.enable_keyboard_shortcuts()
+    assert home_page.element("shortcut_menu_alert_esp").wait_visible(),"Shortcut enable alert should be visible"
+    home_page.close_shortcut_modal()
 
 
 
+    #AQUIIIIIIIIIIIIIIIII
+    # home_page.close_browser()
+    # home_page.open()
+    # home_page.wait_spinner_disappears()
+    # url = "https://testintranet.oreillyauto.mx/ecatalog-mx/#/"
+    # home_page.new_tab(url)
+    # home_page.wait_spinner_disappears()
 
-
+    # home_page.switch_to_window()
+    # home_page.change_language_En_to_Es()
+    # home_page.wait_spinner_disappears()
+    # home_page.close()
+    # home_page.element("shortcut_menu_button_esp").find_element().click()
+    # assert home_page.element("shortcuts_gray_span").find_elements(), "When we open a new window, shortcuts should be disabled by default"
+    # home_page.close_shortcut_modal()
+    # home_page.shortcut_new_client()
+    # assert not home_page.validate_new_client_popup_visibility(), "New client popup shouldn't be visible"
